@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { theme } from "./theme/theme";
 
-import { RegistrationForm } from "./components";
+import { LoginForm, RegistrationForm } from "./components";
 
 console.log(theme);
 
@@ -25,6 +25,7 @@ function App() {
       </header>
 
       <RegistrationForm />
+      <LoginForm />
     </div>
   );
 }

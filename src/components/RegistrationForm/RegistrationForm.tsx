@@ -52,7 +52,7 @@ const RegistrationForm = () => {
   return (
     <Container>
       <a href="#">Already have an account? Sign in</a>
-      <h1>Registration form</h1>
+      <h1>Get started</h1>
       <form onSubmit={formik.handleSubmit}>
         <FormTextInput label="Name" name="name" formik={formik} />
         <FormTextInput label="Email" name="email" formik={formik} />
@@ -79,7 +79,6 @@ const RegistrationForm = () => {
             </p>
           }
         />
-
         <Button type="submit" variant="contained" disabled={!isCheckboxChecked}>
           Create account
         </Button>
