@@ -3,9 +3,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import { theme } from "./theme/theme";
 
-import { LoginForm, RegistrationForm } from "./components";
+import {
+  // LoginForm,
+  // RegistrationForm,
+  SingleMolCanvas,
+  ReactionSchemePreview,
+} from "./components";
 
-console.log(theme);
+import { testSchemePreviewData } from "./testData";
+
+console.log(testSchemePreviewData);
 
 function App() {
   return (
@@ -24,8 +31,9 @@ function App() {
         </a>
       </header>
 
-      <RegistrationForm />
-      <LoginForm />
+      {/* <RegistrationForm />
+      <LoginForm /> */}
+      <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
     </div>
   );
 }
