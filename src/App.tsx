@@ -10,6 +10,8 @@ import {
   ReactionSchemePreview,
 } from "./components";
 
+import { Schemes } from "./pages";
+
 import { testSchemePreviewData } from "./testData";
 
 console.log(testSchemePreviewData);
@@ -33,7 +35,17 @@ function App() {
 
       {/* <RegistrationForm />
       <LoginForm /> */}
-      <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+      {/* <div className="schemes-preview-container">
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+      </div> */}
+
+      <Schemes></Schemes>
     </div>
   );
 }
