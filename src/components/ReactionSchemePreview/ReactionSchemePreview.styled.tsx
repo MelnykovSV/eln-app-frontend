@@ -14,6 +14,7 @@ const Container = styled.div`
     z-index: 10;
     clip-path: inset(0 0%);
     .canvas-container {
+      width: 300px;
       div:last-child {
         /* display: block; */
         transform: translateX(0);
@@ -23,10 +24,12 @@ const Container = styled.div`
 
   .canvas-container {
     border: solid green 1px;
-    width: fit-content;
+    /* width: fit-content; */
     margin: 0 auto;
     margin-bottom: 20px;
     display: flex;
+    transition: width 0.3s linear;
+    width: 150px;
     div {
       background-color: white;
     }
