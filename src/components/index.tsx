@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm/LoginForm";
 import FormTextInput from "./FormTextInput/FormTextInput";
 import SingleMolCanvas from "./SingleMolCanvas/SingleMolCanvas";
 import ReactionSchemePreview from "./ReactionSchemePreview/ReactionSchemePreview";
+import DoubleArrows from "./DoubleArrows/DoubleArrows";
 
 export {
   RegistrationForm,
@@ -10,4 +11,5 @@ export {
   LoginForm,
   SingleMolCanvas,
   ReactionSchemePreview,
+  DoubleArrows,
 };

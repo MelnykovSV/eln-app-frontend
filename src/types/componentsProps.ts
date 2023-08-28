@@ -21,4 +21,10 @@ export interface IReactionPreviewData {
 
 export interface IReactionSchemePreviewProps {
   schemePreviewData: IReactionPreviewData;
+
+}
+
+export interface IDoubleArrowsProps {
+  stagesNumber: number;
+
 }

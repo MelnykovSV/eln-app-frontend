@@ -1,4 +1,13 @@
 import { IFormTextInputProps } from "./forms";
-import { ISingleMolCanvasProps, IReactionSchemePreviewProps } from "./componentsProps";
+import {
+  ISingleMolCanvasProps,
+  IReactionSchemePreviewProps,
+  IDoubleArrowsProps,
+} from "./componentsProps";
 
-export type { IFormTextInputProps, ISingleMolCanvasProps, IReactionSchemePreviewProps };
+export type {
+  IFormTextInputProps,
+  ISingleMolCanvasProps,
+  IReactionSchemePreviewProps,
+  IDoubleArrowsProps,
+};

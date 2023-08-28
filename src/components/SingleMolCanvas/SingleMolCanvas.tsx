@@ -6,8 +6,8 @@ const SmilesDrawer = require("smiles-drawer");
 const SingleMolCanvas = ({
   smiles,
   options = {
-    width: 150,
-    height: 150,
+    width: 110,
+    height: 110,
   },
 }: ISingleMolCanvasProps) => {
   const canvasRef = useRef(null);
