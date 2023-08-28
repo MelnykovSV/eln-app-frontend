@@ -5,7 +5,7 @@ import { testSchemePreviewData } from "../../testData";
 const Schemes = () => {
   return (
     <Container>
-      <div className="schemes-preview-container">
+      <div className="schemes-preview-container container">
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
@@ -19,6 +19,35 @@ const Schemes = () => {
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
 
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
+        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
         <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />

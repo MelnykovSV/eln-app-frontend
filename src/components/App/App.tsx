@@ -26,7 +26,7 @@ function App() {
       <ModernNormalize />
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          {/* <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
@@ -36,21 +36,8 @@ function App() {
             target="_blank"
             rel="noopener noreferrer">
             Learn React
-          </a>
+          </a> */}
         </header>
-
-        {/* <RegistrationForm />
-      <LoginForm /> */}
-        {/* <div className="schemes-preview-container">
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-        <ReactionSchemePreview schemePreviewData={testSchemePreviewData} />
-      </div> */}
-        <DoubleArrows stagesNumber={7} />
 
         <Schemes></Schemes>
       </div>

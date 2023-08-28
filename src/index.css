@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.container {
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: yellow;
+  max-width: 320px;
+  @media screen and (min-width: 768px) {
+    background-color: aqua;
+    max-width: 768px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    background-color: pink;
+    max-width: 1280px;
+  }
+}

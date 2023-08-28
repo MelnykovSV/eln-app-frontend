@@ -13,21 +13,6 @@ const Container = styled.div`
   font-size: 11px;
 
   position: relative;
-  /* left: 50%;
-  transform: translateX(-50%); */
-  &:nth-child(5n + 2),
-  &:nth-child(5n + 3),
-  &:nth-child(5n + 4) {
-    left: 50%;
-    transform: translateX(-50%);
-    /* background-color: red; */
-  }
-
-  &:nth-child(5n + 5) {
-    left: 100%;
-    transform: translateX(-100%);
-    /* background-color: red; */
-  }
 
   &:hover {
     z-index: 20 !important;
@@ -56,7 +41,6 @@ const Container = styled.div`
 
   .canvas-container {
     border: solid green 1px;
-    /* width: fit-content; */
     margin: 0 auto;
     margin-bottom: 20px;
     display: flex;
@@ -70,7 +54,6 @@ const Container = styled.div`
       transform: translateX(-50px);
     }
     div:last-child {
-      /* display: none; */
       transition: transform 0.3s linear;
       transform: translateX(-140px);
     }
@@ -81,7 +64,6 @@ const Container = styled.div`
     transition: width 0.3s linear;
     margin: 0 auto;
     display: flex;
-    /* padding: 5px; */
     flex-shrink: 0;
     position: relative;
     dl {
@@ -111,6 +93,34 @@ const Container = styled.div`
       transform: translateX(0);
       position: absolute;
       padding: 10px;
+    }
+  }
+
+
+
+  @media screen and (min-width: 768px) {
+    &:nth-child(3n + 2) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &:nth-child(3n + 3) {
+      left: 100%;
+      transform: translateX(-100%);
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    &:nth-child(6n + 2),
+    &:nth-child(6n + 3),
+    &:nth-child(6n + 4),
+    &:nth-child(6n + 5) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &:nth-child(6n + 6) {
+      left: 100%;
+      transform: translateX(-100%);
     }
   }
 

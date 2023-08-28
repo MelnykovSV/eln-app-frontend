@@ -3,12 +3,25 @@ import styled from "@emotion/styled";
 const Container = styled.div`
   .schemes-preview-container {
     display: grid;
-    grid-template-columns: repeat(5, 202px);
+
     position: relative;
+
+    grid-template-columns: repeat(1, 202px);
+
+    @media screen and (min-width: 768px) {
+      grid-template-columns: repeat(3, 202px);
+    }
+    @media screen and (min-width: 1280px) {
+      grid-template-columns: repeat(6, 202px);
+    }
+
+    justify-content: space-between;
+
+    margin: 0 auto;
     /* justify-content: center;
     align-items: center; */
     /* background-color: yellow; */
-    gap: 15px;
+    gap: 5px;
 
     & > div {
       /* left: 50%; */
