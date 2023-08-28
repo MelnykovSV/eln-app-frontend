@@ -14,11 +14,13 @@ code {
 
 .container {
   margin: 0 auto;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   background-color: yellow;
   max-width: 320px;
   @media screen and (min-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: aqua;
     max-width: 768px;
   }
