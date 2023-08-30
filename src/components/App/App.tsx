@@ -14,11 +14,8 @@ import { DoubleArrows } from "..";
 
 import { Schemes } from "../../pages";
 
-import { testSchemePreviewData } from "../../testData";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
-
-console.log(testSchemePreviewData);
 
 function App() {
   return (

@@ -3,6 +3,8 @@ import {
   ISingleMolCanvasProps,
   IReactionSchemePreviewProps,
   IDoubleArrowsProps,
+  ICustomSelectProps,
+  ISortingRadioGroupProps,
 } from "./componentsProps";
 
 export type {
@@ -10,4 +12,6 @@ export type {
   ISingleMolCanvasProps,
   IReactionSchemePreviewProps,
   IDoubleArrowsProps,
+  ICustomSelectProps,
+  ISortingRadioGroupProps,
 };

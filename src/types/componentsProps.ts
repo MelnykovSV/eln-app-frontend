@@ -1,3 +1,4 @@
+import { SelectChangeEvent } from "@mui/material/Select";
 export interface ISingleMolCanvasProps {
   smiles: string;
   options?: {
@@ -21,10 +22,24 @@ export interface IReactionPreviewData {
 
 export interface IReactionSchemePreviewProps {
   schemePreviewData: IReactionPreviewData;
-
 }
 
 export interface IDoubleArrowsProps {
   stagesNumber: number;
+}
 
+export interface ICustomSelectProps {
+  currentSchemesType: string;
+  schemesTypeSelectHandler: (event: SelectChangeEvent) => void;
+}
+
+export interface ISortingRadioGroupProps {
+  sortingParam: string;
+  sortingParamChangeHandler: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+  sortingDireaction: string;
+  sortingDireactionChangeHandler: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 }

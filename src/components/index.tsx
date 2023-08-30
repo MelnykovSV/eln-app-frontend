@@ -4,6 +4,8 @@ import FormTextInput from "./FormTextInput/FormTextInput";
 import SingleMolCanvas from "./SingleMolCanvas/SingleMolCanvas";
 import ReactionSchemePreview from "./ReactionSchemePreview/ReactionSchemePreview";
 import DoubleArrows from "./DoubleArrows/DoubleArrows";
+import CustomSelect from "./CustomSelect/CustomSelect";
+import SortingRadioGroup from "./SortingRadioGroup/SortingRadioGroup";
 
 export {
   RegistrationForm,
@@ -12,4 +14,6 @@ export {
   SingleMolCanvas,
   ReactionSchemePreview,
   DoubleArrows,
+  CustomSelect,
+  SortingRadioGroup,
 };
