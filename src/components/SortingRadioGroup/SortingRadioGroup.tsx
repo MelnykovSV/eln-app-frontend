@@ -2,10 +2,8 @@ import Container from "./SortingRadioGroup.styled";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-import React, { ChangeEvent } from "react";
 import { ISortingRadioGroupProps } from "../../types";
 
 const SortingRadioGroup = ({
@@ -24,12 +22,12 @@ const SortingRadioGroup = ({
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group">
         <FormControlLabel
-          value="dateCreated"
+          value="createdAt"
           control={<Radio />}
           label="Date created"
         />
         <FormControlLabel
-          value="dateUpdated"
+          value="updatedAt"
           control={<Radio />}
           label="Date updated"
         />

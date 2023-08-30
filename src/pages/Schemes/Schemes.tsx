@@ -1,21 +1,19 @@
 import Container from "./Schemes.styled";
 import { ReactionSchemePreview } from "../../components";
 import { testSchemesPreviewData } from "../../testData";
-
 import { CustomSelect } from "../../components";
 import React, { useState, useEffect } from "react";
-
 import { nanoid } from "nanoid";
-
 import { SelectChangeEvent } from "@mui/material/Select";
-
 import { SortingRadioGroup } from "../../components";
-
 import { IReactionPreviewData } from "../../types";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 const Schemes = () => {
   const [currentSchemesType, setCurrentSchemesType] = useState("all");
-  const [sortingParam, setSortingParam] = useState("dateCreated");
+  const [sortingParam, setSortingParam] = useState("createdAt");
   const [sortingDireaction, setSortingDireaction] = useState("up");
 
   const schemesTypeSelectHandler = (event: SelectChangeEvent) => {
@@ -46,10 +44,27 @@ const Schemes = () => {
 
     console.log(schemePreviews);
 
-    const sortedData = filteredData.sort((a, b) =>
-      sortingDireaction === "up"
-        ? a[sortingParam] - b[sortingParam]
-        : b[sortingParam] - a[sortingParam]
+    const sortedData = filteredData.sort(
+      (a: IReactionPreviewData, b: IReactionPreviewData) => {
+        if (typeof sortingParam === "number") {
+          return sortingDireaction === "up"
+            ? a[sortingParam] - b[sortingParam]
+            : b[sortingParam] - a[sortingParam];
+        }
+
+        if (
+          sortingParam === "createdAt" ||
+          sortingParam === "updatedAt" ||
+          sortingParam === "deadline"
+        ) {
+          return sortingDireaction === "up"
+            ? dayjs(a[sortingParam], "DD.MM.YYYY").valueOf() -
+                dayjs(b[sortingParam], "DD.MM.YYYY").valueOf()
+            : dayjs(b[sortingParam], "DD.MM.YYYY").valueOf() -
+                dayjs(a[sortingParam], "DD.MM.YYYY").valueOf();
+        }
+        return 0;
+      }
     );
     return sortedData;
   };
@@ -60,6 +75,7 @@ const Schemes = () => {
 
   useEffect(() => {
     setDataToShow(formatOutput(testSchemesPreviewData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSchemesType, sortingParam, sortingDireaction]);
 
   return (

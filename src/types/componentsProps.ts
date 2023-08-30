@@ -11,7 +11,7 @@ export interface IReactionPreviewData {
   _id: string;
   status: string; ///  понять, почему не работают литералы
   mass: number;
-  price: string;
+  price: number;
   deadline: string;
   stagesNumber: number;
   startingMaterial: string;
