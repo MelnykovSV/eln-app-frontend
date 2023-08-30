@@ -16,7 +16,7 @@ const SortingRadioGroup = ({
 }: ISortingRadioGroupProps) => {
   return (
     <Container>
-      <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
+      <FormLabel id="demo-row-radio-buttons-group-label">Sorting</FormLabel>
       <RadioGroup
         onChange={sortingParamChangeHandler}
         value={sortingParam}
