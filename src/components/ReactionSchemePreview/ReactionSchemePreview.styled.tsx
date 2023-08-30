@@ -4,14 +4,19 @@ const Container = styled.div`
   cursor: pointer;
   width: 300px;
   background-color: white;
-  border: solid red 1px;
+  border: solid
+    ${(props) => {
+      console.log(props);
+      return "red";
+    }}
+    1px;
   padding: 10px 5px;
   transition: width 0.3s linear, box-shadow 0.3s linear;
   font-size: 11px;
   position: relative;
 
   .canvas-container {
-    border: solid green 1px;
+    border: solid black 1px;
     margin: 0 auto;
     margin-bottom: 20px;
     display: flex;
@@ -21,11 +26,9 @@ const Container = styled.div`
       background-color: white;
     }
     .arrows {
-      /* transition: transform 0.3s linear; */
       transform: translateX(0);
     }
     div:last-child {
-      /* transition: transform 0.3s linear; */
       transform: translateX(0);
     }
   }
@@ -55,8 +58,6 @@ const Container = styled.div`
       width: 140px;
       transform: translateX(0);
       padding: 10px;
-
-      /* position: absolute; */
     }
     .scheme-info__additional {
       width: 140px;
@@ -86,7 +87,7 @@ const Container = styled.div`
       transform: translateX(-100%);
     }
     .canvas-container {
-      border: solid green 1px;
+      border: solid black 1px;
       margin: 0 auto;
       margin-bottom: 20px;
       display: flex;
@@ -105,7 +106,7 @@ const Container = styled.div`
       }
     }
     .scheme-info {
-      border: solid blue 1px;
+      border: solid black 1px;
       width: 142px;
       transition: width 0.3s linear;
       margin: 0 auto;
@@ -130,8 +131,6 @@ const Container = styled.div`
         width: 140px;
         transform: translateX(0);
         padding: 10px;
-
-        /* position: absolute; */
       }
       .scheme-info__additional {
         width: 140px;

@@ -1,6 +1,5 @@
 import Container from "./ReactionSchemePreview.styled";
 import { SingleMolCanvas } from "../";
-// import { testSchemePreviewData } from "../../testData";
 import { IReactionSchemePreviewProps } from "../../types";
 import { DoubleArrows } from "../";
 import { useState } from "react";
@@ -19,11 +18,27 @@ const ReactionSchemePreview = ({
       setIsActive(false);
     }, 300);
   };
+
+  const calculateBorderColor = () => {
+    if (schemePreviewData.status === "chosen") {
+      return "blue";
+    }
+    if (schemePreviewData.status === "fail") {
+      return "red";
+    }
+    if (schemePreviewData.status === "success") {
+      return "green";
+    }
+    return "black";
+  };
   return (
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ zIndex: isActive ? 10 : 0 }}>
+      style={{
+        zIndex: isActive ? 10 : 0,
+        borderColor: calculateBorderColor(),
+      }}>
       <div className="canvas-container  ">
         <SingleMolCanvas
           smiles={schemePreviewData.startingMaterial}></SingleMolCanvas>
