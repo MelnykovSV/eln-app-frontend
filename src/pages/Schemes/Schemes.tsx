@@ -42,8 +42,6 @@ const Schemes = () => {
       filteredData = [...schemePreviews];
     }
 
-    console.log(schemePreviews);
-
     const sortedData = filteredData.sort(
       (a: IReactionPreviewData, b: IReactionPreviewData) => {
         if (typeof sortingParam === "number") {
@@ -80,16 +78,19 @@ const Schemes = () => {
 
   return (
     <Container>
-      <CustomSelect
-        currentSchemesType={currentSchemesType}
-        schemesTypeSelectHandler={schemesTypeSelectHandler}
-      />
-      <SortingRadioGroup
-        sortingParam={sortingParam}
-        sortingParamChangeHandler={sortingParamChangeHandler}
-        sortingDireaction={sortingDireaction}
-        sortingDireactionChangeHandler={sortingDireactionChangeHandler}
-      />
+      <div className="utility-panel container">
+        <CustomSelect
+          currentSchemesType={currentSchemesType}
+          schemesTypeSelectHandler={schemesTypeSelectHandler}
+        />
+        <SortingRadioGroup
+          sortingParam={sortingParam}
+          sortingParamChangeHandler={sortingParamChangeHandler}
+          sortingDireaction={sortingDireaction}
+          sortingDireactionChangeHandler={sortingDireactionChangeHandler}
+        />
+      </div>
+
       <div className="schemes-preview-container container">
         {dataToShow.map((item) => (
           <ReactionSchemePreview schemePreviewData={item} key={nanoid()} />

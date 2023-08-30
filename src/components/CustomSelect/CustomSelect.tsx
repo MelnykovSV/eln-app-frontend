@@ -18,7 +18,7 @@ const CustomSelect = ({
   schemesTypeSelectHandler,
 }: ICustomSelectProps) => {
   return (
-    <Container>
+    <Container className="select-container">
       <FormControl fullWidth sx={{ width: 320 }}>
         <InputLabel id="schemes-type-select-label">Schemes type</InputLabel>
         <Select

@@ -76,12 +76,12 @@ const Container = styled.div`
     transition: width 0.3s linear, box-shadow 0.3s linear;
     font-size: 11px;
     position: relative;
-    &:nth-child(3n + 2) {
+    &:nth-of-type(3n + 2) {
       left: 50%;
       transform: translateX(-50%);
     }
 
-    &:nth-child(3n + 3) {
+    &:nth-of-type(3n + 3) {
       left: 100%;
       transform: translateX(-100%);
     }
@@ -167,15 +167,15 @@ const Container = styled.div`
     }
   }
   @media screen and (min-width: 1280px) {
-    &:nth-child(6n + 2),
-    &:nth-child(6n + 3),
-    &:nth-child(6n + 4),
-    &:nth-child(6n + 5) {
+    &:nth-of-type(6n + 2),
+    &:nth-of-type(6n + 3),
+    &:nth-of-type(6n + 4),
+    &:nth-of-type(6n + 5) {
       left: 50%;
       transform: translateX(-50%);
     }
 
-    &:nth-child(6n + 6) {
+    &:nth-of-type(6n + 6) {
       left: 100%;
       transform: translateX(-100%);
     }

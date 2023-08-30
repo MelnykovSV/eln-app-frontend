@@ -13,14 +13,15 @@ const SortingRadioGroup = ({
   sortingDireactionChangeHandler,
 }: ISortingRadioGroupProps) => {
   return (
-    <Container>
-      <FormLabel id="demo-row-radio-buttons-group-label">Sorting</FormLabel>
+    <Container className="sorting-container">
+      <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel>
       <RadioGroup
         onChange={sortingParamChangeHandler}
         value={sortingParam}
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group">
+        name="row-radio-buttons-group"
+        className="radio-buttons-container">
         <FormControlLabel
           value="createdAt"
           control={<Radio />}
@@ -44,7 +45,8 @@ const SortingRadioGroup = ({
         onChange={sortingDireactionChangeHandler}
         value={sortingDireaction}
         aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group">
+        name="row-radio-buttons-group"
+        className="arrows-container">
         <FormControlLabel
           value="up"
           control={
