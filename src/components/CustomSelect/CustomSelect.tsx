@@ -7,7 +7,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { ICustomSelectProps } from "../../types";
 
-const schemesTypes = ["All", "Active", "Finished", "Failed", "Chosen"];
+const schemesTypes = [
+  { value: "all", label: "All" },
+  { value: "active", label: "Active" },
+  { value: "success", label: "Finished" },
+  { value: "fail", label: "Failed" },
+  { value: "chosen", label: "Chosen" },
+];
 
 const CustomSelect = ({
   currentSchemesType,
@@ -24,8 +30,8 @@ const CustomSelect = ({
           label="Schemes type"
           onChange={schemesTypeSelectHandler}>
           {schemesTypes.map((shemesType) => (
-            <MenuItem value={shemesType} key={shemesType}>
-              {shemesType}
+            <MenuItem value={shemesType.value} key={shemesType.label}>
+              {shemesType.label}
             </MenuItem>
           ))}
         </Select>
