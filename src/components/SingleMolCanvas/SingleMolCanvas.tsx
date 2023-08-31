@@ -21,6 +21,7 @@ const SingleMolCanvas = ({
         smilesDrawer.draw(tree, canvasRef.current, "light", false);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [smiles]);
   return (
     <Container>

@@ -6,6 +6,7 @@ import {
   IDoubleArrowsProps,
   ICustomSelectProps,
   ISortingRadioGroupProps,
+  ISearchTextInput
 } from "./componentsProps";
 
 export type {
@@ -16,4 +17,5 @@ export type {
   IDoubleArrowsProps,
   ICustomSelectProps,
   ISortingRadioGroupProps,
+  ISearchTextInput
 };

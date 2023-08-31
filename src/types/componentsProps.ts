@@ -43,3 +43,8 @@ export interface ISortingRadioGroupProps {
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
 }
+
+export interface ISearchTextInput {
+  label: string;
+  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}

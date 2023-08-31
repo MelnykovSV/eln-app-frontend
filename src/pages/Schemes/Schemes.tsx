@@ -9,12 +9,18 @@ import { SortingRadioGroup } from "../../components";
 import { IReactionPreviewData } from "../../types";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { SearchTextInput } from "../../ui";
 dayjs.extend(customParseFormat);
 
 const Schemes = () => {
   const [currentSchemesType, setCurrentSchemesType] = useState("all");
   const [sortingParam, setSortingParam] = useState("createdAt");
   const [sortingDireaction, setSortingDireaction] = useState("up");
+  const [searchValue, setSearchValue] = useState("");
+
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
 
   const schemesTypeSelectHandler = (event: SelectChangeEvent) => {
     setCurrentSchemesType(event.target.value as string);
@@ -64,6 +70,13 @@ const Schemes = () => {
         return 0;
       }
     );
+    if (searchValue) {
+      const dataAfterSearch = sortedData.filter(
+        (item) => item.targetCompound === searchValue
+      );
+      return dataAfterSearch;
+    }
+
     return sortedData;
   };
 
@@ -74,7 +87,7 @@ const Schemes = () => {
   useEffect(() => {
     setDataToShow(formatOutput(testSchemesPreviewData));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSchemesType, sortingParam, sortingDireaction]);
+  }, [currentSchemesType, sortingParam, sortingDireaction, searchValue]);
 
   return (
     <Container>
@@ -89,6 +102,7 @@ const Schemes = () => {
           sortingDireaction={sortingDireaction}
           sortingDireactionChangeHandler={sortingDireactionChangeHandler}
         />
+        <SearchTextInput label="Enter SMILES" changeHandler={searchHandler} />
       </div>
 
       <div className="schemes-preview-container container">

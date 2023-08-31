@@ -6,13 +6,18 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme/theme";
 
+import { BrowserRouter } from "react-router-dom";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter basename="/eln-app-frontend">
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </ThemeProvider>
 );
