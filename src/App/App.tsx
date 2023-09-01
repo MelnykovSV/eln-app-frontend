@@ -1,5 +1,5 @@
 import "./App.css";
-import { Schemes } from "../pages";
+import { Schemes, SingleSchemePage } from "../pages";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
 
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Schemes />}></Route>
-          <Route path="/scheme" element={"Scheme"}></Route>
+          <Route path="/scheme" element={<SingleSchemePage />}></Route>
           <Route path="/stage" element={"Stage"}></Route>
           <Route path="/tasks" element={"Tasks"}></Route>
         </Route>

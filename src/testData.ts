@@ -82,3 +82,28 @@ export const testSchemesPreviewData = [
   testSchemePreviewDataChosen,
   testSchemePreviewDataChosen,
 ];
+
+export const singleStageTestData = {
+  solvent: "MeOH",
+  temp: 70,
+  time: "20h",
+  _yield: 86,
+  product: "CN1CCC[C@H]1c2cccnc2",
+  methodic:
+    "The one-pot interaction with dimethyl(vinyl)phosphine oxide was used for the synthesis of the target compounds. Nitrile oxides were obtained in situ from the corresponding halogenoximes by base-promoted generation. The ADME parameters for a synthesized 5-P(O)Me2-isoxazoline compared to its isosters with the same core structure were predicted using a SwissADME Web Tool. The compounds obtained were characterized by 1H, 13C, 19F, 31P NMR spectroscopy and HPLC-MS spectrometry methods, as well as the elemental analysis.",
+};
+
+export const schemeTestData = {
+  startingMaterial: "CC(C)[C@@]12C[C@@H]1[C@@H](C)C(=O)C2",
+  stages: [
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+    singleStageTestData,
+  ],
+};

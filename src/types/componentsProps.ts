@@ -48,3 +48,28 @@ export interface ISearchTextInput {
   label: string;
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface ISynthesisSchemeStageProps {
+  stageData: {
+    solvent: string;
+    temp: number;
+    time: string;
+    _yield: number;
+    methodic: string;
+    product: string;
+  };
+}
+
+export interface ISchemeProps {
+  schemeData: {
+    startingMaterial: string;
+    stages: {
+      solvent: string;
+      temp: number;
+      time: string;
+      _yield: number;
+      methodic: string;
+      product: string;
+    }[];
+  };
+}
