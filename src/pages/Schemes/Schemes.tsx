@@ -50,7 +50,7 @@ const Schemes = () => {
 
     const sortedData = filteredData.sort(
       (a: IReactionPreviewData, b: IReactionPreviewData) => {
-        if (typeof sortingParam === "number") {
+        if (sortingParam === "price" || sortingParam === "mass") {
           return sortingDireaction === "up"
             ? a[sortingParam] - b[sortingParam]
             : b[sortingParam] - a[sortingParam];
