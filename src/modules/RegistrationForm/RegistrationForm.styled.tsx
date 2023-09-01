@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { theme } from "./../../theme/theme";
+import { theme } from "../../theme/theme";
 
 const Container = styled.div`
   /* background-color: ${theme.palette.primary.light}; */

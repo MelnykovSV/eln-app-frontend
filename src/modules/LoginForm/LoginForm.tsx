@@ -1,7 +1,7 @@
 import Container from "./LoginForm.styled";
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
-import FormTextInput from "../FormTextInput/FormTextInput";
+import { FormTextInput } from "../../components";
 import * as yup from "yup";
 
 const LoginForm = () => {

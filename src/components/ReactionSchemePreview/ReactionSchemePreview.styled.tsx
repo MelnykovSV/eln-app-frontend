@@ -71,12 +71,7 @@ const Container = styled.div`
   @media screen and (min-width: 768px) {
     cursor: pointer;
     width: 200px;
-    background-color: white;
-    border: solid red 1px;
-    padding: 10px 5px;
-    transition: width 0.3s linear, box-shadow 0.3s linear;
-    font-size: 11px;
-    position: relative;
+
     &:nth-of-type(3n + 2) {
       left: 50%;
       transform: translateX(-50%);

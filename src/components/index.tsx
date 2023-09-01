@@ -1,19 +1,15 @@
-import RegistrationForm from "./RegistrationForm/RegistrationForm";
-import LoginForm from "./LoginForm/LoginForm";
+// import RegistrationForm from "../modules/RegistrationForm/RegistrationForm";
+// import LoginForm from "./LoginForm/LoginForm";
 import FormTextInput from "./FormTextInput/FormTextInput";
-import SingleMolCanvas from "./SingleMolCanvas/SingleMolCanvas";
 import ReactionSchemePreview from "./ReactionSchemePreview/ReactionSchemePreview";
-import DoubleArrows from "./DoubleArrows/DoubleArrows";
 import CustomSelect from "./CustomSelect/CustomSelect";
 import SortingRadioGroup from "./SortingRadioGroup/SortingRadioGroup";
 
 export {
-  RegistrationForm,
+  // RegistrationForm,
   FormTextInput,
-  LoginForm,
-  SingleMolCanvas,
+  // LoginForm,
   ReactionSchemePreview,
-  DoubleArrows,
   CustomSelect,
   SortingRadioGroup,
 };

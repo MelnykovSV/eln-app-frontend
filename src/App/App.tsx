@@ -1,10 +1,10 @@
 import "./App.css";
-import { Schemes } from "../../pages";
+import { Schemes } from "../pages";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
 
 import { Route, Routes } from "react-router";
-import SharedLayout from "../SharedLayout/SharedLayout";
+import { SharedLayout } from "../modules";
 
 function App() {
   return (

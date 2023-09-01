@@ -1,7 +1,7 @@
 import Container from "./RegistrationForm.styled";
 import { Button, FormControlLabel, Checkbox } from "@mui/material";
 import { useFormik } from "formik";
-import FormTextInput from "../FormTextInput/FormTextInput";
+import FormTextInput from "../../components/FormTextInput/FormTextInput";
 import * as yup from "yup";
 import { regexp } from "../../regexp";
 import { useState } from "react";

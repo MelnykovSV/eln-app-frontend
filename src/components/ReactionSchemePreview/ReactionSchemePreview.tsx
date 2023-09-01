@@ -1,7 +1,7 @@
 import Container from "./ReactionSchemePreview.styled";
-import { SingleMolCanvas } from "../";
+import { SingleMolCanvas } from "../../ui";
 import { IReactionSchemePreviewProps } from "../../types";
-import { DoubleArrows } from "../";
+import { DoubleArrows } from "../../ui";
 import { useState } from "react";
 
 const ReactionSchemePreview = ({
