@@ -3,8 +3,18 @@ import { ISchemeProps } from "../../types/componentsProps";
 import { SynthesisSchemeStage } from "../../components";
 import { nanoid } from "nanoid";
 import { SingleMolCanvas } from "../../ui";
+import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 
-const Scheme = ({ schemeData: { startingMaterial, stages } }: ISchemeProps) => {
+const Scheme = ({
+  schemeData: {
+    startingMaterial,
+    targetCompound,
+    totalYieldCoefficient,
+    mass,
+    stages,
+  },
+}: ISchemeProps) => {
+  const n = mass / smilesToMolWeight(targetCompound);
   return (
     <Container>
       <div className="starting-material-canvas-container">
@@ -12,9 +22,14 @@ const Scheme = ({ schemeData: { startingMaterial, stages } }: ISchemeProps) => {
           smiles={startingMaterial}
           options={{ width: 110, height: 110 }}
         />
+        <p>
+          {totalYieldCoefficient
+            ? (smilesToMolWeight(startingMaterial) * n) / totalYieldCoefficient
+            : null}
+        </p>
       </div>
       {stages.map((item) => (
-        <SynthesisSchemeStage stageData={item} key={nanoid()} />
+        <SynthesisSchemeStage stageData={item} n={n} key={nanoid()} />
       ))}
     </Container>
   );

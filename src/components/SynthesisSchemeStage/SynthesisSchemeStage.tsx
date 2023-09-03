@@ -2,9 +2,19 @@ import Container from "./SynthesisSchemeStage.styled";
 import { SingleMolCanvas } from "../../ui";
 import { SingleArrow } from "../../ui";
 import { ISynthesisSchemeStageProps } from "../../types";
+import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 
 const SynthesisSchemeStage = ({
-  stageData: { solvent, temp, time, _yield, methodic, product },
+  stageData: {
+    solvent,
+    temp,
+    time,
+    _yield,
+    methodic,
+    product,
+    yieldCoefficient,
+  },
+  n,
 }: ISynthesisSchemeStageProps) => {
   return (
     <Container>
@@ -22,6 +32,11 @@ const SynthesisSchemeStage = ({
         <SingleMolCanvas
           smiles={product}
           options={{ width: 110, height: 110 }}></SingleMolCanvas>
+        <p className="calculated-mass">
+          {yieldCoefficient
+            ? (n * smilesToMolWeight(product)) / yieldCoefficient
+            : null}
+        </p>
       </div>
     </Container>
   );

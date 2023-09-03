@@ -54,22 +54,30 @@ export interface ISynthesisSchemeStageProps {
     solvent: string;
     temp: number;
     time: string;
-    _yield: number;
+    _yield: number | null;
     methodic: string;
     product: string;
+    yieldCoefficient?: number;
   };
+  n: number;
+  calculatedMass?: number | null;
 }
 
 export interface ISchemeProps {
   schemeData: {
     startingMaterial: string;
+    targetCompound: string;
+    mass: number;
+    totalYieldCoefficient?: number;
+
     stages: {
       solvent: string;
       temp: number;
       time: string;
-      _yield: number;
+      _yield: number | null;
       methodic: string;
       product: string;
+      yieldCoefficient?: number;
     }[];
   };
 }
@@ -84,19 +92,12 @@ export interface IReagentCardProps {
   };
 }
 
-// export interface IReagentListProps {
-//   reagents: {
-//     smiles: string;
-//     mass: number;
-//     formula: string;
-//     molWeight: number;
-//     compoundName: string;
-//   }[];
-// }
-
 export interface IReagentListProps {
   reagents: {
     smiles: string;
     mass: number;
+    formula: string;
+    molWeight: number;
+    compoundName: string;
   }[];
 }

@@ -1,44 +1,20 @@
 import Container from "./SingleSchemePage.styled";
 import { Scheme } from "../../modules";
 import { schemeTestData } from "../../testData";
-
-import Button from "@mui/material/Button";
-
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { ReagentCard } from "../../components";
-
-import { useState } from "react";
-import { reagentCardData } from "../../testData";
+import { useState, useEffect } from "react";
 import { ReagentList } from "../../modules";
 import { reagentListShortData } from "../../testData";
+import { calc } from "../../helpers/molMass";
+import axios from "axios";
+import { CustomTabPanel } from "../../components";
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}>
-      {value === index && (
-        <div>
-          <Typography>{children}</Typography>
-        </div>
-      )}
-    </div>
-  );
-}
+import {
+  calculateSchemeYieldCoefficients,
+  ISchemeData,
+} from "../../helpers/calculateSchemeYieldCoefficients";
+import { smilesToMolecularFormula } from "../../helpers/chemistryHelpers";
 
 function a11yProps(index: number) {
   return {
@@ -48,19 +24,39 @@ function a11yProps(index: number) {
 }
 
 const SingleSchemePage = () => {
-  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  // const toggleDrawer = () => {
-  //   setIsDrawerOpen(!isDrawerOpen);
-  // };
-
   const [value, setValue] = useState(0);
+
+  const [reagentsListData, setReagentsListData] = useState([] as any);
+
+  // const updatedSchemeData = {...schemeTestData, calculateSchemeYieldCoefficients(schemeTestData[stages])}
+  const updatedSchemeData = calculateSchemeYieldCoefficients(
+    schemeTestData
+  ) as ISchemeData;
+  useEffect(() => {
+    const arr1 = reagentListShortData.map(async (item) => {
+      const formula = smilesToMolecularFormula(item.smiles);
+      const molWeight = calc(formula) as unknown as string;
+      const response = await axios.get(
+        `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/${item.smiles}/property/IUPACName/JSON`
+      );
+      return {
+        smiles: item.smiles,
+        mass: item.mass,
+        formula,
+        molWeight,
+        compoundName: response.data.PropertyTable.Properties[0].IUPACName,
+      };
+    });
+
+    Promise.all(arr1).then((resolvedArr) => {
+      setReagentsListData(resolvedArr);
+    });
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
-  const anchor = "drawer";
   return (
     <Container className="container">
       <div>
@@ -73,14 +69,11 @@ const SingleSchemePage = () => {
         </Tabs>
       </div>
       <CustomTabPanel value={value} index={0}>
-        <Scheme schemeData={schemeTestData} />
+        <Scheme schemeData={updatedSchemeData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
-        {/* <ReagentCard reagentData={reagentCardData} /> */}
-        <ReagentList reagents={reagentListShortData} />
+        <ReagentList reagents={reagentsListData} />
       </CustomTabPanel>
-      {/* <Scheme schemeData={schemeTestData} /> */}
     </Container>
   );
 };

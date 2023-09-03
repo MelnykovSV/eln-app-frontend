@@ -19,6 +19,7 @@ const Container = styled.div`
     .methodic-container {
       position: relative;
       width: 100%;
+
       .methodic {
         position: absolute;
         border: 1px blue solid;
@@ -26,6 +27,9 @@ const Container = styled.div`
         transition: transform 0.3s linear;
         transform: scaleY(0);
         transform-origin: top;
+        max-height: 400px;
+        overflow: auto;
+        font-size: 14px;
       }
     }
   }
