@@ -6,7 +6,6 @@ const Container = styled.div`
   background-color: white;
   border: solid
     ${(props) => {
-      console.log(props);
       return "red";
     }}
     1px;

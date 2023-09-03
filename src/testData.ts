@@ -107,3 +107,61 @@ export const schemeTestData = {
     singleStageTestData,
   ],
 };
+
+export const reagentCardData = {
+  smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+  mass: 200,
+  formula: "C9H8N2O2",
+  molWeight: 176.17,
+  compoundName: "",
+};
+
+export const reagentListData = [
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+    formula: "C9H8N2O2",
+    molWeight: 176.17,
+    compoundName: "",
+  },
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+    formula: "C9H8N2O2",
+    molWeight: 176.17,
+    compoundName: "",
+  },
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+    formula: "C9H8N2O2",
+    molWeight: 176.17,
+    compoundName: "",
+  },
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+    formula: "C9H8N2O2",
+    molWeight: 176.17,
+    compoundName: "",
+  },
+];
+
+export const reagentListShortData = [
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+  },
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+  },
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+  },
+  {
+    smiles: "COC(=O)C1=CC=CC2=NC=CN21",
+    mass: 200,
+  },
+];

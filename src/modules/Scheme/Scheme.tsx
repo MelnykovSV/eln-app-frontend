@@ -10,7 +10,7 @@ const Scheme = ({ schemeData: { startingMaterial, stages } }: ISchemeProps) => {
       <div className="starting-material-canvas-container">
         <SingleMolCanvas
           smiles={startingMaterial}
-          options={{ width: 150, height: 150 }}
+          options={{ width: 110, height: 110 }}
         />
       </div>
       {stages.map((item) => (

@@ -8,6 +8,8 @@ import {
   ISortingRadioGroupProps,
   ISearchTextInput,
   ISynthesisSchemeStageProps,
+  IReagentCardProps,
+  IReagentListProps,
 } from "./componentsProps";
 
 export type {
@@ -20,4 +22,6 @@ export type {
   ISortingRadioGroupProps,
   ISearchTextInput,
   ISynthesisSchemeStageProps,
+  IReagentCardProps,
+  IReagentListProps,
 };

@@ -73,3 +73,30 @@ export interface ISchemeProps {
     }[];
   };
 }
+
+export interface IReagentCardProps {
+  reagentData: {
+    smiles: string;
+    mass: number;
+    formula: string;
+    molWeight: number;
+    compoundName: string;
+  };
+}
+
+// export interface IReagentListProps {
+//   reagents: {
+//     smiles: string;
+//     mass: number;
+//     formula: string;
+//     molWeight: number;
+//     compoundName: string;
+//   }[];
+// }
+
+export interface IReagentListProps {
+  reagents: {
+    smiles: string;
+    mass: number;
+  }[];
+}

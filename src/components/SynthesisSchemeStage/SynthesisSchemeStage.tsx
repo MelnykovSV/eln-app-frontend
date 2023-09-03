@@ -21,7 +21,7 @@ const SynthesisSchemeStage = ({
       <div className="drawing-container">
         <SingleMolCanvas
           smiles={product}
-          options={{ width: 150, height: 150 }}></SingleMolCanvas>
+          options={{ width: 110, height: 110 }}></SingleMolCanvas>
       </div>
     </Container>
   );
