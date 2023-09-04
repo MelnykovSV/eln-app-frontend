@@ -24,8 +24,12 @@ const Scheme = ({
         />
         <p>
           {totalYieldCoefficient
-            ? (smilesToMolWeight(startingMaterial) * n) / totalYieldCoefficient
-            : null}
+            ? (
+                (smilesToMolWeight(startingMaterial) * n) /
+                totalYieldCoefficient
+              ).toFixed(2)
+            : null}{" "}
+          g
         </p>
       </div>
       {stages.map((item) => (

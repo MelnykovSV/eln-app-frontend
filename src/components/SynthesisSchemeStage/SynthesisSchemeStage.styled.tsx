@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const Container = styled.div`
   display: flex;
-  /* height: 300px; */
+  height: 170px;
   width: fit-content;
   /* border: 1px solid black; */
 
@@ -35,9 +35,19 @@ const Container = styled.div`
   }
   .drawing-container {
     /* width: 120px; */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .calculated-mass {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &:hover {

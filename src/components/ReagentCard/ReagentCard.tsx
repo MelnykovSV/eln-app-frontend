@@ -8,7 +8,7 @@ const ReagentCard = ({
   return (
     <Container>
       <SingleMolCanvas
-        smiles="COC(=O)C1=CC=CC2=NC=CN21"
+        smiles={smiles}
         options={{ width: 200, height: 200 }}></SingleMolCanvas>
 
       <div className="mol-info">

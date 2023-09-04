@@ -34,8 +34,9 @@ const SynthesisSchemeStage = ({
           options={{ width: 110, height: 110 }}></SingleMolCanvas>
         <p className="calculated-mass">
           {yieldCoefficient
-            ? (n * smilesToMolWeight(product)) / yieldCoefficient
-            : null}
+            ? ((n * smilesToMolWeight(product)) / yieldCoefficient).toFixed(2)
+            : null}{" "}
+          g
         </p>
       </div>
     </Container>
