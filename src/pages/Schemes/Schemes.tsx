@@ -10,6 +10,7 @@ import { IReactionPreviewData } from "../../types";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { SearchTextInput } from "../../ui";
+import { Link } from "react-router-dom";
 dayjs.extend(customParseFormat);
 
 const Schemes = () => {
@@ -103,6 +104,7 @@ const Schemes = () => {
           sortingDireactionChangeHandler={sortingDireactionChangeHandler}
         />
         <SearchTextInput label="Enter SMILES" changeHandler={searchHandler} />
+        <Link to="/newScheme">New Scheme</Link>
       </div>
 
       <div className="schemes-preview-container container">

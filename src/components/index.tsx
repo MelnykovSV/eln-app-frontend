@@ -5,6 +5,7 @@ import SortingRadioGroup from "./SortingRadioGroup/SortingRadioGroup";
 import SynthesisSchemeStage from "./SynthesisSchemeStage/SynthesisSchemeStage";
 import ReagentCard from "./ReagentCard/ReagentCard";
 import CustomTabPanel from "./CustomTabPanel/CustomTabPanel";
+import NewStageTab from "./NewStageTab/NewStageTab";
 
 export {
   FormTextInput,
@@ -14,4 +15,5 @@ export {
   SynthesisSchemeStage,
   ReagentCard,
   CustomTabPanel,
+  NewStageTab,
 };
