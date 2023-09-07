@@ -1,4 +1,5 @@
 import { SelectChangeEvent } from "@mui/material/Select";
+import { Dayjs } from "dayjs";
 export interface ISingleMolCanvasProps {
   smiles: string;
   options?: {
@@ -100,4 +101,33 @@ export interface IReagentListProps {
     molWeight: number;
     compoundName: string;
   }[];
+}
+
+export interface INewSchemeFormProps {
+  startingMaterial: string;
+  mass: string;
+  price: string;
+  stageNumber: number;
+  deadline: string;
+  targetCompound: string;
+  stages: {
+    solvent: string;
+    temp: number | null;
+    time: string;
+    _yield: number | null;
+    methodic: string;
+    product: string;
+    yieldCoefficient?: number;
+  }[];
+  stageChangeHandler: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    stageNumber: number
+  ) => void;
+  addStageHandler: () => void;
+  handleChange: (event: SelectChangeEvent) => void;
+  schemeFormSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+  inputChangeHandler: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  deadlineChangeHandler: (value: Dayjs | null) => void;
 }
