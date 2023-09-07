@@ -20,10 +20,14 @@ const SynthesisSchemeStage = ({
     <Container>
       <div className="conditions-container">
         <p>
-          {solvent}, {temp} &deg, {time}
+          {solvent ? <span>{solvent}</span> : null}
+          {(solvent && temp) || (solvent && time) ? <span>,</span> : null}
+          {temp ? <span>{temp} &#8451;</span> : null}
+          {temp && time ? <span>,</span> : null}
+          {time ? <span> {time}</span> : null}
         </p>
         <SingleArrow />
-        <p>{_yield} %</p>
+        {_yield ? <p>{_yield} %</p> : null}
         <div className="methodic-container">
           <p className="methodic">{methodic}</p>
         </div>
@@ -32,12 +36,11 @@ const SynthesisSchemeStage = ({
         <SingleMolCanvas
           smiles={product}
           options={{ width: 110, height: 110 }}></SingleMolCanvas>
-        <p className="calculated-mass">
-          {yieldCoefficient
-            ? ((n * smilesToMolWeight(product)) / yieldCoefficient).toFixed(2)
-            : null}{" "}
-          g
-        </p>
+        {yieldCoefficient ? (
+          <p className="calculated-mass">
+            {((n * smilesToMolWeight(product)) / yieldCoefficient).toFixed(2)} g
+          </p>
+        ) : null}
       </div>
     </Container>
   );

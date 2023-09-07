@@ -5,7 +5,7 @@ export interface ISchemeData {
   totalYieldCoefficient?: number;
   stages: {
     solvent: string;
-    temp: number;
+    temp: number | null;
     time: string;
     _yield: number | null;
     methodic: string;
@@ -18,7 +18,6 @@ export const calculateSchemeYieldCoefficients = (obj: ISchemeData) => {
   const arr = [...obj.stages];
 
   if (arr.some((item) => item._yield === null)) {
-    console.log("null");
     return obj;
   } else {
     arr.reverse();
@@ -32,18 +31,11 @@ export const calculateSchemeYieldCoefficients = (obj: ISchemeData) => {
 
     arr.reverse();
     coefficients.reverse();
-    console.log(coefficients);
 
     const result = arr.map((item: any, i: number) => ({
       ...item,
       yieldCoefficient: coefficients[i + 1] || 1,
     }));
-
-    console.log({
-      ...obj,
-      stages: result,
-      totalYieldCoefficient: coefficients[0],
-    });
 
     return {
       ...obj,

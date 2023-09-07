@@ -52,7 +52,7 @@ export interface ISearchTextInput {
 export interface ISynthesisSchemeStageProps {
   stageData: {
     solvent: string;
-    temp: number;
+    temp: number | null;
     time: string;
     _yield: number | null;
     methodic: string;
@@ -72,7 +72,7 @@ export interface ISchemeProps {
 
     stages: {
       solvent: string;
-      temp: number;
+      temp: number | null;
       time: string;
       _yield: number | null;
       methodic: string;

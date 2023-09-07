@@ -1,7 +1,6 @@
 import Container from "./SingleMolCanvas.styled";
 import React, { useRef, useEffect } from "react";
 import { ISingleMolCanvasProps } from "../../types";
-import { calc } from "../../helpers/molMass";
 const SmilesDrawer = require("smiles-drawer");
 
 const SingleMolCanvas = ({

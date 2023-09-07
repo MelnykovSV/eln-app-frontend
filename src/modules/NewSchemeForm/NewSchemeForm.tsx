@@ -1,7 +1,5 @@
 import Container from "./NewSchemeForm.styled";
 
-
-
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,33 +8,42 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import dayjs, { Dayjs } from "dayjs";
 import { nanoid } from "nanoid";
 import { NewStageTab } from "../../components";
 
+import { SingleMolCanvas } from "../../ui";
+import { Scheme } from "../";
+import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
+
 const blankStage = {
   product: "",
   solvent: "",
   temp: null,
-  time: null,
+  time: "",
   _yield: null,
   methodic: "",
 };
 
 const NewSchemeForm = () => {
   const [startingMaterial, setStartingMaterial] = useState("");
-  const [mass, setStartingMass] = useState("");
+  const [mass, setStartingMass] = useState("" as string);
   const [price, setPrice] = useState("");
   const [deadline, setDeadline] = useState<string>("");
   const [stageNumber, setStageNumber] = useState(1);
 
+  const [targetCompound, setTargetCompound] = useState("");
   const [stages, setStages] = useState([
     {
       ...blankStage,
     },
   ]);
+
+  useEffect(() => {
+    setTargetCompound(stages[stages.length - 1].product);
+  }, [stages]);
 
   const stageChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -55,6 +62,8 @@ const NewSchemeForm = () => {
 
   const addStageHandler = () => {
     setStages([...stages, { ...blankStage }]);
+
+    setStageNumber(stageNumber + 1);
   };
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -92,6 +101,7 @@ const NewSchemeForm = () => {
   };
   return (
     <Container onSubmit={schemeFormSubmitHandler}>
+      <SingleMolCanvas smiles={startingMaterial} />
       <TextField
         label="Starting Material"
         name="startingMaterial"
@@ -155,6 +165,16 @@ const NewSchemeForm = () => {
       />
 
       <Button type="submit">Submit</Button>
+
+      <Scheme
+        schemeData={calculateSchemeYieldCoefficients({
+          startingMaterial,
+          targetCompound,
+          // totalYieldCoefficient: 0.3,
+          mass: Number(mass),
+          stages,
+        })}
+      />
     </Container>
   );
 };

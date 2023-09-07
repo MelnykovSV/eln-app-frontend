@@ -1,11 +1,13 @@
 import Container from "./NewStageTab.styled";
 import { TextField } from "@mui/material";
 
+import { SingleMolCanvas } from "../../ui";
+
 interface IStage {
   product: string;
   solvent: string;
   temp: number | null;
-  time: number | null;
+  time: string;
   _yield: number | null;
   methodic: string;
 }
@@ -26,6 +28,7 @@ const NewStageTab = ({
   return (
     <Container>
       <h2>Stage {stageNumber}</h2>
+      <SingleMolCanvas smiles={product} />
       <TextField
         label="Product"
         name="product"
@@ -49,10 +52,13 @@ const NewStageTab = ({
         name="methodic"
         variant="outlined"
         value={methodic}
+        multiline
+        rows={4}
         onChange={(e) => {
           stageChangeHandler(e, stageNumber);
         }}
       />
+
       <TextField
         label="Temperature"
         name="temp"

@@ -15,6 +15,7 @@ const Scheme = ({
   },
 }: ISchemeProps) => {
   const n = mass / smilesToMolWeight(targetCompound);
+
   return (
     <Container>
       <div className="starting-material-canvas-container">
@@ -22,15 +23,15 @@ const Scheme = ({
           smiles={startingMaterial}
           options={{ width: 110, height: 110 }}
         />
-        <p>
-          {totalYieldCoefficient
-            ? (
-                (smilesToMolWeight(startingMaterial) * n) /
-                totalYieldCoefficient
-              ).toFixed(2)
-            : null}{" "}
-          g
-        </p>
+        {totalYieldCoefficient ? (
+          <p>
+            {(
+              (smilesToMolWeight(startingMaterial) * n) /
+              totalYieldCoefficient
+            ).toFixed(2)}{" "}
+            g
+          </p>
+        ) : null}
       </div>
       {stages.map((item) => (
         <SynthesisSchemeStage stageData={item} n={n} key={nanoid()} />
