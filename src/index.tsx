@@ -5,6 +5,10 @@ import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme/theme";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./redux/store";
 
 import { BrowserRouter } from "react-router-dom";
 
@@ -15,9 +19,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
-      <BrowserRouter basename="/eln-app-frontend">
-        <App />
-      </BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter basename="/eln-app-frontend">
+            <App />
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </React.StrictMode>
   </ThemeProvider>
 );

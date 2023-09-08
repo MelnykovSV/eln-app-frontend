@@ -11,6 +11,7 @@ import {
   IReagentCardProps,
   IReagentListProps,
 } from "./componentsProps";
+import { IAuthState, IUserPayload, ISignUpData } from "./redux";
 
 export type {
   IReactionPreviewData,
@@ -24,4 +25,7 @@ export type {
   ISynthesisSchemeStageProps,
   IReagentCardProps,
   IReagentListProps,
+  IAuthState,
+  IUserPayload,
+  ISignUpData,
 };

@@ -6,9 +6,13 @@ import * as yup from "yup";
 import { regexp } from "../../regexp";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hooks";
+import { signUp } from "../../redux/auth/operations";
+import axios from "axios";
 
 const RegistrationForm = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const dispatch = useAppDispatch();
 
   const checkboxHandler = () => {
     setIsCheckboxChecked(!isCheckboxChecked);
@@ -45,8 +49,25 @@ const RegistrationForm = () => {
       confirmPassword: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+
+      // const response = await axios.post(
+      //   "http://localhost:3000/api/auth/register",
+      //   {
+      //     userName: values.name,
+      //     email: values.email,
+      //     password: values.password,
+      //   }
+      // );
+      // console.log(response);
+      dispatch(
+        signUp({
+          userName: values.name,
+          email: values.email,
+          password: values.password,
+        })
+      );
     },
   });
 
