@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import { useFormik } from "formik";
 import { FormTextInput } from "../../components";
 import * as yup from "yup";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const validationSchema = yup.object({
@@ -21,7 +22,7 @@ const LoginForm = () => {
   });
   return (
     <Container>
-      <a href="#">Don't have an account? Sign up</a>
+      <Link to="/register">Don't have an account? Sign up</Link>
       <h1>Login form</h1>
       <form onSubmit={formik.handleSubmit}>
         <FormTextInput label="Email" name="email" formik={formik} />

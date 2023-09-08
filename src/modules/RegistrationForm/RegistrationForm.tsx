@@ -5,6 +5,7 @@ import FormTextInput from "../../components/FormTextInput/FormTextInput";
 import * as yup from "yup";
 import { regexp } from "../../regexp";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const RegistrationForm = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
@@ -51,7 +52,7 @@ const RegistrationForm = () => {
 
   return (
     <Container>
-      <a href="#">Already have an account? Sign in</a>
+      <Link to="/login">Already have an account? Sign in</Link>
       <h1>Get started</h1>
       <form onSubmit={formik.handleSubmit}>
         <FormTextInput label="Name" name="name" formik={formik} />

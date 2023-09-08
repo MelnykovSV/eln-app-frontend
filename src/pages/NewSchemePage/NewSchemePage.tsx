@@ -7,7 +7,6 @@ import { Dayjs } from "dayjs";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 
 import Switch from "@mui/material/Switch";
-import Paper from "@mui/material/Paper";
 import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
