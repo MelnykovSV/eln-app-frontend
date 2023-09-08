@@ -29,47 +29,58 @@ const NewSchemeForm = ({
 }: INewSchemeFormProps) => {
   return (
     <Container onSubmit={schemeFormSubmitHandler}>
-      <SingleMolCanvas smiles={startingMaterial} />
-      <TextField
-        label="Starting Material"
-        name="startingMaterial"
-        variant="outlined"
-        value={startingMaterial}
-        onChange={inputChangeHandler}
-      />
-      <TextField
-        label="Mass"
-        name="mass"
-        variant="outlined"
-        type="number"
-        value={mass}
-        onChange={inputChangeHandler}
-      />
-      <TextField
-        label="Price"
-        name="price"
-        variant="outlined"
-        type="number"
-        value={price}
-        onChange={inputChangeHandler}
-      />
+      <div className="scheme-form-first-block">
+        <div className="scheme-form-first-block__inputs-container">
+          {" "}
+          <TextField
+            label="Starting Material"
+            name="startingMaterial"
+            variant="outlined"
+            value={startingMaterial}
+            onChange={inputChangeHandler}
+          />
+          <TextField
+            label="Mass"
+            name="mass"
+            variant="outlined"
+            type="number"
+            value={mass}
+            onChange={inputChangeHandler}
+          />
+          <TextField
+            label="Price"
+            name="price"
+            variant="outlined"
+            type="number"
+            value={price}
+            onChange={inputChangeHandler}
+          />
+        </div>
+        <div className="scheme-form-first-block__canvas-container">
+          <SingleMolCanvas smiles={startingMaterial} />
+        </div>
+      </div>
 
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          slotProps={{ textField: { size: "medium" } }}
-          label="Deadline"
-          className="datepicker"
-          disablePast
-          onChange={deadlineChangeHandler}
-          minDate={dayjs().add(1, "day")}
-          maxDate={dayjs().add(999, "day")}
-        />
-      </LocalizationProvider>
+      <div className="scheme-form-second-block">
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            slotProps={{ textField: { size: "medium" } }}
+            label="Deadline"
+            className="datepicker"
+            disablePast
+            onChange={deadlineChangeHandler}
+            minDate={dayjs().add(1, "day")}
+            maxDate={dayjs().add(999, "day")}
+            sx={{ width: "100%" }}
+          />
+        </LocalizationProvider>
 
-      <Button type="button" onClick={addStageHandler}>
-        Add stage
-      </Button>
-
+        <div className="button-container">
+          <Button type="button" onClick={addStageHandler} variant="contained">
+            Add stage
+          </Button>
+        </div>
+      </div>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Stage</InputLabel>
         <Select
@@ -92,7 +103,9 @@ const NewSchemeForm = ({
         stageChangeHandler={stageChangeHandler}
       />
 
-      <Button type="submit">Submit</Button>
+      <Button type="submit" variant="contained">
+        Submit
+      </Button>
     </Container>
   );
 };

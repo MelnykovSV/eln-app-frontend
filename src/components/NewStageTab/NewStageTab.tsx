@@ -27,64 +27,80 @@ const NewStageTab = ({
 }: IStageProps) => {
   return (
     <Container>
-      <h2>Stage {stageNumber}</h2>
-      <SingleMolCanvas smiles={product} />
-      <TextField
-        label="Product"
-        name="product"
-        variant="outlined"
-        value={product}
-        onChange={(e) => {
-          stageChangeHandler(e, stageNumber);
-        }}
-      />
-      <TextField
-        label="Solvent"
-        name="solvent"
-        variant="outlined"
-        value={solvent}
-        onChange={(e) => {
-          stageChangeHandler(e, stageNumber);
-        }}
-      />
+      {/* <h2>Stage {stageNumber}</h2> */}
+
+      <div className="new-stage-tab-first-block">
+        <div className="new-stage-tab-first-block__inputs">
+          <TextField
+            label="Product"
+            name="product"
+            variant="outlined"
+            value={product}
+            className="input"
+            onChange={(e) => {
+              stageChangeHandler(e, stageNumber);
+            }}
+          />
+          <TextField
+            label="Solvent"
+            name="solvent"
+            variant="outlined"
+            value={solvent}
+            className="input"
+            onChange={(e) => {
+              stageChangeHandler(e, stageNumber);
+            }}
+          />
+          <TextField
+            label="Yield"
+            name="_yield"
+            variant="outlined"
+            value={_yield || ""}
+            type="number"
+            onChange={(e) => {
+              stageChangeHandler(e, stageNumber);
+            }}
+          />
+        </div>
+
+        <div className="new-stage-tab-first-block__canvas-container">
+          <SingleMolCanvas smiles={product} />
+        </div>
+      </div>
+      <div className="new-stage-tab-second-block">
+        <TextField
+          label="Time"
+          name="time"
+          variant="outlined"
+          value={time || ""}
+          type="number"
+          className="input"
+          onChange={(e) => {
+            stageChangeHandler(e, stageNumber);
+          }}
+        />
+
+        <TextField
+          label="Temperature"
+          name="temp"
+          variant="outlined"
+          value={temp || ""}
+          type="number"
+          className="input"
+          onChange={(e) => {
+            stageChangeHandler(e, stageNumber);
+          }}
+        />
+      </div>
+
       <TextField
         label="Methodic"
         name="methodic"
         variant="outlined"
         value={methodic}
         multiline
+        className="input"
         rows={4}
-        onChange={(e) => {
-          stageChangeHandler(e, stageNumber);
-        }}
-      />
-
-      <TextField
-        label="Temperature"
-        name="temp"
-        variant="outlined"
-        value={temp || ""}
-        type="number"
-        onChange={(e) => {
-          stageChangeHandler(e, stageNumber);
-        }}
-      />
-      <TextField
-        label="Time"
-        name="time"
-        variant="outlined"
-        value={time || ""}
-        type="number"
-        onChange={(e) => {
-          stageChangeHandler(e, stageNumber);
-        }}
-      />
-      <TextField
-        label="Yield"
-        name="_yield"
-        variant="outlined"
-        value={_yield || ""}
-        type="number"
         onChange={(e) => {
           stageChangeHandler(e, stageNumber);
         }}

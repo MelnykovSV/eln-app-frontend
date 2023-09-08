@@ -6,6 +6,11 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { Dayjs } from "dayjs";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 
+import Switch from "@mui/material/Switch";
+import Paper from "@mui/material/Paper";
+import Slide from "@mui/material/Slide";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
 const blankStage = {
   product: "",
   solvent: "",
@@ -21,6 +26,7 @@ const NewSchemePage = () => {
   const [price, setPrice] = useState("");
   const [deadline, setDeadline] = useState<string>("");
   const [stageNumber, setStageNumber] = useState(1);
+  const [isSchemePreviewShown, setIsSchemePreviewShown] = useState(false);
 
   const [targetCompound, setTargetCompound] = useState("");
   const [stages, setStages] = useState([
@@ -87,31 +93,70 @@ const NewSchemePage = () => {
       setDeadline(value.format("DD.MM.YYYY"));
     }
   };
+
+  const toggleSchemePreview = () => {
+    setIsSchemePreviewShown(!isSchemePreviewShown);
+  };
   return (
-    <Container>
-      <NewSchemeForm
-        startingMaterial={startingMaterial}
-        mass={mass}
-        price={price}
-        deadline={deadline}
-        stageNumber={stageNumber}
-        targetCompound={targetCompound}
-        stages={stages}
-        stageChangeHandler={stageChangeHandler}
-        addStageHandler={addStageHandler}
-        handleChange={handleChange}
-        schemeFormSubmitHandler={schemeFormSubmitHandler}
-        inputChangeHandler={inputChangeHandler}
-        deadlineChangeHandler={deadlineChangeHandler}
-      />
-      <Scheme
-        schemeData={calculateSchemeYieldCoefficients({
-          startingMaterial,
-          targetCompound,
-          mass: Number(mass),
-          stages,
-        })}
-      />
+    <Container className="container">
+      <div className="utility-panel">
+        <FormControlLabel
+          className="toggle-schem-preview"
+          control={
+            <Switch
+              checked={isSchemePreviewShown}
+              onChange={toggleSchemePreview}
+            />
+          }
+          label="Show scheme preview"
+        />
+      </div>
+      <div className="new-scheme-content">
+        <Slide
+          direction="right"
+          in={isSchemePreviewShown}
+          mountOnEnter
+          unmountOnExit
+          className="slide">
+          <div className="mobile-scheme-preview-container">
+            <Scheme
+              schemeData={calculateSchemeYieldCoefficients({
+                startingMaterial,
+                targetCompound,
+                mass: Number(mass),
+                stages,
+              })}
+            />
+          </div>
+        </Slide>
+
+        <div className="scheme-preview-container">
+          <Scheme
+            schemeData={calculateSchemeYieldCoefficients({
+              startingMaterial,
+              targetCompound,
+              mass: Number(mass),
+              stages,
+            })}
+          />
+        </div>
+
+        <NewSchemeForm
+          startingMaterial={startingMaterial}
+          mass={mass}
+          price={price}
+          deadline={deadline}
+          stageNumber={stageNumber}
+          targetCompound={targetCompound}
+          stages={stages}
+          stageChangeHandler={stageChangeHandler}
+          addStageHandler={addStageHandler}
+          handleChange={handleChange}
+          schemeFormSubmitHandler={schemeFormSubmitHandler}
+          inputChangeHandler={inputChangeHandler}
+          deadlineChangeHandler={deadlineChangeHandler}
+        />
+      </div>
     </Container>
   );
 };
