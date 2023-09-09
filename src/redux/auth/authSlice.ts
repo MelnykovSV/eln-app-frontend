@@ -17,8 +17,12 @@ import { isError, isPending } from "../statusCheckers";
 //   IGetUserDataPayloadAction,
 // } from '../../interfaces';
 
-import { IAuthState, IUserPayload } from "../../types";
-import { signUp } from "./operations";
+import {
+  IAuthState,
+  ILoginUserPayload,
+  IRegisterUserPayload,
+} from "../../types";
+import { signUp, signIn, logOut } from "./operations";
 
 const initialState: IAuthState = {
   user: {
@@ -65,48 +69,39 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       signUp.fulfilled,
-      (state, action: PayloadAction<IUserPayload>) => {
-        // setUserData(state, action);
+      (state, action: PayloadAction<IRegisterUserPayload>) => {
         state.user = action.payload.user;
-        // state.accessToken = action.payload.accessToken;
-        // state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = false;
         state.isLoading = false;
         state.status = "fulfilled";
         state.error = null;
-        // fulfill(state);
       }
     );
-    // builder.addCase(
-    //   signIn.fulfilled,
-    //   (state, action: PayloadAction<IUserPayload>) => {
-    //     state.user = action.payload.userData;
-    //     state.accessToken = action.payload.accessToken;
-    //     state.refreshToken = action.payload.refreshToken;
-    //     state.sid = action.payload.sid;
-    //     state.isLoggedIn = true;
-    //     state.isLoading = false;
-    //     state.status = 'fulfilled';
-    //     state.error = null;
-    //   }
-    // );
-    // builder.addCase(logOut.fulfilled, state => {
-    //   // clearUserData(state);
-    //   state.user = {
-    //     name: null,
-    //     email: null,
-    //     id: null,
-    //     goingToRead: [],
-    //     currentlyReading: [],
-    //     finishedReading: [],
-    //   };
-    //   state.accessToken = null;
-    //   state.refreshToken = null;
-    //   state.isLoggedIn = false;
-    //   state.isLoading = false;
-    //   state.status = 'fulfilled';
-    //   state.error = null;
-    // });
+    builder.addCase(
+      signIn.fulfilled,
+      (state, action: PayloadAction<ILoginUserPayload>) => {
+        state.user = action.payload.user;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+      }
+    );
+    builder.addCase(logOut.fulfilled, (state) => {
+      state.user = {
+        userName: null,
+        email: null,
+        avatarURL: null,
+      };
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.isLoggedIn = false;
+      state.isLoading = false;
+      state.status = "fulfilled";
+      state.error = null;
+    });
     // builder.addCase(
     //   getUserData.fulfilled,
     //   (state, action: PayloadAction<IGetUserDataPayloadAction>) => {

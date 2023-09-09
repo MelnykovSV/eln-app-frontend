@@ -17,14 +17,17 @@ import { Logo } from "../../ui";
 // import { useAppSelector } from "../../redux/hooks";
 // import { getToken, getUser } from "../../redux/auth/authSlice";
 // import { UserMenu } from "../UserMenu/UserMenu";
+import { useAppDispatch } from "../../redux/hooks";
+import { logOut } from "../../redux/auth/operations";
 
 const publicPages = ["register", "login"];
 const privatePages = ["scheme", "stage", "tasks"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Logout"];
 
 export function ResponsiveAppBar() {
+  const dispatch = useAppDispatch();
   const token = true;
-//   const user = true;
+  //   const user = true;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -210,7 +213,13 @@ export function ResponsiveAppBar() {
                 {/* <UserMenu handleCloseUserMenu={handleCloseUserMenu} /> */}
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography
+                      textAlign="center"
+                      onClick={() => {
+                        dispatch(logOut());
+                      }}>
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>

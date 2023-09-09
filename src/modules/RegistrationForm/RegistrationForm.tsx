@@ -8,7 +8,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { signUp } from "../../redux/auth/operations";
-import axios from "axios";
 
 const RegistrationForm = () => {
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);

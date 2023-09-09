@@ -12,7 +12,15 @@ export interface IAuthState {
   error: string | null;
 }
 
-export interface IUserPayload {
+export interface IRegisterUserPayload {
+  user: {
+    userName: string;
+    email: string;
+    avatarURL: string | null;
+  };
+}
+
+export interface ILoginUserPayload {
   user: {
     userName: string;
     email: string;
@@ -24,6 +32,11 @@ export interface IUserPayload {
 
 export interface ISignUpData {
   userName: string;
+  email: string;
+  password: string;
+}
+
+export interface ISignInData {
   email: string;
   password: string;
 }
