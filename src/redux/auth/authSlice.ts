@@ -21,8 +21,10 @@ import {
   IAuthState,
   ILoginUserPayload,
   IRegisterUserPayload,
+  IRefreshPayload,
+  ICurrentUserPayload,
 } from "../../types";
-import { signUp, signIn, logOut } from "./operations";
+import { signUp, signIn, logOut, refresh, getCurrentUser } from "./operations";
 
 const initialState: IAuthState = {
   user: {
@@ -65,6 +67,14 @@ const authSlice = createSlice({
     //     item => item._id !== action.payload._id
     //   );
     // },
+    updateTokens(state, action: PayloadAction<any>) {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      // state.user.finishedReading.push(action.payload);
+      // state.user.currentlyReading = state.user.currentlyReading.filter(
+      //   item => item._id !== action.payload._id
+      // );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -102,38 +112,33 @@ const authSlice = createSlice({
       state.status = "fulfilled";
       state.error = null;
     });
-    // builder.addCase(
-    //   getUserData.fulfilled,
-    //   (state, action: PayloadAction<IGetUserDataPayloadAction>) => {
-    //     if (!action.payload) {
-    //       state.user = {
-    //         name: null,
-    //         email: null,
-    //         id: null,
-    //         goingToRead: [],
-    //         currentlyReading: [],
-    //         finishedReading: [],
-    //       };
-    //       state.accessToken = null;
-    //       state.refreshToken = null;
-    //       state.isLoggedIn = false;
-    //       state.isLoading = false;
-    //       state.status = 'fulfilled';
-    //       state.error = null;
-    //       return;
-    //     }
-    //     if (action.payload) {
-    //       state.user = action.payload.user;
-    //       state.isLoggedIn = true;
-    //       if (action.payload.refreshedData) {
-    //         state.accessToken = action.payload.refreshedData.newAccessToken;
-    //         state.refreshToken = action.payload.refreshedData.newRefreshToken;
-    //         state.status = 'fulfilled';
-    //         state.sid = action.payload.refreshedData.newSid;
-    //       }
-    //     }
-    //   }
-    // );
+    builder.addCase(
+      refresh.fulfilled,
+      (state, action: PayloadAction<IRefreshPayload>) => {
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+      }
+    );
+
+    builder.addCase(
+      getCurrentUser.fulfilled,
+      (state, action: PayloadAction<ICurrentUserPayload>) => {
+        state.user = {
+          userName: action.payload.userName,
+          email: action.payload.email,
+          avatarURL: action.payload.avatarURL,
+        };
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+        return;
+      }
+    );
     // builder.addCase(
     //   addBook.fulfilled,
     //   (state, action: PayloadAction<IBookData>) => {
@@ -184,6 +189,7 @@ export const {
   //   updateBooksAfterPlanningCreation,
   //   updateBooksAfterSuccess,
   //   updateBookToRead,
+  updateTokens,
 } = authSlice.actions;
 
 // export const getIsLoggedIn = (state: IStore) => state.auth.isLoggedIn;

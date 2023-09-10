@@ -29,7 +29,16 @@ export interface ILoginUserPayload {
   accessToken: string;
   refreshToken: string;
 }
+export interface ICurrentUserPayload {
+  userName: string;
+  email: string;
+  avatarURL: string | null;
+}
 
+export interface IRefreshPayload {
+  accessToken: string;
+  refreshToken: string;
+}
 export interface ISignUpData {
   userName: string;
   email: string;

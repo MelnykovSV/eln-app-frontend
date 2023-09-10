@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect } from "react";
 import {
   Schemes,
   SingleSchemePage,
@@ -11,8 +12,15 @@ import Container from "./App.styled";
 
 import { Route, Routes } from "react-router";
 import { SharedLayout } from "../modules";
+import { useAppDispatch } from "../redux/hooks";
+import { getCurrentUser } from "../redux/auth/operations";
 
 function App() {
+  const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(getCurrentUser());
+  // }, []);
+
   return (
     <Container>
       <ModernNormalize />

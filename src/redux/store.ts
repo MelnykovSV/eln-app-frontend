@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from './auth/authSlice';
+import { userReducer } from "./auth/authSlice";
 // import { planningReducer } from './planning/planningSlice';
 import storage from "redux-persist/lib/storage";
 import {
@@ -19,6 +19,12 @@ const persistConfig = {
   whitelist: ["accessToken", "refreshToken"],
 };
 
+const customMiddleWare = (store: any) => (next: any) => (action: any) => {
+  // console.log("Middleware triggered:", action);
+  // console.log(store.getState().auth.accessToken);
+  next(action);
+};
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer<any>(persistConfig, userReducer),
@@ -29,7 +35,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(customMiddleWare),
 });
 
 export const persistor = persistStore(store);

@@ -1,6 +1,7 @@
-import { axios } from "../../api";
+import { privateApi } from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
+
 // import {
 //   ISignUpData,
 //   ISignInData,
@@ -20,13 +21,16 @@ import {
   ISignUpData,
   ISignInData,
   IAuthState,
+  ICurrentUserPayload,
 } from "../../types";
+
+import { store } from "../store";
 
 export const signUp = createAsyncThunk<IRegisterUserPayload, ISignUpData>(
   "auth/signUp",
   async ({ userName, email, password }: ISignUpData, thunkAPI) => {
     try {
-      const signUpResponse = await axios.post("/api/auth/register", {
+      const signUpResponse = await privateApi.post("/api/auth/register", {
         userName,
         email,
         password,
@@ -43,12 +47,11 @@ export const signIn = createAsyncThunk<ILoginUserPayload, ISignInData>(
   "auth/signIn",
   async ({ email, password }: ISignInData, thunkAPI) => {
     try {
-      const signInResponse = await axios.post("/api/auth/login", {
+      const signInResponse = await privateApi.post("/api/auth/login", {
         email,
         password,
       });
-      token.set(signInResponse.data.data.accessToken);
-      console.log(axios.defaults);
+      // token.set(signInResponse.data.data.accessToken);
       return signInResponse.data.data;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
@@ -57,27 +60,62 @@ export const signIn = createAsyncThunk<ILoginUserPayload, ISignInData>(
   }
 );
 
-export const logOut = createAsyncThunk(
-  "/api/auth/logout",
+export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  // const state = thunkAPI.getState() as { auth: IAuthState };
+
+  try {
+    const response = await privateApi.post("/api/auth/logout");
+    console.log(response);
+
+    // await fetch("https://bookread-backend.goit.global/auth/logout", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${state.auth.accessToken}`,
+    //   },
+    // });
+
+    token.unset();
+  } catch (error) {
+    console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  }
+});
+
+export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
+  const state = thunkAPI.getState() as { auth: IAuthState };
+  console.log(state.auth.accessToken);
+  console.log(privateApi.defaults);
+  if (state.auth.refreshToken) {
+    token.set(state.auth.refreshToken);
+  }
+
+  try {
+    const response = await privateApi.post("/api/auth/refresh");
+    console.log(response.data.data);
+    token.set(response.data.data.accessToken);
+    return response.data.data;
+  } catch (error) {
+    console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  }
+});
+
+export const getCurrentUser = createAsyncThunk<ICurrentUserPayload>(
+  "auth/current",
   async (_, thunkAPI) => {
-    // const state = thunkAPI.getState() as { auth: IAuthState };
-
     try {
-      const response = await axios.post("/api/auth/logout");
+      // console.log(axios.defaults);
+      const response = await privateApi.get("/api/auth/current");
       console.log(response);
-
-      // await fetch("https://bookread-backend.goit.global/auth/logout", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: `Bearer ${state.auth.accessToken}`,
-      //   },
-      // });
-
-      token.unset();
+      return {
+        ...response.data.data,
+      };
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (getErrorMessage(error) !== "Request failed with status code 404") {
+        console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+        return thunkAPI.rejectWithValue(getErrorMessage(error));
+      }
     }
   }
 );

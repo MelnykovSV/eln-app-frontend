@@ -16,7 +16,9 @@ import {
   IRegisterUserPayload,
   ISignUpData,
   ISignInData,
-  ILoginUserPayload
+  ILoginUserPayload,
+  IRefreshPayload,
+  ICurrentUserPayload,
 } from "./redux";
 
 export type {
@@ -35,5 +37,7 @@ export type {
   IRegisterUserPayload,
   ISignUpData,
   ISignInData,
-  ILoginUserPayload
+  ILoginUserPayload,
+  IRefreshPayload,
+  ICurrentUserPayload,
 };
