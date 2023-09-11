@@ -21,10 +21,10 @@ import {
   IAuthState,
   ILoginUserPayload,
   IRegisterUserPayload,
-  IRefreshPayload,
   ICurrentUserPayload,
+  IState
 } from "../../types";
-import { signUp, signIn, logOut, refresh, getCurrentUser } from "./operations";
+import { signUp, signIn, logOut, getCurrentUser } from "./operations";
 
 const initialState: IAuthState = {
   user: {
@@ -112,17 +112,17 @@ const authSlice = createSlice({
       state.status = "fulfilled";
       state.error = null;
     });
-    builder.addCase(
-      refresh.fulfilled,
-      (state, action: PayloadAction<IRefreshPayload>) => {
-        state.accessToken = action.payload.accessToken;
-        state.refreshToken = action.payload.refreshToken;
-        state.isLoggedIn = true;
-        state.isLoading = false;
-        state.status = "fulfilled";
-        state.error = null;
-      }
-    );
+    // builder.addCase(
+    //   refresh.fulfilled,
+    //   (state, action: PayloadAction<IRefreshPayload>) => {
+    //     state.accessToken = action.payload.accessToken;
+    //     state.refreshToken = action.payload.refreshToken;
+    //     state.isLoggedIn = true;
+    //     state.isLoading = false;
+    //     state.status = "fulfilled";
+    //     state.error = null;
+    //   }
+    // );
 
     builder.addCase(
       getCurrentUser.fulfilled,
@@ -194,7 +194,7 @@ export const {
 
 // export const getIsLoggedIn = (state: IStore) => state.auth.isLoggedIn;
 // export const getUser = (state: IStore) => state.auth.user;
-// export const getAccessToken = (state: IStore) => state.auth.accessToken;
+export const getAccessToken = (state: IState) => state.auth.accessToken;
 // export const getSid = (state: IStore) => state.auth.sid;
 // export const getStatus = (state: IStore) => state.auth.status;
 

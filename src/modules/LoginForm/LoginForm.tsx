@@ -5,8 +5,7 @@ import { FormTextInput } from "../../components";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
-import { signIn, refresh, getCurrentUser } from "../../redux/auth/operations";
-import { updateTokens } from "../../redux/auth/authSlice";
+import { signIn } from "../../redux/auth/operations";
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
@@ -46,20 +45,6 @@ const LoginForm = () => {
           Login
         </Button>
       </form>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch(refresh());
-        }}>
-        Refresh
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch(getCurrentUser());
-        }}>
-        Current
-      </button>
     </Container>
   );
 };

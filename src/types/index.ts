@@ -10,6 +10,7 @@ import {
   ISynthesisSchemeStageProps,
   IReagentCardProps,
   IReagentListProps,
+  IRouteProps,
 } from "./componentsProps";
 import {
   IAuthState,
@@ -19,6 +20,7 @@ import {
   ILoginUserPayload,
   IRefreshPayload,
   ICurrentUserPayload,
+  IState,
 } from "./redux";
 
 export type {
@@ -33,6 +35,7 @@ export type {
   ISynthesisSchemeStageProps,
   IReagentCardProps,
   IReagentListProps,
+  IRouteProps,
   IAuthState,
   IRegisterUserPayload,
   ISignUpData,
@@ -40,4 +43,5 @@ export type {
   ILoginUserPayload,
   IRefreshPayload,
   ICurrentUserPayload,
+  IState,
 };

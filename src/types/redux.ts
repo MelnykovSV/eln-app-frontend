@@ -12,6 +12,10 @@ export interface IAuthState {
   error: string | null;
 }
 
+export interface IState {
+  auth: IAuthState;
+}
+
 export interface IRegisterUserPayload {
   user: {
     userName: string;

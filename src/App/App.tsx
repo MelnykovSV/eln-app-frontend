@@ -1,39 +1,71 @@
 import "./App.css";
-import { useEffect } from "react";
-import {
-  Schemes,
-  SingleSchemePage,
-  NewSchemePage,
-  LoginPage,
-  RegisterPage,
-} from "../pages";
+import { lazy } from "react";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
-
 import { Route, Routes } from "react-router";
 import { SharedLayout } from "../modules";
-import { useAppDispatch } from "../redux/hooks";
-import { getCurrentUser } from "../redux/auth/operations";
+import { PrivateRoute } from "../userMenu/PrivateRoute";
+import { PublicRoute } from "../userMenu/PublicRoute";
+const Schemes = lazy(() => import("../pages/Schemes/Schemes"));
+const SingleSchemePage = lazy(
+  () => import("../pages/SingleSchemePage/SingleSchemePage")
+);
+
+const NewSchemePage = lazy(
+  () => import("../pages/NewSchemePage/NewSchemePage")
+);
+const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
 
 function App() {
-  const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(getCurrentUser());
-  // }, []);
-
   return (
     <Container>
       <ModernNormalize />
 
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Schemes />}></Route>
-          <Route path="/register" element={<RegisterPage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/scheme" element={<SingleSchemePage />}></Route>
-          <Route path="/stage" element={"Stage"}></Route>
-          <Route path="/tasks" element={"Tasks"}></Route>
-          <Route path="/newScheme" element={<NewSchemePage />}></Route>
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <Schemes />
+              </PrivateRoute>
+            }></Route>
+
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegisterPage />
+              </PublicRoute>
+            }></Route>
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }></Route>
+          <Route
+            path="/scheme"
+            element={
+              <PrivateRoute>
+                <SingleSchemePage />
+              </PrivateRoute>
+            }></Route>
+          <Route
+            path="/stage"
+            element={<PrivateRoute>Stage</PrivateRoute>}></Route>
+          <Route
+            path="/tasks"
+            element={<PrivateRoute>Tasks</PrivateRoute>}></Route>
+          <Route
+            path="/newScheme"
+            element={
+              <PrivateRoute>
+                <NewSchemePage />
+              </PrivateRoute>
+            }></Route>
         </Route>
       </Routes>
     </Container>
