@@ -9,6 +9,7 @@ import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeY
 import Switch from "@mui/material/Switch";
 import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { privateApi } from "../../api";
 
 const blankStage = {
   product: "",
@@ -69,7 +70,9 @@ const NewSchemePage = () => {
     price: setPrice,
   };
 
-  const schemeFormSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const schemeFormSubmitHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     console.log({
       startingMaterial,
@@ -78,6 +81,17 @@ const NewSchemePage = () => {
       deadline,
       stages,
     });
+
+    const response = await privateApi.post("/api/schemes/", {
+      startingMaterial,
+      targetCompound: stages[stages.length - 1].product,
+      mass,
+      price,
+      deadline,
+      stages,
+    });
+
+    console.log(response);
   };
 
   const inputChangeHandler = (

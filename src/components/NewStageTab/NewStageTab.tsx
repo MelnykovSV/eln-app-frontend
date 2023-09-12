@@ -73,7 +73,7 @@ const NewStageTab = ({
           name="time"
           variant="outlined"
           value={time || ""}
-          type="number"
+          // type="number"
           className="input"
           onChange={(e) => {
             stageChangeHandler(e, stageNumber);

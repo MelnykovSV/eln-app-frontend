@@ -1,3 +1,4 @@
+import { IReactionPreviewData } from "./componentsProps";
 export interface IAuthState {
   user: {
     userName: string | null;
@@ -11,9 +12,16 @@ export interface IAuthState {
   isLoading: boolean;
   error: string | null;
 }
+export interface ISchemesState {
+  schemePreviews: IReactionPreviewData[];
+  status: string;
+  isLoading: boolean;
+  error: null | string;
+}
 
 export interface IState {
   auth: IAuthState;
+  schemes: ISchemesState;
 }
 
 export interface IRegisterUserPayload {
@@ -52,4 +60,30 @@ export interface ISignUpData {
 export interface ISignInData {
   email: string;
   password: string;
+}
+
+export interface IStage {
+  product: string;
+  _yield: number | null;
+  methodic: string | null;
+  temp: number | null;
+  time: string | null;
+}
+
+export interface INewScheme {
+  mass: number;
+  price: number;
+  deadline: string;
+  startingMaterial: string;
+  stages: IStage[];
+}
+
+export interface ISchemePreview {
+  _id: string;
+  status: string;
+  mass: number;
+  price: number;
+  deadline: string;
+  startingMaterial: string;
+  targetCompound: string;
 }

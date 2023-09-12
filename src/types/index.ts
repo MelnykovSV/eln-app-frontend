@@ -21,6 +21,8 @@ import {
   IRefreshPayload,
   ICurrentUserPayload,
   IState,
+  ISchemesState,
+  ISchemePreview
 } from "./redux";
 
 export type {
@@ -44,4 +46,6 @@ export type {
   IRefreshPayload,
   ICurrentUserPayload,
   IState,
+  ISchemesState,
+  ISchemePreview
 };

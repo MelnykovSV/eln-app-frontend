@@ -19,14 +19,17 @@ import { Logo } from "../../ui";
 // import { UserMenu } from "../UserMenu/UserMenu";
 import { useAppDispatch } from "../../redux/hooks";
 import { logOut } from "../../redux/auth/operations";
+import { useAppSelector } from "../../redux/hooks";
+import { getAccessToken } from "../../redux/auth/authSlice";
 
-const publicPages = ["register", "login"];
-const privatePages = ["scheme", "stage", "tasks"];
+// const publicPages = ["register", "login"];
+const privatePages = ["schemes", "scheme", "stage", "tasks"];
 const settings = ["Logout"];
 
 export function ResponsiveAppBar() {
+  const token = useAppSelector(getAccessToken);
   const dispatch = useAppDispatch();
-  const token = true;
+
   //   const user = true;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -58,46 +61,48 @@ export function ResponsiveAppBar() {
             {" "}
             <Logo />
           </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              alignItems: "center",
-            }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-              className="menu-button">
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              className="mobile-menu"
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
+
+          {token ? (
+            <Box
               sx={{
-                display: { xs: "block", md: "none" },
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                alignItems: "center",
               }}>
-              <MenuItem key="Home" onClick={handleCloseNavMenu}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+                className="menu-button">
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                className="mobile-menu"
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}>
+                {/* <MenuItem key="Home" onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
                   <NavLink to={`/`}>Home</NavLink>
                 </Typography>
-              </MenuItem>
-              {publicPages.map((page) =>
+              </MenuItem> */}
+                {/* {publicPages.map((page) =>
                 !token ? (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">
@@ -105,18 +110,21 @@ export function ResponsiveAppBar() {
                     </Typography>
                   </MenuItem>
                 ) : null
-              )}
-              {privatePages.map((page) =>
-                token ? (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <NavLink to={`/${page}`}>{page}</NavLink>
-                    </Typography>
-                  </MenuItem>
-                ) : null
-              )}
-            </Menu>
-          </Box>
+              )} */}
+                {privatePages.map((page) =>
+                  token ? (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        <NavLink to={`/${page === "schemes" ? "" : page}`}>
+                          {page}
+                        </NavLink>
+                      </Typography>
+                    </MenuItem>
+                  ) : null
+                )}
+              </Menu>
+            </Box>
+          ) : null}
 
           <Box sx={{ display: { xs: "flex", md: "none" }, mr: 2, flexGrow: 1 }}>
             {" "}
@@ -131,7 +139,7 @@ export function ResponsiveAppBar() {
               alignItems: "center",
               justifyContent: "center",
             }}>
-            <Button
+            {/* <Button
               key="Home"
               onClick={handleCloseNavMenu}
               className="menu-button"
@@ -143,8 +151,8 @@ export function ResponsiveAppBar() {
               <NavLink className="nav-link" to={`/`}>
                 Home
               </NavLink>
-            </Button>
-            {publicPages.map((page) =>
+            </Button> */}
+            {/* {publicPages.map((page) =>
               !token ? (
                 <Button
                   key={page}
@@ -160,7 +168,7 @@ export function ResponsiveAppBar() {
                   </NavLink>
                 </Button>
               ) : null
-            )}
+            )} */}
             {privatePages.map((page) =>
               token ? (
                 <Button
@@ -170,7 +178,9 @@ export function ResponsiveAppBar() {
                   variant="contained"
                   color="info"
                   sx={{ padding: 0 }}>
-                  <NavLink className="nav-link" to={`/${page}`}>
+                  <NavLink
+                    className="nav-link"
+                    to={`/${page === "schemes" ? "" : page}`}>
                     {page}
                   </NavLink>
                 </Button>
@@ -211,6 +221,7 @@ export function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}>
                 {/* <UserMenu handleCloseUserMenu={handleCloseUserMenu} /> */}
+
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography

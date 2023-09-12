@@ -1,6 +1,6 @@
 import Container from "./Schemes.styled";
 import { ReactionSchemePreview } from "../../components";
-import { testSchemesPreviewData } from "../../testData";
+// import { testSchemesPreviewData } from "../../testData";
 import { CustomSelect } from "../../components";
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
@@ -11,9 +11,19 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { SearchTextInput } from "../../ui";
 import { Link } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { getSchemePreviews } from "../../redux/schemes/schemesSlice";
+import { getSchemes } from "../../redux/schemes/operations";
 dayjs.extend(customParseFormat);
 
 const Schemes = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getSchemes());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const realSchemes = useAppSelector(getSchemePreviews);
   const [currentSchemesType, setCurrentSchemesType] = useState("all");
   const [sortingParam, setSortingParam] = useState("createdAt");
   const [sortingDireaction, setSortingDireaction] = useState("up");
@@ -81,14 +91,18 @@ const Schemes = () => {
     return sortedData;
   };
 
-  const [dataToShow, setDataToShow] = useState(
-    formatOutput(testSchemesPreviewData)
-  );
+  const [dataToShow, setDataToShow] = useState(formatOutput(realSchemes));
 
   useEffect(() => {
-    setDataToShow(formatOutput(testSchemesPreviewData));
+    setDataToShow(formatOutput(realSchemes));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSchemesType, sortingParam, sortingDireaction, searchValue]);
+  }, [
+    currentSchemesType,
+    sortingParam,
+    sortingDireaction,
+    searchValue,
+    realSchemes,
+  ]);
 
   return (
     <Container>
