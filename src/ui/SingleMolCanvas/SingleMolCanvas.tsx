@@ -4,7 +4,7 @@ import { ISingleMolCanvasProps } from "../../types";
 const SmilesDrawer = require("smiles-drawer");
 
 const SingleMolCanvas = ({
-  smiles,
+  smiles = "c",
   options = {
     width: 110,
     height: 110,

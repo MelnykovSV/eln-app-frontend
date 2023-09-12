@@ -8,7 +8,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -20,14 +20,18 @@ import { Logo } from "../../ui";
 import { useAppDispatch } from "../../redux/hooks";
 import { logOut } from "../../redux/auth/operations";
 import { useAppSelector } from "../../redux/hooks";
+import { clearSchemesData } from "../../redux/schemes/schemesSlice";
+
 import { getAccessToken } from "../../redux/auth/authSlice";
+import { getCurrentSchemeId } from "../../redux/schemes/schemesSlice";
 
 // const publicPages = ["register", "login"];
-const privatePages = ["schemes", "scheme", "stage", "tasks"];
+// const privatePages = ["schemes", "scheme", "stage", "tasks"];
 const settings = ["Logout"];
 
 export function ResponsiveAppBar() {
   const token = useAppSelector(getAccessToken);
+  const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const dispatch = useAppDispatch();
 
   //   const user = true;
@@ -97,31 +101,31 @@ export function ResponsiveAppBar() {
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}>
-                {/* <MenuItem key="Home" onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <NavLink to={`/`}>Home</NavLink>
-                </Typography>
-              </MenuItem> */}
-                {/* {publicPages.map((page) =>
-                !token ? (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                      <NavLink to={`/${page}`}>{page}</NavLink>
-                    </Typography>
-                  </MenuItem>
-                ) : null
-              )} */}
-                {privatePages.map((page) =>
-                  token ? (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">
-                        <NavLink to={`/${page === "schemes" ? "" : page}`}>
-                          {page}
-                        </NavLink>
-                      </Typography>
-                    </MenuItem>
-                  ) : null
-                )}
+                <MenuItem key={"schemes"} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <NavLink to={""}>Schemes</NavLink>
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  key={"scheme"}
+                  onClick={handleCloseNavMenu}
+                  disabled={currentSchemeId ? false : true}>
+                  <Typography textAlign="center">
+                    <NavLink to={`/scheme/${currentSchemeId}`}>
+                      Current scheme
+                    </NavLink>
+                  </Typography>
+                </MenuItem>
+                <MenuItem key={"stage"} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <NavLink to={"/stage"}>Stage</NavLink>
+                  </Typography>
+                </MenuItem>
+                <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <NavLink to={"/tasks"}>Tasks</NavLink>
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : null}
@@ -130,63 +134,43 @@ export function ResponsiveAppBar() {
             {" "}
             <Logo />
           </Box>
-
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              gap: "20px",
-              alignItems: "center",
-              justifyContent: "center",
-            }}>
-            {/* <Button
-              key="Home"
-              onClick={handleCloseNavMenu}
-              className="menu-button"
-              variant="contained"
-              color="info"
+          {token ? (
+            <Box
               sx={{
-                padding: 0,
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                gap: "20px",
+                alignItems: "center",
+                justifyContent: "center",
               }}>
-              <NavLink className="nav-link" to={`/`}>
-                Home
-              </NavLink>
-            </Button> */}
-            {/* {publicPages.map((page) =>
-              !token ? (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  className="menu-button"
-                  variant="contained"
-                  color="info"
-                  sx={{
-                    padding: 0,
-                  }}>
-                  <NavLink className="nav-link" to={`/${page}`}>
-                    {page}
+              <MenuItem key={"schemes"} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <NavLink to={""}>Schemes</NavLink>
+                </Typography>
+              </MenuItem>
+              <MenuItem
+                key={"scheme"}
+                onClick={handleCloseNavMenu}
+                disabled={currentSchemeId ? false : true}>
+                <Typography textAlign="center">
+                  <NavLink to={`/scheme/${currentSchemeId}`}>
+                    Current scheme
                   </NavLink>
-                </Button>
-              ) : null
-            )} */}
-            {privatePages.map((page) =>
-              token ? (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  className="menu-button"
-                  variant="contained"
-                  color="info"
-                  sx={{ padding: 0 }}>
-                  <NavLink
-                    className="nav-link"
-                    to={`/${page === "schemes" ? "" : page}`}>
-                    {page}
-                  </NavLink>
-                </Button>
-              ) : null
-            )}
-          </Box>
+                </Typography>
+              </MenuItem>
+              <MenuItem key={"stage"} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <NavLink to={"/stage"}>Stage</NavLink>
+                </Typography>
+              </MenuItem>
+              <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <NavLink to={"/tasks"}>Tasks</NavLink>
+                </Typography>
+              </MenuItem>
+            </Box>
+          ) : null}
+
           {token ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip className="avatar" title="Open settings">
@@ -228,6 +212,7 @@ export function ResponsiveAppBar() {
                       textAlign="center"
                       onClick={() => {
                         dispatch(logOut());
+                        dispatch(clearSchemesData());
                       }}>
                       {setting}
                     </Typography>

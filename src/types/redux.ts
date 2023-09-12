@@ -14,6 +14,7 @@ export interface IAuthState {
 }
 export interface ISchemesState {
   schemePreviews: IReactionPreviewData[];
+  currentScheme: any;
   status: string;
   isLoading: boolean;
   error: null | string;

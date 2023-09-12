@@ -3,16 +3,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
 import dayjs from "dayjs";
 
-// import {
+import { IReactionPreviewData } from "../../types";
 
-// } from "../../types";
-
-export const getSchemes = createAsyncThunk<any>(
+export const getSchemes = createAsyncThunk<IReactionPreviewData[]>(
   "schemes/getSchemes",
   async (_, thunkAPI) => {
     try {
       const response = await privateApi.get("/api/schemes");
-      const result = response.data.data.map((item: any) => {
+      const result = response.data.data.map((item: IReactionPreviewData) => {
         item.createdAt = dayjs(item.createdAt).format("DD.MM.YYYY");
         item.updatedAt = dayjs(item.updatedAt).format("DD.MM.YYYY");
         return item;
@@ -26,4 +24,24 @@ export const getSchemes = createAsyncThunk<any>(
   }
 );
 
-export {};
+export const getSingleScheme = createAsyncThunk<IReactionPreviewData[], string>(
+  "schemes/getSingleScheme",
+  async (schemeId: string, thunkAPI) => {
+    try {
+      const response = await privateApi.get(`/api/schemes/${schemeId}`);
+      console.log(response);
+
+      const result = {
+        ...response.data.data,
+        createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
+        updatedAt: dayjs(response.data.data.updatedAt).format("DD.MM.YYYY"),
+      };
+      console.log(result);
+
+      return result;
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);

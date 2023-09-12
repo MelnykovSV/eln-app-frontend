@@ -33,9 +33,11 @@ const Scheme = ({
           </p>
         ) : null}
       </div>
-      {stages.map((item) => (
-        <SynthesisSchemeStage stageData={item} n={n} key={nanoid()} />
-      ))}
+      {stages.length
+        ? stages.map((item) => (
+            <SynthesisSchemeStage stageData={item} n={n} key={nanoid()} />
+          ))
+        : null}
     </Container>
   );
 };

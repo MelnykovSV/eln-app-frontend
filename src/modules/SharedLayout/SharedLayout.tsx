@@ -2,6 +2,7 @@ import Container from "./SharedLayout.styled";
 import { Suspense } from "react";
 import { Outlet } from "react-router";
 import { ResponsiveAppBar } from "./ResponsiveAppBar";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const SharedLayout = () => {
   return (
@@ -10,7 +11,7 @@ const SharedLayout = () => {
         <ResponsiveAppBar />
       </header>
       <main>
-        <Suspense fallback={"Loading..."}>
+        <Suspense fallback={<LinearProgress color="secondary" />}>
           <Outlet></Outlet>
         </Suspense>
       </main>

@@ -1,6 +1,6 @@
 import Container from "./SingleSchemePage.styled";
 import { Scheme } from "../../modules";
-import { schemeTestData } from "../../testData";
+// import { currentScheme } from "../../testData";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useState, useEffect } from "react";
@@ -9,12 +9,17 @@ import { reagentListShortData } from "../../testData";
 import { calc } from "../../helpers/molMass";
 import axios from "axios";
 import { CustomTabPanel } from "../../components";
+import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
+import { useParams } from "react-router";
+import { getSingleScheme } from "../../redux/schemes/operations";
 
 import {
   calculateSchemeYieldCoefficients,
   ISchemeData,
 } from "../../helpers/calculateSchemeYieldCoefficients";
 import { smilesToMolecularFormula } from "../../helpers/chemistryHelpers";
+import { getCurrentScheme } from "../../redux/schemes/schemesSlice";
 
 function a11yProps(index: number) {
   return {
@@ -24,15 +29,24 @@ function a11yProps(index: number) {
 }
 
 const SingleSchemePage = () => {
+  const { schemeId } = useParams();
+
+  const dispatch = useAppDispatch();
+  const currentScheme = useAppSelector(getCurrentScheme);
+
   const [value, setValue] = useState(0);
 
   const [reagentsListData, setReagentsListData] = useState([] as any);
 
-  // const updatedSchemeData = {...schemeTestData, calculateSchemeYieldCoefficients(schemeTestData[stages])}
+  // const updatedSchemeData = {...currentScheme, calculateSchemeYieldCoefficients(currentScheme[stages])}
   const updatedSchemeData = calculateSchemeYieldCoefficients(
-    schemeTestData
+    currentScheme
   ) as ISchemeData;
   useEffect(() => {
+    if (schemeId) {
+      dispatch(getSingleScheme(schemeId));
+    }
+
     const arr1 = reagentListShortData.map(async (item) => {
       const formula = smilesToMolecularFormula(item.smiles);
       const molWeight = calc(formula) as unknown as string;
@@ -51,7 +65,8 @@ const SingleSchemePage = () => {
     Promise.all(arr1).then((resolvedArr) => {
       setReagentsListData(resolvedArr);
     });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schemeId]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

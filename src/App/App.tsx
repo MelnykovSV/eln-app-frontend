@@ -47,7 +47,7 @@ function App() {
               </PublicRoute>
             }></Route>
           <Route
-            path="/scheme"
+            path="/scheme/:schemeId"
             element={
               <PrivateRoute>
                 <SingleSchemePage />

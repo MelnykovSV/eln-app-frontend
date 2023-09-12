@@ -22,8 +22,6 @@ const persistConfig = {
 };
 
 const customMiddleWare = (store: any) => (next: any) => (action: any) => {
-  // console.log("Middleware triggered:", action);
-  // console.log(store.getState().auth.accessToken);
   next(action);
 };
 

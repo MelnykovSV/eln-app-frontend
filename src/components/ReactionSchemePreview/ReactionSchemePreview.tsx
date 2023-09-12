@@ -4,9 +4,13 @@ import { IReactionSchemePreviewProps } from "../../types";
 import { DoubleArrows } from "../../ui";
 import { useState } from "react";
 
+// import { redirect } from "react-router";
+import { useNavigate } from "react-router";
+
 const ReactionSchemePreview = ({
   schemePreviewData,
 }: IReactionSchemePreviewProps) => {
+  const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
 
   const handleMouseEnter = () => {
@@ -35,6 +39,11 @@ const ReactionSchemePreview = ({
     <Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        console.log("clicked");
+        // dispatch(getSingleScheme(schemePreviewData._id));
+        navigate(`/scheme/${schemePreviewData._id}`);
+      }}
       style={{
         zIndex: isActive ? 10 : 0,
         borderColor: calculateBorderColor(),
