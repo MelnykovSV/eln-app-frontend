@@ -16,6 +16,7 @@ const NewSchemePage = lazy(
 );
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
+const StagePage = lazy(() => import("../pages/StagePage/StagePage"));
 
 function App() {
   return (
@@ -55,7 +56,11 @@ function App() {
             }></Route>
           <Route
             path="/stage"
-            element={<PrivateRoute>Stage</PrivateRoute>}></Route>
+            element={
+              <PrivateRoute>
+                <StagePage />
+              </PrivateRoute>
+            }></Route>
           <Route
             path="/tasks"
             element={<PrivateRoute>Tasks</PrivateRoute>}></Route>

@@ -1,15 +1,15 @@
 export interface ISchemeData {
-  startingMaterial: string;
-  targetCompound: string;
-  mass: number;
+  startingMaterial: string | null;
+  targetCompound: string | null;
+  mass: number | null;
   totalYieldCoefficient?: number;
   stages: {
-    solvent: string;
+    solvent: string | null;
     temp: number | null;
-    time: string;
+    time: string | null;
     _yield: number | null;
-    methodic: string;
-    product: string;
+    methodic: string | null;
+    product: string | null;
     yieldCoefficient?: number;
   }[];
 }

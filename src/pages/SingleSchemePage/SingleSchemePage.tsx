@@ -13,11 +13,9 @@ import { useAppSelector } from "../../redux/hooks";
 import { useAppDispatch } from "../../redux/hooks";
 import { useParams } from "react-router";
 import { getSingleScheme } from "../../redux/schemes/operations";
+import { ICurrentScheme } from "../../types";
 
-import {
-  calculateSchemeYieldCoefficients,
-  ISchemeData,
-} from "../../helpers/calculateSchemeYieldCoefficients";
+import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 import { smilesToMolecularFormula } from "../../helpers/chemistryHelpers";
 import { getCurrentScheme } from "../../redux/schemes/schemesSlice";
 
@@ -41,7 +39,7 @@ const SingleSchemePage = () => {
   // const updatedSchemeData = {...currentScheme, calculateSchemeYieldCoefficients(currentScheme[stages])}
   const updatedSchemeData = calculateSchemeYieldCoefficients(
     currentScheme
-  ) as ISchemeData;
+  ) as ICurrentScheme;
   useEffect(() => {
     if (schemeId) {
       dispatch(getSingleScheme(schemeId));

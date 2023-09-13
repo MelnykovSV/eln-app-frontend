@@ -16,6 +16,9 @@ const SynthesisSchemeStage = ({
   },
   n,
 }: ISynthesisSchemeStageProps) => {
+  if (!product) {
+    product = ''
+  }
   return (
     <Container>
       <div className="conditions-container">

@@ -22,7 +22,8 @@ import {
   ICurrentUserPayload,
   IState,
   ISchemesState,
-  ISchemePreview
+  ISchemePreview,
+  ICurrentScheme,
 } from "./redux";
 
 export type {
@@ -47,5 +48,6 @@ export type {
   ICurrentUserPayload,
   IState,
   ISchemesState,
-  ISchemePreview
+  ISchemePreview,
+  ICurrentScheme,
 };

@@ -19,6 +19,19 @@ const initialState: ISchemesState = {
     updatedAt: null,
     stages: [],
   },
+  currentStage: {
+    _id: null,
+    _yield: null,
+    solvent: null,
+    startingMaterial: null,
+    methodic: null,
+    temp: null,
+    time: null,
+    product: null,
+    testSuccess: false,
+    scalingSuccess: false,
+    attempts: [],
+  },
   status: "idle",
   isLoading: false,
   error: null,
@@ -41,6 +54,19 @@ const schemesSlice = createSlice({
         createdAt: null,
         updatedAt: null,
         stages: [],
+      };
+      state.currentStage = {
+        _id: null,
+        _yield: null,
+        solvent: null,
+        startingMaterial: null,
+        methodic: null,
+        temp: null,
+        time: null,
+        product: null,
+        testSuccess: false,
+        scalingSuccess: false,
+        attempts: [],
       };
       state.isLoading = false;
       state.status = "idle";

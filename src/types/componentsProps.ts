@@ -1,7 +1,7 @@
 import { SelectChangeEvent } from "@mui/material/Select";
 import { Dayjs } from "dayjs";
 export interface ISingleMolCanvasProps {
-  smiles: string;
+  smiles: string | null;
   options?: {
     width: number;
     height: number;
@@ -52,12 +52,12 @@ export interface ISearchTextInput {
 
 export interface ISynthesisSchemeStageProps {
   stageData: {
-    solvent: string;
+    solvent: string | null;
     temp: number | null;
-    time: string;
+    time: string | null;
     _yield: number | null;
-    methodic: string;
-    product: string;
+    methodic: string | null;
+    product: string | null;
     yieldCoefficient?: number;
   };
   n: number;
@@ -66,18 +66,18 @@ export interface ISynthesisSchemeStageProps {
 
 export interface ISchemeProps {
   schemeData: {
-    startingMaterial: string;
-    targetCompound: string;
-    mass: number;
+    startingMaterial: string | null;
+    targetCompound: string | null;
+    mass: number | null;
     totalYieldCoefficient?: number;
 
     stages: {
-      solvent: string;
+      solvent: string | null;
       temp: number | null;
-      time: string;
+      time: string | null;
       _yield: number | null;
-      methodic: string;
-      product: string;
+      methodic: string | null;
+      product: string | null;
       yieldCoefficient?: number;
     }[];
   };

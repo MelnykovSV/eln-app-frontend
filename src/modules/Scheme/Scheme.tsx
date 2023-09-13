@@ -14,7 +14,19 @@ const Scheme = ({
     stages,
   },
 }: ISchemeProps) => {
-  const n = mass / smilesToMolWeight(targetCompound);
+  let n: number;
+
+  if (!startingMaterial) {
+    startingMaterial = "";
+  }
+  if (!targetCompound) {
+    targetCompound = "";
+  }
+  if (!mass || !startingMaterial || !targetCompound) {
+    n = 0;
+  } else {
+    n = mass / smilesToMolWeight(targetCompound);
+  }
 
   return (
     <Container>

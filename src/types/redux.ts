@@ -12,9 +12,60 @@ export interface IAuthState {
   isLoading: boolean;
   error: string | null;
 }
+export interface IStage {
+  product: string | null;
+  _yield: number | null;
+  solvent: string | null;
+  methodic: string | null;
+  temp: number | null;
+  time: string | null;
+  _id: string | null;
+  startingMaterial: string | null;
+  testSuccess: boolean;
+  scalingSuccess: boolean;
+  attempts: [];
+}
+
+export interface ICurrentScheme {
+  _id: string | null;
+  status: string | null;
+  mass: number | null;
+  price: number | null;
+  deadline: string | null;
+  startingMaterial: string | null;
+  targetCompound: string | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  stages: IStage[];
+}
+export interface ICurrentStage {
+  _id: string | null;
+  startingMaterial: string | null;
+  targetCompound: string | null;
+  testSuccess: boolean;
+  scalingSuccess: boolean;
+  attempts: [];
+}
+
+// export interface ISchemeData {
+//   startingMaterial: string;
+//   targetCompound: string;
+//   mass: number;
+//   totalYieldCoefficient?: number;
+//   stages: {
+//     solvent: string;
+//     temp: number | null;
+//     time: string | null;
+//     _yield: number | null;
+//     methodic: string;
+//     product: string;
+//     yieldCoefficient?: number;
+//   }[];
+// }
 export interface ISchemesState {
   schemePreviews: IReactionPreviewData[];
-  currentScheme: any;
+  currentScheme: ICurrentScheme;
+  currentStage: IStage;
   status: string;
   isLoading: boolean;
   error: null | string;
@@ -61,14 +112,6 @@ export interface ISignUpData {
 export interface ISignInData {
   email: string;
   password: string;
-}
-
-export interface IStage {
-  product: string;
-  _yield: number | null;
-  methodic: string | null;
-  temp: number | null;
-  time: string | null;
 }
 
 export interface INewScheme {

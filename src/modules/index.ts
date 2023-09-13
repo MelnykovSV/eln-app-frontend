@@ -4,6 +4,7 @@ import SharedLayout from "./SharedLayout/SharedLayout";
 import Scheme from "./Scheme/Scheme";
 import ReagentList from "./ReagentList/ReagentList";
 import NewSchemeForm from "./NewSchemeForm/NewSchemeForm";
+import Stage from "./Stage/Stage";
 
 export {
   RegistrationForm,
@@ -12,4 +13,5 @@ export {
   Scheme,
   ReagentList,
   NewSchemeForm,
+  Stage,
 };
