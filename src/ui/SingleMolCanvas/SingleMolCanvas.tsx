@@ -10,10 +10,17 @@ const SingleMolCanvas = ({
     height: 110,
   },
 }: ISingleMolCanvasProps) => {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     if (canvasRef.current) {
+      if (!smiles) {
+        const context = canvasRef.current.getContext("2d");
+        if (context) {
+          context.clearRect(0, 0, options.width, options.height);
+        }
+      }
+
       // Create an instance of SmilesDrawer.Drawer
       let smilesDrawer = new SmilesDrawer.Drawer(options);
       // console.log(SmilesDrawer);
@@ -28,6 +35,7 @@ const SingleMolCanvas = ({
         // console.log(calc(smilesDrawer.getMolecularFormula(tree)));
       });
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [smiles]);
   return (

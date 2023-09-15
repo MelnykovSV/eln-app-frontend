@@ -6,7 +6,11 @@ import SynthesisSchemeStage from "./SynthesisSchemeStage/SynthesisSchemeStage";
 import ReagentCard from "./ReagentCard/ReagentCard";
 import CustomTabPanel from "./CustomTabPanel/CustomTabPanel";
 import NewStageTab from "./NewStageTab/NewStageTab";
-import AttemptTab from "./AttemptTab/AttemptTab";
+import StageInfo from "./StageInfo/StageInfo";
+import AttemptConditions from "./AttemptConditions/AttemptConditions";
+import AttemptReagents from "./AttemptReagents/AttemptReagents";
+import AttemptSpectra from "./AttemptSpectra/AttemptSpectra";
+import SingleAttemptReagentTab from "./SingleAttemptReagentTab/SingleAttemptReagentTab";
 
 export {
   FormTextInput,
@@ -17,5 +21,9 @@ export {
   ReagentCard,
   CustomTabPanel,
   NewStageTab,
-  AttemptTab,
+  StageInfo,
+  AttemptConditions,
+  AttemptReagents,
+  AttemptSpectra,
+  SingleAttemptReagentTab,
 };
