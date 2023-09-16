@@ -27,7 +27,7 @@ export interface IAttempt {
   productMass: number | null;
   productPurity: number | null;
   type: "test" | "scaling";
-  isOk: boolean | null;
+  isOk: boolean;
   spectra: ISpectr[];
   reagents: IAttemptReagent[];
 }

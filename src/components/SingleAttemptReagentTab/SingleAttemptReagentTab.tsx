@@ -1,5 +1,4 @@
 import Container from "./SingleAttemptReagentTab.styled";
-import { IAttemptReagent } from "../../types/redux";
 import { SingleMolCanvas } from "../../ui";
 import TextField from "@mui/material/TextField";
 import { useAppDispatch } from "../../redux/hooks";

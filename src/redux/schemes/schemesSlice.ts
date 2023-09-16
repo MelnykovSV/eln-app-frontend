@@ -45,7 +45,7 @@ const initialState: ISchemesState = {
         productMass: null,
         productPurity: null,
         type: "test",
-        isOk: null,
+        isOk: false,
         spectra: [],
         reagents: [
           {
@@ -90,7 +90,7 @@ const initialState: ISchemesState = {
         productMass: null,
         productPurity: null,
         type: "test",
-        isOk: null,
+        isOk: false,
         spectra: [],
         reagents: [
           {
@@ -167,48 +167,237 @@ const schemesSlice = createSlice({
       state.error = null;
     },
     setAttemptReagentData(state, action: PayloadAction<any>) {
-      const attempt =
+      const reagent =
         state.currentStage.attempts[action.payload.attemptNumber - 1].reagents[
           action.payload.reagentNumber - 1
         ];
       switch (action.payload.fieldName) {
         case "smiles":
-          attempt.smiles = action.payload.smiles;
+          reagent.smiles = action.payload.smiles;
 
-          attempt.molecularWeight =
+          reagent.molecularWeight =
             smilesToMolWeight(action.payload.smiles) || null;
 
           if (
-            attempt.molecularWeight !== null &&
-            attempt.equivalents !== null
+            reagent.molecularWeight !== null &&
+            reagent.equivalents !== null
           ) {
-            attempt.mass = Number(
-              (attempt.molecularWeight * attempt.equivalents).toFixed(4)
+            reagent.mass = Number(
+              (reagent.molecularWeight * reagent.equivalents).toFixed(4)
             );
           }
           break;
         case "mass":
-          attempt.mass = action.payload.mass;
-          if (attempt.molecularWeight) {
-            console.log(attempt.molecularWeight);
-            attempt.equivalents = Number(
-              (action.payload.mass / attempt.molecularWeight).toFixed(4)
+          reagent.mass = action.payload.mass;
+          if (reagent.molecularWeight) {
+            console.log(reagent.molecularWeight);
+            reagent.equivalents = Number(
+              (action.payload.mass / reagent.molecularWeight).toFixed(4)
             );
           }
 
           break;
         case "equivalents":
-          attempt.equivalents = action.payload.equivalents;
+          reagent.equivalents = action.payload.equivalents;
           if (
-            attempt.molecularWeight !== null &&
-            attempt.equivalents !== null
+            reagent.molecularWeight !== null &&
+            reagent.equivalents !== null
           ) {
-            attempt.mass = Number(
-              (attempt.molecularWeight * attempt.equivalents).toFixed(4)
+            reagent.mass = Number(
+              (reagent.molecularWeight * reagent.equivalents).toFixed(4)
             );
           }
           break;
       }
+    },
+
+    setAttemptInfo(
+      state,
+      action: PayloadAction<{
+        [key: string]: string | number | null | boolean;
+        attemptNumber: number;
+        fieldName: string;
+      }>
+    ) {
+      const attempt =
+        state.currentStage.attempts[action.payload.attemptNumber - 1];
+
+      switch (action.payload.fieldName) {
+        case "methodic":
+        case "solvent":
+        case "time": {
+          const fieldValue =
+            (action.payload[action.payload.fieldName] as string) || null;
+          attempt[action.payload.fieldName] = fieldValue;
+          break;
+        }
+        case "_yield": {
+          const fieldValue =
+            Number(action.payload[action.payload.fieldName]) || null;
+          attempt[action.payload.fieldName] = fieldValue;
+          if (
+            attempt.startingMaterialMass &&
+            attempt.productPurity &&
+            state.currentStage.startingMaterial &&
+            state.currentStage.product
+          ) {
+            if (!fieldValue) {
+              attempt.productMass = null;
+            } else {
+              const productPurity = attempt.productPurity;
+              const startingMaterialN =
+                attempt.startingMaterialMass /
+                smilesToMolWeight(state.currentStage.startingMaterial);
+              const productYield = fieldValue;
+              const productMolWeight = smilesToMolWeight(
+                state.currentStage.product
+              );
+
+              attempt.productMass = Number(
+                (
+                  (startingMaterialN *
+                    productMolWeight *
+                    productYield *
+                    productPurity) /
+                  10000
+                ).toFixed(4)
+              );
+            }
+          }
+          break;
+        }
+        case "temp":
+        case "startingMaterialMass": {
+          const fieldValue =
+            Number(action.payload[action.payload.fieldName]) || null;
+          attempt[action.payload.fieldName] = fieldValue;
+          if (
+            attempt.productPurity &&
+            attempt.productMass &&
+            state.currentStage.startingMaterial &&
+            state.currentStage.product
+          ) {
+            if (!fieldValue) {
+              attempt._yield = null;
+            } else {
+              const productMass = attempt.productMass;
+              const startingMaterialN =
+                fieldValue /
+                smilesToMolWeight(state.currentStage.startingMaterial);
+              const productPurity = attempt.productPurity;
+              const productMolWeight = smilesToMolWeight(
+                state.currentStage.product
+              );
+
+              // attempt.reagents.forEach((item) => {
+              //   if (item.equivalents && item.molecularWeight) {
+              //     item.mass =
+              //       startingMaterialN * item.molecularWeight * item.equivalents;
+              //   }
+              // });
+
+              attempt._yield = Number(
+                (
+                  ((productMass * productPurity) /
+                    100 /
+                    (startingMaterialN * productMolWeight)) *
+                  100
+                ).toFixed(4)
+              );
+            }
+          }
+          break;
+        }
+        case "productMass": {
+          const fieldValue =
+            Number(action.payload[action.payload.fieldName]) || null;
+          attempt[action.payload.fieldName] = fieldValue;
+          if (
+            attempt.startingMaterialMass &&
+            attempt.productPurity &&
+            state.currentStage.startingMaterial &&
+            state.currentStage.product
+          ) {
+            if (!fieldValue) {
+              attempt._yield = null;
+            } else {
+              const productPurity = attempt.productPurity;
+              const startingMaterialN =
+                attempt.startingMaterialMass /
+                smilesToMolWeight(state.currentStage.startingMaterial);
+              const productMass = fieldValue;
+              const productMolWeight = smilesToMolWeight(
+                state.currentStage.product
+              );
+
+              attempt._yield = Number(
+                (
+                  ((productMass * productPurity) /
+                    100 /
+                    (startingMaterialN * productMolWeight)) *
+                  100
+                ).toFixed(4)
+              );
+            }
+          }
+          break;
+        }
+        case "productPurity": {
+          const fieldValue =
+            Number(action.payload[action.payload.fieldName]) || null;
+          attempt[action.payload.fieldName] = fieldValue;
+
+          if (
+            attempt.startingMaterialMass &&
+            attempt.productMass &&
+            state.currentStage.startingMaterial &&
+            state.currentStage.product
+          ) {
+            if (!fieldValue) {
+              attempt._yield = null;
+            } else {
+              const productMass = attempt.productMass;
+              const startingMaterialN =
+                attempt.startingMaterialMass /
+                smilesToMolWeight(state.currentStage.startingMaterial);
+              const productPurity = fieldValue;
+              const productMolWeight = smilesToMolWeight(
+                state.currentStage.product
+              );
+
+              attempt._yield = Number(
+                (
+                  ((productMass * productPurity) /
+                    100 /
+                    (startingMaterialN * productMolWeight)) *
+                  100
+                ).toFixed(4)
+              );
+            }
+          }
+
+          break;
+        }
+        case "type": {
+          const fieldValue = action.payload[action.payload.fieldName] as
+            | "test"
+            | "scaling";
+          attempt[action.payload.fieldName] = fieldValue;
+          break;
+        }
+        case "isOk": {
+          const fieldValue = action.payload[
+            action.payload.fieldName
+          ] as boolean;
+          attempt[action.payload.fieldName] = fieldValue;
+          break;
+        }
+      }
+    },
+    setAttemptStatus(state, action: PayloadAction<{ attemptNumber: number }>) {
+      const attempt =
+        state.currentStage.attempts[action.payload.attemptNumber - 1];
+      attempt.isOk = !attempt.isOk;
     },
   },
   extraReducers: (builder) => {
@@ -243,7 +432,12 @@ const schemesSlice = createSlice({
 });
 
 export const schemesReducer = schemesSlice.reducer;
-export const { clearSchemesData, setAttemptReagentData } = schemesSlice.actions;
+export const {
+  clearSchemesData,
+  setAttemptReagentData,
+  setAttemptInfo,
+  setAttemptStatus,
+} = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;
 
