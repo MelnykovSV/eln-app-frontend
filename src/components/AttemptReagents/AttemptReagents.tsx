@@ -2,7 +2,6 @@ import Container from "./AttemptReagents.styled";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
 import { SingleAttemptReagentTab } from "../";
-import TextField from "@mui/material/TextField";
 
 interface IAttemptReagentsProps {
   attemptNumber: number;
@@ -13,9 +12,9 @@ const AttemptReagents = ({ attemptNumber }: IAttemptReagentsProps) => {
     attemptNumber - 1
   ].reagents;
 
-  const reagentDataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    return { value: e.target.value, attemptNumber: attemptNumber };
-  };
+  // const reagentDataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   return { value: e.target.value, attemptNumber: attemptNumber };
+  // };
   return (
     <Container>
       {currentAttemptReagents.map((item) => (

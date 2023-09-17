@@ -171,6 +171,9 @@ const schemesSlice = createSlice({
         state.currentStage.attempts[action.payload.attemptNumber - 1].reagents[
           action.payload.reagentNumber - 1
         ];
+
+      const attempt =
+        state.currentStage.attempts[action.payload.attemptNumber - 1];
       switch (action.payload.fieldName) {
         case "smiles":
           reagent.smiles = action.payload.smiles;
@@ -189,10 +192,19 @@ const schemesSlice = createSlice({
           break;
         case "mass":
           reagent.mass = action.payload.mass;
-          if (reagent.molecularWeight) {
-            console.log(reagent.molecularWeight);
+          if (
+            reagent.molecularWeight &&
+            attempt.startingMaterialMass !== null &&
+            state.currentStage.startingMaterial !== null
+          ) {
+            const startingMaterialN =
+              attempt.startingMaterialMass /
+              smilesToMolWeight(state.currentStage.startingMaterial);
             reagent.equivalents = Number(
-              (action.payload.mass / reagent.molecularWeight).toFixed(4)
+              (
+                action.payload.mass /
+                (reagent.molecularWeight * startingMaterialN)
+              ).toFixed(4)
             );
           }
 
@@ -201,10 +213,19 @@ const schemesSlice = createSlice({
           reagent.equivalents = action.payload.equivalents;
           if (
             reagent.molecularWeight !== null &&
-            reagent.equivalents !== null
+            reagent.equivalents !== null &&
+            attempt.startingMaterialMass !== null &&
+            state.currentStage.startingMaterial !== null
           ) {
+            const startingMaterialN =
+              attempt.startingMaterialMass /
+              smilesToMolWeight(state.currentStage.startingMaterial);
             reagent.mass = Number(
-              (reagent.molecularWeight * reagent.equivalents).toFixed(4)
+              (
+                reagent.molecularWeight *
+                reagent.equivalents *
+                startingMaterialN
+              ).toFixed(4)
             );
           }
           break;
@@ -271,6 +292,27 @@ const schemesSlice = createSlice({
           const fieldValue =
             Number(action.payload[action.payload.fieldName]) || null;
           attempt[action.payload.fieldName] = fieldValue;
+
+          attempt.reagents.forEach((item) => {
+            if (
+              item.equivalents &&
+              item.molecularWeight &&
+              state.currentStage.startingMaterial
+            ) {
+              if (fieldValue) {
+                item.mass = Number(
+                  (
+                    (fieldValue /
+                      smilesToMolWeight(state.currentStage.startingMaterial)) *
+                    item.molecularWeight *
+                    item.equivalents
+                  ).toFixed(4)
+                );
+              } else {
+                item.mass = null;
+              }
+            }
+          });
           if (
             attempt.productPurity &&
             attempt.productMass &&
@@ -288,13 +330,6 @@ const schemesSlice = createSlice({
               const productMolWeight = smilesToMolWeight(
                 state.currentStage.product
               );
-
-              // attempt.reagents.forEach((item) => {
-              //   if (item.equivalents && item.molecularWeight) {
-              //     item.mass =
-              //       startingMaterialN * item.molecularWeight * item.equivalents;
-              //   }
-              // });
 
               attempt._yield = Number(
                 (

@@ -3,7 +3,7 @@ import { Stage } from "../../modules";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStage } from "../../redux/schemes/schemesSlice";
 import { useState } from "react";
-import { IStage, IAttempt } from "../../types/redux";
+import { IAttempt } from "../../types/redux";
 // product,
 // _yield,
 // solvent,
@@ -66,25 +66,25 @@ const StagePage = () => {
   return (
     <Container>
       <Stage
-        // product={product}
-        // _yield={_yield}
-        // solvent={solvent}
-        // methodic={methodic}
-        // temp={temp}
-        // time={time}
-        // _id={_id}
-        // startingMaterial={startingMaterial}
-        // testSuccess={testSuccess}
-        // scalingSuccess={scalingSuccess}
-        // attempts={attempts}
-        // _yieldChangeHandler={_yieldChangeHandler}
-        // solventChangeHandler={solventChangeHandler}
-        // methodicChangeHandler={methodicChangeHandler}
-        // tempChangeHandler={tempChangeHandler}
-        // timeChangeHandler={timeChangeHandler}
-        // testSuccessChangeHandler={testSuccessChangeHandler}
-        // scalingSuccessChangeHandler={scalingSuccessChangeHandler}
-        // attemptsChangeHandler={attemptsChangeHandler}
+      // product={product}
+      // _yield={_yield}
+      // solvent={solvent}
+      // methodic={methodic}
+      // temp={temp}
+      // time={time}
+      // _id={_id}
+      // startingMaterial={startingMaterial}
+      // testSuccess={testSuccess}
+      // scalingSuccess={scalingSuccess}
+      // attempts={attempts}
+      // _yieldChangeHandler={_yieldChangeHandler}
+      // solventChangeHandler={solventChangeHandler}
+      // methodicChangeHandler={methodicChangeHandler}
+      // tempChangeHandler={tempChangeHandler}
+      // timeChangeHandler={timeChangeHandler}
+      // testSuccessChangeHandler={testSuccessChangeHandler}
+      // scalingSuccessChangeHandler={scalingSuccessChangeHandler}
+      // attemptsChangeHandler={attemptsChangeHandler}
       />
     </Container>
   );
