@@ -3,9 +3,13 @@ import { SingleMolCanvas } from "../../ui";
 import { SingleArrow } from "../../ui";
 import { ISynthesisSchemeStageProps } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
+import { useNavigate } from "react-router";
+import { useAppDispatch } from "../../redux/hooks";
+import { updateCurrentStage } from "../../redux/schemes/schemesSlice";
 
 const SynthesisSchemeStage = ({
   stageData: {
+    _id,
     solvent,
     temp,
     time,
@@ -17,10 +21,21 @@ const SynthesisSchemeStage = ({
   n,
 }: ISynthesisSchemeStageProps) => {
   if (!product) {
-    product = ''
+    product = "";
   }
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const stageClickHandler = () => {
+    console.log("clicked");
+    // dispatch(getSingleScheme(schemePreviewData._id));
+    if (_id) {
+      dispatch(updateCurrentStage(_id));
+      navigate(`/stage/`);
+    }
+  };
   return (
-    <Container>
+    <Container onClick={stageClickHandler}>
       <div className="conditions-container">
         <p>
           {solvent ? <span>{solvent}</span> : null}

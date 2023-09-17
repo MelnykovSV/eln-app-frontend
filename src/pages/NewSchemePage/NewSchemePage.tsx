@@ -12,6 +12,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { privateApi } from "../../api";
 
 const blankStage = {
+  startingMaterial: "",
   product: "",
   solvent: "",
   temp: null,
@@ -29,6 +30,15 @@ const NewSchemePage = () => {
   const [isSchemePreviewShown, setIsSchemePreviewShown] = useState(false);
 
   const [targetCompound, setTargetCompound] = useState("");
+  // const blankStage = {
+  //   startingMaterial: "cccccccc",
+  //   product: "",
+  //   solvent: "",
+  //   temp: null,
+  //   time: "",
+  //   _yield: null,
+  //   methodic: "",
+  // };
   const [stages, setStages] = useState([
     {
       ...blankStage,
@@ -55,7 +65,8 @@ const NewSchemePage = () => {
   };
 
   const addStageHandler = () => {
-    setStages([...stages, { ...blankStage }]);
+    const startingMaterial = stages[stages.length - 1].product;
+    setStages([...stages, { ...blankStage, startingMaterial }]);
 
     setStageNumber(stageNumber + 1);
   };
@@ -81,6 +92,8 @@ const NewSchemePage = () => {
       deadline,
       stages,
     });
+
+    stages[0].startingMaterial = startingMaterial; // костыль, доделать!
 
     const response = await privateApi.post("/api/schemes/", {
       startingMaterial,

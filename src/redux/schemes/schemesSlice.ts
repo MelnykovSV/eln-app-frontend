@@ -24,11 +24,11 @@ const initialState: ISchemesState = {
     _id: null,
     _yield: null,
     solvent: null,
-    startingMaterial: "ccccc",
+    startingMaterial: "c",
     methodic: null,
     temp: null,
     time: null,
-    product: "ccccc",
+    product: "c",
     testSuccess: false,
     scalingSuccess: false,
     isChanged: false,
@@ -41,51 +41,7 @@ const initialState: ISchemesState = {
         methodic: null,
         temp: null,
         time: null,
-        startingMaterialMass: null,
-        productMass: null,
-        productPurity: null,
-        type: "test",
-        isOk: false,
-        spectra: [],
-        reagents: [
-          {
-            reagentNumber: 1,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 2,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 3,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 4,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-        ],
-      },
-      {
-        attemptNumber: 2,
-        _id: null,
-        _yield: null,
-        solvent: null,
-        methodic: null,
-        temp: null,
-        time: null,
+        notes: null,
         startingMaterialMass: null,
         productMass: null,
         productPurity: null,
@@ -134,6 +90,63 @@ const schemesSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
+    updateCurrentStage(state, action: PayloadAction<string>) {
+      const stage = state.currentScheme.stages.find(
+        (item) => item._id === action.payload
+      );
+      if (stage) {
+        state.currentStage = { ...stage };
+      }
+    },
+    addAttempt(state) {
+      const attemptnumber = state.currentStage.attempts.length + 1;
+      state.currentStage.attempts.push({
+        attemptNumber: attemptnumber,
+        _id: null,
+        _yield: null,
+        solvent: null,
+        methodic: null,
+        temp: null,
+        time: null,
+        notes: null,
+        startingMaterialMass: null,
+        productMass: null,
+        productPurity: null,
+        type: "test",
+        isOk: false,
+        spectra: [],
+        reagents: [
+          {
+            reagentNumber: 1,
+            smiles: null,
+            equivalents: null,
+            molecularWeight: null,
+            mass: null,
+          },
+          {
+            reagentNumber: 2,
+            smiles: null,
+            equivalents: null,
+            molecularWeight: null,
+            mass: null,
+          },
+          {
+            reagentNumber: 3,
+            smiles: null,
+            equivalents: null,
+            molecularWeight: null,
+            mass: null,
+          },
+          {
+            reagentNumber: 4,
+            smiles: null,
+            equivalents: null,
+            molecularWeight: null,
+            mass: null,
+          },
+        ],
+      });
+    },
     clearSchemesData(state) {
       state.schemePreviews = [];
       state.currentScheme = {
@@ -472,6 +485,7 @@ export const {
   setAttemptReagentData,
   setAttemptInfo,
   setAttemptStatus,
+  updateCurrentStage,
 } = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;

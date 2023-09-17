@@ -23,6 +23,7 @@ export interface IAttempt {
   methodic: string | null;
   temp: number | null;
   time: string | null;
+  notes: string | null;
   startingMaterialMass: number | null;
   productMass: number | null;
   productPurity: number | null;

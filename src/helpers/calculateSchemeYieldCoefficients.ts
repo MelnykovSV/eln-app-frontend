@@ -4,6 +4,7 @@ export interface ISchemeData {
   mass: number | null;
   totalYieldCoefficient?: number;
   stages: {
+    _id?: string | null;
     solvent: string | null;
     temp: number | null;
     time: string | null;
