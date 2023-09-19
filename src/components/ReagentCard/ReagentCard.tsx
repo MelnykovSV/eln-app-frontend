@@ -19,7 +19,7 @@ const ReagentCard = ({
         </ul>
         <ul className="mol-info__second">
           <li>SMILES: {smiles}</li>
-          <li>Compound name: {compoundName}</li>
+          <li>Compound name: {compoundName || "Can't name this compound"}</li>
         </ul>
       </div>
     </Container>

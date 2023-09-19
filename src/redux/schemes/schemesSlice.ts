@@ -36,10 +36,11 @@ const schemesSlice = createSlice({
   initialState: initialState,
   reducers: {
     initialUpdateCurrentStage(state, action: PayloadAction<string>) {
+      console.log("this");
       const stage = state.currentScheme.stages.find(
         (item) => item._id === action.payload
       );
-      if (stage) {
+      if (stage && stage._id !== state.currentStage._id) {
         state.currentStage = { ...state.currentStage, ...stage };
       }
     },
@@ -178,8 +179,22 @@ const schemesSlice = createSlice({
           const fieldValue =
             (action.payload[action.payload.fieldName] as string) || null;
           attempt[action.payload.fieldName] = fieldValue;
+
+          if (attempt.isOk) {
+            state.currentStage[action.payload.fieldName] = fieldValue;
+          }
           break;
         }
+        case "temp": {
+          const fieldValue =
+            (action.payload[action.payload.fieldName] as number) || null;
+          attempt[action.payload.fieldName] = Number(fieldValue);
+          if (attempt.isOk) {
+            state.currentStage[action.payload.fieldName] = Number(fieldValue);
+          }
+          break;
+        }
+
         case "_yield": {
           const fieldValue =
             Number(action.payload[action.payload.fieldName]) || null;
@@ -213,9 +228,10 @@ const schemesSlice = createSlice({
               );
             }
           }
+
           break;
         }
-        case "temp":
+
         case "startingMaterialMass": {
           const fieldValue =
             Number(action.payload[action.payload.fieldName]) || null;
@@ -266,6 +282,9 @@ const schemesSlice = createSlice({
                   100
                 ).toFixed(4)
               );
+              if (attempt.isOk) {
+                state.currentStage._yield = attempt._yield;
+              }
             }
           }
           break;
@@ -299,6 +318,9 @@ const schemesSlice = createSlice({
                   100
                 ).toFixed(4)
               );
+              if (attempt.isOk) {
+                state.currentStage._yield = attempt._yield;
+              }
             }
           }
           break;
@@ -333,6 +355,10 @@ const schemesSlice = createSlice({
                   100
                 ).toFixed(4)
               );
+
+              if (attempt.isOk) {
+                state.currentStage._yield = attempt._yield;
+              }
             }
           }
           break;
@@ -358,22 +384,30 @@ const schemesSlice = createSlice({
     },
     setAttemptStatus(state, action: PayloadAction<{ attemptNumber: number }>) {
       state.currentStage.isChanged = true;
-      const attempt =
-        state.currentStage.attempts[action.payload.attemptNumber - 1];
-      attempt.isOk = !attempt.isOk;
-
-      state.currentScheme.stages = state.currentScheme.stages.map((item) => {
-        if (item._id === state.currentStage._id) {
-          const { isChanged, ...payload } = item;
-          console.log({ ...item });
-          console.log(payload);
-
-          return { ...item, ...payload };
+      state.currentStage.attempts.map((attempt) => {
+        if (attempt.attemptNumber !== action.payload.attemptNumber) {
+          attempt.isOk = false;
+        } else {
+          attempt.isOk = !attempt.isOk;
         }
-        return item;
+        return attempt;
       });
 
-      //synchronyzes currentScheme with currentStage
+      if (state.currentStage.attempts[action.payload.attemptNumber - 1].isOk) {
+        state.currentStage.methodic =
+          state.currentStage.attempts[
+            action.payload.attemptNumber - 1
+          ].methodic;
+        state.currentStage.time =
+          state.currentStage.attempts[action.payload.attemptNumber - 1].time;
+        state.currentStage.solvent =
+          state.currentStage.attempts[action.payload.attemptNumber - 1].solvent;
+        state.currentStage.temp =
+          state.currentStage.attempts[action.payload.attemptNumber - 1].temp;
+        state.currentStage._yield =
+          state.currentStage.attempts[action.payload.attemptNumber - 1]._yield;
+      }
+
       schemeDataSynchronyzer(state);
     },
   },

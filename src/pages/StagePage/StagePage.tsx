@@ -72,7 +72,6 @@ const StagePage = () => {
   const currentScheme = useAppSelector(getCurrentScheme);
 
   const { schemeId, stageId } = useParams() as any;
-  console.log(schemeId);
   useEffect(() => {
     if (currentScheme._id === schemeId) {
       // const stage = currentScheme.stages.find((item) => item._id === stageId);
