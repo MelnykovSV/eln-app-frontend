@@ -10,7 +10,7 @@ interface IAttemptReagentTabProps {
   equivalents: number | null;
   molecularWeight: number | null;
   mass: number | null;
-  attemptNumber: number | null;
+  attemptNumber: number ;
 }
 
 const SingleAttemptReagentTab = ({

@@ -2,8 +2,17 @@ import { privateApi } from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
 import dayjs from "dayjs";
-
 import { IReactionPreviewData } from "../../types";
+import { ISchemeData, IStage } from "../../types/redux";
+
+export interface IgetSchemeAndStageParams {
+  schemeId: string;
+  stageId: string;
+}
+export interface IgetSchemeAndStagePayload {
+  schemeData: ISchemeData;
+  stageData: IStage;
+}
 
 export const getSchemes = createAsyncThunk<IReactionPreviewData[]>(
   "schemes/getSchemes",
@@ -24,7 +33,7 @@ export const getSchemes = createAsyncThunk<IReactionPreviewData[]>(
   }
 );
 
-export const getSingleScheme = createAsyncThunk<IReactionPreviewData[], string>(
+export const getSingleScheme = createAsyncThunk<ISchemeData, string>(
   "schemes/getSingleScheme",
   async (schemeId: string, thunkAPI) => {
     try {
@@ -46,29 +55,29 @@ export const getSingleScheme = createAsyncThunk<IReactionPreviewData[], string>(
   }
 );
 
-export const getSchemeAndStage = createAsyncThunk<any[], any>(
-  "schemes/getSchemeAndStage",
-  async ({ schemeId, stageId }, thunkAPI: any) => {
-    try {
-      const response = await privateApi.get(`/api/schemes/${schemeId}`);
-      console.log(response);
+export const getSchemeAndStage = createAsyncThunk<
+  IgetSchemeAndStagePayload,
+  IgetSchemeAndStageParams
+>("schemes/getSchemeAndStage", async ({ schemeId, stageId }, thunkAPI) => {
+  try {
+    const response = await privateApi.get(`/api/schemes/${schemeId}`);
+    console.log(response);
 
-      const schemeData = {
-        ...response.data.data,
-        createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
-        updatedAt: dayjs(response.data.data.updatedAt).format("DD.MM.YYYY"),
-      };
+    const schemeData = {
+      ...response.data.data,
+      createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
+      updatedAt: dayjs(response.data.data.updatedAt).format("DD.MM.YYYY"),
+    };
 
-      const stageData = schemeData.stages.find(
-        (item: any) => item._id === stageId
-      );
+    const stageData = schemeData.stages.find(
+      (item: IStage) => item._id === stageId
+    );
 
-      console.log(schemeData, stageData);
+    console.log(schemeData, stageData);
 
-      return { schemeData, stageData };
-    } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
-    }
+    return { schemeData, stageData };
+  } catch (error) {
+    console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
   }
-);
+});

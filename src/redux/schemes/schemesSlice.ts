@@ -1,86 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { isError, isPending } from "../statusCheckers";
-
 import { IState, ISchemesState } from "../../types";
-import { getSchemes, getSingleScheme, getSchemeAndStage } from "./operations";
+import {
+  getSchemes,
+  getSingleScheme,
+  getSchemeAndStage,
+  IgetSchemeAndStagePayload,
+} from "./operations";
 import { IReactionPreviewData } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
+import {
+  currentSchemeInitialValue,
+  currentStageInitialValue,
+  setAttemptInitialValue,
+} from "./initialValues";
+import { schemeDataSynchronyzer } from "../../helpers/schemeDataSynchronyzer";
+import {
+  ISchemeData,
+  ICurrentScheme,
+  IStage,
+  IAttempt,
+} from "../../types/redux";
 
 const initialState: ISchemesState = {
   schemePreviews: [],
-  currentScheme: {
-    _id: null,
-    status: null,
-    mass: null,
-    price: null,
-    deadline: null,
-    startingMaterial: null,
-    targetCompound: null,
-    createdAt: null,
-    updatedAt: null,
-    stages: [],
-  },
-  currentStage: {
-    _id: null,
-    _yield: null,
-    solvent: null,
-    startingMaterial: null,
-    methodic: null,
-    temp: null,
-    time: null,
-    product: null,
-    testSuccess: false,
-    scalingSuccess: false,
-    isChanged: false,
-    attempts: [
-      {
-        attemptNumber: 1,
-        _id: null,
-        _yield: null,
-        solvent: null,
-        methodic: null,
-        temp: null,
-        time: null,
-        notes: null,
-        startingMaterialMass: null,
-        productMass: null,
-        productPurity: null,
-        type: "test",
-        isOk: false,
-        spectra: [],
-        reagents: [
-          {
-            reagentNumber: 1,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 2,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 3,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 4,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-        ],
-      },
-    ],
-  },
+  currentScheme: JSON.parse(JSON.stringify(currentSchemeInitialValue)),
+  currentStage: JSON.parse(JSON.stringify(currentStageInitialValue)),
   status: "idle",
   isLoading: false,
   error: null,
@@ -95,15 +40,7 @@ const schemesSlice = createSlice({
         (item) => item._id === action.payload
       );
       if (stage) {
-        // const currentStagePrevId = state.currentStage._id;
-        // console.log("Before", currentStagePrevId);
         state.currentStage = { ...state.currentStage, ...stage };
-        // console.log("After", currentStagePrevId);
-        // if (stage._id === currentStagePrevId && currentStagePrevId !== null) {
-        //   console.log("triggered");
-        //   console.log("Inside if", currentStagePrevId);
-        //   state.currentStage.isChanged = true;
-        // }
       }
     },
     temporalSaveStageData(state) {
@@ -115,149 +52,33 @@ const schemesSlice = createSlice({
       );
       console.log(stage);
       if (stage) {
-        // const currentStagePrevId = state.currentStage._id;
-        // console.log("Before", currentStagePrevId);
-        console.log("triggred");
         state.currentStage = { ...state.currentStage, ...stage };
         state.currentStage.isChanged = true;
-        // console.log("After", currentStagePrevId);
-        // if (stage._id === currentStagePrevId && currentStagePrevId !== null) {
-        //   console.log("triggered");
-        //   console.log("Inside if", currentStagePrevId);
-        //   state.currentStage.isChanged = true;
-        // }
       }
     },
     addAttempt(state) {
       const attemptnumber = state.currentStage.attempts.length + 1;
-      state.currentStage.attempts.push({
-        attemptNumber: attemptnumber,
-        _id: null,
-        _yield: null,
-        solvent: null,
-        methodic: null,
-        temp: null,
-        time: null,
-        notes: null,
-        startingMaterialMass: null,
-        productMass: null,
-        productPurity: null,
-        type: "test",
-        isOk: false,
-        spectra: [],
-        reagents: [
-          {
-            reagentNumber: 1,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 2,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 3,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-          {
-            reagentNumber: 4,
-            smiles: null,
-            equivalents: null,
-            molecularWeight: null,
-            mass: null,
-          },
-        ],
-      });
-      
+      state.currentStage.attempts.push(
+        setAttemptInitialValue(attemptnumber) as IAttempt
+      );
     },
     clearSchemesData(state) {
       state.schemePreviews = [];
-      state.currentScheme = {
-        _id: null,
-        status: null,
-        mass: null,
-        price: null,
-        deadline: null,
-        startingMaterial: null,
-        targetCompound: null,
-        createdAt: null,
-        updatedAt: null,
-        stages: [],
-      };
-      state.currentStage = {
-        _id: null,
-        _yield: null,
-        solvent: null,
-        startingMaterial: null,
-        methodic: null,
-        temp: null,
-        time: null,
-        product: null,
-        testSuccess: false,
-        scalingSuccess: false,
-        isChanged: false,
-        attempts: [
-          {
-            attemptNumber: 1,
-            _id: null,
-            _yield: null,
-            solvent: null,
-            methodic: null,
-            temp: null,
-            time: null,
-            notes: null,
-            startingMaterialMass: null,
-            productMass: null,
-            productPurity: null,
-            type: "test",
-            isOk: false,
-            spectra: [],
-            reagents: [
-              {
-                reagentNumber: 1,
-                smiles: null,
-                equivalents: null,
-                molecularWeight: null,
-                mass: null,
-              },
-              {
-                reagentNumber: 2,
-                smiles: null,
-                equivalents: null,
-                molecularWeight: null,
-                mass: null,
-              },
-              {
-                reagentNumber: 3,
-                smiles: null,
-                equivalents: null,
-                molecularWeight: null,
-                mass: null,
-              },
-              {
-                reagentNumber: 4,
-                smiles: null,
-                equivalents: null,
-                molecularWeight: null,
-                mass: null,
-              },
-            ],
-          },
-        ],
-      };
+      state.currentScheme = currentSchemeInitialValue;
+      state.currentStage = currentStageInitialValue as IStage;
       state.isLoading = false;
       state.status = "idle";
       state.error = null;
     },
-    setAttemptReagentData(state, action: PayloadAction<any>) {
+    setAttemptReagentData(
+      state,
+      action: PayloadAction<{
+        reagentNumber: number;
+        [key: string]: any;
+        attemptNumber: number;
+        fieldName: string;
+      }>
+    ) {
       state.currentStage.isChanged = true;
       const reagent =
         state.currentStage.attempts[action.payload.attemptNumber - 1].reagents[
@@ -269,7 +90,6 @@ const schemesSlice = createSlice({
       switch (action.payload.fieldName) {
         case "smiles":
           reagent.smiles = action.payload.smiles;
-
           reagent.molecularWeight =
             smilesToMolWeight(action.payload.smiles) || null;
 
@@ -283,7 +103,7 @@ const schemesSlice = createSlice({
           }
           break;
         case "mass":
-          reagent.mass = action.payload.mass;
+          reagent.mass = Number(action.payload.mass);
           if (
             reagent.molecularWeight &&
             attempt.startingMaterialMass !== null &&
@@ -302,7 +122,7 @@ const schemesSlice = createSlice({
 
           break;
         case "equivalents":
-          reagent.equivalents = action.payload.equivalents;
+          reagent.equivalents = Number(action.payload.equivalents);
           if (
             reagent.molecularWeight !== null &&
             reagent.equivalents !== null &&
@@ -334,16 +154,9 @@ const schemesSlice = createSlice({
         return item;
       });
 
-
       //synchronyzes currentScheme with currentStage
 
-      state.currentScheme.stages = state.currentScheme.stages.map((item) => {
-        if (item._id === state.currentStage._id) {
-          const { isChanged, ...payload } = state.currentStage;
-          return { ...item, ...payload };
-        }
-        return item;
-      });
+      schemeDataSynchronyzer(state);
     },
 
     setAttemptInfo(
@@ -407,7 +220,6 @@ const schemesSlice = createSlice({
           const fieldValue =
             Number(action.payload[action.payload.fieldName]) || null;
           attempt[action.payload.fieldName] = fieldValue;
-
           attempt.reagents.forEach((item) => {
             if (
               item.equivalents &&
@@ -479,7 +291,6 @@ const schemesSlice = createSlice({
               const productMolWeight = smilesToMolWeight(
                 state.currentStage.product
               );
-
               attempt._yield = Number(
                 (
                   ((productMass * productPurity) /
@@ -496,7 +307,6 @@ const schemesSlice = createSlice({
           const fieldValue =
             Number(action.payload[action.payload.fieldName]) || null;
           attempt[action.payload.fieldName] = fieldValue;
-
           if (
             attempt.startingMaterialMass &&
             attempt.productMass &&
@@ -525,7 +335,6 @@ const schemesSlice = createSlice({
               );
             }
           }
-
           break;
         }
         case "type": {
@@ -545,14 +354,7 @@ const schemesSlice = createSlice({
       }
 
       //synchronyzes currentScheme with currentStage
-
-      state.currentScheme.stages = state.currentScheme.stages.map((item) => {
-        if (item._id === state.currentStage._id) {
-          const { isChanged, ...payload } = state.currentStage;
-          return { ...item, ...payload };
-        }
-        return item;
-      });
+      schemeDataSynchronyzer(state);
     },
     setAttemptStatus(state, action: PayloadAction<{ attemptNumber: number }>) {
       state.currentStage.isChanged = true;
@@ -572,14 +374,7 @@ const schemesSlice = createSlice({
       });
 
       //synchronyzes currentScheme with currentStage
-
-      state.currentScheme.stages = state.currentScheme.stages.map((item) => {
-        if (item._id === state.currentStage._id) {
-          const { isChanged, ...payload } = state.currentStage;
-          return { ...item, ...payload };
-        }
-        return item;
-      });
+      schemeDataSynchronyzer(state);
     },
   },
   extraReducers: (builder) => {
@@ -594,86 +389,17 @@ const schemesSlice = createSlice({
     );
     builder.addCase(
       getSingleScheme.fulfilled,
-      (state, action: PayloadAction<any>) => {
+      (state, action: PayloadAction<ISchemeData>) => {
         state.currentScheme = action.payload;
-        state.currentStage = {
-          _id: null,
-          _yield: null,
-          solvent: null,
-          startingMaterial: null,
-          methodic: null,
-          temp: null,
-          time: null,
-          product: null,
-          testSuccess: false,
-          scalingSuccess: false,
-          isChanged: false,
-          attempts: [
-            {
-              attemptNumber: 1,
-              _id: null,
-              _yield: null,
-              solvent: null,
-              methodic: null,
-              temp: null,
-              time: null,
-              notes: null,
-              startingMaterialMass: null,
-              productMass: null,
-              productPurity: null,
-              type: "test",
-              isOk: false,
-              spectra: [],
-              reagents: [
-                {
-                  reagentNumber: 1,
-                  smiles: null,
-                  equivalents: null,
-                  molecularWeight: null,
-                  mass: null,
-                },
-                {
-                  reagentNumber: 2,
-                  smiles: null,
-                  equivalents: null,
-                  molecularWeight: null,
-                  mass: null,
-                },
-                {
-                  reagentNumber: 3,
-                  smiles: null,
-                  equivalents: null,
-                  molecularWeight: null,
-                  mass: null,
-                },
-                {
-                  reagentNumber: 4,
-                  smiles: null,
-                  equivalents: null,
-                  molecularWeight: null,
-                  mass: null,
-                },
-              ],
-            },
-          ],
-        };
+        state.currentStage = currentStageInitialValue as IStage;
         state.isLoading = false;
         state.status = "fulfilled";
         state.error = null;
       }
     );
-    // builder.addCase(
-    //   getSchemes.fulfilled,
-    //   (state, action: PayloadAction<IReactionPreviewData[]>) => {
-    //     state.schemePreviews = action.payload;
-    //     state.isLoading = false;
-    //     state.status = "fulfilled";
-    //     state.error = null;
-    //   }
-    // );
     builder.addCase(
       getSchemeAndStage.fulfilled,
-      (state, action: PayloadAction<any>) => {
+      (state, action: PayloadAction<IgetSchemeAndStagePayload>) => {
         state.currentScheme = action.payload.schemeData;
         state.currentStage = action.payload.stageData;
         state.currentStage.isChanged = false;
@@ -707,12 +433,9 @@ export const {
 } = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;
-
 export const getCurrentScheme = (state: IState) => state.schemes.currentScheme;
-
 export const getCurrentSchemeId = (state: IState) =>
   state.schemes.currentScheme._id;
-
 export const getCurrentStage = (state: IState) => state.schemes.currentStage;
 export const getCurrentStageStartingMaterial = (state: IState) =>
   state.schemes.currentStage.startingMaterial;

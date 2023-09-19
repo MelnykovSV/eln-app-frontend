@@ -73,6 +73,21 @@ export interface ICurrentScheme {
   updatedAt: string | null;
   stages: IStage[];
 }
+
+export interface ISchemeData {
+  _id: string | null;
+  status: "active" | "success" | "fail";
+  mass: number | null;
+  price: number | null;
+  deadline: string | null;
+  startingMaterial: string | null;
+  targetCompound: string | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  stagesNumber: number;
+  stages: IStage[];
+}
+
 // export interface ICurrentStage {
 //   _id: string | null;
 //   startingMaterial: string | null;

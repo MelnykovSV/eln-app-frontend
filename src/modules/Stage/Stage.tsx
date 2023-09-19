@@ -5,34 +5,13 @@ import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material";
 import { privateApi } from "../../api";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { getCurrentStage,temporalSaveStageData } from "../../redux/schemes/schemesSlice";
-import { Button } from "@mui/material";
-
-// interface IStageProps {
-//   // product: string | null;
-//   // _yield: number | null;
-//   // solvent: string | null;
-//   // methodic: string | null;
-//   // temp: number | null;
-//   // time: string | null;
-//   // _id: string | null;
-//   // startingMaterial: string | null;
-//   // testSuccess: boolean | null;
-//   // scalingSuccess: boolean | null;
-//   // attempts: IAttempt[];
-//   // _yieldChangeHandler: (value: number | null) => void;
-//   // solventChangeHandler: (value: string | null) => void;
-//   // methodicChangeHandler: (value: string | null) => void;
-//   // tempChangeHandler: (value: number | null) => void;
-//   // timeChangeHandler: (value: string | null) => void;
-//   // testSuccessChangeHandler: (value: boolean | null) => void;
-//   // scalingSuccessChangeHandler: (value: boolean | null) => void;
-//   // attemptsChangeHandler: (value: IAttempt[]) => void;
-// }
+import {
+  getCurrentStage,
+  temporalSaveStageData,
+} from "../../redux/schemes/schemesSlice";
 
 const Stage = () => {
-  // const attempts = useAppSelector(getCurrentStageAttempts);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [attemptNumber, setAttemptNumber] = useState(1);
   const handleAttemptNumberChange = (event: SelectChangeEvent) => {
     setAttemptNumber(Number(event.target.value));
@@ -52,7 +31,7 @@ const Stage = () => {
       currentStage
     );
 
-    dispatch(temporalSaveStageData())
+    dispatch(temporalSaveStageData());
 
     console.log(response);
   };
