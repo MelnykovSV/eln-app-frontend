@@ -1,9 +1,15 @@
 import Container from "./StagePage.styled";
 import { Stage } from "../../modules";
-import { useAppSelector } from "../../redux/hooks";
-import { getCurrentStage } from "../../redux/schemes/schemesSlice";
-import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import {
+  getCurrentStage,
+  getCurrentScheme,
+  initialUpdateCurrentStage,
+} from "../../redux/schemes/schemesSlice";
+import { useEffect, useState } from "react";
 import { IAttempt } from "../../types/redux";
+import { useParams } from "react-router";
+import { getSchemeAndStage } from "../../redux/schemes/operations";
 // product,
 // _yield,
 // solvent,
@@ -16,6 +22,7 @@ import { IAttempt } from "../../types/redux";
 // scalingSuccess,
 // attempts,
 const StagePage = () => {
+  const dispatch = useAppDispatch();
   const currentStage = useAppSelector(getCurrentStage);
   const [product, setProduct] = useState(currentStage.product);
   const [_yield, set_yield] = useState(currentStage._yield);
@@ -62,6 +69,18 @@ const StagePage = () => {
   const attemptsChangeHandler = (value: IAttempt[]) => {
     setAttempts(value);
   };
+  const currentScheme = useAppSelector(getCurrentScheme);
+
+  const { schemeId, stageId } = useParams() as any;
+  console.log(schemeId);
+  useEffect(() => {
+    if (currentScheme._id === schemeId) {
+      // const stage = currentScheme.stages.find((item) => item._id === stageId);
+      dispatch(initialUpdateCurrentStage(stageId));
+    } else {
+      dispatch(getSchemeAndStage({ schemeId, stageId }));
+    }
+  }, []);
 
   return (
     <Container>

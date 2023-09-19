@@ -55,7 +55,7 @@ function App() {
               </PrivateRoute>
             }></Route>
           <Route
-            path="/stage"
+            path="/stage/:schemeId/:stageId"
             element={
               <PrivateRoute>
                 <StagePage />

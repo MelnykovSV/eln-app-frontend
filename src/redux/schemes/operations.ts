@@ -45,3 +45,30 @@ export const getSingleScheme = createAsyncThunk<IReactionPreviewData[], string>(
     }
   }
 );
+
+export const getSchemeAndStage = createAsyncThunk<any[], any>(
+  "schemes/getSchemeAndStage",
+  async ({ schemeId, stageId }, thunkAPI: any) => {
+    try {
+      const response = await privateApi.get(`/api/schemes/${schemeId}`);
+      console.log(response);
+
+      const schemeData = {
+        ...response.data.data,
+        createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
+        updatedAt: dayjs(response.data.data.updatedAt).format("DD.MM.YYYY"),
+      };
+
+      const stageData = schemeData.stages.find(
+        (item: any) => item._id === stageId
+      );
+
+      console.log(schemeData, stageData);
+
+      return { schemeData, stageData };
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);

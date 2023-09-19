@@ -23,7 +23,10 @@ import { useAppSelector } from "../../redux/hooks";
 import { clearSchemesData } from "../../redux/schemes/schemesSlice";
 
 import { getAccessToken } from "../../redux/auth/authSlice";
-import { getCurrentSchemeId } from "../../redux/schemes/schemesSlice";
+import {
+  getCurrentSchemeId,
+  getCurrentStage,
+} from "../../redux/schemes/schemesSlice";
 
 // const publicPages = ["register", "login"];
 // const privatePages = ["schemes", "scheme", "stage", "tasks"];
@@ -32,6 +35,7 @@ const settings = ["Logout"];
 export function ResponsiveAppBar() {
   const token = useAppSelector(getAccessToken);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
+  const currentStage = useAppSelector(getCurrentStage);
   const dispatch = useAppDispatch();
 
   //   const user = true;
@@ -158,9 +162,14 @@ export function ResponsiveAppBar() {
                   </NavLink>
                 </Typography>
               </MenuItem>
-              <MenuItem key={"stage"} onClick={handleCloseNavMenu}>
+              <MenuItem
+                key={"stage"}
+                onClick={handleCloseNavMenu}
+                disabled={currentStage._id && currentSchemeId ? false : true}>
                 <Typography textAlign="center">
-                  <NavLink to={"/stage"}>Stage</NavLink>
+                  <NavLink to={`/stage/${currentSchemeId}/${currentStage._id}`}>
+                    Stage
+                  </NavLink>
                 </Typography>
               </MenuItem>
               <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>

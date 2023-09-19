@@ -41,7 +41,7 @@ const SingleSchemePage = () => {
     currentScheme
   ) as ICurrentScheme;
   useEffect(() => {
-    if (schemeId) {
+    if (schemeId && schemeId !== currentScheme._id) {
       dispatch(getSingleScheme(schemeId));
     }
 

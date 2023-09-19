@@ -4,6 +4,7 @@ import {
   getCurrentStageStartingMaterial,
   getCurrentStageProduct,
   getCurrentStageAttempts,
+  getCurrentStage,
 } from "../../redux/schemes/schemesSlice";
 import { SingleMolCanvas, SingleArrow } from "../../ui";
 import { Select } from "@mui/material";
@@ -12,19 +13,28 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import { nanoid } from "nanoid";
 import { SelectChangeEvent } from "@mui/material";
+import { addAttempt } from "../../redux/schemes/schemesSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { Button } from "@mui/material";
 
 interface IStageInfoProps {
   attemptNumber: number;
   handleAttemptNumberChange: (event: SelectChangeEvent) => void;
+  getLastAttempt: () => void;
+  saveHandler: () => void;
 }
 
 const StageInfo = ({
   attemptNumber,
   handleAttemptNumberChange,
+  getLastAttempt,
+  saveHandler,
 }: IStageInfoProps) => {
   const startingMaterial = useAppSelector(getCurrentStageStartingMaterial);
   const product = useAppSelector(getCurrentStageProduct);
   const attempts = useAppSelector(getCurrentStageAttempts);
+  const currentStage = useAppSelector(getCurrentStage);
+  const dispatch = useAppDispatch();
 
   return (
     <Container>
@@ -49,6 +59,22 @@ const StageInfo = ({
           ))}
         </Select>
       </FormControl>
+
+      <Button
+        onClick={() => {
+          dispatch(addAttempt());
+          getLastAttempt();
+        }}>
+        Add attempt
+      </Button>
+      <Button
+        type="button"
+        onClick={saveHandler}
+        variant="contained"
+        color="primary"
+        disabled={currentStage.isChanged ? false : true}>
+        Save!
+      </Button>
     </Container>
   );
 };

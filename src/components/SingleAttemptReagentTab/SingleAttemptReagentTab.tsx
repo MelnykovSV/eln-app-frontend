@@ -36,6 +36,7 @@ const SingleAttemptReagentTab = ({
   return (
     <Container>
       <SingleMolCanvas smiles={smiles} />
+      <p>Reagent {reagentNumber}</p>
       <TextField
         label="Smiles"
         name="smiles"

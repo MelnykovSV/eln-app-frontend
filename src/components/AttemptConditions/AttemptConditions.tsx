@@ -88,6 +88,15 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         size="small"
       />
       <TextField
+        label="Temperature"
+        name="temp"
+        value={temp || ""}
+        variant="outlined"
+        onChange={inputChangeHandler}
+        size="small"
+        type="number"
+      />
+      <TextField
         label="Starting Material Mass"
         name="startingMaterialMass"
         value={startingMaterialMass || ""}
@@ -130,7 +139,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
             name="isOk"
             color="success"
             // defaultChecked={isOk}
-            // checked={isOk}
+            checked={isOk}
             onChange={checkboxChangeHandler}
           />
         }
