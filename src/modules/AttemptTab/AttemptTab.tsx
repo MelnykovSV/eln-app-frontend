@@ -20,7 +20,7 @@ const AttemptTab = ({ attemptNumber }: IAttemptProps) => {
       <p>{JSON.stringify(attempts[attemptNumber - 1])}</p>
       <AttemptConditions attemptNumber={attemptNumber} />
       <AttemptReagents attemptNumber={attemptNumber} />
-      <AttemptSpectra />
+      <AttemptSpectra attemptNumber={attemptNumber} />
     </Container>
   );
 };
