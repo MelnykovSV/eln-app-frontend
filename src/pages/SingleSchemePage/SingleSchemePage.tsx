@@ -49,14 +49,47 @@ const SingleSchemePage = () => {
     },
   ];
 
-  currentScheme.stages.forEach((item) => {
+  currentScheme.stages.forEach((item, i) => {
     const approvedAttempt = item.attempts.find((attempt) => attempt.isOk);
-    approvedAttempt?.reagents.forEach((reagent) =>
-      reagentsList.push({
-        smiles: reagent.smiles,
-        mass: reagent.mass ? reagent.mass : 0,
-      })
-    );
+    if (i === 0) {
+      approvedAttempt?.reagents.forEach((reagent) => {
+
+        return reagentsList.push({
+          smiles: reagent.smiles,
+          mass: Number(
+            (
+              ((smilesToMolWeight(reagent.smiles || "") *
+                ((updatedSchemeData.mass || 0) /
+                  smilesToMolWeight(updatedSchemeData.targetCompound || ""))) /
+                updatedSchemeData.totalYieldCoefficient) *
+              (reagent.equivalents || 0)
+            ).toFixed(2)
+          ),
+        });
+    
+      
+      
+    });
+    }
+    else {
+      approvedAttempt?.reagents.forEach((reagent) => {
+ 
+        return reagentsList.push({
+          smiles: reagent.smiles,
+          mass:  Number(
+            (
+              ((smilesToMolWeight(reagent.smiles || "") *
+                ((updatedSchemeData.mass || 0) /
+                  smilesToMolWeight(updatedSchemeData.targetCompound || ""))) /
+                updatedSchemeData.stages[i-1].yieldCoefficient) *
+              (reagent.equivalents || 0)
+            ).toFixed(2)
+          ),
+        });
+      
+    });
+    }
+   
   });
 
   console.log(reagentsList);

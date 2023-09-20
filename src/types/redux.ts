@@ -84,7 +84,16 @@ export interface IUpdatedCurrentScheme {
   targetCompound: string | null;
   createdAt: string | null;
   updatedAt: string | null;
-  stages: IStage[];
+  stages: {
+    _id?: string | null;
+    solvent: string | null;
+    temp: number | null;
+    time: string | null;
+    _yield: number | null;
+    methodic: string | null;
+    product: string | null;
+    yieldCoefficient: number;
+  }[];
   totalYieldCoefficient: number;
 }
 
