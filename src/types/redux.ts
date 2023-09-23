@@ -55,6 +55,7 @@ export interface IStage {
   temp: number | null;
   time: string | null;
   _id: string | null;
+  notes?: string | null;
   startingMaterial: string | null;
   testSuccess: boolean | null;
   scalingSuccess: boolean | null;

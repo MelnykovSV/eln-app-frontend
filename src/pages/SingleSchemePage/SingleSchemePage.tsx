@@ -143,12 +143,8 @@ const SingleSchemePage = () => {
     });
 
     Promise.all(arr1).then((resolvedArr) => {
-      console.log(resolvedArr);
-      if (resolvedArr.some((item) => item === undefined)) {
-        return;
-      }
-
-      setReagentsListData(resolvedArr);
+      const filteredArray = resolvedArr.filter((item) => item !== undefined);
+      setReagentsListData(filteredArray);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentScheme]);
@@ -159,7 +155,12 @@ const SingleSchemePage = () => {
 
   const synthesisStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // dispatch(setSchemeStatus(e.target.value));
-    dispatch(updateSchemeStatusAndSave({schemeId:currentScheme._id, status: e.target.value}));
+    dispatch(
+      updateSchemeStatusAndSave({
+        schemeId: currentScheme._id,
+        status: e.target.value,
+      })
+    );
   };
 
   return (

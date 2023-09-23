@@ -14,6 +14,7 @@ import SingleAttemptReagentTab from "./SingleAttemptReagentTab/SingleAttemptReag
 import SpectraForm from "./SpectraForm/SpectraForm";
 import SpectraList from "./SpectraList/SpectraList";
 import SpectraListItem from "./SpectraListItem/SpectraListItem";
+import AttemptNotes from "./AttemptNotes/AttemptNotes";
 
 export {
   FormTextInput,
@@ -32,4 +33,5 @@ export {
   SpectraForm,
   SpectraList,
   SpectraListItem,
+  AttemptNotes,
 };

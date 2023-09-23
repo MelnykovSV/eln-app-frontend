@@ -12,6 +12,7 @@ import {
 import { modalOpenType } from "../../types";
 import { saveCurrentStageData } from "../../redux/schemes/operations";
 
+
 const Stage = () => {
   const dispatch = useAppDispatch();
   const [attemptNumber, setAttemptNumber] = useState(1);
@@ -44,6 +45,7 @@ const Stage = () => {
         saveHandler={saveHandler}
       />
       <AttemptTab attemptNumber={attemptNumber} />
+
     </Container>
   );
 };

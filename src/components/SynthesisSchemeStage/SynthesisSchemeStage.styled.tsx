@@ -4,7 +4,12 @@ const Container = styled.div`
   display: flex;
   height: 170px;
   width: fit-content;
-  /* border: 1px solid black; */
+
+  &.currentStage {
+    .drawing-container {
+      border: solid 1px green;
+    }
+  }
 
   .conditions-container {
     width: 200px;

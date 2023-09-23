@@ -107,6 +107,7 @@ export const addSpectr = createAsyncThunk<IAddFilePayload, IaddFileParams>(
       formData.append("attemptNumber", attemptNumber.toString());
       formData.append("schemeId", schemeId);
       formData.append("stageId", stageId);
+      console.log({ spectr, label, attemptNumber, schemeId, stageId });
       const response = await privateApi.patch("/api/schemes/spectr", formData);
       return {
         schemeId,

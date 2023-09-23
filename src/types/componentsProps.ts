@@ -60,9 +60,11 @@ export interface ISynthesisSchemeStageProps {
     methodic: string | null;
     product: string | null;
     yieldCoefficient?: number;
+    testSuccess?: boolean;
   };
   n: number;
   calculatedMass?: number | null;
+  isCurrentStage: boolean;
 }
 
 export interface ISchemeProps {
@@ -81,6 +83,7 @@ export interface ISchemeProps {
       methodic: string | null;
       product: string | null;
       yieldCoefficient?: number;
+      testSuccess?: boolean;
     }[];
   };
 }

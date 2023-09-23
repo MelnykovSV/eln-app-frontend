@@ -53,7 +53,7 @@ const schemesSlice = createSlice({
     },
     setSchemeStatus(state, action: PayloadAction<string>) {
       state.currentScheme.status = action.payload;
-    },
+    }, // не нужно?
     updateCurrentStage(state, action: PayloadAction<string>) {
       const stage = state.currentScheme.stages.find(
         (item) => item._id === action.payload
@@ -180,6 +180,7 @@ const schemesSlice = createSlice({
         state.currentStage.attempts[action.payload.attemptNumber - 1];
 
       switch (action.payload.fieldName) {
+        case "notes":
         case "methodic":
         case "solvent":
         case "time": {
@@ -396,6 +397,7 @@ const schemesSlice = createSlice({
           attempt.isOk = false;
         } else {
           attempt.isOk = !attempt.isOk;
+          state.currentStage.testSuccess = attempt.isOk;
         }
         return attempt;
       });

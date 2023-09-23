@@ -28,6 +28,12 @@ const Scheme = ({
     n = mass / smilesToMolWeight(targetCompound);
   }
 
+  const lastOkStageNumber =
+    stages.findIndex((item) => item.testSuccess !== true) === -1
+      ? stages.length - 1
+      : stages.findIndex((item) => item.testSuccess !== true) - 1;
+
+  console.log(lastOkStageNumber);
   return (
     <Container>
       <div className="starting-material-canvas-container">
@@ -46,8 +52,13 @@ const Scheme = ({
         ) : null}
       </div>
       {stages.length
-        ? stages.map((item) => (
-            <SynthesisSchemeStage stageData={item} n={n} key={nanoid()} />
+        ? stages.map((item, i) => (
+            <SynthesisSchemeStage
+              stageData={item}
+              n={n}
+              key={nanoid()}
+              isCurrentStage={i === lastOkStageNumber}
+            />
           ))
         : null}
     </Container>

@@ -22,6 +22,7 @@ const SynthesisSchemeStage = ({
     yieldCoefficient,
   },
   n,
+  isCurrentStage,
 }: ISynthesisSchemeStageProps) => {
   if (!product) {
     product = "";
@@ -47,7 +48,9 @@ const SynthesisSchemeStage = ({
     }
   };
   return (
-    <Container onClick={stageClickHandler}>
+    <Container
+      onClick={stageClickHandler}
+      className={isCurrentStage ? "currentStage" : ""}>
       <div className="conditions-container">
         <p>
           {solvent ? <span>{solvent}</span> : null}
