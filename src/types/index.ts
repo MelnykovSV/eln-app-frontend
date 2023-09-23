@@ -25,6 +25,7 @@ import {
   ISchemePreview,
   ICurrentScheme,
 } from "./redux";
+import { modalOpenType } from "./common";
 
 export type {
   IReactionPreviewData,
@@ -50,4 +51,5 @@ export type {
   ISchemesState,
   ISchemePreview,
   ICurrentScheme,
+  modalOpenType,
 };

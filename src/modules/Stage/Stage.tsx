@@ -9,6 +9,8 @@ import {
   getCurrentStage,
   temporalSaveStageData,
 } from "../../redux/schemes/schemesSlice";
+import { modalOpenType } from "../../types";
+import { saveCurrentStageData } from "../../redux/schemes/operations";
 
 const Stage = () => {
   const dispatch = useAppDispatch();
@@ -25,15 +27,12 @@ const Stage = () => {
   const stageId = currentStage._id;
 
   const saveHandler = async () => {
-    console.log(stageId);
-    const response = await privateApi.post(
-      `/api/schemes/updateStage/${stageId}`,
-      currentStage
-    );
-
-    dispatch(temporalSaveStageData());
-
-    console.log(response);
+    // const response = await privateApi.post(
+    //   `/api/schemes/updateStage/${stageId}`,
+    //   currentStage
+    // );
+    // dispatch(temporalSaveStageData());
+    dispatch(saveCurrentStageData(currentStage));
   };
 
   return (
@@ -45,10 +44,6 @@ const Stage = () => {
         saveHandler={saveHandler}
       />
       <AttemptTab attemptNumber={attemptNumber} />
-
-      {/* <Button type="button" onClick={saveHandler}>
-        Save!
-      </Button> */}
     </Container>
   );
 };

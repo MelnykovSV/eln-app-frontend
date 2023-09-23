@@ -10,17 +10,19 @@ import { useEffect, useState } from "react";
 import { IAttempt } from "../../types/redux";
 import { useParams } from "react-router";
 import { getSchemeAndStage } from "../../redux/schemes/operations";
-// product,
-// _yield,
-// solvent,
-// methodic,
-// temp,
-// time,
-// _id,
-// startingMaterial,
-// testSuccess,
-// scalingSuccess,
-// attempts,
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const StagePage = () => {
   const dispatch = useAppDispatch();
   const currentStage = useAppSelector(getCurrentStage);

@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
 import dayjs from "dayjs";
 import { IReactionPreviewData } from "../../types";
-import { ISchemeData, IStage } from "../../types/redux";
+import { ISchemeData, IStage, ICurrentScheme } from "../../types/redux";
 
 export interface IgetSchemeAndStageParams {
   schemeId: string;
@@ -12,6 +12,21 @@ export interface IgetSchemeAndStageParams {
 export interface IgetSchemeAndStagePayload {
   schemeData: ISchemeData;
   stageData: IStage;
+}
+
+export interface IaddFileParams {
+  spectr: File;
+  label: string;
+  attemptNumber: number;
+  schemeId: string;
+  stageId: string;
+}
+
+export interface IAddFilePayload {
+  schemeId: string;
+  stageId: string;
+  attemptNumber: number;
+  spectra: { label: string; spectrUrl: string; _id: string }[];
 }
 
 export const getSchemes = createAsyncThunk<IReactionPreviewData[]>(
@@ -81,3 +96,62 @@ export const getSchemeAndStage = createAsyncThunk<
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   }
 });
+
+export const addSpectr = createAsyncThunk<IAddFilePayload, IaddFileParams>(
+  "schemes/addSpectr",
+  async ({ spectr, label, attemptNumber, schemeId, stageId }, thunkAPI) => {
+    try {
+      const formData = new FormData();
+      formData.append("spectr", spectr);
+      formData.append("label", label);
+      formData.append("attemptNumber", attemptNumber.toString());
+      formData.append("schemeId", schemeId);
+      formData.append("stageId", stageId);
+      const response = await privateApi.patch("/api/schemes/spectr", formData);
+      return {
+        schemeId,
+        stageId,
+        attemptNumber,
+        spectra: response.data.data,
+      };
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const saveCurrentStageData = createAsyncThunk<void, IStage>(
+  "schemes/saveCurrentStageData",
+  async (currentStage, thunkAPI) => {
+    try {
+      await privateApi.patch(
+        `/api/schemes/updateStage/${currentStage._id}`,
+        currentStage
+      );
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
+export const updateSchemeStatusAndSave = createAsyncThunk<
+  string,
+  { schemeId: string | null; status: string }
+>(
+  "schemes/updateSchemeStatusAndSave",
+  async ({ schemeId, status }, thunkAPI) => {
+    try {
+      const response = await privateApi.patch(`/api/schemes/${schemeId}`, {
+        status,
+      });
+
+      console.log(response);
+      return status;
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);

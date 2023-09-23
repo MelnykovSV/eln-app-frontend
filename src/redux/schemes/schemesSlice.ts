@@ -6,6 +6,9 @@ import {
   getSingleScheme,
   getSchemeAndStage,
   IgetSchemeAndStagePayload,
+  addSpectr,
+  saveCurrentStageData,
+  updateSchemeStatusAndSave,
 } from "./operations";
 import { IReactionPreviewData } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
@@ -21,6 +24,7 @@ import {
   IStage,
   IAttempt,
 } from "../../types/redux";
+import { IAddFilePayload } from "./operations";
 
 const initialState: ISchemesState = {
   schemePreviews: [],
@@ -46,6 +50,9 @@ const schemesSlice = createSlice({
     },
     temporalSaveStageData(state) {
       state.currentStage.isChanged = false;
+    },
+    setSchemeStatus(state, action: PayloadAction<string>) {
+      state.currentScheme.status = action.payload;
     },
     updateCurrentStage(state, action: PayloadAction<string>) {
       const stage = state.currentScheme.stages.find(
@@ -432,11 +439,43 @@ const schemesSlice = createSlice({
       }
     );
     builder.addCase(
+      saveCurrentStageData.fulfilled,
+      (state, action: PayloadAction<void>) => {
+        state.currentStage.isChanged = false;
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+      }
+    );
+    builder.addCase(
+      updateSchemeStatusAndSave.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.currentScheme.status = action.payload;
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+      }
+    );
+    builder.addCase(
       getSchemeAndStage.fulfilled,
       (state, action: PayloadAction<IgetSchemeAndStagePayload>) => {
         state.currentScheme = action.payload.schemeData;
         state.currentStage = action.payload.stageData;
         state.currentStage.isChanged = false;
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+      }
+    );
+    builder.addCase(
+      addSpectr.fulfilled,
+      (state, action: PayloadAction<IAddFilePayload>) => {
+        const { schemeId, stageId, attemptNumber, spectra } = action.payload;
+        state.currentStage.attempts[attemptNumber - 1].spectra = spectra;
+
+        console.log(spectra);
+        schemeDataSynchronyzer(state);
+
         state.isLoading = false;
         state.status = "fulfilled";
         state.error = null;
@@ -464,6 +503,7 @@ export const {
   initialUpdateCurrentStage,
   addAttempt,
   temporalSaveStageData,
+  setSchemeStatus,
 } = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;

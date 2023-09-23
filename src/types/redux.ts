@@ -4,7 +4,8 @@ import { IReactionPreviewData } from "./componentsProps";
 
 export interface ISpectr {
   label: string | null;
-  spectr: string;
+  spectrUrl: string;
+  _id: string;
 }
 
 export interface IAttemptReagent {

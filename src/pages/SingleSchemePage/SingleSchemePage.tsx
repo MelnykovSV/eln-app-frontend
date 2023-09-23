@@ -14,9 +14,16 @@ import { useParams } from "react-router";
 import { getSingleScheme } from "../../redux/schemes/operations";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 import { smilesToMolecularFormula } from "../../helpers/chemistryHelpers";
-import { getCurrentScheme } from "../../redux/schemes/schemesSlice";
+import {
+  getCurrentScheme,
+  setSchemeStatus,
+} from "../../redux/schemes/schemesSlice";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 import { IUpdatedCurrentScheme } from "../../types/redux";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import { updateSchemeStatusAndSave } from "../../redux/schemes/operations";
 
 function a11yProps(index: number) {
   return {
@@ -53,7 +60,6 @@ const SingleSchemePage = () => {
     const approvedAttempt = item.attempts.find((attempt) => attempt.isOk);
     if (i === 0) {
       approvedAttempt?.reagents.forEach((reagent) => {
-
         return reagentsList.push({
           smiles: reagent.smiles,
           mass: Number(
@@ -66,30 +72,23 @@ const SingleSchemePage = () => {
             ).toFixed(2)
           ),
         });
-    
-      
-      
-    });
-    }
-    else {
+      });
+    } else {
       approvedAttempt?.reagents.forEach((reagent) => {
- 
         return reagentsList.push({
           smiles: reagent.smiles,
-          mass:  Number(
+          mass: Number(
             (
               ((smilesToMolWeight(reagent.smiles || "") *
                 ((updatedSchemeData.mass || 0) /
                   smilesToMolWeight(updatedSchemeData.targetCompound || ""))) /
-                updatedSchemeData.stages[i-1].yieldCoefficient) *
+                updatedSchemeData.stages[i - 1].yieldCoefficient) *
               (reagent.equivalents || 0)
             ).toFixed(2)
           ),
         });
-      
-    });
+      });
     }
-   
   });
 
   console.log(reagentsList);
@@ -158,6 +157,11 @@ const SingleSchemePage = () => {
     setValue(newValue);
   };
 
+  const synthesisStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // dispatch(setSchemeStatus(e.target.value));
+    dispatch(updateSchemeStatusAndSave({schemeId:currentScheme._id, status: e.target.value}));
+  };
+
   return (
     <Container className="container">
       <div>
@@ -170,6 +174,22 @@ const SingleSchemePage = () => {
         </Tabs>
       </div>
       <CustomTabPanel value={value} index={0}>
+        <RadioGroup
+          onChange={synthesisStatusChange}
+          value={currentScheme.status}
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          className="radio-buttons-container">
+          <FormControlLabel value="active" control={<Radio />} label="Active" />
+          <FormControlLabel
+            value="success"
+            control={<Radio />}
+            label="Success"
+          />
+          <FormControlLabel value="fail" control={<Radio />} label="Fail" />
+          <FormControlLabel value="chosen" control={<Radio />} label="Chosen" />
+        </RadioGroup>
         <Scheme schemeData={updatedSchemeData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>

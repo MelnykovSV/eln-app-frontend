@@ -11,6 +11,9 @@ import AttemptConditions from "./AttemptConditions/AttemptConditions";
 import AttemptReagents from "./AttemptReagents/AttemptReagents";
 import AttemptSpectra from "./AttemptSpectra/AttemptSpectra";
 import SingleAttemptReagentTab from "./SingleAttemptReagentTab/SingleAttemptReagentTab";
+import SpectraForm from "./SpectraForm/SpectraForm";
+import SpectraList from "./SpectraList/SpectraList";
+import SpectraListItem from "./SpectraListItem/SpectraListItem";
 
 export {
   FormTextInput,
@@ -26,4 +29,7 @@ export {
   AttemptReagents,
   AttemptSpectra,
   SingleAttemptReagentTab,
+  SpectraForm,
+  SpectraList,
+  SpectraListItem,
 };

@@ -6,6 +6,7 @@ import {
 } from "../../components/";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
+import { modalOpenType } from "../../types";
 
 interface IAttemptProps {
   attemptNumber: number;
@@ -16,11 +17,12 @@ const AttemptTab = ({ attemptNumber }: IAttemptProps) => {
 
   return (
     <Container>
-      <h1>Attempt #{attemptNumber}</h1>
-      <p>{JSON.stringify(attempts[attemptNumber - 1])}</p>
+      <h1>Attempt {attemptNumber}</h1>
       <AttemptConditions attemptNumber={attemptNumber} />
-      <AttemptReagents attemptNumber={attemptNumber} />
-      <AttemptSpectra attemptNumber={attemptNumber} />
+      <div className="attempt-second-block">
+        <AttemptReagents attemptNumber={attemptNumber} />
+        <AttemptSpectra attemptNumber={attemptNumber} />
+      </div>
     </Container>
   );
 };
