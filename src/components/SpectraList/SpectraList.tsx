@@ -54,6 +54,7 @@ IAttemptSpectraProps) => {
     setIsModalOpen(false);
     setModalSpectrUrl(null);
     setModalSpectrLabel(null);
+    setPageNumber(1);
   };
 
   const handleModalOpen = (spectrUrl: string, label: string | null) => {

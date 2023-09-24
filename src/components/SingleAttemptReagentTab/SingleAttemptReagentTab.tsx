@@ -3,6 +3,7 @@ import { SingleMolCanvas } from "../../ui";
 import TextField from "@mui/material/TextField";
 import { useAppDispatch } from "../../redux/hooks";
 import { setAttemptReagentData } from "../../redux/schemes/schemesSlice";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface IAttemptReagentTabProps {
   reagentNumber: 1 | 2 | 3 | 4;
@@ -10,7 +11,7 @@ interface IAttemptReagentTabProps {
   equivalents: number | null;
   molecularWeight: number | null;
   mass: number | null;
-  attemptNumber: number ;
+  attemptNumber: number;
 }
 
 const SingleAttemptReagentTab = ({
@@ -48,7 +49,7 @@ const SingleAttemptReagentTab = ({
       <TextField
         label="Equivalents"
         name="equivalents"
-        value={equivalents || ""}
+        value={equivalents || 0}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -63,15 +64,21 @@ const SingleAttemptReagentTab = ({
         size="small"
         type="number"
         disabled
+        InputProps={{
+          endAdornment: <InputAdornment position="end">g/mol</InputAdornment>,
+        }}
       />
       <TextField
         label="Mass"
         name="mass"
-        value={mass || ""}
+        value={mass || 0}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
         type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">g</InputAdornment>,
+        }}
       />
     </Container>
   );

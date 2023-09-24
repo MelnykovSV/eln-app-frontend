@@ -2,6 +2,7 @@ import Container from "./NewStageTab.styled";
 import { TextField } from "@mui/material";
 
 import { SingleMolCanvas } from "../../ui";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface IStage {
   product: string;
@@ -60,6 +61,9 @@ const NewStageTab = ({
             onChange={(e) => {
               stageChangeHandler(e, stageNumber);
             }}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">%</InputAdornment>,
+            }}
           />
         </div>
 
@@ -89,6 +93,11 @@ const NewStageTab = ({
           className="input"
           onChange={(e) => {
             stageChangeHandler(e, stageNumber);
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">&#8451;</InputAdornment>
+            ),
           }}
         />
       </div>

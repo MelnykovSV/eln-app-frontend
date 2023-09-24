@@ -14,7 +14,19 @@ const ReagentCard = ({
       <div className="mol-info">
         <ul className="mol-info__first">
           <li>Mass: {mass} g</li>
-          <li>Molecular formula: {formula}</li>
+          <li>
+            Molecular formula:{" "}
+            {
+              formula.split("").map((item) => {
+                if (!isNaN(Number(item))) {
+                  return <sub>{item}</sub>;
+                }
+                return item;
+              })
+
+              // formula.replace(/\d+/g, "<sub>$&</sub>")
+            }
+          </li>
           <li>Molecular Weight: {molWeight} g/mol</li>
         </ul>
         <ul className="mol-info__second">

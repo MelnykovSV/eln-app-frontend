@@ -13,6 +13,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import InputAdornment from "@mui/material/InputAdornment";
 
 interface IAttemptInfoProps {
   attemptNumber: number;
@@ -62,6 +63,9 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         size="small"
         type="number"
         disabled
+        InputProps={{
+          endAdornment: <InputAdornment position="end">%</InputAdornment>,
+        }}
       />
       <TextField
         label="Solvent"
@@ -90,38 +94,50 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
       <TextField
         label="Temperature"
         name="temp"
-        value={temp || ""}
+        value={temp || 0}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
         type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">&#8451;</InputAdornment>,
+        }}
       />
       <TextField
         label="Starting Material Mass"
         name="startingMaterialMass"
-        value={startingMaterialMass || ""}
+        value={startingMaterialMass || 0}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
         type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">g</InputAdornment>,
+        }}
       />
       <TextField
         label="Product Mass"
         name="productMass"
-        value={productMass || ""}
+        value={productMass || 0}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
         type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">g</InputAdornment>,
+        }}
       />
       <TextField
         label="Product Purity"
         name="productPurity"
-        value={productPurity || ""}
+        value={productPurity || 0}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
         type="number"
+        InputProps={{
+          endAdornment: <InputAdornment position="end">%</InputAdornment>,
+        }}
       />
       <RadioGroup
         defaultValue="outlined"

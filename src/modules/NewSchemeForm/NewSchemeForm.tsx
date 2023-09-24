@@ -13,6 +13,7 @@ import { nanoid } from "nanoid";
 import { NewStageTab } from "../../components";
 import { SingleMolCanvas } from "../../ui";
 import { INewSchemeFormProps } from "../../types/componentsProps";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const NewSchemeForm = ({
   startingMaterial,
@@ -46,6 +47,9 @@ const NewSchemeForm = ({
             type="number"
             value={mass}
             onChange={inputChangeHandler}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">g</InputAdornment>,
+            }}
           />
           <TextField
             label="Price"
@@ -54,6 +58,9 @@ const NewSchemeForm = ({
             type="number"
             value={price}
             onChange={inputChangeHandler}
+            InputProps={{
+              endAdornment: <InputAdornment position="end">$</InputAdornment>,
+            }}
           />
         </div>
         <div className="scheme-form-first-block__canvas-container">

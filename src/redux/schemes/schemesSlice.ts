@@ -111,7 +111,10 @@ const schemesSlice = createSlice({
           }
           break;
         case "mass":
-          reagent.mass = Number(action.payload.mass);
+          reagent.mass =
+            Number(action.payload.mass) > 0
+              ? (reagent.mass = Number(action.payload.mass))
+              : null;
           if (
             reagent.molecularWeight &&
             attempt.startingMaterialMass !== null &&
@@ -120,17 +123,28 @@ const schemesSlice = createSlice({
             const startingMaterialN =
               attempt.startingMaterialMass /
               smilesToMolWeight(state.currentStage.startingMaterial);
-            reagent.equivalents = Number(
-              (
-                action.payload.mass /
-                (reagent.molecularWeight * startingMaterialN)
-              ).toFixed(4)
-            );
+            reagent.equivalents =
+              Number(
+                (
+                  action.payload.mass /
+                  (reagent.molecularWeight * startingMaterialN)
+                ).toFixed(4)
+              ) > 0
+                ? Number(
+                    (
+                      action.payload.mass /
+                      (reagent.molecularWeight * startingMaterialN)
+                    ).toFixed(4)
+                  )
+                : null;
           }
 
           break;
         case "equivalents":
-          reagent.equivalents = Number(action.payload.equivalents);
+          reagent.equivalents =
+            Number(action.payload.equivalents) > 0
+              ? (reagent.equivalents = Number(action.payload.equivalents))
+              : null;
           if (
             reagent.molecularWeight !== null &&
             reagent.equivalents !== null &&
@@ -195,7 +209,9 @@ const schemesSlice = createSlice({
         }
         case "temp": {
           const fieldValue =
-            (action.payload[action.payload.fieldName] as number) || null;
+            (action.payload[action.payload.fieldName] as number) > 0
+              ? (action.payload[action.payload.fieldName] as number)
+              : null;
           attempt[action.payload.fieldName] = Number(fieldValue);
           if (attempt.isOk) {
             state.currentStage[action.payload.fieldName] = Number(fieldValue);
@@ -205,7 +221,9 @@ const schemesSlice = createSlice({
 
         case "_yield": {
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) || null;
+            Number(action.payload[action.payload.fieldName]) > 0
+              ? Number(action.payload[action.payload.fieldName])
+              : null;
           attempt[action.payload.fieldName] = fieldValue;
           if (
             attempt.startingMaterialMass &&
@@ -242,7 +260,9 @@ const schemesSlice = createSlice({
 
         case "startingMaterialMass": {
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) || null;
+            Number(action.payload[action.payload.fieldName]) > 0
+              ? Number(action.payload[action.payload.fieldName])
+              : null;
           attempt[action.payload.fieldName] = fieldValue;
           attempt.reagents.forEach((item) => {
             if (
@@ -299,7 +319,9 @@ const schemesSlice = createSlice({
         }
         case "productMass": {
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) || null;
+            Number(action.payload[action.payload.fieldName]) > 0
+              ? Number(action.payload[action.payload.fieldName])
+              : null;
           attempt[action.payload.fieldName] = fieldValue;
           if (
             attempt.startingMaterialMass &&
@@ -335,7 +357,9 @@ const schemesSlice = createSlice({
         }
         case "productPurity": {
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) || null;
+            Number(action.payload[action.payload.fieldName]) > 0
+              ? Number(action.payload[action.payload.fieldName])
+              : null;
           attempt[action.payload.fieldName] = fieldValue;
           if (
             attempt.startingMaterialMass &&

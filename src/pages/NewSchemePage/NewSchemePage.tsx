@@ -10,6 +10,7 @@ import Switch from "@mui/material/Switch";
 import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { privateApi } from "../../api";
+import { useNavigate } from "react-router";
 
 const blankStage = {
   startingMaterial: "",
@@ -48,6 +49,7 @@ const NewSchemePage = () => {
   useEffect(() => {
     setTargetCompound(stages[stages.length - 1].product);
   }, [stages]);
+  const navigate = useNavigate();
 
   const stageChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -104,7 +106,7 @@ const NewSchemePage = () => {
       stages,
     });
 
-    console.log(response);
+    navigate(`/scheme/${response.data.data._id}`);
   };
 
   const inputChangeHandler = (
