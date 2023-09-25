@@ -45,8 +45,7 @@ export const signIn = createAsyncThunk<ILoginUserPayload, ISignInData>(
 
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    const response = await privateApi.post("/api/auth/logout");
-    console.log(response);
+    await privateApi.post("/api/auth/logout");
     token.unset();
   } catch (error) {
     console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
