@@ -31,15 +31,6 @@ const NewSchemePage = () => {
   const [isSchemePreviewShown, setIsSchemePreviewShown] = useState(false);
 
   const [targetCompound, setTargetCompound] = useState("");
-  // const blankStage = {
-  //   startingMaterial: "cccccccc",
-  //   product: "",
-  //   solvent: "",
-  //   temp: null,
-  //   time: "",
-  //   _yield: null,
-  //   methodic: "",
-  // };
   const [stages, setStages] = useState([
     {
       ...blankStage,
@@ -87,13 +78,6 @@ const NewSchemePage = () => {
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log({
-      startingMaterial,
-      mass,
-      price,
-      deadline,
-      stages,
-    });
 
     stages[0].startingMaterial = startingMaterial; // костыль, доделать!
 

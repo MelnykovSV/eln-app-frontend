@@ -1,6 +1,5 @@
 import Container from "./Schemes.styled";
 import { ReactionSchemePreview } from "../../components";
-// import { testSchemesPreviewData } from "../../testData";
 import { CustomSelect } from "../../components";
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";

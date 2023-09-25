@@ -4,11 +4,10 @@ import { SingleArrow } from "../../ui";
 import { ISynthesisSchemeStageProps } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 import { useNavigate } from "react-router";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { updateCurrentStage } from "../../redux/schemes/schemesSlice";
+import { useAppSelector } from "../../redux/hooks";
+
 import { getCurrentSchemeId } from "../../redux/schemes/schemesSlice";
-import { useEffect } from "react";
-import { getSingleScheme } from "../../redux/schemes/operations";
+
 
 const SynthesisSchemeStage = ({
   stageData: {
@@ -27,23 +26,13 @@ const SynthesisSchemeStage = ({
   if (!product) {
     product = "";
   }
-  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
 
-  // useEffect(()=> {
-  //   if (currentSchemeId) {
-  //     console.log(currentSchemeId)
-  //   }
-  //   else {
-  //     dispatch(getSingleScheme())
-  //   }
-
-  // }, [])
 
   const stageClickHandler = () => {
     if (_id) {
-      // dispatch(updateCurrentStage(_id));
       navigate(`/stage/${currentSchemeId}/${_id}`);
     }
   };

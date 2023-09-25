@@ -4,15 +4,14 @@ import {
   AttemptReagents,
   AttemptSpectra,
 } from "../../components/";
-import { useAppSelector } from "../../redux/hooks";
-import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
+
 
 interface IAttemptProps {
   attemptNumber: number;
 }
 
 const AttemptTab = ({ attemptNumber }: IAttemptProps) => {
-  const attempts = useAppSelector(getCurrentStageAttempts);
+
 
   return (
     <Container>

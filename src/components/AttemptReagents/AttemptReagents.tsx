@@ -12,9 +12,6 @@ const AttemptReagents = ({ attemptNumber }: IAttemptReagentsProps) => {
     attemptNumber - 1
   ].reagents;
 
-  // const reagentDataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   return { value: e.target.value, attemptNumber: attemptNumber };
-  // };
   return (
     <Container>
       {currentAttemptReagents.map((item) => (

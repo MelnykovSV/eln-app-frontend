@@ -20,7 +20,6 @@ const LoginForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       dispatch(
         signIn({
           email: values.email,

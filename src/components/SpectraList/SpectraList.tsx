@@ -2,7 +2,6 @@ import Container from "./SpectraList.styled";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
 import { SpectraListItem } from "../";
-import { modalOpenType } from "../../types";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -26,7 +25,7 @@ interface IAttemptSpectraProps {
 }
 const SpectraList = ({
   attemptNumber,
-}: // handleModalOpen,
+}: 
 IAttemptSpectraProps) => {
   const currentStageAttempts = useAppSelector(getCurrentStageAttempts);
   const spectra = currentStageAttempts[attemptNumber - 1].spectra;
@@ -84,8 +83,6 @@ IAttemptSpectraProps) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={style}>
-          {/* <h2 id="modal-modal-title">{modalSpectrLabel}</h2>
-          <p id="modal-modal-description">{modalSpectrUrl}</p> */}
           <div>
             <Document
               file={`http://localhost:3000/${modalSpectrUrl}`}

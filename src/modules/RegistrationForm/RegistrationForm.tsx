@@ -49,17 +49,6 @@ const RegistrationForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
-
-      // const response = await axios.post(
-      //   "http://localhost:3000/api/auth/register",
-      //   {
-      //     userName: values.name,
-      //     email: values.email,
-      //     password: values.password,
-      //   }
-      // );
-      // console.log(response);
       dispatch(
         signUp({
           userName: values.name,

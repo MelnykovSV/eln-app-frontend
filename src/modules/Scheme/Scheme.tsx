@@ -32,8 +32,6 @@ const Scheme = ({
     stages.findIndex((item) => item.testSuccess !== true) === -1
       ? stages.length - 1
       : stages.findIndex((item) => item.testSuccess !== true) - 1;
-
-  console.log(lastOkStageNumber);
   return (
     <Container>
       <div className="starting-material-canvas-container">

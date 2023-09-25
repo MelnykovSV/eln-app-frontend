@@ -15,8 +15,7 @@ import { getSingleScheme } from "../../redux/schemes/operations";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 import { smilesToMolecularFormula } from "../../helpers/chemistryHelpers";
 import {
-  getCurrentScheme,
-  setSchemeStatus,
+  getCurrentScheme
 } from "../../redux/schemes/schemesSlice";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 import { IUpdatedCurrentScheme } from "../../types/redux";
@@ -91,29 +90,18 @@ const SingleSchemePage = () => {
     }
   });
 
-  console.log(reagentsList);
   const [value, setValue] = useState(0);
 
   const [reagentsListData, setReagentsListData] = useState([] as any);
-
-  // const updatedSchemeData = {...currentScheme, calculateSchemeYieldCoefficients(currentScheme[stages])}
-
-  //Use for reagents masses calculation!!!
-  console.log(updatedSchemeData);
-
-  // Судя по всему, useEffect срабатывает до
   useEffect(() => {
     if (schemeId && schemeId !== currentScheme._id) {
       dispatch(getSingleScheme(schemeId));
     }
 
-    console.log(reagentsList);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schemeId]);
 
   useEffect(() => {
-    console.log(reagentsList);
     const arr1 = reagentsList.map(async (item) => {
       if (item.smiles !== null) {
         const formula = smilesToMolecularFormula(item.smiles);
@@ -130,7 +118,6 @@ const SingleSchemePage = () => {
             compoundName: response.data.PropertyTable.Properties[0].IUPACName,
           };
         } catch (e) {
-          console.log(e);
           return {
             smiles: item.smiles,
             mass: item.mass,
@@ -154,7 +141,6 @@ const SingleSchemePage = () => {
   };
 
   const synthesisStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // dispatch(setSchemeStatus(e.target.value));
     dispatch(
       updateSchemeStatusAndSave({
         schemeId: currentScheme._id,
