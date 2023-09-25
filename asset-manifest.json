@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/eln-app-frontend/static/css/main.9de78cd1.css",
+    "main.js": "/eln-app-frontend/static/js/main.1bc29c7b.js",
+    "static/js/250.968d9154.chunk.js": "/eln-app-frontend/static/js/250.968d9154.chunk.js",
+    "static/js/187.a2e0d644.chunk.js": "/eln-app-frontend/static/js/187.a2e0d644.chunk.js",
+    "static/js/472.2874f24d.chunk.js": "/eln-app-frontend/static/js/472.2874f24d.chunk.js",
+    "static/js/657.7695a9cd.chunk.js": "/eln-app-frontend/static/js/657.7695a9cd.chunk.js",
+    "static/js/790.73cfd003.chunk.js": "/eln-app-frontend/static/js/790.73cfd003.chunk.js",
+    "static/js/356.d9daed06.chunk.js": "/eln-app-frontend/static/js/356.d9daed06.chunk.js",
+    "static/js/787.13d92dec.chunk.js": "/eln-app-frontend/static/js/787.13d92dec.chunk.js",
+    "static/js/411.f20e58f4.chunk.js": "/eln-app-frontend/static/js/411.f20e58f4.chunk.js",
+    "static/media/eln_logo.svg": "/eln-app-frontend/static/media/eln_logo.5f0231b3ddf87b6febb6add523ba4894.svg",
+    "index.html": "/eln-app-frontend/index.html",
+    "static/media/Long_arrow.svg": "/eln-app-frontend/static/media/Long_arrow.16989dfa3e25b9a3eb5b1a337d903955.svg",
+    "main.9de78cd1.css.map": "/eln-app-frontend/static/css/main.9de78cd1.css.map",
+    "main.1bc29c7b.js.map": "/eln-app-frontend/static/js/main.1bc29c7b.js.map",
+    "250.968d9154.chunk.js.map": "/eln-app-frontend/static/js/250.968d9154.chunk.js.map",
+    "187.a2e0d644.chunk.js.map": "/eln-app-frontend/static/js/187.a2e0d644.chunk.js.map",
+    "472.2874f24d.chunk.js.map": "/eln-app-frontend/static/js/472.2874f24d.chunk.js.map",
+    "657.7695a9cd.chunk.js.map": "/eln-app-frontend/static/js/657.7695a9cd.chunk.js.map",
+    "790.73cfd003.chunk.js.map": "/eln-app-frontend/static/js/790.73cfd003.chunk.js.map",
+    "356.d9daed06.chunk.js.map": "/eln-app-frontend/static/js/356.d9daed06.chunk.js.map",
+    "787.13d92dec.chunk.js.map": "/eln-app-frontend/static/js/787.13d92dec.chunk.js.map",
+    "411.f20e58f4.chunk.js.map": "/eln-app-frontend/static/js/411.f20e58f4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9de78cd1.css",
+    "static/js/main.1bc29c7b.js"
+  ]
+}
