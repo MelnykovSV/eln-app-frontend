@@ -2,7 +2,7 @@
   "name": "eln-app-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://MelnykovSV.github.io/eln-app-frontend/",
+  "homepage": "https://eln-app-frontend.vercel.app",
   "type": "module",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -42,6 +42,8 @@
     "yup": "^1.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -66,6 +68,7 @@
     ]
   },
   "devDependencies": {
-    "@types/json2mq": "^0.2.0"
+    "@types/json2mq": "^0.2.0",
+    "gh-pages": "^6.0.0"
   }
 }
