@@ -3,13 +3,10 @@ import { StageInfo } from "../../components";
 import { AttemptTab } from "../";
 import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material";
-import { privateApi } from "../../api";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
   getCurrentStage,
-  temporalSaveStageData,
 } from "../../redux/schemes/schemesSlice";
-import { modalOpenType } from "../../types";
 import { saveCurrentStageData } from "../../redux/schemes/operations";
 
 
@@ -25,19 +22,13 @@ const Stage = () => {
     setAttemptNumber(Number(currentStage.attempts.length + 1));
   };
 
-  const stageId = currentStage._id;
 
   const saveHandler = async () => {
-    // const response = await privateApi.post(
-    //   `/api/schemes/updateStage/${stageId}`,
-    //   currentStage
-    // );
-    // dispatch(temporalSaveStageData());
     dispatch(saveCurrentStageData(currentStage));
   };
 
   return (
-    <Container>
+    <Container className='container'>
       <StageInfo
         attemptNumber={attemptNumber}
         handleAttemptNumberChange={handleAttemptNumberChange}

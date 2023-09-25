@@ -39,6 +39,7 @@ const SingleAttemptReagentTab = ({
       <SingleMolCanvas smiles={smiles} />
       <p>Reagent {reagentNumber}</p>
       <TextField
+        className="reagent-input"
         label="Smiles"
         name="smiles"
         value={smiles || ""}
@@ -47,6 +48,7 @@ const SingleAttemptReagentTab = ({
         size="small"
       />
       <TextField
+        className="reagent-input"
         label="Equivalents"
         name="equivalents"
         value={equivalents || 0}
@@ -56,6 +58,7 @@ const SingleAttemptReagentTab = ({
         type="number"
       />
       <TextField
+        className="reagent-input"
         label="Molecular weight"
         name="molecularWeight"
         value={molecularWeight || ""}
@@ -69,6 +72,7 @@ const SingleAttemptReagentTab = ({
         }}
       />
       <TextField
+        className="reagent-input"
         label="Mass"
         name="mass"
         value={mass || 0}

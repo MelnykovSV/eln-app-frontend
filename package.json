@@ -5,6 +5,7 @@
   "homepage": "https://MelnykovSV.github.io/eln-app-frontend/",
   "type": "module",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.14.6",
     "@mui/x-date-pickers": "^6.9.0",
@@ -22,6 +23,7 @@
     "dayjs": "^1.11.9",
     "emotion-modern-normalize": "^1.0.0",
     "formik": "^2.4.3",
+    "json2mq": "^0.2.0",
     "nanoid": "^4.0.2",
     "openchemlib": "^8.5.0",
     "react": "^18.2.0",
@@ -62,5 +64,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/json2mq": "^0.2.0"
   }
 }

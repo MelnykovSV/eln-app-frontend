@@ -23,8 +23,6 @@ const ReagentCard = ({
                 }
                 return item;
               })
-
-              // formula.replace(/\d+/g, "<sub>$&</sub>")
             }
           </li>
           <li>Molecular Weight: {molWeight} g/mol</li>

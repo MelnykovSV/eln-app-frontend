@@ -4,6 +4,7 @@ import { addSpectr } from "../../redux/schemes/operations";
 import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 interface IAttemptSpectraProps {
   attemptNumber: number;
@@ -37,23 +38,24 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
   };
   return (
     <Container onSubmit={fileFormSubmitHandler}>
-      <section className="container">
+      <section >
         <div
           {...getRootProps({ className: "dropzone" })}
           style={{ height: "100px" }}>
           <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drag 'n' drop file here, or click to select file</p>
         </div>
         <aside>
-          <h4>Files</h4>
+          <h4>File</h4>
           <ul>{files}</ul>
         </aside>
       </section>
-     
+
       {/* <input type="text" name="label" /> */}
 
       <TextField
         label="Description"
+        className="spectr-label"
         name="label"
         // value={mass || ""}
         variant="outlined"
@@ -62,7 +64,9 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
         type="text"
       />
 
-      <button type="submit">Submit file</button>
+      <Button type="submit" variant="contained">
+        Submit file
+      </Button>
     </Container>
   );
 };

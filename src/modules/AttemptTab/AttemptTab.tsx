@@ -6,8 +6,6 @@ import {
 } from "../../components/";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
-import { modalOpenType } from "../../types";
-import { AttemptNotes } from "../../components";
 
 interface IAttemptProps {
   attemptNumber: number;
@@ -24,7 +22,6 @@ const AttemptTab = ({ attemptNumber }: IAttemptProps) => {
         <AttemptReagents attemptNumber={attemptNumber} />
         <AttemptSpectra attemptNumber={attemptNumber} />
       </div>
-      <AttemptNotes attemptNumber={attemptNumber} />
     </Container>
   );
 };

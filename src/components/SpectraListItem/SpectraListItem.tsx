@@ -2,6 +2,7 @@ import Container from "./SpectraListItem.styled";
 import { useParams } from "react-router";
 import { privateApi } from "../../api";
 import { modalOpenType } from "../../types";
+import Button from "@mui/material/Button";
 
 interface ISpectraListItemProps {
   spectrUrl: string;
@@ -45,12 +46,14 @@ const SpectraListItem = ({
   return (
     <Container>
       <p>{label || null}</p>
-      <button type="button" onClick={downloadFileHandler}>
-        Download
-      </button>
-      <button type="button" onClick={spectrOpenHandler}>
-        Open
-      </button>
+      <div className="spectr-button-container">
+        <Button type="button" variant="contained" onClick={downloadFileHandler}>
+          Download
+        </Button>
+        <Button type="button" variant="contained" onClick={spectrOpenHandler}>
+          Open
+        </Button>
+      </div>
     </Container>
   );
 };

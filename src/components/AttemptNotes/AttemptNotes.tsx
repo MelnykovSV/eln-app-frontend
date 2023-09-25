@@ -24,12 +24,15 @@ const AttemptNotes = ({ attemptNumber }: IAttemptNotesProps) => {
   return (
     <Container>
       <TextField
+        className="notes-input"
         label="Notes"
         name="notes"
         value={notes || ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="medium"
+        multiline
+        rows={8}
       />
     </Container>
   );

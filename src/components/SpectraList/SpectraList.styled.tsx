@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  
-
   ul {
     list-style: none;
-    height: 700px;
+    max-height: 517px;
     overflow: auto;
     padding: 0;
+    margin: 0;
   }
 `;
 
