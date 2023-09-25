@@ -1,6 +1,5 @@
 import axios from "axios";
-import { updateTokens } from "./redux/auth/authSlice";
-import { logOut } from "./redux/auth/operations";
+import { updateTokens, forceLogOut } from "./redux/auth/authSlice";
 
 let store: any;
 
@@ -57,7 +56,7 @@ privateApi.interceptors.response.use(
         );
         return privateApi.request(error.config);
       } catch (e) {
-        console.log(e);
+        store.dispatch(forceLogOut());
       }
       return error;
     }

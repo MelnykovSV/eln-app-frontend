@@ -32,6 +32,14 @@ const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },
+    forceLogOut(state) {
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.isLoggedIn = false;
+      state.isLoading = false;
+      state.status = "fulfilled";
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -98,6 +106,6 @@ const authSlice = createSlice({
 });
 
 export const userReducer = authSlice.reducer;
-export const { updateTokens } = authSlice.actions;
+export const { updateTokens, forceLogOut } = authSlice.actions;
 
 export const getAccessToken = (state: IState) => state.auth.accessToken;
