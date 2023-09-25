@@ -70,12 +70,9 @@ refreshApi.interceptors.response.use(
     return config;
   },
   async (error) => {
+    console.log(error.response.status);
     if (error.response.status === 401) {
-      try {
-        store.dispatch(logOut());
-      } catch (e) {
-        console.log(e);
-      }
+      store.dispatch(logOut());
     }
     return error;
   }
