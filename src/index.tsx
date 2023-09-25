@@ -23,7 +23,7 @@ root.render(
     <React.StrictMode>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter basename="/eln-app-frontend">
+          <BrowserRouter basename="/">
             <App />
           </BrowserRouter>
         </PersistGate>
