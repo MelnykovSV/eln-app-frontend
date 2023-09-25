@@ -65,17 +65,17 @@ privateApi.interceptors.response.use(
   }
 );
 
-refreshApi.interceptors.response.use(
-  (config) => {
-    return config;
-  },
-  async (error) => {
-    console.log(error.response.status);
-    if (error.response.status === 401) {
-      store.dispatch(logOut());
-    }
-    return error;
-  }
-);
+// refreshApi.interceptors.response.use(
+//   (config) => {
+//     return config;
+//   },
+//   async (error) => {
+//     console.log(error.response.status);
+//     if (error.response.status === 401) {
+//       store.dispatch(logOut());
+//     }
+//     return error;
+//   }
+// );
 
 export { privateApi, publicApi, refreshApi };
