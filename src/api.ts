@@ -57,9 +57,25 @@ privateApi.interceptors.response.use(
         );
         return privateApi.request(error.config);
       } catch (e) {
-        store.dispatch(logOut());
+        console.log(e);
       }
       return error;
+    }
+    return error;
+  }
+);
+
+refreshApi.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  async (error) => {
+    if (error.response.status === 401) {
+      try {
+        store.dispatch(logOut());
+      } catch (e) {
+        console.log(e);
+      }
     }
     return error;
   }
