@@ -4,13 +4,13 @@ import { updateTokens, forceLogOut } from "./redux/auth/authSlice";
 let store: any;
 
 const privateApi = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://eln-app-web-server.onrender.com",
 });
 const publicApi = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://eln-app-web-server.onrender.com",
 });
 const refreshApi = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://eln-app-web-server.onrender.com",
 });
 
 export const injectStore = (_store: any) => {
@@ -63,18 +63,5 @@ privateApi.interceptors.response.use(
     return error;
   }
 );
-
-// refreshApi.interceptors.response.use(
-//   (config) => {
-//     return config;
-//   },
-//   async (error) => {
-//     console.log(error.response.status);
-//     if (error.response.status === 401) {
-//       store.dispatch(logOut());
-//     }
-//     return error;
-//   }
-// );
 
 export { privateApi, publicApi, refreshApi };
