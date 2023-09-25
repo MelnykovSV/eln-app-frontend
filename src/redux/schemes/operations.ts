@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
 import dayjs from "dayjs";
 import { IReactionPreviewData } from "../../types";
-import { ISchemeData, IStage, ICurrentScheme } from "../../types/redux";
+import { ISchemeData, IStage } from "../../types/redux";
 
 export interface IgetSchemeAndStageParams {
   schemeId: string;
@@ -53,14 +53,12 @@ export const getSingleScheme = createAsyncThunk<ISchemeData, string>(
   async (schemeId: string, thunkAPI) => {
     try {
       const response = await privateApi.get(`/api/schemes/${schemeId}`);
-      console.log(response);
 
       const result = {
         ...response.data.data,
         createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
         updatedAt: dayjs(response.data.data.updatedAt).format("DD.MM.YYYY"),
       };
-      console.log(result);
 
       return result;
     } catch (error) {
@@ -76,7 +74,6 @@ export const getSchemeAndStage = createAsyncThunk<
 >("schemes/getSchemeAndStage", async ({ schemeId, stageId }, thunkAPI) => {
   try {
     const response = await privateApi.get(`/api/schemes/${schemeId}`);
-    console.log(response);
 
     const schemeData = {
       ...response.data.data,
@@ -87,8 +84,6 @@ export const getSchemeAndStage = createAsyncThunk<
     const stageData = schemeData.stages.find(
       (item: IStage) => item._id === stageId
     );
-
-    console.log(schemeData, stageData);
 
     return { schemeData, stageData };
   } catch (error) {
@@ -107,7 +102,6 @@ export const addSpectr = createAsyncThunk<IAddFilePayload, IaddFileParams>(
       formData.append("attemptNumber", attemptNumber.toString());
       formData.append("schemeId", schemeId);
       formData.append("stageId", stageId);
-      console.log({ spectr, label, attemptNumber, schemeId, stageId });
       const response = await privateApi.patch("/api/schemes/spectr", formData);
       return {
         schemeId,
@@ -147,8 +141,6 @@ export const updateSchemeStatusAndSave = createAsyncThunk<
       const response = await privateApi.patch(`/api/schemes/${schemeId}`, {
         status,
       });
-
-      console.log(response);
       return status;
     } catch (error) {
       console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
