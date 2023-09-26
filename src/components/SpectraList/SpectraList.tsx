@@ -23,10 +23,7 @@ const style = {
 interface IAttemptSpectraProps {
   attemptNumber: number;
 }
-const SpectraList = ({
-  attemptNumber,
-}: 
-IAttemptSpectraProps) => {
+const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
   const currentStageAttempts = useAppSelector(getCurrentStageAttempts);
   const spectra = currentStageAttempts[attemptNumber - 1].spectra;
 
@@ -85,7 +82,7 @@ IAttemptSpectraProps) => {
         <Box sx={style}>
           <div>
             <Document
-              file={`http://localhost:3000/${modalSpectrUrl}`}
+              file={`https://eln-app-frontend-melnykovsv.vercel.app//${modalSpectrUrl}`}
               onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber} />
             </Document>
