@@ -22,7 +22,7 @@ import { logOut } from "../../redux/auth/operations";
 import { useAppSelector } from "../../redux/hooks";
 import { clearSchemesData } from "../../redux/schemes/schemesSlice";
 
-import { getAccessToken } from "../../redux/auth/authSlice";
+import { getIsLoggedIn } from "../../redux/auth/authSlice";
 import {
   getCurrentSchemeId,
   getCurrentStage,
@@ -33,7 +33,8 @@ import {
 const settings = ["Logout"];
 
 export function ResponsiveAppBar() {
-  const token = useAppSelector(getAccessToken);
+  // const token = useAppSelector(getAccessToken);
+  const isLoggedIn = useAppSelector(getIsLoggedIn);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const currentStage = useAppSelector(getCurrentStage);
   const dispatch = useAppDispatch();
@@ -70,7 +71,7 @@ export function ResponsiveAppBar() {
             <Logo />
           </Box>
 
-          {token ? (
+          {isLoggedIn ? (
             <Box
               sx={{
                 flexGrow: 1,
@@ -138,7 +139,7 @@ export function ResponsiveAppBar() {
             {" "}
             <Logo />
           </Box>
-          {token ? (
+          {isLoggedIn ? (
             <Box
               sx={{
                 flexGrow: 1,
@@ -180,7 +181,7 @@ export function ResponsiveAppBar() {
             </Box>
           ) : null}
 
-          {token ? (
+          {isLoggedIn ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip className="avatar" title="Open settings">
                 <IconButton
