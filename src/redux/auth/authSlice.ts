@@ -125,5 +125,5 @@ export const userReducer = authSlice.reducer;
 export const { updateTokens, forceLogOut } = authSlice.actions;
 
 export const getAccessToken = (state: IState) => state.auth.accessToken;
-export const getIsLoggedIn = (state: IState) => state.auth.accessToken;
+export const getIsLoggedIn = (state: IState) => state.auth.isLoggedIn;
 export const getIsRefreshing = (state: IState) => state.auth.isRefreshing;
