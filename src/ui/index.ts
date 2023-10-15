@@ -4,6 +4,7 @@ import SingleMolCanvas from "./SingleMolCanvas/SingleMolCanvas";
 import DoubleArrows from "./DoubleArrows/DoubleArrows";
 import SingleArrow from "./SingleArrow/SingleArrow";
 import DNALoader from "./DNALoader/DNALoader";
+import DNALoaderSmall from "./DNALoaderSmall/DNALoaderSmall";
 
 export {
   Logo,
@@ -12,4 +13,5 @@ export {
   DoubleArrows,
   SingleArrow,
   DNALoader,
+  DNALoaderSmall,
 };

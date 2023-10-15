@@ -19,11 +19,7 @@ import {
   setAttemptInitialValue,
 } from "./initialValues";
 import { schemeDataSynchronyzer } from "../../helpers/schemeDataSynchronyzer";
-import {
-  ISchemeData,
-  IStage,
-  IAttempt,
-} from "../../types/redux";
+import { ISchemeData, IStage, IAttempt } from "../../types/redux";
 import { IAddFilePayload, IDeleteFilePayload } from "./operations";
 
 const initialState: ISchemesState = {
@@ -31,6 +27,7 @@ const initialState: ISchemesState = {
   currentScheme: JSON.parse(JSON.stringify(currentSchemeInitialValue)),
   currentStage: JSON.parse(JSON.stringify(currentStageInitialValue)),
   status: "idle",
+  isSpectrUploading: false,
   isLoading: false,
   error: null,
 };
@@ -496,12 +493,24 @@ const schemesSlice = createSlice({
         state.currentStage.attempts[attemptNumber - 1].spectra = spectra;
 
         schemeDataSynchronyzer(state);
-
+        state.isSpectrUploading = false;
         state.isLoading = false;
         state.status = "fulfilled";
         state.error = null;
       }
     );
+    builder.addCase(addSpectr.pending, (state) => {
+      state.isLoading = false;
+      state.isSpectrUploading = true;
+      state.status = "pending";
+      state.error = null;
+    });
+    builder.addCase(addSpectr.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isSpectrUploading = false;
+      state.status = "rejected";
+      state.error = action.error.message || "Something went wrong";
+    });
     builder.addCase(
       deleteSpectr.fulfilled,
       (state, action: PayloadAction<IDeleteFilePayload>) => {
@@ -551,3 +560,5 @@ export const getCurrentStageProduct = (state: IState) =>
   state.schemes.currentStage.product;
 export const getCurrentStageAttempts = (state: IState) =>
   state.schemes.currentStage.attempts;
+export const getIsSpectrUploading = (state: IState) =>
+  state.schemes.isSpectrUploading;

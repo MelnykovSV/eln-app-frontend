@@ -1,11 +1,14 @@
 import Container from "./SpectraForm.styled";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addSpectr } from "../../redux/schemes/operations";
 import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState, useCallback } from "react";
+import { DNALoaderSmall } from "../../ui";
+
+import { getIsSpectrUploading } from "../../redux/schemes/schemesSlice";
 
 interface IAttemptSpectraProps {
   attemptNumber: number;
@@ -13,6 +16,7 @@ interface IAttemptSpectraProps {
 
 const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
   const dispatch = useAppDispatch();
+  const isSpectrUploading = useAppSelector(getIsSpectrUploading);
 
   const [myFiles, setMyFiles] = useState([] as any);
 
@@ -60,10 +64,14 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
           <input {...getInputProps()} />
           <p>Drag 'n' drop file here, or click to select file</p>
         </div>
-        <aside>
-          <h4>File</h4>
+        <div>
+          <div className="label-wrapper">
+            <p>File</p>
+            {isSpectrUploading ? <DNALoaderSmall /> : null}
+          </div>
+
           <ul>{files}</ul>
-        </aside>
+        </div>
       </section>
 
       {/* <input type="text" name="label" /> */}

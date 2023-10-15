@@ -4,10 +4,13 @@ import { useFormik } from "formik";
 import { FormTextInput } from "../../components";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { signIn } from "../../redux/auth/operations";
+import { DNALoaderSmall } from "../../ui";
+import { getIsLoading } from "../../redux/auth/authSlice";
 
 const LoginForm = () => {
+  const isLoading = useAppSelector(getIsLoading);
   const dispatch = useAppDispatch();
   const validationSchema = yup.object({
     email: yup.string().required("Email is required"),
@@ -40,8 +43,9 @@ const LoginForm = () => {
           type="password"
           formik={formik}
         />
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" disabled={isLoading}>
           Login
+          {isLoading ? <DNALoaderSmall /> : null}
         </Button>
       </form>
     </Container>

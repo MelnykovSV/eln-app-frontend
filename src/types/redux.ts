@@ -143,6 +143,7 @@ export interface ISchemesState {
   currentScheme: ICurrentScheme;
   currentStage: IStage;
   status: string;
+  isSpectrUploading: boolean;
   isLoading: boolean;
   error: null | string;
 }

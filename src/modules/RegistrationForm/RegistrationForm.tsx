@@ -6,10 +6,13 @@ import * as yup from "yup";
 import { regexp } from "../../regexp";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { signUp } from "../../redux/auth/operations";
+import { DNALoaderSmall } from "../../ui";
+import { getIsLoading } from "../../redux/auth/authSlice";
 
 const RegistrationForm = () => {
+  const isLoading = useAppSelector(getIsLoading);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -89,8 +92,12 @@ const RegistrationForm = () => {
             </p>
           }
         />
-        <Button type="submit" variant="contained" disabled={!isCheckboxChecked}>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={!isCheckboxChecked || isLoading}>
           Create account
+          {isLoading ? <DNALoaderSmall /> : null}
         </Button>
       </form>
     </Container>

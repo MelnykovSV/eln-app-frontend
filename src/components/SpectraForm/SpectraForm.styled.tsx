@@ -13,6 +13,11 @@ const Container = styled.form`
     margin-bottom: 15px;
     width: 100%;
   }
+  .label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   button {
     width: 100%;
   }
