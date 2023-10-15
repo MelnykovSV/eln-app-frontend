@@ -72,7 +72,7 @@ export const getCurrentUser = createAsyncThunk<ICurrentUserPayload>(
 
 export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
   try {
-    const response = await refreshApi.get("/api/auth/refresh");
+    const response = await refreshApi.post("/api/auth/refresh");
     return response.data.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));

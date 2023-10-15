@@ -46,7 +46,7 @@ privateApi.interceptors.response.use(
         error.config.headers.Authorization = `Bearer ${
           store.getState().auth.refreshToken
         }`;
-        const response = await refreshApi.get("/api/auth/refresh");
+        const response = await refreshApi.post("/api/auth/refresh");
         error.config.headers.Authorization = `Bearer ${response.data.data.accessToken}`;
         store.dispatch(
           updateTokens({
