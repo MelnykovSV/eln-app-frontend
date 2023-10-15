@@ -108,6 +108,8 @@ const authSlice = createSlice({
     builder.addCase(refresh.rejected, (state) => {
       state.isRefreshing = false;
       state.isLoggedIn = false;
+      state.accessToken = null;
+      state.refreshToken = null;
     });
     builder.addMatcher(isPending, (state) => {
       state.isLoading = true;
