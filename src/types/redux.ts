@@ -43,6 +43,7 @@ export interface IAuthState {
   accessToken: string | null;
   refreshToken: string | null;
   isLoggedIn: boolean;
+  isRefreshing: boolean;
   status: "idle" | "pending" | "fulfilled" | "rejected";
   isLoading: boolean;
   error: string | null;

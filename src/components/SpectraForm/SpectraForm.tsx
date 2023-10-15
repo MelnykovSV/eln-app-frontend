@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { useState, useCallback } from "react";
 
 interface IAttemptSpectraProps {
   attemptNumber: number;
@@ -12,13 +13,25 @@ interface IAttemptSpectraProps {
 
 const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
   const dispatch = useAppDispatch();
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
+  const [myFiles, setMyFiles] = useState([] as any);
+
+  const onDrop = useCallback(
+    (acceptedFiles: any) => {
+      setMyFiles([...myFiles, ...acceptedFiles]);
+    },
+    [myFiles]
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+  });
   const { schemeId, stageId } = useParams() as {
     schemeId: string;
     stageId: string;
   };
 
-  const files = acceptedFiles.map((file: File) => (
+  const files = myFiles.map((file: File) => (
     <li key={file.name}>
       {file.name} - {file.size} bytes
     </li>
@@ -26,19 +39,21 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
 
   const fileFormSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(
+    await dispatch(
       addSpectr({
-        spectr: acceptedFiles[0],
+        spectr: myFiles[0],
         label: (e.target as HTMLFormElement).label.value,
         attemptNumber: attemptNumber,
         schemeId,
         stageId,
       })
     );
+    setMyFiles([]);
+    (e.target as HTMLFormElement).label.value = "";
   };
   return (
     <Container onSubmit={fileFormSubmitHandler}>
-      <section >
+      <section>
         <div
           {...getRootProps({ className: "dropzone" })}
           style={{ height: "100px" }}>

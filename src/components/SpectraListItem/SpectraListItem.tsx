@@ -1,8 +1,10 @@
 import Container from "./SpectraListItem.styled";
 import { useParams } from "react-router";
-import { privateApi } from "../../api";
+// import { privateApi } from "../../api";
 import { modalOpenType } from "../../types";
 import Button from "@mui/material/Button";
+import { useAppDispatch } from "../../redux/hooks";
+import { deleteSpectr } from "../../redux/schemes/operations";
 
 interface ISpectraListItemProps {
   spectrUrl: string;
@@ -19,24 +21,16 @@ const SpectraListItem = ({
   attemptNumber,
   handleModalOpen,
 }: ISpectraListItemProps) => {
-  const { schemeId, stageId } = useParams() as {
-    schemeId: string;
+  const { stageId } = useParams() as {
     stageId: string;
   };
-  const downloadFileHandler = async () => {
-    const blob = await privateApi.get(
-      `/api/schemes/spectr/${schemeId}/${stageId}/${attemptNumber}/${_id}`,
-      {
-        responseType: "blob",
-      }
+
+  const dispatch = useAppDispatch();
+
+  const deleteSpectrHandler = () => {
+    dispatch(
+      deleteSpectr({ attemptNumber, stageId, spectrId: _id, spectrUrl })
     );
-    const url = window.URL.createObjectURL(blob.data);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "test.pdf";
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
   };
 
   const spectrOpenHandler = () => {
@@ -47,11 +41,21 @@ const SpectraListItem = ({
     <Container>
       <p>{label || null}</p>
       <div className="spectr-button-container">
-        <Button type="button" variant="contained" onClick={downloadFileHandler}>
+        <Button
+          type="button"
+          variant="contained"
+          href={spectrUrl.replace("/upload", "/upload/fl_attachment")}>
           Download
         </Button>
         <Button type="button" variant="contained" onClick={spectrOpenHandler}>
           Open
+        </Button>
+        <Button
+          type="button"
+          color="error"
+          variant="contained"
+          onClick={deleteSpectrHandler}>
+          Delete
         </Button>
       </div>
     </Container>

@@ -1,11 +1,16 @@
-import { Navigate } from "react-router";
-import { getAccessToken } from "../redux/auth/authSlice";
-import { useAppSelector } from "../redux/hooks";
-import { IRouteProps } from "../types";
+import { Navigate, Outlet, useLocation } from "react-router";
 
-export const PrivateRoute = ({ children, ...routeProps }: IRouteProps) => {
-  const token = useAppSelector(getAccessToken);
-  return (
-    <div {...routeProps}>{token ? children : <Navigate to="/register" />}</div>
+import { useAppSelector } from "../redux/hooks";
+// import { IRouteProps } from "../types";
+import { getIsLoggedIn, getIsRefreshing } from "../redux/auth/authSlice";
+
+export const PrivateRoute = () => {
+  const location = useLocation();
+  const isRefreshing = useAppSelector(getIsRefreshing);
+  const isLoggedIn = useAppSelector(getIsLoggedIn);
+  return isLoggedIn && !isRefreshing ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/login" state={location} />
   );
 };

@@ -1,11 +1,17 @@
 import "./App.css";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
 import { Route, Routes } from "react-router";
 import { SharedLayout } from "../modules";
 import { PrivateRoute } from "../userMenu/PrivateRoute";
 import { PublicRoute } from "../userMenu/PublicRoute";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { refresh } from "../redux/auth/operations";
+import { getIsRefreshing } from "../redux/auth/authSlice";
+import { DNALoader } from "../ui";
+
 const Schemes = lazy(() => import("../pages/Schemes/Schemes"));
 const SingleSchemePage = lazy(
   () => import("../pages/SingleSchemePage/SingleSchemePage")
@@ -19,11 +25,54 @@ const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
 const StagePage = lazy(() => import("../pages/StagePage/StagePage"));
 
 function App() {
+  const isRefreshing = useAppSelector(getIsRefreshing);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(refresh());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Container>
       <ModernNormalize />
 
-      <Routes>
+      <Suspense fallback={<DNALoader />}>
+        {!isRefreshing ? (
+          <Routes>
+            <Route element={<SharedLayout />}>
+              <Route element={<PublicRoute />}>
+                {/* <Route path="/" element={<MainPage />} /> */}
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
+              </Route>
+              <Route element={<PrivateRoute />}>
+                {/* <Route path="account" element={<AccountPage />} />
+                <Route path="calendar" element={<CalendarDatepickerPage />}>
+                  <Route path="month/:month" element={<CalendarPage />} />
+                  <Route path="day/:day" element={<DayTasksListPage />} />
+                </Route>
+                <Route path="statistics" element={<Statistics />} /> */}
+                <Route path="/" element={<Schemes />} />
+                <Route
+                  path="/scheme/:schemeId"
+                  element={<SingleSchemePage />}
+                />
+                <Route
+                  path="/stage/:schemeId/:stageId"
+                  element={<StagePage />}
+                />
+                <Route path="/tasks" element={<div>Tasks</div>} />
+                <Route path="/newScheme" element={<NewSchemePage />} />
+              </Route>
+
+              <Route path="*" element={<div>404 page</div>} />
+            </Route>
+          </Routes>
+        ) : (
+          <DNALoader />
+        )}
+      </Suspense>
+
+      {/* <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route
             index
@@ -72,7 +121,7 @@ function App() {
               </PrivateRoute>
             }></Route>
         </Route>
-      </Routes>
+      </Routes> */}
     </Container>
   );
 }

@@ -10,7 +10,7 @@ import {
   ISynthesisSchemeStageProps,
   IReagentCardProps,
   IReagentListProps,
-  IRouteProps,
+  // IRouteProps,
 } from "./componentsProps";
 import {
   IAuthState,
@@ -39,7 +39,7 @@ export type {
   ISynthesisSchemeStageProps,
   IReagentCardProps,
   IReagentListProps,
-  IRouteProps,
+  // IRouteProps,
   IAuthState,
   IRegisterUserPayload,
   ISignUpData,

@@ -1,4 +1,4 @@
-import { privateApi, publicApi } from "../../api";
+import { privateApi, publicApi, refreshApi } from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
 import { token } from "../../api";
@@ -69,3 +69,12 @@ export const getCurrentUser = createAsyncThunk<ICurrentUserPayload>(
     }
   }
 );
+
+export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
+  try {
+    const response = await refreshApi.post("/api/auth/refresh");
+    return response.data.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  }
+});

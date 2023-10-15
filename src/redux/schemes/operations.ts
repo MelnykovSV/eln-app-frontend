@@ -22,8 +22,22 @@ export interface IaddFileParams {
   stageId: string;
 }
 
+export interface IDeleteFileParams {
+  spectrId: string;
+  attemptNumber: number;
+  spectrUrl: string;
+
+  stageId: string;
+}
+
 export interface IAddFilePayload {
   schemeId: string;
+  stageId: string;
+  attemptNumber: number;
+  spectra: { label: string; spectrUrl: string; _id: string }[];
+}
+
+export interface IDeleteFilePayload {
   stageId: string;
   attemptNumber: number;
   spectra: { label: string; spectrUrl: string; _id: string }[];
@@ -116,6 +130,29 @@ export const addSpectr = createAsyncThunk<IAddFilePayload, IaddFileParams>(
   }
 );
 
+export const deleteSpectr = createAsyncThunk<
+  IDeleteFilePayload,
+  IDeleteFileParams
+>(
+  "schemes/deleteSpectr",
+  async ({ attemptNumber, stageId, spectrId, spectrUrl }, thunkAPI) => {
+    try {
+      const publicId = spectrUrl.split("/").pop()?.split(".")[0] as string;
+      const response = await privateApi.delete(
+        `/api/schemes/spectr/${stageId}/${attemptNumber}/${spectrId}/${publicId}`
+      );
+      return {
+        stageId,
+        attemptNumber,
+        spectra: response.data.data,
+      };
+    } catch (error) {
+      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
+      return thunkAPI.rejectWithValue(getErrorMessage(error));
+    }
+  }
+);
+
 export const saveCurrentStageData = createAsyncThunk<void, IStage>(
   "schemes/saveCurrentStageData",
   async (currentStage, thunkAPI) => {
@@ -138,7 +175,7 @@ export const updateSchemeStatusAndSave = createAsyncThunk<
   "schemes/updateSchemeStatusAndSave",
   async ({ schemeId, status }, thunkAPI) => {
     try {
-      const response = await privateApi.patch(`/api/schemes/${schemeId}`, {
+      await privateApi.patch(`/api/schemes/${schemeId}`, {
         status,
       });
       return status;

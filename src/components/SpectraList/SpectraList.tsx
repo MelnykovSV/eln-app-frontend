@@ -82,7 +82,7 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
         <Box sx={style}>
           <div>
             <Document
-              file={`https://eln-app-web-server.onrender.com//${modalSpectrUrl}`}
+              file={`${modalSpectrUrl}`}
               onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber} />
             </Document>

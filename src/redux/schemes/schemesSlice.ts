@@ -9,6 +9,7 @@ import {
   addSpectr,
   saveCurrentStageData,
   updateSchemeStatusAndSave,
+  deleteSpectr,
 } from "./operations";
 import { IReactionPreviewData } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
@@ -20,11 +21,10 @@ import {
 import { schemeDataSynchronyzer } from "../../helpers/schemeDataSynchronyzer";
 import {
   ISchemeData,
-  ICurrentScheme,
   IStage,
   IAttempt,
 } from "../../types/redux";
-import { IAddFilePayload } from "./operations";
+import { IAddFilePayload, IDeleteFilePayload } from "./operations";
 
 const initialState: ISchemesState = {
   schemePreviews: [],
@@ -40,7 +40,6 @@ const schemesSlice = createSlice({
   initialState: initialState,
   reducers: {
     initialUpdateCurrentStage(state, action: PayloadAction<string>) {
-      console.log("this");
       const stage = state.currentScheme.stages.find(
         (item) => item._id === action.payload
       );
@@ -58,7 +57,6 @@ const schemesSlice = createSlice({
       const stage = state.currentScheme.stages.find(
         (item) => item._id === action.payload
       );
-      console.log(stage);
       if (stage) {
         state.currentStage = { ...state.currentStage, ...stage };
         state.currentStage.isChanged = true;
@@ -168,8 +166,6 @@ const schemesSlice = createSlice({
       state.currentScheme.stages = state.currentScheme.stages.map((item) => {
         if (item._id === state.currentStage._id) {
           const { isChanged, ...payload } = item;
-          console.log({ ...item });
-          console.log(payload);
 
           return { ...item, ...payload };
         }
@@ -496,10 +492,22 @@ const schemesSlice = createSlice({
     builder.addCase(
       addSpectr.fulfilled,
       (state, action: PayloadAction<IAddFilePayload>) => {
-        const { schemeId, stageId, attemptNumber, spectra } = action.payload;
+        const { attemptNumber, spectra } = action.payload;
         state.currentStage.attempts[attemptNumber - 1].spectra = spectra;
 
-        console.log(spectra);
+        schemeDataSynchronyzer(state);
+
+        state.isLoading = false;
+        state.status = "fulfilled";
+        state.error = null;
+      }
+    );
+    builder.addCase(
+      deleteSpectr.fulfilled,
+      (state, action: PayloadAction<IDeleteFilePayload>) => {
+        const { attemptNumber, spectra } = action.payload;
+        state.currentStage.attempts[attemptNumber - 1].spectra = spectra;
+
         schemeDataSynchronyzer(state);
 
         state.isLoading = false;

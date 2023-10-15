@@ -8,7 +8,7 @@ import {
   ICurrentUserPayload,
   IState,
 } from "../../types";
-import { signUp, signIn, logOut, getCurrentUser } from "./operations";
+import { signUp, signIn, logOut, getCurrentUser, refresh } from "./operations";
 
 const initialState: IAuthState = {
   user: {
@@ -19,6 +19,7 @@ const initialState: IAuthState = {
   accessToken: null,
   refreshToken: null,
   isLoggedIn: false,
+  isRefreshing: false,
   status: "idle",
   isLoading: false,
   error: null,
@@ -93,6 +94,20 @@ const authSlice = createSlice({
         return;
       }
     );
+    builder.addCase(refresh.fulfilled, (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.isLoading = false;
+      state.isRefreshing = false;
+      state.isLoggedIn = true;
+      state.status = "fulfilled";
+    });
+    builder.addCase(refresh.pending, (state) => {
+      state.isRefreshing = true;
+    });
+    builder.addCase(refresh.rejected, (state) => {
+      state.isRefreshing = false;
+    });
     builder.addMatcher(isPending, (state) => {
       state.isLoading = true;
       state.status = "pending";
@@ -109,3 +124,5 @@ export const userReducer = authSlice.reducer;
 export const { updateTokens, forceLogOut } = authSlice.actions;
 
 export const getAccessToken = (state: IState) => state.auth.accessToken;
+export const getIsLoggedIn = (state: IState) => state.auth.accessToken;
+export const getIsRefreshing = (state: IState) => state.auth.isRefreshing;

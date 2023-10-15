@@ -137,6 +137,6 @@ export interface INewSchemeFormProps {
   deadlineChangeHandler: (value: Dayjs | null) => void;
 }
 
-export interface IRouteProps {
-  children: React.ReactNode;
-}
+// export interface IRouteProps {
+//   children: React.ReactNode;
+// }
