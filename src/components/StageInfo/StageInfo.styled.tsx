@@ -14,6 +14,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 204px;
+    width: 100%;
     .arrow {
       width: 150px;
     }
