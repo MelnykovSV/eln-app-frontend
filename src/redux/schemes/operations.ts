@@ -4,6 +4,7 @@ import { getErrorMessage } from "../../getErrorMessage";
 import dayjs from "dayjs";
 import { IReactionPreviewData } from "../../types";
 import { ISchemeData, IStage } from "../../types/redux";
+import request from "axios";
 
 export interface IgetSchemeAndStageParams {
   schemeId: string;
@@ -56,8 +57,16 @@ export const getSchemes = createAsyncThunk<IReactionPreviewData[]>(
 
       return result;
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -76,8 +85,16 @@ export const getSingleScheme = createAsyncThunk<ISchemeData, string>(
 
       return result;
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -101,8 +118,16 @@ export const getSchemeAndStage = createAsyncThunk<
 
     return { schemeData, stageData };
   } catch (error) {
-    console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-    return thunkAPI.rejectWithValue(getErrorMessage(error));
+    if (request.isAxiosError(error) && error.response) {
+      return thunkAPI.rejectWithValue({
+        message: error.response.data.message,
+        code: error.response.data.code || null,
+      });
+    }
+    return thunkAPI.rejectWithValue({
+      message: getErrorMessage(error),
+      code: null,
+    });
   }
 });
 
@@ -124,8 +149,16 @@ export const addSpectr = createAsyncThunk<IAddFilePayload, IaddFileParams>(
         spectra: response.data.data,
       };
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -147,8 +180,16 @@ export const deleteSpectr = createAsyncThunk<
         spectra: response.data.data,
       };
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -162,8 +203,16 @@ export const saveCurrentStageData = createAsyncThunk<void, IStage>(
         currentStage
       );
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -180,8 +229,16 @@ export const updateSchemeStatusAndSave = createAsyncThunk<
       });
       return status;
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );

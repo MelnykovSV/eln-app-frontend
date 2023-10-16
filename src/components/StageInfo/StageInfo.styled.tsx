@@ -9,22 +9,24 @@ const Container = styled.div`
     display: flex;
   }
   .canvas-container {
+    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 204px;
     .arrow {
       width: 150px;
     }
-
   }
   .canvas-container-mobile {
+    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 124px;
     .arrow {
       width: 60px;
     }
-
   }
 
   .stage-wrapper {
@@ -50,8 +52,6 @@ const Container = styled.div`
       }
     }
   }
-
-  
 `;
 
 export default Container;

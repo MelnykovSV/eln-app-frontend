@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { isError, isPending } from "../statusCheckers";
+import { isAuthError, isAuthPending } from "../statusCheckers";
 
 import {
   IAuthState,
@@ -22,7 +22,7 @@ const initialState: IAuthState = {
   isRefreshing: false,
   status: "idle",
   isLoading: false,
-  error: null,
+  error: { message: null, code: null },
 };
 
 const authSlice = createSlice({
@@ -39,7 +39,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoading = false;
       state.status = "fulfilled";
-      state.error = null;
+      state.error = { message: null, code: null };
     },
   },
   extraReducers: (builder) => {
@@ -50,7 +50,7 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(
@@ -62,7 +62,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(logOut.fulfilled, (state) => {
@@ -76,7 +76,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.isLoading = false;
       state.status = "fulfilled";
-      state.error = null;
+      state.error = { message: null, code: null };
     });
 
     builder.addCase(
@@ -90,7 +90,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
         return;
       }
     );
@@ -111,14 +111,14 @@ const authSlice = createSlice({
       state.accessToken = null;
       state.refreshToken = null;
     });
-    builder.addMatcher(isPending, (state) => {
+    builder.addMatcher(isAuthPending, (state) => {
       state.isLoading = true;
       state.status = "pending";
     });
-    builder.addMatcher(isError, (state, action) => {
+    builder.addMatcher(isAuthError, (state, action) => {
       state.isLoading = false;
       state.status = "rejected";
-      state.error = action.error.message || "Something went wrong";
+      state.error = action.payload;
     });
   },
 });
@@ -131,5 +131,4 @@ export const getIsLoggedIn = (state: IState) => state.auth.isLoggedIn;
 export const getIsRefreshing = (state: IState) => state.auth.isRefreshing;
 export const getIsLoading = (state: IState) => state.auth.isLoading;
 
-
-export const  getError = (state: IState) => state.auth.error;
+export const getAuthError = (state: IState) => state.auth.error;

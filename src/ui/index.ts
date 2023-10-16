@@ -5,6 +5,7 @@ import DoubleArrows from "./DoubleArrows/DoubleArrows";
 import SingleArrow from "./SingleArrow/SingleArrow";
 import DNALoader from "./DNALoader/DNALoader";
 import DNALoaderSmall from "./DNALoaderSmall/DNALoaderSmall";
+import DNALoaderMedium from "./DNALoaderMedium/DNALoaderMedium";
 
 export {
   Logo,
@@ -14,4 +15,5 @@ export {
   SingleArrow,
   DNALoader,
   DNALoaderSmall,
+  DNALoaderMedium,
 };

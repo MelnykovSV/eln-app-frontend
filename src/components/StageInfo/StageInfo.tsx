@@ -17,6 +17,11 @@ import { addAttempt } from "../../redux/schemes/schemesSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { Button } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { DNALoaderMedium } from "../../ui";
+import {
+  getIsLoadingSchemes,
+  getCurrentSchemeId,
+} from "../../redux/schemes/schemesSlice";
 
 interface IStageInfoProps {
   attemptNumber: number;
@@ -37,6 +42,8 @@ const StageInfo = ({
   const currentStage = useAppSelector(getCurrentStage);
   const dispatch = useAppDispatch();
   const matches = useMediaQuery("(min-width:768px)");
+  const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
+  const currentSchemeId = useAppSelector(getCurrentSchemeId);
 
   return (
     <Container>
@@ -44,22 +51,28 @@ const StageInfo = ({
         className={
           matches ? "canvas-container" : "canvas-container visually-hidden"
         }>
-        <SingleMolCanvas
-          smiles={startingMaterial}
-          options={{
-            width: 200,
-            height: 200,
-          }}
-        />
-        <SingleArrow />
+        {isLoadingSchemes && !currentSchemeId ? (
+          <DNALoaderMedium />
+        ) : (
+          <>
+            <SingleMolCanvas
+              smiles={startingMaterial}
+              options={{
+                width: 200,
+                height: 200,
+              }}
+            />
+            <SingleArrow />
 
-        <SingleMolCanvas
-          smiles={product}
-          options={{
-            width: 200,
-            height: 200,
-          }}
-        />
+            <SingleMolCanvas
+              smiles={product}
+              options={{
+                width: 200,
+                height: 200,
+              }}
+            />
+          </>
+        )}
       </div>
       <div
         className={
@@ -67,22 +80,28 @@ const StageInfo = ({
             ? "canvas-container-mobile visually-hidden"
             : "canvas-container-mobile"
         }>
-        <SingleMolCanvas
-          smiles={startingMaterial}
-          options={{
-            width: 120,
-            height: 120,
-          }}
-        />
-        <SingleArrow />
+        {isLoadingSchemes && !currentSchemeId ? (
+          <DNALoaderMedium />
+        ) : (
+          <>
+            <SingleMolCanvas
+              smiles={startingMaterial}
+              options={{
+                width: 120,
+                height: 120,
+              }}
+            />
+            <SingleArrow />
 
-        <SingleMolCanvas
-          smiles={product}
-          options={{
-            width: 120,
-            height: 120,
-          }}
-        />
+            <SingleMolCanvas
+              smiles={product}
+              options={{
+                width: 120,
+                height: 120,
+              }}
+            />
+          </>
+        )}
       </div>
 
       <div className="stage-wrapper">

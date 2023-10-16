@@ -14,15 +14,18 @@ import { useParams } from "react-router";
 import { getSingleScheme } from "../../redux/schemes/operations";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 import { smilesToMolecularFormula } from "../../helpers/chemistryHelpers";
-import {
-  getCurrentScheme
-} from "../../redux/schemes/schemesSlice";
+import { getCurrentScheme } from "../../redux/schemes/schemesSlice";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 import { IUpdatedCurrentScheme } from "../../types/redux";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import { updateSchemeStatusAndSave } from "../../redux/schemes/operations";
+import {
+  getIsLoadingSchemes,
+  getCurrentSchemeId,
+} from "../../redux/schemes/schemesSlice";
+import { DNALoader } from "../../ui";
 
 function a11yProps(index: number) {
   return {
@@ -33,7 +36,8 @@ function a11yProps(index: number) {
 
 const SingleSchemePage = () => {
   const { schemeId } = useParams();
-
+  const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
+  const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const dispatch = useAppDispatch();
   const currentScheme = useAppSelector(getCurrentScheme);
   const updatedSchemeData = calculateSchemeYieldCoefficients(
@@ -177,7 +181,11 @@ const SingleSchemePage = () => {
           <FormControlLabel value="fail" control={<Radio />} label="Fail" />
           <FormControlLabel value="chosen" control={<Radio />} label="Chosen" />
         </RadioGroup>
-        <Scheme schemeData={updatedSchemeData} />
+        {isLoadingSchemes && !currentSchemeId ? (
+          <DNALoader />
+        ) : (
+          <Scheme schemeData={updatedSchemeData} />
+        )}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <ReagentList reagents={reagentsListData} />

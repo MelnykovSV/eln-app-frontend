@@ -13,6 +13,13 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
+    button {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
   }
 `;
 

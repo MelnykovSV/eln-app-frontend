@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { refresh } from "../redux/auth/operations";
 import { getIsRefreshing } from "../redux/auth/authSlice";
 import { DNALoader } from "../ui";
+import { ToastContainer } from "react-toastify";
 
 const Schemes = lazy(() => import("../pages/Schemes/Schemes"));
 const SingleSchemePage = lazy(
@@ -71,6 +72,8 @@ function App() {
           <DNALoader />
         )}
       </Suspense>
+
+      <ToastContainer />
 
       {/* <Routes>
         <Route path="/" element={<SharedLayout />}>

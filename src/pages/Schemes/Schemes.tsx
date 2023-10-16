@@ -8,15 +8,18 @@ import { SortingRadioGroup } from "../../components";
 import { IReactionPreviewData } from "../../types";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { SearchTextInput } from "../../ui";
+import { DNALoader, SearchTextInput } from "../../ui";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { getSchemePreviews } from "../../redux/schemes/schemesSlice";
 import { getSchemes } from "../../redux/schemes/operations";
+import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
+
 dayjs.extend(customParseFormat);
 
 const Schemes = () => {
   const dispatch = useAppDispatch();
+  const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
   useEffect(() => {
     dispatch(getSchemes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,11 +123,15 @@ const Schemes = () => {
         <Link to="/newScheme">New Scheme</Link>
       </div>
 
-      <div className="schemes-preview-container container">
-        {dataToShow.map((item) => (
-          <ReactionSchemePreview schemePreviewData={item} key={nanoid()} />
-        ))}
-      </div>
+      {isLoadingSchemes ? (
+        <DNALoader />
+      ) : (
+        <div className="schemes-preview-container container">
+          {dataToShow.map((item) => (
+            <ReactionSchemePreview schemePreviewData={item} key={nanoid()} />
+          ))}
+        </div>
+      )}
     </Container>
   );
 };

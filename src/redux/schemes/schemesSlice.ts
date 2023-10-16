@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { isError, isPending } from "../statusCheckers";
+import { AnyAction, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IState, ISchemesState } from "../../types";
 import {
   getSchemes,
@@ -21,6 +20,7 @@ import {
 import { schemeDataSynchronyzer } from "../../helpers/schemeDataSynchronyzer";
 import { ISchemeData, IStage, IAttempt } from "../../types/redux";
 import { IAddFilePayload, IDeleteFilePayload } from "./operations";
+import { isSchemesPending, isSchemesError } from "../statusCheckers";
 
 const initialState: ISchemesState = {
   schemePreviews: [],
@@ -29,7 +29,7 @@ const initialState: ISchemesState = {
   status: "idle",
   isSpectrUploading: false,
   isLoading: false,
-  error: null,
+  error: { message: null, code: null },
 };
 
 const schemesSlice = createSlice({
@@ -71,7 +71,7 @@ const schemesSlice = createSlice({
       state.currentStage = currentStageInitialValue as IStage;
       state.isLoading = false;
       state.status = "idle";
-      state.error = null;
+      state.error = { message: null, code: null };
     },
     setAttemptReagentData(
       state,
@@ -444,7 +444,7 @@ const schemesSlice = createSlice({
         state.schemePreviews = action.payload;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(
@@ -454,7 +454,7 @@ const schemesSlice = createSlice({
         state.currentStage = currentStageInitialValue as IStage;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(
@@ -463,7 +463,7 @@ const schemesSlice = createSlice({
         state.currentStage.isChanged = false;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(
@@ -472,7 +472,7 @@ const schemesSlice = createSlice({
         state.currentScheme.status = action.payload;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(
@@ -483,7 +483,7 @@ const schemesSlice = createSlice({
         state.currentStage.isChanged = false;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(
@@ -496,20 +496,20 @@ const schemesSlice = createSlice({
         state.isSpectrUploading = false;
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
     builder.addCase(addSpectr.pending, (state) => {
       state.isLoading = false;
       state.isSpectrUploading = true;
       state.status = "pending";
-      state.error = null;
+      state.error = { message: null, code: null };
     });
-    builder.addCase(addSpectr.rejected, (state, action) => {
+    builder.addCase(addSpectr.rejected, (state, action: AnyAction) => {
       state.isLoading = false;
       state.isSpectrUploading = false;
       state.status = "rejected";
-      state.error = action.error.message || "Something went wrong";
+      state.error = action.payload;
     });
     builder.addCase(
       deleteSpectr.fulfilled,
@@ -521,17 +521,17 @@ const schemesSlice = createSlice({
 
         state.isLoading = false;
         state.status = "fulfilled";
-        state.error = null;
+        state.error = { message: null, code: null };
       }
     );
-    builder.addMatcher(isPending, (state) => {
+    builder.addMatcher(isSchemesPending, (state) => {
       state.isLoading = true;
       state.status = "pending";
     });
-    builder.addMatcher(isError, (state, action) => {
+    builder.addMatcher(isSchemesError, (state, action) => {
       state.isLoading = false;
       state.status = "rejected";
-      state.error = action.error.message || "Something went wrong";
+      state.error = action.payload;
     });
   },
 });
@@ -562,3 +562,7 @@ export const getCurrentStageAttempts = (state: IState) =>
   state.schemes.currentStage.attempts;
 export const getIsSpectrUploading = (state: IState) =>
   state.schemes.isSpectrUploading;
+
+export const getIsLoadingSchemes = (state: IState) => state.schemes.isLoading;
+
+export const getSchemesError = (state: IState) => state.schemes.error;

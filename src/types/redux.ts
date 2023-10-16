@@ -46,7 +46,7 @@ export interface IAuthState {
   isRefreshing: boolean;
   status: "idle" | "pending" | "fulfilled" | "rejected";
   isLoading: boolean;
-  error: string | null;
+  error: { message: string | null; code: number | null };
 }
 export interface IStage {
   product: string | null;
@@ -145,7 +145,7 @@ export interface ISchemesState {
   status: string;
   isSpectrUploading: boolean;
   isLoading: boolean;
-  error: null | string;
+  error: { message: string | null; code: number | null };
 }
 
 export interface IState {

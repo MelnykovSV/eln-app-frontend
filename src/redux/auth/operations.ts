@@ -2,6 +2,7 @@ import { privateApi, publicApi, refreshApi } from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
 import { token } from "../../api";
+import request from "axios";
 import {
   IRegisterUserPayload,
   ILoginUserPayload,
@@ -21,8 +22,16 @@ export const signUp = createAsyncThunk<IRegisterUserPayload, ISignUpData>(
       });
       return signUpResponse.data.data;
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -37,8 +46,16 @@ export const signIn = createAsyncThunk<ILoginUserPayload, ISignInData>(
       });
       return signInResponse.data.data;
     } catch (error) {
-      console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-      return thunkAPI.rejectWithValue(getErrorMessage(error));
+      if (request.isAxiosError(error) && error.response) {
+        return thunkAPI.rejectWithValue({
+          message: error.response.data.message,
+          code: error.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(error),
+        code: null,
+      });
     }
   }
 );
@@ -48,8 +65,17 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await privateApi.post("/api/auth/logout");
     token.unset();
   } catch (error) {
-    console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-    return thunkAPI.rejectWithValue(getErrorMessage(error));
+    if (request.isAxiosError(error) && error.response) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({
+        message: error.response.data.message,
+        code: error.response.data.code || null,
+      });
+    }
+    return thunkAPI.rejectWithValue({
+      message: getErrorMessage(error),
+      code: null,
+    });
   }
 });
 
@@ -62,9 +88,19 @@ export const getCurrentUser = createAsyncThunk<ICurrentUserPayload>(
         ...response.data.data,
       };
     } catch (error) {
+      /// TODO: Разобраться, почему тут такая проверка, скорее всего нужно что-то изменить
       if (getErrorMessage(error) !== "Request failed with status code 404") {
-        console.log(thunkAPI.rejectWithValue(getErrorMessage(error)));
-        return thunkAPI.rejectWithValue(getErrorMessage(error));
+        if (request.isAxiosError(error) && error.response) {
+          console.log(error);
+          return thunkAPI.rejectWithValue({
+            message: error.response.data.message,
+            code: error.response.data.code || null,
+          });
+        }
+        return thunkAPI.rejectWithValue({
+          message: getErrorMessage(error),
+          code: null,
+        });
       }
     }
   }
@@ -75,6 +111,16 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
     const response = await refreshApi.post("/api/auth/refresh");
     return response.data.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(getErrorMessage(error));
+    if (request.isAxiosError(error) && error.response) {
+      console.log(error);
+      return thunkAPI.rejectWithValue({
+        message: error.response.data.message,
+        code: error.response.data.code || null,
+      });
+    }
+    return thunkAPI.rejectWithValue({
+      message: getErrorMessage(error),
+      code: null,
+    });
   }
 });
