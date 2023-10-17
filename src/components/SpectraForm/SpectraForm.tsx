@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { DNALoaderSmall } from "../../ui";
 
 import { getIsSpectrUploading } from "../../redux/schemes/schemesSlice";
@@ -17,8 +17,32 @@ interface IAttemptSpectraProps {
 const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
   const dispatch = useAppDispatch();
   const isSpectrUploading = useAppSelector(getIsSpectrUploading);
+  const fileErrorRef = useRef<HTMLParagraphElement>(null);
+  const spectrLabelRef = useRef<HTMLParagraphElement>(null);
 
-  const [myFiles, setMyFiles] = useState([] as any);
+  const [myFiles, setMyFiles] = useState([] as File[]);
+  const [spectrLabel, setSpectrLabel] = useState("");
+
+  useEffect(() => {
+    if (
+      myFiles.length &&
+      fileErrorRef.current?.innerText !== "" &&
+      fileErrorRef.current
+    ) {
+      fileErrorRef.current.innerText = "";
+    }
+  }, [myFiles]);
+
+  useEffect(() => {
+    if (
+      spectrLabel &&
+      spectrLabel.length <= 300 &&
+      spectrLabelRef.current &&
+      spectrLabelRef.current.innerText !== ""
+    ) {
+      spectrLabelRef.current.innerText = "";
+    }
+  }, [spectrLabel]);
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
@@ -41,19 +65,35 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
     </li>
   ));
 
+  const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSpectrLabel(e.target.value);
+  };
+
   const fileFormSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dispatch(
-      addSpectr({
-        spectr: myFiles[0],
-        label: (e.target as HTMLFormElement).label.value,
-        attemptNumber: attemptNumber,
-        schemeId,
-        stageId,
-      })
-    );
-    setMyFiles([]);
-    (e.target as HTMLFormElement).label.value = "";
+    if (!myFiles.length && fileErrorRef.current) {
+      fileErrorRef.current.innerText = "File is required";
+    }
+    if (!(e.target as HTMLFormElement).label.value && spectrLabelRef.current) {
+      spectrLabelRef.current.innerText = "Spectr label is required";
+    } else if (
+      (e.target as HTMLFormElement).label.value.length > 300 &&
+      spectrLabelRef.current
+    ) {
+      spectrLabelRef.current.innerText = "Spectr label max length is 300";
+    } else if (myFiles.length && (e.target as HTMLFormElement).label.value) {
+      await dispatch(
+        addSpectr({
+          spectr: myFiles[0],
+          label: (e.target as HTMLFormElement).label.value,
+          attemptNumber: attemptNumber,
+          schemeId,
+          stageId,
+        })
+      );
+      setMyFiles([]);
+      setSpectrLabel("");
+    }
   };
   return (
     <Container onSubmit={fileFormSubmitHandler}>
@@ -63,6 +103,7 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
           style={{ height: "100px" }}>
           <input {...getInputProps()} />
           <p>Drag 'n' drop file here, or click to select file</p>
+          <p className="dropzone-error" ref={fileErrorRef}></p>
         </div>
         <div>
           <div className="label-wrapper">
@@ -74,20 +115,19 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
         </div>
       </section>
 
-      {/* <input type="text" name="label" /> */}
-
       <TextField
         label="Description"
         className="spectr-label"
         name="label"
-        // value={mass || ""}
         variant="outlined"
-        // onChange={inputChangeHandler}
+        onChange={inputChangeHandler}
+        value={spectrLabel}
         size="medium"
         type="text"
       />
+      <p className="spectr-label-error" ref={spectrLabelRef}></p>
 
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" disabled={isSpectrUploading}>
         Submit file
       </Button>
     </Container>

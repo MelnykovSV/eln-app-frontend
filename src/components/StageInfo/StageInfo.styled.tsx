@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+const Container = styled.div<IStyledProps>`
   align-items: center;
   gap: 30px;
   padding-top: 20px;
+  margin-bottom: 20px;
+  /* background-color: ${({ theme }) => theme.palette.background.default}; */
 
   @media screen and (min-width: 1280px) {
+    display: flex;
+  }
+  .stage-scheme-container {
     display: flex;
   }
   .canvas-container {
@@ -15,10 +21,14 @@ const Container = styled.div`
     justify-content: center;
     height: 204px;
     width: 100%;
+    background-color: ${({ theme }) => theme.palette.background.secondary};
+    border: 2px solid ${({ theme }) => theme.palette.primary.main};
+    border-radius: 15px;
     .arrow {
       width: 150px;
     }
   }
+
   .canvas-container-mobile {
     /* position: relative; */
     display: flex;
@@ -36,7 +46,7 @@ const Container = styled.div`
     .stage-info-select-container {
       margin-bottom: 20px;
       #stage-info-select-label {
-        background-color: white;
+        background-color: ${({ theme }) => theme.palette.background.default};
         padding-left: 5px;
         padding-right: 10px;
       }

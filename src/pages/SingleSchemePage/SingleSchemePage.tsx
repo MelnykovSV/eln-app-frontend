@@ -187,7 +187,7 @@ const SingleSchemePage = () => {
           <Scheme schemeData={updatedSchemeData} />
         )}
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
+      <CustomTabPanel  value={value} index={1}>
         <ReagentList reagents={reagentsListData} />
       </CustomTabPanel>
     </Container>

@@ -8,7 +8,6 @@ import { useAppSelector } from "../../redux/hooks";
 
 import { getCurrentSchemeId } from "../../redux/schemes/schemesSlice";
 
-
 const SynthesisSchemeStage = ({
   stageData: {
     _id,
@@ -30,7 +29,6 @@ const SynthesisSchemeStage = ({
   const navigate = useNavigate();
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
 
-
   const stageClickHandler = () => {
     if (_id) {
       navigate(`/stage/${currentSchemeId}/${_id}`);
@@ -50,9 +48,11 @@ const SynthesisSchemeStage = ({
         </p>
         <SingleArrow />
         {_yield ? <p>{_yield} %</p> : null}
-        <div className="methodic-container">
-          <p className="methodic">{methodic}</p>
-        </div>
+        {methodic ? (
+          <div className="methodic-container">
+            <p className="methodic">{methodic}</p>
+          </div>
+        ) : null}
       </div>
       <div className="drawing-container">
         <SingleMolCanvas

@@ -28,6 +28,7 @@ const Container = styled.div`
     }
     .scheme-preview-container {
       width: 100%;
+      padding: 20px;
     }
 
     .slide {

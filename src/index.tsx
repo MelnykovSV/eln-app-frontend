@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App/App";
 import reportWebVitals from "./reportWebVitals";
-import { ThemeProvider } from "@emotion/react";
+// import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider } from "@mui/system";
 import { theme } from "./theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -17,6 +18,8 @@ injectStore(store);
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+console.log(theme);
 
 root.render(
   <ThemeProvider theme={theme}>

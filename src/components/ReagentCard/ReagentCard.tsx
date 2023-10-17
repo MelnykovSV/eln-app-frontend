@@ -1,29 +1,30 @@
 import Container from "./ReagentCard.styled";
 import { SingleMolCanvas } from "../../ui";
 import { IReagentCardProps } from "../../types";
+import { nanoid } from "nanoid";
 
 const ReagentCard = ({
   reagentData: { smiles, mass, formula, molWeight, compoundName },
 }: IReagentCardProps) => {
   return (
     <Container>
-      <SingleMolCanvas
-        smiles={smiles}
-        options={{ width: 200, height: 200 }}></SingleMolCanvas>
+      <div className="reagent-canvas-wrapper">
+        <SingleMolCanvas
+          smiles={smiles}
+          options={{ width: 200, height: 200 }}></SingleMolCanvas>
+      </div>
 
       <div className="mol-info">
         <ul className="mol-info__first">
           <li>Mass: {mass} g</li>
           <li>
             Molecular formula:{" "}
-            {
-              formula.split("").map((item) => {
-                if (!isNaN(Number(item))) {
-                  return <sub>{item}</sub>;
-                }
-                return item;
-              })
-            }
+            {formula.split("").map((item) => {
+              if (!isNaN(Number(item))) {
+                return <sub key={nanoid()}>{item}</sub>;
+              }
+              return item;
+            })}
           </li>
           <li>Molecular Weight: {molWeight} g/mol</li>
         </ul>

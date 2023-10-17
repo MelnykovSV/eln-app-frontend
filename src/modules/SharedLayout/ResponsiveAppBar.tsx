@@ -148,34 +148,50 @@ export function ResponsiveAppBar() {
                 alignItems: "center",
                 justifyContent: "center",
               }}>
-              <MenuItem key={"schemes"} onClick={handleCloseNavMenu}>
+              <MenuItem
+                key={"schemes"}
+                sx={{ padding: 0 }}
+                onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                  <NavLink to={""}>Schemes</NavLink>
+                  <NavLink className="nav-link" to={""}>
+                    Schemes
+                  </NavLink>
                 </Typography>
               </MenuItem>
               <MenuItem
                 key={"scheme"}
+                sx={{ padding: 0 }}
                 onClick={handleCloseNavMenu}
                 disabled={currentSchemeId ? false : true}>
                 <Typography textAlign="center">
-                  <NavLink to={`/scheme/${currentSchemeId}`}>
+                  <NavLink
+                    className="nav-link"
+                    to={`/scheme/${currentSchemeId}`}>
                     Current scheme
                   </NavLink>
                 </Typography>
               </MenuItem>
               <MenuItem
                 key={"stage"}
+                sx={{ padding: 0 }}
                 onClick={handleCloseNavMenu}
                 disabled={currentStage._id && currentSchemeId ? false : true}>
                 <Typography textAlign="center">
-                  <NavLink to={`/stage/${currentSchemeId}/${currentStage._id}`}>
+                  <NavLink
+                    className="nav-link"
+                    to={`/stage/${currentSchemeId}/${currentStage._id}`}>
                     Stage
                   </NavLink>
                 </Typography>
               </MenuItem>
-              <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
+              <MenuItem
+                sx={{ padding: 0 }}
+                key={"tasks"}
+                onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                  <NavLink to={"/tasks"}>Tasks</NavLink>
+                  <NavLink className="nav-link" to={"/tasks"}>
+                    Tasks
+                  </NavLink>
                 </Typography>
               </MenuItem>
             </Box>

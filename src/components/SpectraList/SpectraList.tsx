@@ -6,6 +6,7 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Document, Page, pdfjs } from "react-pdf";
+import { DNALoader } from "../../ui";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const style = {
@@ -83,7 +84,8 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
           <div>
             <Document
               file={`${modalSpectrUrl}`}
-              onLoadSuccess={onDocumentLoadSuccess}>
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={<DNALoader />}>
               <Page pageNumber={pageNumber} />
             </Document>
             <p>{modalSpectrLabel}</p>

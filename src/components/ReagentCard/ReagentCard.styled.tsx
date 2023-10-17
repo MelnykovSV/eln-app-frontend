@@ -1,11 +1,19 @@
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
+import { styled as muiStyled } from "@mui/system";
 
-const Container = styled.div`
+const Container = muiStyled("li")`
   padding: 10px;
   border: 1px solid black;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 3px solid ${(props) => props.theme.palette.primary.main};
+  border-radius: 15px;
+
+  .reagent-canvas-wrapper {
+    border: 1px solid ${(props) => props.theme.palette.primary.main};
+    border-radius: 15px;
+  }
 
   @media screen and (min-width: 768px) {
     flex-direction: row;

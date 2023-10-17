@@ -4,10 +4,12 @@ const Container = styled.div`
   display: flex;
   height: 170px;
   width: fit-content;
+  cursor: pointer;
 
   &.currentStage {
     .drawing-container {
-      border: solid 1px green;
+      /* border: solid 1px green; */
+      box-shadow: 0 0 5px 1px green;
     }
   }
 
@@ -17,23 +19,32 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     p {
       max-width: 200px;
       margin: 0;
     }
     .methodic-container {
       position: relative;
-      width: 100%;
+      width: 95%;
+      /* padding-top: 50px; */
 
       .methodic {
+        padding: 10px;
         position: absolute;
-        border: 1px blue solid;
-        background-color: white;
+        top: 10px;
+        z-index: 10;
+
+        /* border: 1px blue solid; */
+        /* border-radius: 10px; */
+        background-color: #e5dcca;
         transition: transform 0.3s linear;
         transform: scaleY(0);
         transform-origin: top;
         max-height: 400px;
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overflow-wrap: break-word;
         font-size: 14px;
       }
     }
