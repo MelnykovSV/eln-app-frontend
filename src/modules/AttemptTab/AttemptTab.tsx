@@ -5,17 +5,14 @@ import {
   AttemptSpectra,
 } from "../../components/";
 
-
 interface IAttemptProps {
   attemptNumber: number;
 }
 
 const AttemptTab = ({ attemptNumber }: IAttemptProps) => {
-
-
   return (
     <Container>
-      <h1>Attempt {attemptNumber}</h1>
+      <h1>Experiment {attemptNumber}</h1>
       <AttemptConditions attemptNumber={attemptNumber} />
       <div className="attempt-second-block">
         <AttemptReagents attemptNumber={attemptNumber} />

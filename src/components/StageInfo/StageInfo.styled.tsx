@@ -6,7 +6,6 @@ const Container = styled.div<IStyledProps>`
   gap: 30px;
   padding-top: 20px;
   margin-bottom: 20px;
-  /* background-color: ${({ theme }) => theme.palette.background.default}; */
 
   @media screen and (min-width: 1280px) {
     display: flex;
@@ -15,26 +14,31 @@ const Container = styled.div<IStyledProps>`
     display: flex;
   }
   .canvas-container {
-    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
     height: 204px;
-    width: 100%;
+
     background-color: ${({ theme }) => theme.palette.background.secondary};
     border: 2px solid ${({ theme }) => theme.palette.primary.main};
     border-radius: 15px;
+    @media screen and (min-width: 768px) {
+      width: 100%;
+    }
+
     .arrow {
       width: 150px;
     }
   }
 
   .canvas-container-mobile {
-    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
     height: 124px;
+    background-color: ${({ theme }) => theme.palette.background.secondary};
+    border: 2px solid ${({ theme }) => theme.palette.primary.main};
+    border-radius: 15px;
     .arrow {
       width: 60px;
     }

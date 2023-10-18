@@ -102,16 +102,16 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
           {...getRootProps({ className: "dropzone" })}
           style={{ height: "100px" }}>
           <input {...getInputProps()} />
-          <p>Drag 'n' drop file here, or click to select file</p>
+          <p>Drop PDF file here, or click to select file</p>
           <p className="dropzone-error" ref={fileErrorRef}></p>
         </div>
         <div>
           <div className="label-wrapper">
-            <p>File</p>
+            <p>File:</p>
             {isSpectrUploading ? <DNALoaderSmall /> : null}
           </div>
 
-          <ul>{files}</ul>
+          <ul className="files-list">{files}</ul>
         </div>
       </section>
 

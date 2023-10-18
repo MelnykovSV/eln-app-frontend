@@ -23,6 +23,8 @@ import {
   getCurrentSchemeId,
 } from "../../redux/schemes/schemesSlice";
 
+import { CheckMark } from "../../ui";
+
 interface IStageInfoProps {
   attemptNumber: number;
   handleAttemptNumberChange: (event: SelectChangeEvent) => void;
@@ -113,9 +115,10 @@ const StageInfo = ({
             value={attemptNumber.toString()}
             label="Attempt"
             onChange={handleAttemptNumberChange}>
-            {attempts.map((_, i) => (
+            {attempts.map((attempt, i) => (
               <MenuItem value={i + 1} key={nanoid()}>
-                Attempt {i + 1}
+                Experiment {i + 1}
+                {attempt.isOk ? <CheckMark /> : null}
               </MenuItem>
             ))}
           </Select>

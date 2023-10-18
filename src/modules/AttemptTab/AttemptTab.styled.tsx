@@ -10,9 +10,11 @@ const Container = styled.div<IStyledProps>`
     display: flex;
     align-items: start;
     flex-direction: column;
+    gap: 20px;
+
     @media screen and (min-width: 1280px) {
       flex-direction: row;
-      gap: 20px;
+      align-items: stretch;
     }
   }
 `;

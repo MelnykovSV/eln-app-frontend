@@ -4,11 +4,8 @@ import { AttemptTab } from "../";
 import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import {
-  getCurrentStage,
-} from "../../redux/schemes/schemesSlice";
+import { getCurrentStage } from "../../redux/schemes/schemesSlice";
 import { saveCurrentStageData } from "../../redux/schemes/operations";
-
 
 const Stage = () => {
   const dispatch = useAppDispatch();
@@ -22,13 +19,12 @@ const Stage = () => {
     setAttemptNumber(Number(currentStage.attempts.length + 1));
   };
 
-
   const saveHandler = async () => {
     dispatch(saveCurrentStageData(currentStage));
   };
 
   return (
-    <Container className='container'>
+    <Container className="container">
       <StageInfo
         attemptNumber={attemptNumber}
         handleAttemptNumberChange={handleAttemptNumberChange}
@@ -36,7 +32,6 @@ const Stage = () => {
         saveHandler={saveHandler}
       />
       <AttemptTab attemptNumber={attemptNumber} />
-
     </Container>
   );
 };

@@ -8,14 +8,12 @@ const Container = styled.div`
   gap: 15px;
   padding: 10px 20px;
   border: 1px solid black;
+  border-radius: 8px;
   width: 100%;
 
   @media screen and (min-width: 768px) {
     width: calc((100% - 20px) / 2);
   }
-  /* @media screen and (min-width: 768px) {
-    width: calc((100% - 60px) / 4);
-  } */
 
   .reagent-input {
     width: 100%;

@@ -6,6 +6,7 @@ import SingleArrow from "./SingleArrow/SingleArrow";
 import DNALoader from "./DNALoader/DNALoader";
 import DNALoaderSmall from "./DNALoaderSmall/DNALoaderSmall";
 import DNALoaderMedium from "./DNALoaderMedium/DNALoaderMedium";
+import CheckMark from "./CheckMark/CheckMark";
 
 export {
   Logo,
@@ -16,4 +17,5 @@ export {
   DNALoader,
   DNALoaderSmall,
   DNALoaderMedium,
+  CheckMark,
 };

@@ -44,16 +44,22 @@ const SpectraListItem = ({
         <Button
           type="button"
           variant="contained"
+          size="small"
           href={spectrUrl.replace("/upload", "/upload/fl_attachment")}>
           Download
         </Button>
-        <Button type="button" variant="contained" onClick={spectrOpenHandler}>
+        <Button
+          type="button"
+          variant="contained"
+          size="small"
+          onClick={spectrOpenHandler}>
           Open
         </Button>
         <Button
           type="button"
           color="error"
           variant="contained"
+          size="small"
           onClick={deleteSpectrHandler}>
           Delete
         </Button>
