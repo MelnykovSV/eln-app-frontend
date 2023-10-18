@@ -33,32 +33,34 @@ const Scheme = ({
       ? stages.length - 1
       : stages.findIndex((item) => item.testSuccess !== true) - 1;
   return (
-    <Container>
-      <div className="starting-material-canvas-container">
-        <SingleMolCanvas
-          smiles={startingMaterial}
-          options={{ width: 110, height: 110 }}
-        />
-        {totalYieldCoefficient ? (
-          <p>
-            {(
-              (smilesToMolWeight(startingMaterial) * n) /
-              totalYieldCoefficient
-            ).toFixed(2)}{" "}
-            g
-          </p>
-        ) : null}
+    <Container className="scheme">
+      <div>
+        <div className="starting-material-canvas-container">
+          <SingleMolCanvas
+            smiles={startingMaterial}
+            options={{ width: 110, height: 110 }}
+          />
+          {totalYieldCoefficient ? (
+            <p>
+              {(
+                (smilesToMolWeight(startingMaterial) * n) /
+                totalYieldCoefficient
+              ).toFixed(2)}{" "}
+              g
+            </p>
+          ) : null}
+        </div>
+        {(stages.length && targetCompound) || stages.length > 1
+          ? stages.map((item, i) => (
+              <SynthesisSchemeStage
+                stageData={item}
+                n={n}
+                key={nanoid()}
+                isCurrentStage={i === lastOkStageNumber}
+              />
+            ))
+          : null}
       </div>
-      {stages.length
-        ? stages.map((item, i) => (
-            <SynthesisSchemeStage
-              stageData={item}
-              n={n}
-              key={nanoid()}
-              isCurrentStage={i === lastOkStageNumber}
-            />
-          ))
-        : null}
     </Container>
   );
 };

@@ -3,6 +3,11 @@ import styled from "@emotion/styled";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    /* height: calc(100vh - 85px); */
+    height: 878px;
+  }
   @media screen and (min-width: 1280px) {
     flex-direction: row;
   }
@@ -48,6 +53,10 @@ const Container = styled.div`
 
       @media screen and (min-width: 1280px) {
         display: block;
+        overflow-y: auto;
+        & > div {
+          min-height: 100%;
+        }
       }
     }
   }

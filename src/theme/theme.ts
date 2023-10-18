@@ -47,7 +47,7 @@ export const theme = createTheme({
     background: {
       paper: "#FFFFFF",
       default: "#F5F5F5",
-      secondary: '#FAFAFA',
+      secondary: "#FAFAFA",
     },
   },
 });

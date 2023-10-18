@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+const Container = styled.div<IStyledProps>`
   display: flex;
   height: 170px;
   width: fit-content;
   cursor: pointer;
+  transition: transform 0.3s linear;
+  &:hover {
+    transform: scale(1.05);
+  }
 
   &.currentStage {
     .drawing-container {
@@ -33,11 +38,14 @@ const Container = styled.div`
         padding: 10px;
         position: absolute;
         top: 10px;
-        z-index: 10;
-
+        z-index: 100;
+        border-radius: 5px;
         /* border: 1px blue solid; */
         /* border-radius: 10px; */
-        background-color: #e5dcca;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border: 1px solid ${({ theme }) => theme.palette.text.disabled};
+
+        background-color: ${({ theme }) => theme.palette.background.secondary};
         transition: transform 0.3s linear;
         transform: scaleY(0);
         transform-origin: top;
@@ -46,6 +54,28 @@ const Container = styled.div`
         overflow-y: auto;
         overflow-wrap: break-word;
         font-size: 14px;
+
+        ::-webkit-scrollbar {
+          width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background-color: ${({ theme }) => theme.palette.text.disabled};
+          /* border: 1px solid ${({ theme }) => theme.palette.primary.main}; */
+          border-radius: 5px;
+          padding: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background-color: ${({ theme }) => theme.palette.primary.main};
+          border: 3px solid ${({ theme }) => theme.palette.text.disabled};
+          border-radius: 12px;
+          width: 5px;
+        }
+
+        scrollbar-width: thin;
+        scrollbar-color: ${({ theme }) => theme.palette.primary.main}
+          ${({ theme }) => theme.palette.text.disabled};
       }
     }
   }

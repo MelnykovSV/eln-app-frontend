@@ -16,7 +16,7 @@ const ReagentCard = ({
 
       <div className="mol-info">
         <ul className="mol-info__first">
-          <li>Mass: {mass} g</li>
+          <li>Mass: {mass || "____"} g</li>
           <li>
             Molecular formula:{" "}
             {formula.split("").map((item) => {

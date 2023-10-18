@@ -184,10 +184,12 @@ const SingleSchemePage = () => {
         {isLoadingSchemes && !currentSchemeId ? (
           <DNALoader />
         ) : (
-          <Scheme schemeData={updatedSchemeData} />
+          <div className="scheme-container">
+            <Scheme schemeData={updatedSchemeData} />
+          </div>
         )}
       </CustomTabPanel>
-      <CustomTabPanel  value={value} index={1}>
+      <CustomTabPanel value={value} index={1}>
         <ReagentList reagents={reagentsListData} />
       </CustomTabPanel>
     </Container>
