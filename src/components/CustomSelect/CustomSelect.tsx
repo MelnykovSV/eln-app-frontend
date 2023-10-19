@@ -10,7 +10,7 @@ const schemesTypes = [
   { value: "active", label: "Active", color: "#757575" },
   { value: "success", label: "Finished", color: "#388E3C" },
   { value: "fail", label: "Failed", color: "#E64A19" },
-  { value: "chosen", label: "Chosen", color: "#2196F3" },
+  { value: "chosen", label: "Chosen", color: "#ba68c8" },
 ];
 
 const CustomSelect = ({
