@@ -6,11 +6,11 @@ import Select from "@mui/material/Select";
 import { ICustomSelectProps } from "../../types";
 
 const schemesTypes = [
-  { value: "all", label: "All" },
-  { value: "active", label: "Active" },
-  { value: "success", label: "Finished" },
-  { value: "fail", label: "Failed" },
-  { value: "chosen", label: "Chosen" },
+  { value: "all", label: "All", color: "#000000" },
+  { value: "active", label: "Active", color: "#757575" },
+  { value: "success", label: "Finished", color: "#388E3C" },
+  { value: "fail", label: "Failed", color: "#E64A19" },
+  { value: "chosen", label: "Chosen", color: "#2196F3" },
 ];
 
 const CustomSelect = ({
@@ -26,10 +26,20 @@ const CustomSelect = ({
           id="schemes-type-select"
           value={currentSchemesType}
           label="Schemes type"
-          onChange={schemesTypeSelectHandler}>
-          {schemesTypes.map((shemesType) => (
-            <MenuItem value={shemesType.value} key={shemesType.label}>
-              {shemesType.label}
+          onChange={schemesTypeSelectHandler}
+          sx={{
+            color: schemesTypes.find(
+              (item) => item.value === currentSchemesType
+            )?.color,
+            fontWeight: 700,
+          }}>
+          {schemesTypes.map((schemesType) => (
+            <MenuItem
+              className={schemesType.value}
+              value={schemesType.value}
+              key={schemesType.label}
+              sx={{ color: schemesType.color, fontWeight: 700 }}>
+              {schemesType.label}
             </MenuItem>
           ))}
         </Select>

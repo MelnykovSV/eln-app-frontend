@@ -1,21 +1,23 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+const Container = styled.div<IStyledProps>`
   cursor: pointer;
   width: 300px;
   background-color: white;
-  border: solid
-    ${(props) => {
-      return "red";
-    }}
-    1px;
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  border-radius: 8px;
   padding: 10px 5px;
   transition: width 0.3s linear, box-shadow 0.3s linear;
   font-size: 11px;
   position: relative;
 
   .canvas-container {
-    border: solid black 1px;
+    border: 2px solid ${({ theme }) => theme.palette.text.secondary};
+ 
+
+    overflow: hidden;
+    border-radius: 8px;
     margin: 0 auto;
     margin-bottom: 20px;
     display: flex;
@@ -31,8 +33,21 @@ const Container = styled.div`
       transform: translateX(0);
     }
   }
+
+  &.chosen .canvas-container {
+    border: 2px solid ${({ theme }) => theme.palette.secondary.contrastText};
+  }
+  &.success .canvas-container {
+    border: 2px solid ${({ theme }) => theme.palette.success.main};
+  }
+  &.fail .canvas-container {
+    border: 2px solid ${({ theme }) => theme.palette.error.dark};
+  }
+
   .scheme-info {
-    border: solid blue 1px;
+    border: 2px solid ${({ theme }) => theme.palette.primary.main};
+    overflow: hidden;
+    border-radius: 8px;
     width: 284px;
     transition: width 0.3s linear;
     margin: 0 auto;
@@ -81,7 +96,9 @@ const Container = styled.div`
       transform: translateX(-100%);
     }
     .canvas-container {
-      border: solid black 1px;
+      border: 2px solid ${({ theme }) => theme.palette.text.secondary};
+      overflow: hidden;
+      border-radius: 8px;
       margin: 0 auto;
       margin-bottom: 20px;
       display: flex;
@@ -99,8 +116,20 @@ const Container = styled.div`
         transform: translateX(-140px);
       }
     }
+
+    &.chosen .canvas-container {
+      border: 2px solid ${({ theme }) => theme.palette.secondary.main};
+    }
+    &.success .canvas-container {
+      border: 2px solid ${({ theme }) => theme.palette.success.main};
+    }
+    &.fail .canvas-container {
+      border: 2px solid ${({ theme }) => theme.palette.error.dark};
+    }
     .scheme-info {
-      border: solid black 1px;
+      border: 2px solid ${({ theme }) => theme.palette.primary.main};
+      overflow: hidden;
+      border-radius: 8px;
       width: 142px;
       transition: width 0.3s linear;
       margin: 0 auto;

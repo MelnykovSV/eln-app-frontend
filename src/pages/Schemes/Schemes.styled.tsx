@@ -4,6 +4,7 @@ const Container = styled.div`
   .utility-panel {
     padding: 20px;
     gap: 30px;
+
     @media screen and (min-width: 1280px) {
       display: flex;
       justify-content: center;
@@ -14,6 +15,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+    
     }
 
     .sorting-container {

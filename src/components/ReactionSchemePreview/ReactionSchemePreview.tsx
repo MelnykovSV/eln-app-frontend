@@ -21,15 +21,15 @@ const ReactionSchemePreview = ({
     }, 300);
   };
 
-  const calculateBorderColor = () => {
+  const getSchemeType = () => {
     if (schemePreviewData.status === "chosen") {
-      return "blue";
+      return "chosen";
     }
     if (schemePreviewData.status === "fail") {
-      return "red";
+      return "fail";
     }
     if (schemePreviewData.status === "success") {
-      return "green";
+      return "success";
     }
     return "black";
   };
@@ -42,8 +42,9 @@ const ReactionSchemePreview = ({
       }}
       style={{
         zIndex: isActive ? 10 : 0,
-        borderColor: calculateBorderColor(),
-      }}>
+        // borderColor: getSchemeType(),
+      }}
+      className={getSchemeType()}>
       <div className="canvas-container  ">
         <SingleMolCanvas
           smiles={schemePreviewData.startingMaterial}></SingleMolCanvas>
