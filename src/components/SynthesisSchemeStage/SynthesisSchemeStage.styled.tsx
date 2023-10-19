@@ -28,6 +28,7 @@ const Container = styled.div<IStyledProps>`
     p {
       max-width: 200px;
       margin: 0;
+      overflow-wrap: break-word;
     }
     .methodic-container {
       position: relative;

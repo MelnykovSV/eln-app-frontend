@@ -44,7 +44,7 @@ const SynthesisSchemeStage = ({
           {(solvent && temp) || (solvent && time) ? <span>,</span> : null}
           {temp ? <span>{temp} &#8451;</span> : null}
           {temp && time ? <span>,</span> : null}
-          {time ? <span> {time}</span> : null}
+          {time ? <span> {time} h</span> : null}
         </p>
         <SingleArrow />
         {_yield ? <p>{_yield} %</p> : null}

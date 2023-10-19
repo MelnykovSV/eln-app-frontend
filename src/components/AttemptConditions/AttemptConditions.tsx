@@ -93,6 +93,11 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
+        type="number"
+        inputProps={{ min: 0 }}
+        InputProps={{
+          endAdornment: <InputAdornment position="end">h</InputAdornment>,
+        }}
       />
       <TextField
         className="input"

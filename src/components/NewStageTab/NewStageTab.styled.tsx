@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
-  border: 1px solid black;
+const Container = styled.div<IStyledProps>`
+  border: 2px solid ${(props) => props.theme.palette.primary.main};
+  border-radius: 8px;
   padding: 15px;
   .new-stage-tab-first-block {
     display: flex;
@@ -15,7 +17,8 @@ const Container = styled.div`
       width: 100%;
     }
     .new-stage-tab-first-block__canvas-container {
-      border: 1px solid black;
+      border: 2px solid ${(props) => props.theme.palette.primary.main};
+      border-radius: 8px;
       width: 100%;
       display: flex;
       justify-content: center;

@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.form`
-  border: 1px solid black;
-  padding: 15px;
+const Container = styled.form<IStyledProps>`
+  border: 3px solid ${(props) => props.theme.palette.primary.main};
+  border-radius: 8px;
+  padding: 14px;
   width: 100%;
   flex-direction: column;
   gap: 15px;
@@ -21,7 +23,8 @@ const Container = styled.form`
     }
     .scheme-form-first-block__canvas-container {
       position: relative;
-      border: 1px solid black;
+      border: 2px solid ${(props) => props.theme.palette.primary.main};
+      border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -37,11 +40,20 @@ const Container = styled.form`
       width: 100%;
       button {
         width: 100%;
+        /* height: 100%; */
       }
     }
   }
-  @media screen and (min-width: 1280px) {
+  /* @media screen and (min-width: 1280px) {
     width: 600px;
+  } */
+
+  .MuiSelect-select {
+    display: flex;
+    align-items: center;
+  }
+  .button-submit {
+    height: 50px;
   }
 `;
 

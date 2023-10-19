@@ -6,10 +6,18 @@ const Container = styled.div`
 
   @media screen and (min-width: 768px) {
     /* height: calc(100vh - 85px); */
-    height: 878px;
+    /* height: 898px; */
   }
   @media screen and (min-width: 1280px) {
     flex-direction: row;
+  }
+
+  .new-scheme-from-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @media screen and (min-width: 1280px) {
+      width: 600px;
+    }
   }
   .utility-panel {
     .toggle-schem-preview {

@@ -7,6 +7,7 @@ import DNALoader from "./DNALoader/DNALoader";
 import DNALoaderSmall from "./DNALoaderSmall/DNALoaderSmall";
 import DNALoaderMedium from "./DNALoaderMedium/DNALoaderMedium";
 import CheckMark from "./CheckMark/CheckMark";
+import AlertIcon from "./AlertIcon/AlertIcon";
 
 export {
   Logo,
@@ -18,4 +19,5 @@ export {
   DNALoaderSmall,
   DNALoaderMedium,
   CheckMark,
+  AlertIcon,
 };

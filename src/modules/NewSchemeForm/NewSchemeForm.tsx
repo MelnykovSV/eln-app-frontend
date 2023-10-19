@@ -14,6 +14,8 @@ import { NewStageTab } from "../../components";
 import { SingleMolCanvas } from "../../ui";
 import { INewSchemeFormProps } from "../../types/componentsProps";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useState } from "react";
+import { AlertIcon } from "../../ui";
 
 const NewSchemeForm = ({
   startingMaterial,
@@ -28,39 +30,50 @@ const NewSchemeForm = ({
   inputChangeHandler,
   deadlineChangeHandler,
 }: INewSchemeFormProps) => {
+  const [areErrorsShown, setAreErrorsShown] = useState(false);
+
   return (
-    <Container onSubmit={schemeFormSubmitHandler}>
+    <Container
+      onSubmit={(e) => {
+        setAreErrorsShown(true);
+        schemeFormSubmitHandler(e);
+      }}>
       <div className="scheme-form-first-block">
         <div className="scheme-form-first-block__inputs-container">
           {" "}
           <TextField
-            label="Starting Material"
+            label="Starting Material*"
             name="startingMaterial"
             variant="outlined"
             value={startingMaterial}
+            error={!startingMaterial && areErrorsShown}
             onChange={inputChangeHandler}
           />
           <TextField
-            label="Mass"
+            label="Mass*"
             name="mass"
             variant="outlined"
             type="number"
             value={mass}
+            error={!mass && areErrorsShown}
             onChange={inputChangeHandler}
             InputProps={{
               endAdornment: <InputAdornment position="end">g</InputAdornment>,
             }}
+            inputProps={{ min: 0 }}
           />
           <TextField
-            label="Price"
+            label="Price*"
             name="price"
             variant="outlined"
             type="number"
             value={price}
+            error={!price && areErrorsShown}
             onChange={inputChangeHandler}
             InputProps={{
               endAdornment: <InputAdornment position="end">$</InputAdornment>,
             }}
+            inputProps={{ min: 0 }}
           />
         </div>
         <div className="scheme-form-first-block__canvas-container">
@@ -83,7 +96,16 @@ const NewSchemeForm = ({
         </LocalizationProvider>
 
         <div className="button-container">
-          <Button type="button" onClick={addStageHandler} variant="contained">
+          <Button
+            type="button"
+            onClick={() => {
+              // if (!stages[stages.length - 1].product) {
+              //   setAreErrorsShown(true);
+              //   return;
+              // }
+              addStageHandler();
+            }}
+            variant="contained">
             Add stage
           </Button>
         </div>
@@ -96,9 +118,10 @@ const NewSchemeForm = ({
           value={stageNumber.toString()}
           label="Stage"
           onChange={handleChange}>
-          {stages.map((_, i) => (
+          {stages.map((stage, i) => (
             <MenuItem value={i + 1} key={nanoid()}>
               Stage {i + 1}
+              {!stage.product && areErrorsShown ? <AlertIcon /> : null}
             </MenuItem>
           ))}
         </Select>
@@ -108,9 +131,10 @@ const NewSchemeForm = ({
         stageData={stages[stageNumber - 1]}
         stageNumber={stageNumber}
         stageChangeHandler={stageChangeHandler}
+        areErrorsShown={areErrorsShown}
       />
 
-      <Button type="submit" variant="contained">
+      <Button type="submit" className="button-submit" variant="contained">
         Submit
       </Button>
     </Container>

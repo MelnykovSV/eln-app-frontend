@@ -15,6 +15,7 @@ interface IStage {
 interface IStageProps {
   stageData: IStage;
   stageNumber: number;
+  areErrorsShown: boolean;
   stageChangeHandler: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     stageNumber: number
@@ -25,18 +26,18 @@ const NewStageTab = ({
   stageData: { product, solvent, temp, time, _yield, methodic },
   stageNumber,
   stageChangeHandler,
+  areErrorsShown,
 }: IStageProps) => {
   return (
     <Container>
-      {/* <h2>Stage {stageNumber}</h2> */}
-
       <div className="new-stage-tab-first-block">
         <div className="new-stage-tab-first-block__inputs">
           <TextField
-            label="Product"
+            label="Product*"
             name="product"
             variant="outlined"
             value={product}
+            error={!product && areErrorsShown}
             className="input"
             onChange={(e) => {
               stageChangeHandler(e, stageNumber);
@@ -64,6 +65,7 @@ const NewStageTab = ({
             InputProps={{
               endAdornment: <InputAdornment position="end">%</InputAdornment>,
             }}
+            inputProps={{ min: 0 }}
           />
         </div>
 
@@ -77,11 +79,15 @@ const NewStageTab = ({
           name="time"
           variant="outlined"
           value={time || ""}
-          // type="number"
+          type="number"
           className="input"
           onChange={(e) => {
             stageChangeHandler(e, stageNumber);
           }}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">h</InputAdornment>,
+          }}
+          inputProps={{ min: 0 }}
         />
 
         <TextField
@@ -99,6 +105,7 @@ const NewStageTab = ({
               <InputAdornment position="end">&#8451;</InputAdornment>
             ),
           }}
+          inputProps={{ min: 0 }}
         />
       </div>
 

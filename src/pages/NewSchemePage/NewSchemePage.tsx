@@ -11,6 +11,7 @@ import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { privateApi } from "../../api";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const blankStage = {
   startingMaterial: "",
@@ -22,6 +23,16 @@ const blankStage = {
   methodic: "",
 };
 
+interface IStage {
+  startingMaterial: string;
+  product: string;
+  solvent: string;
+  temp: null | number;
+  time: string;
+  _yield: number | null;
+  methodic: string;
+}
+
 const NewSchemePage = () => {
   const [startingMaterial, setStartingMaterial] = useState("");
   const [mass, setStartingMass] = useState("");
@@ -31,7 +42,7 @@ const NewSchemePage = () => {
   const [isSchemePreviewShown, setIsSchemePreviewShown] = useState(false);
 
   const [targetCompound, setTargetCompound] = useState("");
-  const [stages, setStages] = useState([
+  const [stages, setStages] = useState<IStage[]>([
     {
       ...blankStage,
     },
@@ -57,6 +68,19 @@ const NewSchemePage = () => {
     );
   };
 
+  const repairNewSchemeArray = (arr: IStage[]) => {
+    const result = arr.map((item, i, arr) => {
+      if (i) {
+        if (item.startingMaterial === arr[i - 1].product) {
+          return item;
+        }
+        return { ...item, startingMaterial: arr[i - 1].product };
+      }
+      return item;
+    });
+    return result;
+  };
+
   const addStageHandler = () => {
     const startingMaterial = stages[stages.length - 1].product;
     setStages([...stages, { ...blankStage, startingMaterial }]);
@@ -79,16 +103,41 @@ const NewSchemePage = () => {
   ) => {
     e.preventDefault();
 
-    stages[0].startingMaterial = startingMaterial; // костыль, доделать!
+    if (
+      !startingMaterial ||
+      !targetCompound ||
+      !mass ||
+      !price ||
+      stages.some((stage) => !stage.product)
+    ) {
+      toast.error("Fill all required fields!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      return;
+    }
+
+    stages[0].startingMaterial = startingMaterial;
+
+    const repairedStagesArray = repairNewSchemeArray(stages);
 
     const response = await privateApi.post("/api/schemes/", {
       startingMaterial,
-      targetCompound: stages[stages.length - 1].product,
+      targetCompound:
+        repairedStagesArray[repairedStagesArray.length - 1].product,
       mass,
       price,
       deadline,
-      stages,
+      stages: repairedStagesArray,
     });
+
+    console.log(response);
 
     navigate(`/scheme/${response.data.data._id}`);
   };
@@ -153,21 +202,23 @@ const NewSchemePage = () => {
           />
         </div>
 
-        <NewSchemeForm
-          startingMaterial={startingMaterial}
-          mass={mass}
-          price={price}
-          deadline={deadline}
-          stageNumber={stageNumber}
-          targetCompound={targetCompound}
-          stages={stages}
-          stageChangeHandler={stageChangeHandler}
-          addStageHandler={addStageHandler}
-          handleChange={handleChange}
-          schemeFormSubmitHandler={schemeFormSubmitHandler}
-          inputChangeHandler={inputChangeHandler}
-          deadlineChangeHandler={deadlineChangeHandler}
-        />
+        <div className="new-scheme-from-container">
+          <NewSchemeForm
+            startingMaterial={startingMaterial}
+            mass={mass}
+            price={price}
+            deadline={deadline}
+            stageNumber={stageNumber}
+            targetCompound={targetCompound}
+            stages={stages}
+            stageChangeHandler={stageChangeHandler}
+            addStageHandler={addStageHandler}
+            handleChange={handleChange}
+            schemeFormSubmitHandler={schemeFormSubmitHandler}
+            inputChangeHandler={inputChangeHandler}
+            deadlineChangeHandler={deadlineChangeHandler}
+          />
+        </div>
       </div>
     </Container>
   );
