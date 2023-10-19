@@ -20,16 +20,25 @@ dayjs.extend(customParseFormat);
 const Schemes = () => {
   const dispatch = useAppDispatch();
   const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
-  useEffect(() => {
-    dispatch(getSchemes());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const realSchemes = useAppSelector(getSchemePreviews);
   const [currentSchemesType, setCurrentSchemesType] = useState("all");
   const [sortingParam, setSortingParam] = useState("createdAt");
   const [sortingDireaction, setSortingDireaction] = useState("up");
   const [searchValue, setSearchValue] = useState("");
+
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(18);
+
+  useEffect(() => {
+    dispatch(getSchemes({ page, limit, schemeStatus: currentSchemesType }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    dispatch(getSchemes({ page, limit, schemeStatus: currentSchemesType }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, limit, currentSchemesType]);
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);

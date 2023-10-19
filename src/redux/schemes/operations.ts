@@ -44,11 +44,22 @@ export interface IDeleteFilePayload {
   spectra: { label: string; spectrUrl: string; _id: string }[];
 }
 
-export const getSchemes = createAsyncThunk<IReactionPreviewData[]>(
+export interface IGetSchemesParams {
+  page: number;
+  limit: number;
+  schemeStatus: string;
+}
+
+export const getSchemes = createAsyncThunk<
+  IReactionPreviewData[],
+  IGetSchemesParams
+>(
   "schemes/getSchemes",
-  async (_, thunkAPI) => {
+  async ({ page , limit, schemeStatus }, thunkAPI) => {
     try {
-      const response = await privateApi.get("/api/schemes");
+      const response = await privateApi.get(
+        `/api/schemes?page=${page}&limit=${limit}&schemeStatus=${schemeStatus}`
+      );
       const result = response.data.data.map((item: IReactionPreviewData) => {
         item.createdAt = dayjs(item.createdAt).format("DD.MM.YYYY");
         item.updatedAt = dayjs(item.updatedAt).format("DD.MM.YYYY");
