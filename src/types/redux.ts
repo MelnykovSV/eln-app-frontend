@@ -142,6 +142,11 @@ export interface ISchemesState {
   schemePreviews: IReactionPreviewData[];
   currentScheme: ICurrentScheme;
   currentStage: IStage;
+  sortingParam: string;
+  sortingDirection: string;
+  searchSubstring: string,
+  totalPages: number | null;
+  currentPage: number | null;
   status: string;
   isSpectrUploading: boolean;
   isLoading: boolean;

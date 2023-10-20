@@ -64,3 +64,116 @@ code {
 
   width: 5px;
 }
+
+.MuiModal-root .MuiBox-root {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(207, 198, 182);
+  width: min(330px, 100%);
+  height: 600px;
+  padding: 10px;
+  /* overflow: auto; */
+}
+
+.MuiModal-root .MuiBox-root .document div {
+  width: 290px !important;
+  height: 438px !important;
+  padding: 10px;
+  margin: 0 auto;
+}
+.react-pdf__Page {
+  width: 290px !important;
+  height: 438px !important;
+  margin: 0 auto;
+}
+.react-pdf__Page__textContent {
+  width: 290px !important;
+  height: 438px !important;
+  margin: 0 auto;
+}
+
+.react-pdf__Page__canvas {
+  width: 290px !important;
+  height: 438px !important;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .MuiModal-root .MuiBox-root {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(207, 198, 182);
+    width: min(768px, 100%);
+    height: 95vh;
+    padding: 10px;
+    aspect-ratio: 1 /1;
+    /* overflow: auto; */
+  }
+
+  .MuiModal-root .MuiBox-root .document div {
+    width: min(57vh, 595px) !important;
+    height: min(80vh, 841px) !important;
+    padding: 10px;
+    margin: 0 auto;
+  }
+  .react-pdf__Page {
+    width: min(57vh, 595px) !important;
+    height: min(80vh, 841px) !important;
+    margin: 0 auto;
+  }
+  .react-pdf__Page__textContent {
+    width: min(57vh, 595px) !important;
+    height: min(80vh, 841px) !important;
+    margin: 0 auto;
+  }
+
+  .react-pdf__Page__canvas {
+    width: min(57vh, 595px) !important;
+    height: min(80vh, 841px) !important;
+    padding: 10px;
+    margin: 0 auto;
+  }
+}
+
+/* @media screen and (min-width: 1280px) {
+  .MuiModal-root .MuiBox-root {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    width: min(768px, 100%);
+    height: 1100px;
+    padding: 10px;
+  
+  }
+
+  .MuiModal-root .MuiBox-root .document div {
+    width: 595px !important;
+    height: 841px !important;
+    padding: 10px;
+    margin: 0 auto;
+  }
+  .react-pdf__Page {
+    width: 595px !important;
+    height: 841px !important;
+    margin: 0 auto;
+  }
+  .react-pdf__Page__textContent {
+    width: 595px !important;
+    height: 841px !important;
+    margin: 0 auto;
+  }
+
+  .react-pdf__Page__canvas {
+    width: 595px !important;
+    height: 841px !important;
+    padding: 10px;
+    margin: 0 auto;
+  }
+} */

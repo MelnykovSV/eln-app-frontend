@@ -11,37 +11,54 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { DNALoader, SearchTextInput } from "../../ui";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { getSchemePreviews } from "../../redux/schemes/schemesSlice";
+import {
+  getSchemePreviews,
+  updateSearchSubstring,
+} from "../../redux/schemes/schemesSlice";
 import { getSchemes } from "../../redux/schemes/operations";
 import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
+import { Outlet } from "react-router-dom";
+import {
+  updateSortingParam,
+  updateSortingDirection,
+} from "../../redux/schemes/schemesSlice";
+import {
+  getSortingParam,
+  getSortingDirection,
+  getTotalPages,
+} from "../../redux/schemes/schemesSlice";
+import { useNavigate } from "react-router-dom";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 dayjs.extend(customParseFormat);
 
 const Schemes = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
+  // const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
+  const sortingParam = useAppSelector(getSortingParam);
+  const sortingDirection = useAppSelector(getSortingDirection);
+  const totalPages = useAppSelector(getTotalPages);
 
-  const realSchemes = useAppSelector(getSchemePreviews);
+  // const realSchemes = useAppSelector(getSchemePreviews);
   const [currentSchemesType, setCurrentSchemesType] = useState("all");
-  const [sortingParam, setSortingParam] = useState("createdAt");
-  const [sortingDireaction, setSortingDireaction] = useState("up");
-  const [searchValue, setSearchValue] = useState("");
-
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(18);
+  // const [sortingParam, setSortingParam] = useState("createdAt");
+  // const [sortingDirection, setSortingDirection] = useState("up");
+
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    dispatch(getSchemes({ page, limit, schemeStatus: currentSchemesType }));
+    navigate(`${currentSchemesType}/${page}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    dispatch(getSchemes({ page, limit, schemeStatus: currentSchemesType }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, limit, currentSchemesType]);
+  }, [page, limit, searchValue, currentSchemesType]);
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
+    dispatch(updateSearchSubstring(e.target.value));
   };
 
   const schemesTypeSelectHandler = (event: SelectChangeEvent) => {
@@ -51,96 +68,71 @@ const Schemes = () => {
   const sortingParamChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSortingParam(e.target.value);
+    dispatch(updateSortingParam(e.target.value));
   };
 
   const sortingDireactionChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSortingDireaction(e.target.value);
+    dispatch(updateSortingDirection(e.target.value));
+  };
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
   };
 
-  const formatOutput = (schemePreviews: IReactionPreviewData[]) => {
-    let filteredData = [];
-    if (currentSchemesType !== "all") {
-      filteredData = schemePreviews.filter(
-        (item) => item.status === currentSchemesType
-      );
-    } else {
-      filteredData = [...schemePreviews];
-    }
-
-    const sortedData = filteredData.sort(
-      (a: IReactionPreviewData, b: IReactionPreviewData) => {
-        if (sortingParam === "price" || sortingParam === "mass") {
-          return sortingDireaction === "up"
-            ? a[sortingParam] - b[sortingParam]
-            : b[sortingParam] - a[sortingParam];
-        }
-
-        if (
-          sortingParam === "createdAt" ||
-          sortingParam === "updatedAt" ||
-          sortingParam === "deadline"
-        ) {
-          return sortingDireaction === "up"
-            ? dayjs(a[sortingParam], "DD.MM.YYYY").valueOf() -
-                dayjs(b[sortingParam], "DD.MM.YYYY").valueOf()
-            : dayjs(b[sortingParam], "DD.MM.YYYY").valueOf() -
-                dayjs(a[sortingParam], "DD.MM.YYYY").valueOf();
-        }
-        return 0;
-      }
-    );
-    if (searchValue) {
-      const dataAfterSearch = sortedData.filter(
-        (item) => item.targetCompound === searchValue
-      );
-      return dataAfterSearch;
-    }
-
-    return sortedData;
+  const handleNavigateNewScheme = () => {
+    navigate("/newScheme");
   };
-
-  const [dataToShow, setDataToShow] = useState(formatOutput(realSchemes));
-
-  useEffect(() => {
-    setDataToShow(formatOutput(realSchemes));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    currentSchemesType,
-    sortingParam,
-    sortingDireaction,
-    searchValue,
-    realSchemes,
-  ]);
 
   return (
     <Container>
       <div className="utility-panel container">
-        <CustomSelect
-          currentSchemesType={currentSchemesType}
-          schemesTypeSelectHandler={schemesTypeSelectHandler}
-        />
+        <div className="utility-panel-outer-block">
+          <CustomSelect
+            currentSchemesType={currentSchemesType}
+            schemesTypeSelectHandler={schemesTypeSelectHandler}
+          />
+
+          <div className="utility-panel-block">
+            <SearchTextInput
+              label="Enter SMILES"
+              changeHandler={searchHandler}
+            />
+            <Button
+              size="large"
+              variant="contained"
+              onClick={handleNavigateNewScheme}
+              sx={{ fontSize: 12 }}>
+              New Scheme
+            </Button>
+          </div>
+        </div>
+
         <SortingRadioGroup
           sortingParam={sortingParam}
           sortingParamChangeHandler={sortingParamChangeHandler}
-          sortingDireaction={sortingDireaction}
+          sortingDireaction={sortingDirection}
           sortingDireactionChangeHandler={sortingDireactionChangeHandler}
         />
-        <SearchTextInput label="Enter SMILES" changeHandler={searchHandler} />
-        <Link to="/newScheme">New Scheme</Link>
-      </div>
 
-      {isLoadingSchemes ? (
-        <DNALoader />
-      ) : (
-        <div className="schemes-preview-container container">
-          {dataToShow.map((item) => (
-            <ReactionSchemePreview schemePreviewData={item} key={nanoid()} />
-          ))}
-        </div>
-      )}
+        {/* <Link to="/newScheme">New Scheme</Link> */}
+      </div>
+      <div className="scheme-previews-container container">
+        <Outlet />
+
+        {totalPages && totalPages >= 2 ? (
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            className="pagination"
+            color="primary"
+          />
+        ) : null}
+      </div>
     </Container>
   );
 };

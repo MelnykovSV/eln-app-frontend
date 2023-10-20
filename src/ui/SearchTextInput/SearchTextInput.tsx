@@ -8,6 +8,8 @@ const SearchTextInput = ({ label, changeHandler }: ISearchTextInput) => {
     <Container
       label={label}
       onChange={changeHandler}
+      defaultValue=""
+      sx={{ width: "100%" }}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

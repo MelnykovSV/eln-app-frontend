@@ -10,7 +10,8 @@ import {
   updateSchemeStatusAndSave,
   deleteSpectr,
 } from "./operations";
-import { IReactionPreviewData } from "../../types";
+// import { IGetSchemesPayload } from "../../types";
+import { IGetSchemesPayload } from "./operations";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 import {
   currentSchemeInitialValue,
@@ -26,7 +27,13 @@ const initialState: ISchemesState = {
   schemePreviews: [],
   currentScheme: JSON.parse(JSON.stringify(currentSchemeInitialValue)),
   currentStage: JSON.parse(JSON.stringify(currentStageInitialValue)),
+  sortingParam: "createdAt",
+  sortingDirection: "asc",
+  searchSubstring: "",
+  totalPages: null,
+  currentPage: null,
   status: "idle",
+
   isSpectrUploading: false,
   isLoading: false,
   error: { message: null, code: null },
@@ -58,6 +65,15 @@ const schemesSlice = createSlice({
         state.currentStage = { ...state.currentStage, ...stage };
         state.currentStage.isChanged = true;
       }
+    },
+    updateSortingParam(state, action) {
+      state.sortingParam = action.payload;
+    },
+    updateSortingDirection(state, action) {
+      state.sortingDirection = action.payload;
+    },
+    updateSearchSubstring(state, action) {
+      state.searchSubstring = action.payload;
     },
     addAttempt(state) {
       const attemptnumber = state.currentStage.attempts.length + 1;
@@ -440,8 +456,10 @@ const schemesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       getSchemes.fulfilled,
-      (state, action: PayloadAction<IReactionPreviewData[]>) => {
-        state.schemePreviews = action.payload;
+      (state, action: PayloadAction<IGetSchemesPayload>) => {
+        state.schemePreviews = action.payload.schemePreviews;
+        state.currentPage = action.payload.currentPage;
+        state.totalPages = action.payload.totalPages;
         state.isLoading = false;
         state.status = "fulfilled";
         state.error = { message: null, code: null };
@@ -547,6 +565,9 @@ export const {
   addAttempt,
   temporalSaveStageData,
   setSchemeStatus,
+  updateSortingDirection,
+  updateSortingParam,
+  updateSearchSubstring,
 } = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;
@@ -566,3 +587,9 @@ export const getIsSpectrUploading = (state: IState) =>
 export const getIsLoadingSchemes = (state: IState) => state.schemes.isLoading;
 
 export const getSchemesError = (state: IState) => state.schemes.error;
+export const getSortingParam = (state: IState) => state.schemes.sortingParam;
+export const getSortingDirection = (state: IState) =>
+  state.schemes.sortingDirection;
+export const getTotalPages = (state: IState) => state.schemes.totalPages;
+export const getSearchSubstring = (state: IState) =>
+  state.schemes.searchSubstring;

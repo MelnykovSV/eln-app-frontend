@@ -6,20 +6,24 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Document, Page, pdfjs } from "react-pdf";
+// import { StyleSheet } from "@react-pdf/renderer";
 import { DNALoader } from "../../ui";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 1200,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+// const style = StyleSheet.create({
+//   page: {
+//     width
+//   }
+//   // position: "absolute" as "absolute",
+//   // top: "50%",
+//   // left: "50%",
+//   // transform: "translate(-50%, -50%)",
+//   // width: 1200,
+//   // bgcolor: "background.paper",
+//   // border: "2px solid #000",
+//   // boxShadow: 24,
+//   // p: 4,
+// });
 
 interface IAttemptSpectraProps {
   attemptNumber: number;
@@ -80,10 +84,11 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
         onClose={handleModalClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
-        <Box sx={style}>
-          <div>
+        <Box>
+          <div className="modal-body">
             <Document
               file={`${modalSpectrUrl}`}
+              className="document"
               onLoadSuccess={onDocumentLoadSuccess}
               loading={<DNALoader />}>
               <Page pageNumber={pageNumber} />

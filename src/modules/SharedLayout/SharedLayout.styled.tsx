@@ -16,6 +16,14 @@ const Container = styled.div`
         background-color: #1565c0;
       }
     }
+    .icon-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      text-transform: uppercase;
+      color: white;
+    }
   }
 `;
 

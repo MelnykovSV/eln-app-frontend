@@ -48,20 +48,20 @@ const SortingRadioGroup = ({
         name="row-radio-buttons-group"
         className="arrows-container">
         <FormControlLabel
-          value="up"
+          value="asc"
           control={
             <Radio
-              checkedIcon={<FaArrowUp fill="blue" />}
+              checkedIcon={<FaArrowUp fill="#2196F3" />}
               icon={<FaArrowUp />}
             />
           }
           label=""
         />
         <FormControlLabel
-          value="down"
+          value="desc"
           control={
             <Radio
-              checkedIcon={<FaArrowDown fill="blue" />}
+              checkedIcon={<FaArrowDown fill="#2196F3" />}
               icon={<FaArrowDown />}
             />
           }

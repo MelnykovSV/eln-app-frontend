@@ -132,3 +132,4 @@ export const getIsRefreshing = (state: IState) => state.auth.isRefreshing;
 export const getIsLoading = (state: IState) => state.auth.isLoading;
 
 export const getAuthError = (state: IState) => state.auth.error;
+export const getUserName = (state:IState)=>state.auth.user.userName

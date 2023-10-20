@@ -22,11 +22,13 @@ import { logOut } from "../../redux/auth/operations";
 import { useAppSelector } from "../../redux/hooks";
 import { clearSchemesData } from "../../redux/schemes/schemesSlice";
 
-import { getIsLoggedIn } from "../../redux/auth/authSlice";
+import { getIsLoggedIn, getUserName } from "../../redux/auth/authSlice";
 import {
   getCurrentSchemeId,
   getCurrentStage,
 } from "../../redux/schemes/schemesSlice";
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "../../redux/auth/operations";
 
 // const publicPages = ["register", "login"];
 // const privatePages = ["schemes", "scheme", "stage", "tasks"];
@@ -37,7 +39,19 @@ export function ResponsiveAppBar() {
   const isLoggedIn = useAppSelector(getIsLoggedIn);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const currentStage = useAppSelector(getCurrentStage);
+  const userName = useAppSelector(getUserName);
   const dispatch = useAppDispatch();
+
+  const [actualUserName, setActualUserName] = useState(userName);
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    setActualUserName(userName);
+  }, [userName]);
+
+
 
   //   const user = true;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -126,11 +140,11 @@ export function ResponsiveAppBar() {
                     <NavLink to={"/stage"}>Stage</NavLink>
                   </Typography>
                 </MenuItem>
-                <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
+                {/* <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                     <NavLink to={"/tasks"}>Tasks</NavLink>
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
               </Menu>
             </Box>
           ) : null}
@@ -184,7 +198,7 @@ export function ResponsiveAppBar() {
                   </NavLink>
                 </Typography>
               </MenuItem>
-              <MenuItem
+              {/* <MenuItem
                 sx={{ padding: 0 }}
                 key={"tasks"}
                 onClick={handleCloseNavMenu}>
@@ -193,7 +207,7 @@ export function ResponsiveAppBar() {
                     Tasks
                   </NavLink>
                 </Typography>
-              </MenuItem>
+              </MenuItem> */}
             </Box>
           ) : null}
 
@@ -202,6 +216,7 @@ export function ResponsiveAppBar() {
               <Tooltip className="avatar" title="Open settings">
                 <IconButton
                   onClick={handleOpenUserMenu}
+                  className="icon-button"
                   sx={{
                     width: 40,
                     height: 40,
@@ -209,9 +224,10 @@ export function ResponsiveAppBar() {
                     p: 0,
                     marginTop: "0",
                   }}>
-                  {true ? (
+                  {/* {true ? (
                     <Avatar alt={`alt`} src="/static/images/avatar/2.jpg" />
-                  ) : null}
+                  ) : null} */}
+                  <span> {actualUserName?.split("")[0] || ""}</span>
                 </IconButton>
               </Tooltip>
 

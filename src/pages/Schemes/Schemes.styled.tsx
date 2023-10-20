@@ -1,25 +1,66 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+const Container = styled.div<IStyledProps>`
   .utility-panel {
-    padding: 20px;
-    gap: 30px;
+    /* border: 1px solid ${({ theme }) => theme.palette.text.secondary}; */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    @media screen and (min-width: 768px) {
+      padding: 20px;
+    }
+    @media screen and (min-width: 1280px) {
+      flex-direction: row-reverse;
+    }
+
+    /* border: 1px solid black; */
+    .utility-panel-outer-block {
+      /* border: 1px solid ${({ theme }) => theme.palette.text.secondary}; */
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      @media screen and (min-width: 768px) {
+        flex-direction: row;
+      }
+      .utility-panel-block {
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+
+        @media screen and (min-width: 768px) {
+          flex-direction: row;
+          align-items: center;
+          button {
+            height: 56px;
+            width: 200px;
+          }
+        }
+        input {
+          width: 100%;
+        }
+        button {
+          /* width: 200px; */
+        }
+      }
+    }
 
     @media screen and (min-width: 1280px) {
       display: flex;
       justify-content: center;
     }
     .select-container {
-      border: 1px solid black;
-      padding: 10px;
+      /* border: 1px solid black; */
+      /* padding: 10px; */
       display: flex;
       justify-content: center;
       align-items: center;
-    
     }
 
     .sorting-container {
-      border: 1px solid black;
+      border: 1px solid ${({ theme }) => theme.palette.text.secondary};
+      border-radius: 8px;
       padding: 5px;
       padding-left: 20px;
       display: flex;
@@ -50,6 +91,15 @@ const Container = styled.div`
     justify-content: space-between;
     margin: 0 auto;
     gap: 5px;
+  }
+  .scheme-previews-container {
+    .pagination {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      ul {
+        justify-content: center;
+      }
+    }
   }
 `;
 

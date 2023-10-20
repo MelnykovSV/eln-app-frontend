@@ -13,7 +13,6 @@ import { getIsRefreshing } from "../redux/auth/authSlice";
 import { DNALoader } from "../ui";
 import { ToastContainer } from "react-toastify";
 
-
 const Schemes = lazy(() => import("../pages/Schemes/Schemes"));
 const SingleSchemePage = lazy(
   () => import("../pages/SingleSchemePage/SingleSchemePage")
@@ -25,6 +24,9 @@ const NewSchemePage = lazy(
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
 const StagePage = lazy(() => import("../pages/StagePage/StagePage"));
+const SchemePreviewsPage = lazy(
+  () => import("../pages/SchemePreviewsPage/SchemePreviewsPage")
+);
 
 function App() {
   const isRefreshing = useAppSelector(getIsRefreshing);
@@ -53,7 +55,13 @@ function App() {
                   <Route path="day/:day" element={<DayTasksListPage />} />
                 </Route>
                 <Route path="statistics" element={<Statistics />} /> */}
-                <Route path="/" element={<Schemes />} />
+                <Route path="/" element={<Schemes />}>
+                  {/* <Route index element={<SchemePreviewsPage />} /> */}
+                  <Route
+                    path=":schemesType/:page"
+                    element={<SchemePreviewsPage />}
+                  />
+                </Route>
                 <Route
                   path="/scheme/:schemeId"
                   element={<SingleSchemePage />}
@@ -62,7 +70,7 @@ function App() {
                   path="/stage/:schemeId/:stageId"
                   element={<StagePage />}
                 />
-                <Route path="/tasks" element={<div>Tasks</div>} />
+                {/* <Route path="/tasks" element={<div>Tasks</div>} /> */}
                 <Route path="/newScheme" element={<NewSchemePage />} />
               </Route>
 

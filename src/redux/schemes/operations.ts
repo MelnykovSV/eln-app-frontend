@@ -48,25 +48,43 @@ export interface IGetSchemesParams {
   page: number;
   limit: number;
   schemeStatus: string;
+  substring: string;
+  sortingParam: string;
+  sortingDirection: string;
+}
+
+export interface IGetSchemesPayload {
+  schemePreviews: IReactionPreviewData[];
+  currentPage: number;
+  totalPages: number;
 }
 
 export const getSchemes = createAsyncThunk<
-  IReactionPreviewData[],
+  IGetSchemesPayload,
   IGetSchemesParams
 >(
   "schemes/getSchemes",
-  async ({ page , limit, schemeStatus }, thunkAPI) => {
+  async (
+    { page, limit, schemeStatus, substring, sortingParam, sortingDirection },
+    thunkAPI
+  ) => {
     try {
       const response = await privateApi.get(
-        `/api/schemes?page=${page}&limit=${limit}&schemeStatus=${schemeStatus}`
+        `/api/schemes?page=${page}&limit=${limit}&schemeStatus=${schemeStatus}&sortingParam=${sortingParam}&sortingDirection=${sortingDirection}&substring=${substring}`
       );
-      const result = response.data.data.map((item: IReactionPreviewData) => {
-        item.createdAt = dayjs(item.createdAt).format("DD.MM.YYYY");
-        item.updatedAt = dayjs(item.updatedAt).format("DD.MM.YYYY");
-        return item;
-      });
+      const schemePreviews = response.data.data.schemes.map(
+        (item: IReactionPreviewData) => {
+          item.createdAt = dayjs(item.createdAt).format("DD.MM.YYYY");
+          item.updatedAt = dayjs(item.updatedAt).format("DD.MM.YYYY");
+          return item;
+        }
+      );
 
-      return result;
+      return {
+        schemePreviews,
+        currentPage: response.data.data.currentPage,
+        totalPages: response.data.data.totalPages,
+      };
     } catch (error) {
       if (request.isAxiosError(error) && error.response) {
         return thunkAPI.rejectWithValue({
