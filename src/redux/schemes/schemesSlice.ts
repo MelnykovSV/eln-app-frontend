@@ -27,11 +27,11 @@ const initialState: ISchemesState = {
   schemePreviews: [],
   currentScheme: JSON.parse(JSON.stringify(currentSchemeInitialValue)),
   currentStage: JSON.parse(JSON.stringify(currentStageInitialValue)),
-  sortingParam: "createdAt",
-  sortingDirection: "asc",
-  searchSubstring: "",
+  // sortingParam: "createdAt",
+  // sortingDirection: "asc",
+  // searchSubstring: "",
   totalPages: null,
-  currentPage: null,
+  // currentPage: null,
   schemesState: null,
   status: "idle",
 
@@ -67,15 +67,15 @@ const schemesSlice = createSlice({
         state.currentStage.isChanged = true;
       }
     },
-    updateSortingParam(state, action) {
-      state.sortingParam = action.payload;
-    },
-    updateSortingDirection(state, action) {
-      state.sortingDirection = action.payload;
-    },
-    updateSearchSubstring(state, action) {
-      state.searchSubstring = action.payload;
-    },
+    // updateSortingParam(state, action) {
+    //   state.sortingParam = action.payload;
+    // },
+    // updateSortingDirection(state, action) {
+    //   state.sortingDirection = action.payload;
+    // },
+    // updateSearchSubstring(state, action) {
+    //   state.searchSubstring = action.payload;
+    // },
     updateSchemesState(state, action) {
       state.schemesState = action.payload;
     },
@@ -462,7 +462,7 @@ const schemesSlice = createSlice({
       getSchemes.fulfilled,
       (state, action: PayloadAction<IGetSchemesPayload>) => {
         state.schemePreviews = action.payload.schemePreviews;
-        state.currentPage = action.payload.currentPage;
+        // state.currentPage = action.payload.currentPage;
         state.totalPages = action.payload.totalPages;
         state.isLoading = false;
         state.status = "fulfilled";
@@ -569,9 +569,9 @@ export const {
   addAttempt,
   temporalSaveStageData,
   setSchemeStatus,
-  updateSortingDirection,
-  updateSortingParam,
-  updateSearchSubstring,
+  // updateSortingDirection,
+  // updateSortingParam,
+  // updateSearchSubstring,
   updateSchemesState,
 } = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
@@ -592,11 +592,11 @@ export const getIsSpectrUploading = (state: IState) =>
 export const getIsLoadingSchemes = (state: IState) => state.schemes.isLoading;
 
 export const getSchemesError = (state: IState) => state.schemes.error;
-export const getSortingParam = (state: IState) => state.schemes.sortingParam;
-export const getSortingDirection = (state: IState) =>
-  state.schemes.sortingDirection;
+// export const getSortingParam = (state: IState) => state.schemes.sortingParam;
+// export const getSortingDirection = (state: IState) =>
+//   state.schemes.sortingDirection;
 export const getTotalPages = (state: IState) => state.schemes.totalPages;
-export const getSearchSubstring = (state: IState) =>
-  state.schemes.searchSubstring;
+// export const getSearchSubstring = (state: IState) =>
+//   state.schemes.searchSubstring;
 
 export const getSchemesState = (state: IState) => state.schemes.schemesState;
