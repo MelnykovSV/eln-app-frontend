@@ -14,14 +14,22 @@ const SchemePreviewsPage = () => {
   const [searchParams] = useSearchParams();
   const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
   const realSchemes = useAppSelector(getSchemePreviews);
-  const sortingParam = searchParams.get("sortingParam");
-  const sortingDirection = searchParams.get("sortingDirection");
-  const substring = searchParams.get("substring");
-  const schemeStatus = searchParams.get("schemeStatus");
-  const page = searchParams.get("page");
-  const limit = searchParams.get("limit");
+  const sortingParam = searchParams.get("sortingParam") || "createdAt";
+  const sortingDirection = searchParams.get("sortingDirection") || "asc";
+  const substring = searchParams.get("substring") || "";
+  const schemeStatus = searchParams.get("schemeStatus") || "all";
+  const page = searchParams.get("page") || 1;
+  const limit = searchParams.get("limit") || 18;
 
   useEffect(() => {
+    console.log({
+      page: Number(page),
+      limit: Number(limit),
+      schemeStatus,
+      sortingParam,
+      sortingDirection,
+      substring,
+    });
     dispatch(
       getSchemes({
         page: Number(page),
@@ -32,7 +40,7 @@ const SchemePreviewsPage = () => {
         substring,
       })
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, limit, schemeStatus, sortingParam, sortingDirection, substring]);
 
   return (

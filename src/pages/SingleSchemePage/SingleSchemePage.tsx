@@ -181,7 +181,7 @@ const SingleSchemePage = () => {
           <FormControlLabel value="fail" control={<Radio />} label="Fail" />
           <FormControlLabel value="chosen" control={<Radio />} label="Chosen" />
         </RadioGroup>
-        {isLoadingSchemes && !currentSchemeId ? (
+        {isLoadingSchemes && currentSchemeId !== schemeId ? (
           <DNALoader />
         ) : (
           <div className="scheme-container">
