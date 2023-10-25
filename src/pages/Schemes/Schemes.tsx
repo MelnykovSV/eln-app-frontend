@@ -1,86 +1,99 @@
 import Container from "./Schemes.styled";
-import { ReactionSchemePreview } from "../../components";
 import { CustomSelect } from "../../components";
 import React, { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { SortingRadioGroup } from "../../components";
-import { IReactionPreviewData } from "../../types";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { DNALoader, SearchTextInput } from "../../ui";
-import { Link } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import {
-  getSchemePreviews,
-  updateSearchSubstring,
-} from "../../redux/schemes/schemesSlice";
-import { getSchemes } from "../../redux/schemes/operations";
-import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
+import { SearchTextInput } from "../../ui";
+import { useAppSelector } from "../../redux/hooks";
 import { Outlet } from "react-router-dom";
-import {
-  updateSortingParam,
-  updateSortingDirection,
-} from "../../redux/schemes/schemesSlice";
-import {
-  getSortingParam,
-  getSortingDirection,
-  getTotalPages,
-} from "../../redux/schemes/schemesSlice";
+import { getTotalPages } from "../../redux/schemes/schemesSlice";
 import { useNavigate } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useSearchParams } from "react-router-dom";
+import { generateQueryString } from "../../helpers/generateQueryString";
 
 dayjs.extend(customParseFormat);
 
 const Schemes = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  // const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
-  const sortingParam = useAppSelector(getSortingParam);
-  const sortingDirection = useAppSelector(getSortingDirection);
+  const [searchParams] = useSearchParams();
+
+  const sortingParam = searchParams.get("sortingParam");
+  const sortingDirection = searchParams.get("sortingDirection");
+  const substring = searchParams.get("substring");
+  const schemeStatus = searchParams.get("schemeStatus");
+  const page = searchParams.get("page");
+  const limit = searchParams.get("limit");
+
   const totalPages = useAppSelector(getTotalPages);
 
-  // const realSchemes = useAppSelector(getSchemePreviews);
-  const [currentSchemesType, setCurrentSchemesType] = useState("all");
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(18);
-  // const [sortingParam, setSortingParam] = useState("createdAt");
-  // const [sortingDirection, setSortingDirection] = useState("up");
-
-  const [searchValue, setSearchValue] = useState("");
+  const [currentSchemeStatus, setCurrentSchemeStatus] = useState(
+    schemeStatus || "all"
+  );
+  const [currentPage, setCurrentPage] = useState(Number(page) || 1);
+  const [currentLimit] = useState(Number(limit) || 18);
+  const [currentSubstring, setCurrentSubstring] = useState(substring || "");
+  const [currentSortingParam, setCurrentSortingParam] = useState(
+    sortingParam || "createdAt"
+  );
+  const [currentSortingDirection, setCurrentSortingDirection] = useState(
+    sortingDirection || "asc"
+  );
 
   useEffect(() => {
-    navigate(`${currentSchemesType}/${page}`);
+    const queryString = generateQueryString({
+      currentSchemeStatus,
+      currentPage,
+      currentLimit,
+      currentSubstring,
+      currentSortingParam,
+      currentSortingDirection,
+    });
+    navigate(queryString ? `?${queryString}` : "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, limit, searchValue, currentSchemesType]);
+  }, [
+    currentSchemeStatus,
+    currentPage,
+    currentLimit,
+    currentSubstring,
+    currentSortingParam,
+    currentSortingDirection,
+  ]);
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-    dispatch(updateSearchSubstring(e.target.value));
+    setCurrentPage(1);
+    setCurrentSubstring(e.target.value);
+    // dispatch(updateSearchSubstring(e.target.value));
   };
 
   const schemesTypeSelectHandler = (event: SelectChangeEvent) => {
-    setCurrentSchemesType(event.target.value as string);
+    setCurrentPage(1);
+    setCurrentSchemeStatus(event.target.value as string);
   };
 
   const sortingParamChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    dispatch(updateSortingParam(e.target.value));
+    setCurrentPage(1);
+    setCurrentSortingParam(e.target.value);
+    // dispatch(updateSortingParam(e.target.value));
   };
 
   const sortingDireactionChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    dispatch(updateSortingDirection(e.target.value));
+    setCurrentPage(1);
+    // dispatch(updateSortingDirection(e.target.value));
+    setCurrentSortingDirection(e.target.value);
   };
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
-    setPage(value);
+    setCurrentPage(value);
   };
 
   const handleNavigateNewScheme = () => {
@@ -92,7 +105,7 @@ const Schemes = () => {
       <div className="utility-panel container">
         <div className="utility-panel-outer-block">
           <CustomSelect
-            currentSchemesType={currentSchemesType}
+            currentSchemesType={currentSchemeStatus}
             schemesTypeSelectHandler={schemesTypeSelectHandler}
           />
 
@@ -100,6 +113,7 @@ const Schemes = () => {
             <SearchTextInput
               label="Enter SMILES"
               changeHandler={searchHandler}
+              value={currentSubstring}
             />
             <Button
               size="large"
@@ -112,9 +126,9 @@ const Schemes = () => {
         </div>
 
         <SortingRadioGroup
-          sortingParam={sortingParam}
+          sortingParam={currentSortingParam}
           sortingParamChangeHandler={sortingParamChangeHandler}
-          sortingDireaction={sortingDirection}
+          sortingDireaction={currentSortingDirection}
           sortingDireactionChangeHandler={sortingDireactionChangeHandler}
         />
 
@@ -126,7 +140,7 @@ const Schemes = () => {
         {totalPages && totalPages >= 2 ? (
           <Pagination
             count={totalPages}
-            page={page}
+            page={currentPage}
             onChange={handlePageChange}
             className="pagination"
             color="primary"

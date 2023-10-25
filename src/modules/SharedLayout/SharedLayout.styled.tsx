@@ -15,14 +15,32 @@ const Container = styled.div`
       &:hover {
         background-color: #1565c0;
       }
+      &.active {
+        background-color: #1976d2;
+      }
     }
-    .icon-button {
+    .avatar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      line-height: 1;
-      text-transform: uppercase;
-      color: white;
+      gap: 20px;
+      p {
+        font-size: 20px;
+        max-width: 200px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: none;
+        @media screen and (min-width: 1280px) {
+          display: block;
+        }
+      }
+      .icon-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        text-transform: uppercase;
+        color: white;
+      }
     }
   }
 `;

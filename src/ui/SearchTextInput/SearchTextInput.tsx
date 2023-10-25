@@ -3,12 +3,13 @@ import { InputAdornment } from "@mui/material";
 import { AiOutlineSearch } from "react-icons/ai";
 import { ISearchTextInput } from "../../types";
 
-const SearchTextInput = ({ label, changeHandler }: ISearchTextInput) => {
+const SearchTextInput = ({ label, changeHandler, value }: ISearchTextInput) => {
   return (
     <Container
       label={label}
       onChange={changeHandler}
-      defaultValue=""
+      // defaultValue=""
+      value={value}
       sx={{ width: "100%" }}
       InputProps={{
         endAdornment: (

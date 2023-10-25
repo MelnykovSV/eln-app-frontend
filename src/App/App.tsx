@@ -44,23 +44,13 @@ function App() {
           <Routes>
             <Route element={<SharedLayout />}>
               <Route element={<PublicRoute />}>
-                {/* <Route path="/" element={<MainPage />} /> */}
+                <Route path="/" element={<div>MainPage</div>} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />
               </Route>
               <Route element={<PrivateRoute />}>
-                {/* <Route path="account" element={<AccountPage />} />
-                <Route path="calendar" element={<CalendarDatepickerPage />}>
-                  <Route path="month/:month" element={<CalendarPage />} />
-                  <Route path="day/:day" element={<DayTasksListPage />} />
-                </Route>
-                <Route path="statistics" element={<Statistics />} /> */}
-                <Route path="/" element={<Schemes />}>
-                  {/* <Route index element={<SchemePreviewsPage />} /> */}
-                  <Route
-                    path=":schemesType/:page"
-                    element={<SchemePreviewsPage />}
-                  />
+                <Route path="schemes" element={<Schemes />}>
+                  <Route index element={<SchemePreviewsPage />} />
                 </Route>
                 <Route
                   path="/scheme/:schemeId"

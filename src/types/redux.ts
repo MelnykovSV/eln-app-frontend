@@ -138,15 +138,23 @@ export interface ISchemeData {
 //     yieldCoefficient?: number;
 //   }[];
 // }
+export interface IPageState {
+  pathname: string;
+  search: string;
+  hash: string;
+  key: string;
+  state: null;
+}
 export interface ISchemesState {
   schemePreviews: IReactionPreviewData[];
   currentScheme: ICurrentScheme;
   currentStage: IStage;
   sortingParam: string;
   sortingDirection: string;
-  searchSubstring: string,
+  searchSubstring: string;
   totalPages: number | null;
   currentPage: number | null;
+  schemesState: IPageState | null;
   status: string;
   isSpectrUploading: boolean;
   isLoading: boolean;

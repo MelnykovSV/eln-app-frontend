@@ -32,6 +32,7 @@ const initialState: ISchemesState = {
   searchSubstring: "",
   totalPages: null,
   currentPage: null,
+  schemesState: null,
   status: "idle",
 
   isSpectrUploading: false,
@@ -74,6 +75,9 @@ const schemesSlice = createSlice({
     },
     updateSearchSubstring(state, action) {
       state.searchSubstring = action.payload;
+    },
+    updateSchemesState(state, action) {
+      state.schemesState = action.payload;
     },
     addAttempt(state) {
       const attemptnumber = state.currentStage.attempts.length + 1;
@@ -568,6 +572,7 @@ export const {
   updateSortingDirection,
   updateSortingParam,
   updateSearchSubstring,
+  updateSchemesState,
 } = schemesSlice.actions;
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;
@@ -593,3 +598,5 @@ export const getSortingDirection = (state: IState) =>
 export const getTotalPages = (state: IState) => state.schemes.totalPages;
 export const getSearchSubstring = (state: IState) =>
   state.schemes.searchSubstring;
+
+export const getSchemesState = (state: IState) => state.schemes.schemesState;

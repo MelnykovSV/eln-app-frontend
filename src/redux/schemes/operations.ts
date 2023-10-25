@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { IReactionPreviewData } from "../../types";
 import { ISchemeData, IStage } from "../../types/redux";
 import request from "axios";
+import { generateQueryString } from "../../helpers/generateQueryString";
 
 export interface IgetSchemeAndStageParams {
   schemeId: string;
@@ -47,10 +48,10 @@ export interface IDeleteFilePayload {
 export interface IGetSchemesParams {
   page: number;
   limit: number;
-  schemeStatus: string;
-  substring: string;
-  sortingParam: string;
-  sortingDirection: string;
+  schemeStatus: string|null;
+  substring: string|null;
+  sortingParam: string|null;
+  sortingDirection: string|null;
 }
 
 export interface IGetSchemesPayload {
@@ -68,9 +69,18 @@ export const getSchemes = createAsyncThunk<
     { page, limit, schemeStatus, substring, sortingParam, sortingDirection },
     thunkAPI
   ) => {
+    const queryString = generateQueryString({
+      currentPage: page,
+      currentLimit: limit,
+      currentSchemeStatus: schemeStatus,
+      currentSubstring: substring,
+      currentSortingParam: sortingParam,
+      currentSortingDirection: sortingDirection,
+    });
+
     try {
       const response = await privateApi.get(
-        `/api/schemes?page=${page}&limit=${limit}&schemeStatus=${schemeStatus}&sortingParam=${sortingParam}&sortingDirection=${sortingDirection}&substring=${substring}`
+        `/api/schemes${queryString ? `?${queryString}` : ""}`
       );
       const schemePreviews = response.data.data.schemes.map(
         (item: IReactionPreviewData) => {

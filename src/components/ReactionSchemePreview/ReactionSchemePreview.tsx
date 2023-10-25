@@ -4,10 +4,15 @@ import { IReactionSchemePreviewProps } from "../../types";
 import { DoubleArrows } from "../../ui";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router";
+import { useAppDispatch } from "../../redux/hooks";
+import { updateSchemesState } from "../../redux/schemes/schemesSlice";
 
 const ReactionSchemePreview = ({
   schemePreviewData,
 }: IReactionSchemePreviewProps) => {
+  const location = useLocation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
 
@@ -38,6 +43,7 @@ const ReactionSchemePreview = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => {
+        dispatch(updateSchemesState(location));
         navigate(`/scheme/${schemePreviewData._id}`);
       }}
       style={{

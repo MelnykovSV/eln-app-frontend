@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 // import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
@@ -17,10 +16,12 @@ import { Logo } from "../../ui";
 // import { useAppSelector } from "../../redux/hooks";
 // import { getToken, getUser } from "../../redux/auth/authSlice";
 // import { UserMenu } from "../UserMenu/UserMenu";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut } from "../../redux/auth/operations";
-import { useAppSelector } from "../../redux/hooks";
-import { clearSchemesData } from "../../redux/schemes/schemesSlice";
+
+import {
+  clearSchemesData,
+} from "../../redux/schemes/schemesSlice";
 
 import { getIsLoggedIn, getUserName } from "../../redux/auth/authSlice";
 import {
@@ -29,29 +30,32 @@ import {
 } from "../../redux/schemes/schemesSlice";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "../../redux/auth/operations";
+import { useLocation } from "react-router";
+import { getSchemesState } from "../../redux/schemes/schemesSlice";
+import { updateSchemesState } from "../../redux/schemes/schemesSlice";
 
 // const publicPages = ["register", "login"];
 // const privatePages = ["schemes", "scheme", "stage", "tasks"];
 const settings = ["Logout"];
 
 export function ResponsiveAppBar() {
+  const location = useLocation();
   // const token = useAppSelector(getAccessToken);
   const isLoggedIn = useAppSelector(getIsLoggedIn);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const currentStage = useAppSelector(getCurrentStage);
   const userName = useAppSelector(getUserName);
   const dispatch = useAppDispatch();
-
   const [actualUserName, setActualUserName] = useState(userName);
+  const locationState = useAppSelector(getSchemesState);
+
   useEffect(() => {
     dispatch(getCurrentUser());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     setActualUserName(userName);
   }, [userName]);
-
-
 
   //   const user = true;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -122,7 +126,7 @@ export function ResponsiveAppBar() {
                 }}>
                 <MenuItem key={"schemes"} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink to={""}>Schemes</NavLink>
+                    <NavLink to={locationState || "/schemes"}>Schemes</NavLink>
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -130,14 +134,28 @@ export function ResponsiveAppBar() {
                   onClick={handleCloseNavMenu}
                   disabled={currentSchemeId ? false : true}>
                   <Typography textAlign="center">
-                    <NavLink to={`/scheme/${currentSchemeId}`}>
+                    <NavLink
+                      to={`/scheme/${currentSchemeId}`}
+                      onClick={() => {
+                        if (location.pathname === "/schemes") {
+                          dispatch(updateSchemesState(location));
+                        }
+                      }}>
                       Current scheme
                     </NavLink>
                   </Typography>
                 </MenuItem>
                 <MenuItem key={"stage"} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink to={"/stage"}>Stage</NavLink>
+                    <NavLink
+                      to={"/stage"}
+                      onClick={() => {
+                        if (location.pathname === "/schemes") {
+                          dispatch(updateSchemesState(location));
+                        }
+                      }}>
+                      Stage
+                    </NavLink>
                   </Typography>
                 </MenuItem>
                 {/* <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
@@ -167,7 +185,9 @@ export function ResponsiveAppBar() {
                 sx={{ padding: 0 }}
                 onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                  <NavLink className="nav-link" to={""}>
+                  <NavLink
+                    className="nav-link"
+                    to={locationState || "/schemes"}>
                     Schemes
                   </NavLink>
                 </Typography>
@@ -180,7 +200,12 @@ export function ResponsiveAppBar() {
                 <Typography textAlign="center">
                   <NavLink
                     className="nav-link"
-                    to={`/scheme/${currentSchemeId}`}>
+                    to={`/scheme/${currentSchemeId}`}
+                    onClick={() => {
+                      if (location.pathname === "/schemes") {
+                        dispatch(updateSchemesState(location));
+                      }
+                    }}>
                     Current scheme
                   </NavLink>
                 </Typography>
@@ -193,7 +218,12 @@ export function ResponsiveAppBar() {
                 <Typography textAlign="center">
                   <NavLink
                     className="nav-link"
-                    to={`/stage/${currentSchemeId}/${currentStage._id}`}>
+                    to={`/stage/${currentSchemeId}/${currentStage._id}`}
+                    onClick={() => {
+                      if (location.pathname === "/schemes") {
+                        dispatch(updateSchemesState(location));
+                      }
+                    }}>
                     Stage
                   </NavLink>
                 </Typography>
@@ -214,21 +244,24 @@ export function ResponsiveAppBar() {
           {isLoggedIn ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip className="avatar" title="Open settings">
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  className="icon-button"
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: "#bdbdbd",
-                    p: 0,
-                    marginTop: "0",
-                  }}>
-                  {/* {true ? (
+                <div>
+                  <p>{actualUserName}</p>
+                  <IconButton
+                    onClick={handleOpenUserMenu}
+                    className="icon-button"
+                    sx={{
+                      width: 40,
+                      height: 40,
+                      backgroundColor: "#bdbdbd",
+                      p: 0,
+                      marginTop: "0",
+                    }}>
+                    {/* {true ? (
                     <Avatar alt={`alt`} src="/static/images/avatar/2.jpg" />
                   ) : null} */}
-                  <span> {actualUserName?.split("")[0] || ""}</span>
-                </IconButton>
+                    <span> {actualUserName?.split("")[0] || ""}</span>
+                  </IconButton>
+                </div>
               </Tooltip>
 
               <Menu
