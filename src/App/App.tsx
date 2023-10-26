@@ -27,6 +27,7 @@ const StagePage = lazy(() => import("../pages/StagePage/StagePage"));
 const SchemePreviewsPage = lazy(
   () => import("../pages/SchemePreviewsPage/SchemePreviewsPage")
 );
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 
 function App() {
   const isRefreshing = useAppSelector(getIsRefreshing);
@@ -44,7 +45,7 @@ function App() {
           <Routes>
             <Route element={<SharedLayout />}>
               <Route element={<PublicRoute />}>
-                <Route path="/" element={<div>MainPage</div>} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />
               </Route>

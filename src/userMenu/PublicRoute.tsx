@@ -11,6 +11,6 @@ export const PublicRoute = () => {
   return !isLoggedIn ? (
     <Outlet />
   ) : (
-    <Navigate to={location.state ? location.state : "/"} />
+    <Navigate to={location.state ? location.state : "schemes"} />
   );
 };

@@ -74,11 +74,11 @@ const ReactionSchemePreview = ({
         <dl className="scheme-info__main">
           <div>
             <dt>Mass</dt>
-            <dd>{schemePreviewData.mass}</dd>
+            <dd>{schemePreviewData.mass} g</dd>
           </div>
           <div>
             <dt>Price</dt>
-            <dd>{schemePreviewData.price}</dd>
+            <dd>{schemePreviewData.price} $</dd>
           </div>
           <div>
             <dt>Deadline</dt>

@@ -6,6 +6,8 @@ import ReagentList from "./ReagentList/ReagentList";
 import NewSchemeForm from "./NewSchemeForm/NewSchemeForm";
 import Stage from "./Stage/Stage";
 import AttemptTab from "./AttemptTab/AttemptTab";
+import DescriptionSection from "./DescriptionSection/DescriptionSection";
+import AuthSection from "./AuthSection/AuthSection";
 
 export {
   RegistrationForm,
@@ -16,4 +18,6 @@ export {
   NewSchemeForm,
   Stage,
   AttemptTab,
+  DescriptionSection,
+  AuthSection,
 };
