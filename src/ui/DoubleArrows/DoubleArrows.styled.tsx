@@ -8,6 +8,7 @@ const Container = styled.div`
   height: 110px;
   justify-content: center;
   align-items: center;
+
   .first-arrow {
     padding-right: 10px;
   }

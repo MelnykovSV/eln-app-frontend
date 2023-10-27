@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 const Container = styled.div`
   padding: 10px;
   display: flex;
+  justify-content: center;
   gap: 5px;
   align-items: center;
   .logo_icon {

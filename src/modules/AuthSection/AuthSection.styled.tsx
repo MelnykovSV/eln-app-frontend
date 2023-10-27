@@ -12,7 +12,12 @@ export const Container = styled.section<IStyledProps>`
 
 export const MainSectionContent = styled.div`
   /* background-color: #3e85f3; */
-  background-image: url(${BgImage});
+  background-image: linear-gradient(
+      0deg,
+      rgba(33, 150, 243, 0.4),
+      rgba(33, 150, 243, 0.4)
+    ),
+    url(${BgImage});
   height: 100%;
   padding-top: 200px;
   padding-bottom: 200px;

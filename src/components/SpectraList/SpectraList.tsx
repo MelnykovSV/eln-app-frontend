@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { Document, Page, pdfjs } from "react-pdf";
 // import { StyleSheet } from "@react-pdf/renderer";
 import { DNALoader } from "../../ui";
+import { Button } from "@mui/material";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 // const style = StyleSheet.create({
@@ -93,22 +94,26 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
               loading={<DNALoader />}>
               <Page pageNumber={pageNumber} />
             </Document>
-            <p>{modalSpectrLabel}</p>
+            <p className='text-container'>{modalSpectrLabel}</p>
             <p>
               Page {pageNumber} of {numPages}
             </p>
-            <button
-              type="button"
-              onClick={prevPageHandler}
-              disabled={pageNumber === 1}>
-              Prev
-            </button>
-            <button
-              type="button"
-              onClick={nextPageHandler}
-              disabled={pageNumber === numPages}>
-              Next
-            </button>
+            <div className="buttons-container">
+              <Button
+                type="button"
+                variant="contained"
+                onClick={prevPageHandler}
+                disabled={pageNumber === 1}>
+                Prev
+              </Button>
+              <Button
+                type="button"
+                variant="contained"
+                onClick={nextPageHandler}
+                disabled={pageNumber === numPages}>
+                Next
+              </Button>
+            </div>
           </div>
         </Box>
       </Modal>

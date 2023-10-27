@@ -3,9 +3,15 @@ import { theme } from "../../theme/theme";
 
 const Container = styled.div`
   /* background-color: ${theme.palette.primary.light}; */
+
   padding: 20px;
 
+
   max-width: 500px;
+  width: 100%;
+  @media screen and (min-width: 1280px) {
+    width: 500px;
+  }
   .MuiFormControlLabel-root {
     display: flex;
   }

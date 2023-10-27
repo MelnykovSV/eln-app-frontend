@@ -1,5 +1,5 @@
 import Container from "./DoubleArrows.styled";
-import { ReactComponent as LongArrowRight } from "./../../images/icons/Long_arrow.svg";
+import { ReactComponent as LongArrowRight } from "./../../images/icons/Long_arrow1.svg";
 import { IDoubleArrowsProps } from "../../types";
 
 const DoubleArrows = ({ stagesNumber }: IDoubleArrowsProps) => {

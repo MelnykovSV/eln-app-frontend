@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  .header {
+  .header  {
     .nav-link {
       display: block;
       padding: 6px 16px;

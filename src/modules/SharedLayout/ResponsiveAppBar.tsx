@@ -19,9 +19,7 @@ import { Logo } from "../../ui";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut } from "../../redux/auth/operations";
 
-import {
-  clearSchemesData,
-} from "../../redux/schemes/schemesSlice";
+import { clearSchemesData } from "../../redux/schemes/schemesSlice";
 
 import { getIsLoggedIn, getUserName } from "../../redux/auth/authSlice";
 import {
@@ -126,7 +124,11 @@ export function ResponsiveAppBar() {
                 }}>
                 <MenuItem key={"schemes"} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink to={locationState || "/schemes"}>Schemes</NavLink>
+                    <NavLink
+                      to={locationState || "/schemes"}
+                      className="nav-link">
+                      Schemes
+                    </NavLink>
                   </Typography>
                 </MenuItem>
                 <MenuItem
@@ -136,6 +138,7 @@ export function ResponsiveAppBar() {
                   <Typography textAlign="center">
                     <NavLink
                       to={`/scheme/${currentSchemeId}`}
+                      className="nav-link"
                       onClick={() => {
                         if (location.pathname === "/schemes") {
                           dispatch(updateSchemesState(location));
@@ -145,10 +148,14 @@ export function ResponsiveAppBar() {
                     </NavLink>
                   </Typography>
                 </MenuItem>
-                <MenuItem key={"stage"} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={"stage"}
+                  onClick={handleCloseNavMenu}
+                  disabled={currentStage._id && currentSchemeId ? false : true}>
                   <Typography textAlign="center">
                     <NavLink
-                      to={"/stage"}
+                      to={`/stage/${currentSchemeId}/${currentStage._id}`}
+                      className="nav-link"
                       onClick={() => {
                         if (location.pathname === "/schemes") {
                           dispatch(updateSchemesState(location));

@@ -24,6 +24,7 @@ import {
 } from "../../redux/schemes/schemesSlice";
 
 import { CheckMark } from "../../ui";
+import { DNALoaderSmall } from "../../ui";
 
 interface IStageInfoProps {
   attemptNumber: number;
@@ -46,6 +47,8 @@ const StageInfo = ({
   const matches = useMediaQuery("(min-width:768px)");
   const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
+
+  const isLoading = useAppSelector(getIsLoadingSchemes);
 
   return (
     <Container>
@@ -137,8 +140,9 @@ const StageInfo = ({
             onClick={saveHandler}
             variant="contained"
             color="primary"
-            disabled={currentStage.isChanged ? false : true}>
+            disabled={currentStage.isChanged || !isLoading ? false : true}>
             Save stage data
+            {isLoading ? <DNALoaderSmall /> : null}
           </Button>
         </div>
       </div>

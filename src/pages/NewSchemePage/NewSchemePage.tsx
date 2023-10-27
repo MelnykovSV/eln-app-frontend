@@ -9,9 +9,12 @@ import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeY
 import Switch from "@mui/material/Switch";
 import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { privateApi } from "../../api";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
+// import { updateIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { addNewScheme } from "../../redux/schemes/operations";
+import { IAddNewSchemePayload } from "../../redux/schemes/operations";
 
 const blankStage = {
   startingMaterial: "",
@@ -34,6 +37,7 @@ interface IStage {
 }
 
 const NewSchemePage = () => {
+  const dispatch = useAppDispatch();
   const [startingMaterial, setStartingMaterial] = useState("");
   const [mass, setStartingMass] = useState("");
   const [price, setPrice] = useState("");
@@ -127,7 +131,7 @@ const NewSchemePage = () => {
 
     const repairedStagesArray = repairNewSchemeArray(stages);
 
-    const response = await privateApi.post("/api/schemes/", {
+    console.log({
       startingMaterial,
       targetCompound:
         repairedStagesArray[repairedStagesArray.length - 1].product,
@@ -137,9 +141,19 @@ const NewSchemePage = () => {
       stages: repairedStagesArray,
     });
 
-    console.log(response);
+    const { payload } = (await dispatch(
+      addNewScheme({
+        startingMaterial,
+        targetCompound:
+          repairedStagesArray[repairedStagesArray.length - 1].product,
+        mass,
+        price,
+        deadline,
+        stages: repairedStagesArray,
+      })
+    )) as { payload: IAddNewSchemePayload };
 
-    navigate(`/scheme/${response.data.data._id}`);
+    navigate(`/scheme/${payload._id}`);
   };
 
   const inputChangeHandler = (

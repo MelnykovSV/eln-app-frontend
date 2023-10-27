@@ -1,10 +1,11 @@
-import Container from "./RegisterPage.styled";
+import * as S from "./RegisterPage.styled";
 import { RegistrationForm } from "../../modules";
 import { useEffect } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import { getAuthError } from "../../redux/auth/authSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Logo } from "../../ui";
 
 const RegisterPage = () => {
   const authError = useAppSelector(getAuthError);
@@ -18,9 +19,19 @@ const RegisterPage = () => {
     }
   }, [authError]);
   return (
-    <Container className="container">
-      <RegistrationForm />
-    </Container>
+    <S.Container>
+      <S.BGContainer>
+        <div className="content">
+          <Logo />
+          <p className="slogan">
+            The smart way to keep your experiment records
+          </p>
+        </div>
+      </S.BGContainer>
+      <S.FormContainer>
+        <RegistrationForm />
+      </S.FormContainer>
+    </S.Container>
   );
 };
 

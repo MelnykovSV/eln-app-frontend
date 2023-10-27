@@ -3,7 +3,7 @@ import { Container } from "./DNALoader.styled";
 
 const DNALoader = () => {
   return (
-    <Container>
+    <Container className="loader">
       <Dna
         visible={true}
         height="300"

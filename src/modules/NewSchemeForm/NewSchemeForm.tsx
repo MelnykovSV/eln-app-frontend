@@ -16,6 +16,10 @@ import { INewSchemeFormProps } from "../../types/componentsProps";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useState } from "react";
 import { AlertIcon } from "../../ui";
+import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { DNALoaderSmall } from "../../ui";
+
 
 const NewSchemeForm = ({
   startingMaterial,
@@ -31,6 +35,8 @@ const NewSchemeForm = ({
   deadlineChangeHandler,
 }: INewSchemeFormProps) => {
   const [areErrorsShown, setAreErrorsShown] = useState(false);
+  const isLoading = useAppSelector(getIsLoadingSchemes);
+
 
   return (
     <Container
@@ -99,10 +105,6 @@ const NewSchemeForm = ({
           <Button
             type="button"
             onClick={() => {
-              // if (!stages[stages.length - 1].product) {
-              //   setAreErrorsShown(true);
-              //   return;
-              // }
               addStageHandler();
             }}
             variant="contained">
@@ -134,8 +136,12 @@ const NewSchemeForm = ({
         areErrorsShown={areErrorsShown}
       />
 
-      <Button type="submit" className="button-submit" variant="contained">
-        Submit
+      <Button
+        type="submit"
+        className="button-submit"
+        variant="contained"
+        disabled={isLoading}>
+        Submit {isLoading ? <DNALoaderSmall /> : null}
       </Button>
     </Container>
   );

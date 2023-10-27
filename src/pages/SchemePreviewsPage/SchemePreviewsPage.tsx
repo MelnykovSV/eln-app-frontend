@@ -30,6 +30,7 @@ const SchemePreviewsPage = () => {
       sortingDirection,
       substring,
     });
+
     dispatch(
       getSchemes({
         page: Number(page),

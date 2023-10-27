@@ -48,16 +48,37 @@ export interface IDeleteFilePayload {
 export interface IGetSchemesParams {
   page: number;
   limit: number;
-  schemeStatus: string|null;
-  substring: string|null;
-  sortingParam: string|null;
-  sortingDirection: string|null;
+  schemeStatus: string | null;
+  substring: string | null;
+  sortingParam: string | null;
+  sortingDirection: string | null;
 }
 
 export interface IGetSchemesPayload {
   schemePreviews: IReactionPreviewData[];
   currentPage: number;
   totalPages: number;
+}
+
+export interface IAddNewSchemeParams {
+  startingMaterial: string;
+  targetCompound: string;
+  mass: string;
+  price: string;
+  deadline: string;
+  stages: {
+    methodic: string;
+    product: string;
+    solvent: string;
+    startingMaterial: string;
+    temp: number | null;
+    time: string;
+    _yield: number | null;
+  }[];
+}
+
+export interface IAddNewSchemePayload {
+  _id: string;
 }
 
 export const getSchemes = createAsyncThunk<
@@ -281,3 +302,24 @@ export const updateSchemeStatusAndSave = createAsyncThunk<
     }
   }
 );
+
+export const addNewScheme = createAsyncThunk<
+  IAddNewSchemePayload,
+  IAddNewSchemeParams
+>("schemes/addNewScheme", async (data, thunkAPI) => {
+  try {
+    const response = await privateApi.post("/api/schemes/", data);
+    return response.data.data;
+  } catch (error) {
+    if (request.isAxiosError(error) && error.response) {
+      return thunkAPI.rejectWithValue({
+        message: error.response.data.message,
+        code: error.response.data.code || null,
+      });
+    }
+    return thunkAPI.rejectWithValue({
+      message: getErrorMessage(error),
+      code: null,
+    });
+  }
+});

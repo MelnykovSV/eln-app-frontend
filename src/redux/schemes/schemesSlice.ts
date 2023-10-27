@@ -9,6 +9,7 @@ import {
   saveCurrentStageData,
   updateSchemeStatusAndSave,
   deleteSpectr,
+  addNewScheme,
 } from "./operations";
 // import { IGetSchemesPayload } from "../../types";
 import { IGetSchemesPayload } from "./operations";
@@ -546,6 +547,11 @@ const schemesSlice = createSlice({
         state.error = { message: null, code: null };
       }
     );
+    builder.addCase(addNewScheme.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.status = "fulfilled";
+      state.error = { message: null, code: null };
+    });
     builder.addMatcher(isSchemesPending, (state) => {
       state.isLoading = true;
       state.status = "pending";
