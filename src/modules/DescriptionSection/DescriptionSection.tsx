@@ -1,5 +1,9 @@
 import * as S from "./DescriptionSection.styled";
 import SchemesPageImage from "./../../images/Schemes-page.JPG";
+import NewSchemePage from "./../../images/New-scheme-page.JPG";
+import SingleSchemePage from "./../../images/Single-scheme-page1.JPG";
+import SingleSchemePageReagents from "./../../images/Single-scheme-page-reagents.JPG";
+import SingleStagePage from "./../../images/Single-stage-page.JPG";
 
 const DescriptionSection = () => {
   return (
@@ -38,8 +42,8 @@ const DescriptionSection = () => {
           </S.DescriptionInfo>
 
           <S.DescritpionPictureContainer>
-            <div className="img-container">
-              <img src={SchemesPageImage} alt="123" />
+            <div className="img-container schemes-page">
+              <img src={SchemesPageImage} alt="Schemes page" />
             </div>
           </S.DescritpionPictureContainer>
         </S.DescriptionBlock>
@@ -77,20 +81,9 @@ const DescriptionSection = () => {
             </S.DescriptionText>
           </S.DescriptionInfo>
           <S.DescritpionPictureContainer>
-            {/* <source
-              srcSet={`${desktopSidebar1x} 1x, ${desktopSidebar2x} 2x`}
-              media="(min-width: 1440px)"
-            />
-            <source
-              srcSet={`${tabletSidebar1x} 1x, ${tabletSidebar2x} 2x`}
-              media="(min-width: 768px)"
-            />
-
-            <source srcSet={`${mobileSidebar1x} 1x, ${mobileSidebar2x} 2x`} />
-            <S.DescriptionImg
-              src={mobileSidebar1x}
-              alt="User panel with dark and light themes"
-            /> */}
+            <div className="img-container new-scheme-page">
+              <img src={NewSchemePage} alt="New scheme page" />
+            </div>
           </S.DescritpionPictureContainer>
         </S.DescriptionBlock>
 
@@ -108,6 +101,12 @@ const DescriptionSection = () => {
                   including reaction conditions and yields for each stage.
                 </li>
                 <li>
+                  Additionally, the "Single Scheme" page can identify the last
+                  successfully completed stage by outlining its product in
+                  green, making it easy to track your progress and quickly
+                  identify the latest accomplishments in your synthesis journey.
+                </li>
+                <li>
                   In the dedicated "Reagents Calculation" tab, you can access
                   information about every reagent required for your synthesis.
                   This feature not only provides details on the reagents but
@@ -115,30 +114,19 @@ const DescriptionSection = () => {
                   mass of the target compound when yields are provided for each
                   stage.
                 </li>
-                <li>
-                  Additionally, the "Single Scheme" page can identify the last
-                  successfully completed stage by outlining its product in
-                  green, making it easy to track your progress and quickly
-                  identify the latest accomplishments in your synthesis journey.
-                </li>
               </ul>
             </S.DescriptionText>
           </S.DescriptionInfo>
           <S.DescritpionPictureContainer>
-            {/* <source
-              srcSet={`${desktopTask1x} 1x, ${desktopTask2x} 2x`}
-              media="(min-width: 1440px)"
-            />
-            <source
-              srcSet={`${tabletTask1x} 1x, ${tabletTask2x} 2x`}
-              media="(min-width: 768px)"
-            />
-
-            <source srcSet={`${mobileTask1x} 1x, ${mobileTask2x} 2x`} />
-            <S.DescriptionImg
-              src={mobileTask1x}
-              alt="Part of the screen with the calendar and scheduled tasks"
-            /> */}
+            <div className="img-container single-scheme-page">
+              <img src={SingleSchemePage} alt="Single scheme page" />
+            </div>
+            <div className="img-container single-scheme-page-reagents">
+              <img
+                src={SingleSchemePageReagents}
+                alt="Single scheme page reagents"
+              />
+            </div>
           </S.DescritpionPictureContainer>
         </S.DescriptionBlock>
         <S.DescriptionBlock>
@@ -178,20 +166,9 @@ const DescriptionSection = () => {
             </S.DescriptionText>
           </S.DescriptionInfo>
           <S.DescritpionPictureContainer>
-            {/* <source
-              srcSet={`${desktopSidebar1x} 1x, ${desktopSidebar2x} 2x`}
-              media="(min-width: 1440px)"
-            />
-            <source
-              srcSet={`${tabletSidebar1x} 1x, ${tabletSidebar2x} 2x`}
-              media="(min-width: 768px)"
-            />
-
-            <source srcSet={`${mobileSidebar1x} 1x, ${mobileSidebar2x} 2x`} />
-            <S.DescriptionImg
-              src={mobileSidebar1x}
-              alt="User panel with dark and light themes"
-            /> */}
+            <div className="img-container single-stage-page">
+              <img src={SingleStagePage} alt="Single stage page" />
+            </div>
           </S.DescritpionPictureContainer>
         </S.DescriptionBlock>
       </S.DescriptionContent>

@@ -41,7 +41,7 @@ const SynthesisSchemeStage = ({
       <div className="conditions-container">
         <p>
           {solvent ? <span>{solvent}</span> : null}
-          {(solvent && temp) || (solvent && time) ? <span>,</span> : null}
+          {(solvent && temp) || (solvent && time) ? <span>, </span> : null}
           {temp ? <span>{temp} &#8451;</span> : null}
           {temp && time ? <span>,</span> : null}
           {time ? <span> {time} h</span> : null}
