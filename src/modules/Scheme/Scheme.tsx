@@ -57,6 +57,7 @@ const Scheme = ({
                 n={n}
                 key={nanoid()}
                 isCurrentStage={i === lastOkStageNumber}
+                z={stages.length-i}
               />
             ))
           : null}

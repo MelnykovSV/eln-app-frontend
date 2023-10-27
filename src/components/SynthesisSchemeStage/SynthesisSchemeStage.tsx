@@ -21,10 +21,13 @@ const SynthesisSchemeStage = ({
   },
   n,
   isCurrentStage,
+  z,
 }: ISynthesisSchemeStageProps) => {
   if (!product) {
     product = "";
   }
+
+  console.log(z);
 
   const navigate = useNavigate();
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
@@ -37,7 +40,8 @@ const SynthesisSchemeStage = ({
   return (
     <Container
       onClick={stageClickHandler}
-      className={isCurrentStage ? "currentStage" : ""}>
+      className={isCurrentStage ? "currentStage" : ""}
+      style={{ zIndex: z }}>
       <div className="conditions-container">
         <p>
           {solvent ? <span>{solvent}</span> : null}
@@ -50,7 +54,7 @@ const SynthesisSchemeStage = ({
         {_yield ? <p>{_yield} %</p> : null}
         {methodic ? (
           <div className="methodic-container">
-            <p className="methodic">{methodic}</p>
+            <div className="methodic">{methodic}</div>
           </div>
         ) : null}
       </div>

@@ -66,6 +66,7 @@ export interface ISynthesisSchemeStageProps {
   n: number;
   calculatedMass?: number | null;
   isCurrentStage: boolean;
+  z: number;
 }
 
 export interface ISchemeProps {

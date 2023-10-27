@@ -9,7 +9,7 @@ body {
 
   scrollbar-width: thin;
   scrollbar-color: #2196f3 #bdbdbd;
-  padding: 0 !important;
+  /* padding: 0 !important; */
 }
 
 code {
