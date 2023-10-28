@@ -94,8 +94,8 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
               loading={<DNALoader />}>
               <Page pageNumber={pageNumber} />
             </Document>
-            <p className='text-container'>{modalSpectrLabel}</p>
-            <p>
+            <p className="text-container">{modalSpectrLabel}</p>
+            <p className="pages">
               Page {pageNumber} of {numPages}
             </p>
             <div className="buttons-container">

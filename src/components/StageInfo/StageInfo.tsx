@@ -140,7 +140,7 @@ const StageInfo = ({
             onClick={saveHandler}
             variant="contained"
             color="primary"
-            disabled={currentStage.isChanged || !isLoading ? false : true}>
+            disabled={!currentStage.isChanged || isLoading ? true : false}>
             Save stage data
             {isLoading ? <DNALoaderSmall /> : null}
           </Button>
