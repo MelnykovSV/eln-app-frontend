@@ -1,20 +1,19 @@
 import Container from "./NewSchemePage.styled";
-import { NewSchemeForm } from "../../modules";
-import { Scheme } from "../../modules";
+import { NewSchemeForm, Scheme } from "../../modules";
 import { useState, useEffect } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { Dayjs } from "dayjs";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
-
 import Switch from "@mui/material/Switch";
 import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-// import { updateIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
 import { useAppDispatch } from "../../redux/hooks";
-import { addNewScheme } from "../../redux/schemes/operations";
-import { IAddNewSchemePayload } from "../../redux/schemes/operations";
+import {
+  addNewScheme,
+  IAddNewSchemePayload,
+} from "../../redux/schemes/operations";
 
 const blankStage = {
   startingMaterial: "",
@@ -130,16 +129,6 @@ const NewSchemePage = () => {
     stages[0].startingMaterial = startingMaterial;
 
     const repairedStagesArray = repairNewSchemeArray(stages);
-
-    console.log({
-      startingMaterial,
-      targetCompound:
-        repairedStagesArray[repairedStagesArray.length - 1].product,
-      mass,
-      price,
-      deadline,
-      stages: repairedStagesArray,
-    });
 
     const { payload } = (await dispatch(
       addNewScheme({

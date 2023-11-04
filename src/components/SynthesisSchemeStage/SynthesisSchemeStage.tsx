@@ -1,11 +1,9 @@
 import Container from "./SynthesisSchemeStage.styled";
-import { SingleMolCanvas } from "../../ui";
-import { SingleArrow } from "../../ui";
+import { SingleMolCanvas, SingleArrow } from "../../ui";
 import { ISynthesisSchemeStageProps } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
 import { useNavigate } from "react-router";
 import { useAppSelector } from "../../redux/hooks";
-
 import { getCurrentSchemeId } from "../../redux/schemes/schemesSlice";
 
 const SynthesisSchemeStage = ({
@@ -27,7 +25,6 @@ const SynthesisSchemeStage = ({
     product = "";
   }
 
-  console.log(z);
 
   const navigate = useNavigate();
   const currentSchemeId = useAppSelector(getCurrentSchemeId);

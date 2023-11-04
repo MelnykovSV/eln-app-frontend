@@ -1,10 +1,8 @@
 import Container from "./ReactionSchemePreview.styled";
-import { SingleMolCanvas } from "../../ui";
+import { SingleMolCanvas, DoubleArrows } from "../../ui";
 import { IReactionSchemePreviewProps } from "../../types";
-import { DoubleArrows } from "../../ui";
 import { useState } from "react";
-import { useNavigate } from "react-router";
-import { useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateSchemesState } from "../../redux/schemes/schemesSlice";
 
@@ -48,7 +46,6 @@ const ReactionSchemePreview = ({
       }}
       style={{
         zIndex: isActive ? 10 : 0,
-        // borderColor: getSchemeType(),
       }}
       className={getSchemeType()}>
       <div className="canvas-container  ">

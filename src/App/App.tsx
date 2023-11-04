@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { lazy, Suspense } from "react";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
@@ -17,7 +17,6 @@ const Schemes = lazy(() => import("../pages/Schemes/Schemes"));
 const SingleSchemePage = lazy(
   () => import("../pages/SingleSchemePage/SingleSchemePage")
 );
-
 const NewSchemePage = lazy(
   () => import("../pages/NewSchemePage/NewSchemePage")
 );
@@ -72,59 +71,7 @@ function App() {
           <DNALoader />
         )}
       </Suspense>
-
       <ToastContainer />
-
-      {/* <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route
-            index
-            element={
-              <PrivateRoute>
-                <Schemes />
-              </PrivateRoute>
-            }></Route>
-
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <RegisterPage />
-              </PublicRoute>
-            }></Route>
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <LoginPage />
-              </PublicRoute>
-            }></Route>
-          <Route
-            path="/scheme/:schemeId"
-            element={
-              <PrivateRoute>
-                <SingleSchemePage />
-              </PrivateRoute>
-            }></Route>
-          <Route
-            path="/stage/:schemeId/:stageId"
-            element={
-              <PrivateRoute>
-                <StagePage />
-              </PrivateRoute>
-            }></Route>
-          <Route
-            path="/tasks"
-            element={<PrivateRoute>Tasks</PrivateRoute>}></Route>
-          <Route
-            path="/newScheme"
-            element={
-              <PrivateRoute>
-                <NewSchemePage />
-              </PrivateRoute>
-            }></Route>
-        </Route>
-      </Routes> */}
     </Container>
   );
 }

@@ -7,7 +7,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { DNALoaderSmall } from "../../ui";
-
 import { getIsSpectrUploading } from "../../redux/schemes/schemesSlice";
 
 interface IAttemptSpectraProps {

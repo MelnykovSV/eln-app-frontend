@@ -1,7 +1,9 @@
 import Container from "./SchemePreviewsPage.styled";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
-import { getSchemePreviews } from "../../redux/schemes/schemesSlice";
-import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
+import {
+  getSchemePreviews,
+  getIsLoadingSchemes,
+} from "../../redux/schemes/schemesSlice";
 import { useEffect } from "react";
 import { getSchemes } from "../../redux/schemes/operations";
 import { DNALoader } from "../../ui";
@@ -22,15 +24,6 @@ const SchemePreviewsPage = () => {
   const limit = searchParams.get("limit") || 18;
 
   useEffect(() => {
-    console.log({
-      page: Number(page),
-      limit: Number(limit),
-      schemeStatus,
-      sortingParam,
-      sortingDirection,
-      substring,
-    });
-
     dispatch(
       getSchemes({
         page: Number(page),

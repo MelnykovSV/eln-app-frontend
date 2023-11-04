@@ -1,6 +1,5 @@
 import Container from "./SingleSchemePage.styled";
 import { Scheme } from "../../modules";
-// import { currentScheme } from "../../testData";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useState, useEffect } from "react";
@@ -8,8 +7,7 @@ import { ReagentList } from "../../modules";
 import { calc } from "../../helpers/molMass";
 import axios from "axios";
 import { CustomTabPanel } from "../../components";
-import { useAppSelector } from "../../redux/hooks";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { useParams } from "react-router";
 import { getSingleScheme } from "../../redux/schemes/operations";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
@@ -55,7 +53,6 @@ const SingleSchemePage = () => {
           updatedSchemeData.totalYieldCoefficient
         ).toFixed(2)
       ),
-      // mass: 100
     },
   ];
 

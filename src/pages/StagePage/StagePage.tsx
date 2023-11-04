@@ -11,9 +11,6 @@ import { getSchemeAndStage } from "../../redux/schemes/operations";
 
 const StagePage = () => {
   const dispatch = useAppDispatch();
-  // const currentStage = useAppSelector(getCurrentStage);
-  // const [_yield] = useState(currentStage._yield);
-  // const [_id] = useState(currentStage._id);
   const currentScheme = useAppSelector(getCurrentScheme);
   const { schemeId, stageId } = useParams() as any;
 

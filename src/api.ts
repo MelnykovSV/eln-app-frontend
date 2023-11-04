@@ -17,14 +17,7 @@ export const injectStore = (_store: any) => {
   store = _store;
 };
 
-export const token = {
-  set(token: string) {
-    privateApi.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    privateApi.defaults.headers.common.Authorization = "";
-  },
-};
+
 
 refreshApi.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${store.getState().auth.refreshToken}`;

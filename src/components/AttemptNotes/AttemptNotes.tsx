@@ -1,8 +1,9 @@
 import Container from "./AttemptNotes.styled";
-import { getCurrentStage } from "../../redux/schemes/schemesSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import { useAppSelector } from "../../redux/hooks";
-import { setAttemptInfo } from "../../redux/schemes/schemesSlice";
+import {
+  getCurrentStage,
+  setAttemptInfo,
+} from "../../redux/schemes/schemesSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import TextField from "@mui/material/TextField";
 
 interface IAttemptNotesProps {

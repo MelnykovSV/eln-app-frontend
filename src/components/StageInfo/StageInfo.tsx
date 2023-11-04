@@ -1,30 +1,29 @@
 import Container from "./StageInfo.styled";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
   getCurrentStageStartingMaterial,
   getCurrentStageProduct,
   getCurrentStageAttempts,
   getCurrentStage,
 } from "../../redux/schemes/schemesSlice";
-import { SingleMolCanvas, SingleArrow } from "../../ui";
-import { Select } from "@mui/material";
+import {
+  SingleMolCanvas,
+  SingleArrow,
+  DNALoaderMedium,
+  CheckMark,
+  DNALoaderSmall,
+} from "../../ui";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import { nanoid } from "nanoid";
-import { SelectChangeEvent } from "@mui/material";
-import { addAttempt } from "../../redux/schemes/schemesSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import { Button } from "@mui/material";
+import { SelectChangeEvent, Button, Select } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { DNALoaderMedium } from "../../ui";
 import {
   getIsLoadingSchemes,
   getCurrentSchemeId,
+  addAttempt,
 } from "../../redux/schemes/schemesSlice";
-
-import { CheckMark } from "../../ui";
-import { DNALoaderSmall } from "../../ui";
 
 interface IStageInfoProps {
   attemptNumber: number;

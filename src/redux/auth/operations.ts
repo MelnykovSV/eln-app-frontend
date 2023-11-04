@@ -1,7 +1,6 @@
 import { privateApi, publicApi, refreshApi } from "../../api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage } from "../../getErrorMessage";
-import { token } from "../../api";
 import request from "axios";
 import {
   IRegisterUserPayload,
@@ -63,10 +62,8 @@ export const signIn = createAsyncThunk<ILoginUserPayload, ISignInData>(
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await privateApi.post("/api/auth/logout");
-    token.unset();
   } catch (error) {
     if (request.isAxiosError(error) && error.response) {
-      console.log(error);
       return thunkAPI.rejectWithValue({
         message: error.response.data.message,
         code: error.response.data.code || null,
@@ -91,7 +88,6 @@ export const getCurrentUser = createAsyncThunk<ICurrentUserPayload>(
       /// TODO: Разобраться, почему тут такая проверка, скорее всего нужно что-то изменить
       if (getErrorMessage(error) !== "Request failed with status code 404") {
         if (request.isAxiosError(error) && error.response) {
-          console.log(error);
           return thunkAPI.rejectWithValue({
             message: error.response.data.message,
             code: error.response.data.code || null,
@@ -112,7 +108,6 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
     return response.data.data;
   } catch (error) {
     if (request.isAxiosError(error) && error.response) {
-      console.log(error);
       return thunkAPI.rejectWithValue({
         message: error.response.data.message,
         code: error.response.data.code || null,

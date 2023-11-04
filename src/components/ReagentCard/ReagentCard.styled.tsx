@@ -1,7 +1,7 @@
-// import styled from "@emotion/styled";
-import { styled as muiStyled } from "@mui/system";
+import { IStyledProps } from "../../types/common";
+import styled from "@emotion/styled";
 
-const Container = muiStyled("li")`
+const Container = styled.li<IStyledProps>`
   padding: 10px;
   border: 1px solid black;
   display: flex;

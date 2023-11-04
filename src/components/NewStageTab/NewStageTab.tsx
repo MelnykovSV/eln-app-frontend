@@ -1,6 +1,5 @@
 import Container from "./NewStageTab.styled";
 import { TextField } from "@mui/material";
-
 import { SingleMolCanvas } from "../../ui";
 import InputAdornment from "@mui/material/InputAdornment";
 

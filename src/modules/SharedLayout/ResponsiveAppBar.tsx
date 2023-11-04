@@ -7,38 +7,29 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-// import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import { NavLink } from "react-router-dom";
 import { Logo } from "../../ui";
-// import { useAppSelector } from "../../redux/hooks";
-// import { getToken, getUser } from "../../redux/auth/authSlice";
-// import { UserMenu } from "../UserMenu/UserMenu";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { logOut } from "../../redux/auth/operations";
-
-import { clearSchemesData } from "../../redux/schemes/schemesSlice";
-
+import { logOut, getCurrentUser } from "../../redux/auth/operations";
 import { getIsLoggedIn, getUserName } from "../../redux/auth/authSlice";
 import {
   getCurrentSchemeId,
   getCurrentStage,
 } from "../../redux/schemes/schemesSlice";
 import { useEffect, useState } from "react";
-import { getCurrentUser } from "../../redux/auth/operations";
 import { useLocation } from "react-router";
-import { getSchemesState } from "../../redux/schemes/schemesSlice";
-import { updateSchemesState } from "../../redux/schemes/schemesSlice";
+import {
+  getSchemesState,
+  updateSchemesState,
+  clearSchemesData,
+} from "../../redux/schemes/schemesSlice";
 
-// const publicPages = ["register", "login"];
-// const privatePages = ["schemes", "scheme", "stage", "tasks"];
 const settings = ["Logout"];
 
 export function ResponsiveAppBar() {
   const location = useLocation();
-  // const token = useAppSelector(getAccessToken);
   const isLoggedIn = useAppSelector(getIsLoggedIn);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const currentStage = useAppSelector(getCurrentStage);
@@ -58,7 +49,6 @@ export function ResponsiveAppBar() {
     setActualUserName(userName);
   }, [userName]);
 
-  //   const user = true;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -168,11 +158,6 @@ export function ResponsiveAppBar() {
                     </NavLink>
                   </Typography>
                 </MenuItem>
-                {/* <MenuItem key={"tasks"} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <NavLink to={"/tasks"}>Tasks</NavLink>
-                  </Typography>
-                </MenuItem> */}
               </Menu>
             </Box>
           ) : null}
@@ -238,16 +223,6 @@ export function ResponsiveAppBar() {
                   </NavLink>
                 </Typography>
               </MenuItem>
-              {/* <MenuItem
-                sx={{ padding: 0 }}
-                key={"tasks"}
-                onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <NavLink className="nav-link" to={"/tasks"}>
-                    Tasks
-                  </NavLink>
-                </Typography>
-              </MenuItem> */}
             </Box>
           ) : null}
 
@@ -266,9 +241,6 @@ export function ResponsiveAppBar() {
                       p: 0,
                       marginTop: "0",
                     }}>
-                    {/* {true ? (
-                    <Avatar alt={`alt`} src="/static/images/avatar/2.jpg" />
-                  ) : null} */}
                     <span> {actualUserName?.split("")[0] || ""}</span>
                   </IconButton>
                 </div>
@@ -289,8 +261,6 @@ export function ResponsiveAppBar() {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}>
-                {/* <UserMenu handleCloseUserMenu={handleCloseUserMenu} /> */}
-
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography
@@ -311,4 +281,3 @@ export function ResponsiveAppBar() {
     </AppBar>
   );
 }
-// export default ResponsiveAppBar;

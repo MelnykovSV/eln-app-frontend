@@ -1,6 +1,5 @@
 import Container from "./SpectraListItem.styled";
 import { useParams } from "react-router";
-// import { privateApi } from "../../api";
 import { modalOpenType } from "../../types";
 import Button from "@mui/material/Button";
 import { useAppDispatch } from "../../redux/hooks";

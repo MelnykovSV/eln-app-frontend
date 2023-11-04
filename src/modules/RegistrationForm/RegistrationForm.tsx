@@ -15,7 +15,6 @@ const RegistrationForm = () => {
   const isLoading = useAppSelector(getIsLoading);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const dispatch = useAppDispatch();
-
   const checkboxHandler = () => {
     setIsCheckboxChecked(!isCheckboxChecked);
   };
@@ -43,6 +42,7 @@ const RegistrationForm = () => {
       .oneOf([yup.ref("password")], "Passwords don't match")
       .required("Password is required"),
   });
+  
   const formik = useFormik({
     initialValues: {
       name: "",

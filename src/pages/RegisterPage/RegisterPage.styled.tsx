@@ -73,7 +73,6 @@ export const BGContainer = styled.div`
   }
 `;
 export const FormContainer = styled.div`
-  /* background-color: #4893d1; */
   display: flex;
   flex-direction: column;
   justify-content: center;

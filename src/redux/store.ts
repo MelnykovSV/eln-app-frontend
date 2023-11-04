@@ -1,8 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userReducer } from "./auth/authSlice";
 import { schemesReducer } from "./schemes/schemesSlice";
-
-// import { planningReducer } from './planning/planningSlice';
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,

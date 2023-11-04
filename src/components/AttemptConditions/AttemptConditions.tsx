@@ -1,11 +1,10 @@
 import Container from "./AttemptConditions.styled";
 import TextField from "@mui/material/TextField";
-import { getCurrentStage } from "../../redux/schemes/schemesSlice";
-import { useAppDispatch } from "../../redux/hooks";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setAttemptInfo,
   setAttemptStatus,
+  getCurrentStage
 } from "../../redux/schemes/schemesSlice";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -192,14 +191,11 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
           label="Scaling"
         />
       </RadioGroup>
-
-      {/* <Checkbox   color="success" /> */}
       <FormControlLabel
         control={
           <Checkbox
             name="isOk"
             color="success"
-            // defaultChecked={isOk}
             checked={isOk}
             onChange={checkboxChangeHandler}
           />

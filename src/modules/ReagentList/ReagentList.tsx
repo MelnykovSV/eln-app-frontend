@@ -1,7 +1,7 @@
 import Container from "./ReagentList.styled";
 import { ReagentCard } from "../../components";
 import { IReagentListProps } from "../../types";
-import { nanoid } from "nanoid";
+
 
 const ReagentList = ({ reagents }: IReagentListProps) => {
   return (

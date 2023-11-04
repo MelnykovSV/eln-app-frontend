@@ -132,7 +132,7 @@ const nums = "1234567890";
 function init() {
   let inputField = document.getElementById("formula");
   let formula = inputField.value;
-  console.log(formula);
+  // console.log(formula);
   let result = calc(formula);
   displayResult(result.atoms, result.mass);
 }
@@ -231,7 +231,7 @@ function getNumberStartingAt(i, formula) {
 }
 
 function displayResult(atoms, mass) {
-  console.log(mass);
+  // console.log(mass);
   let resultContainer = document.getElementById("result");
   resultContainer.innerHTML = `${mass} g/mol`;
   let atomsstr = "<br>Found:";

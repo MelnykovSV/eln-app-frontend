@@ -11,14 +11,12 @@ import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import { nanoid } from "nanoid";
 import { NewStageTab } from "../../components";
-import { SingleMolCanvas } from "../../ui";
 import { INewSchemeFormProps } from "../../types/componentsProps";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useState } from "react";
-import { AlertIcon } from "../../ui";
+import { AlertIcon,DNALoaderSmall, SingleMolCanvas } from "../../ui";
 import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
 import { useAppSelector } from "../../redux/hooks";
-import { DNALoaderSmall } from "../../ui";
 
 
 const NewSchemeForm = ({

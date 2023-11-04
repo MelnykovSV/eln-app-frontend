@@ -1,8 +1,6 @@
 import Container from "./FormTextInput.styled";
 import { IFormTextInputProps } from "../../types";
-import { InputAdornment } from "@mui/material";
-import { IconButton } from "@mui/material";
-
+import { InputAdornment, IconButton } from "@mui/material";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 

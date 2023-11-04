@@ -1,7 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router";
-
 import { useAppSelector } from "../redux/hooks";
-// import { IRouteProps } from "../types";
 import { getIsLoggedIn, getIsRefreshing } from "../redux/auth/authSlice";
 
 export const PrivateRoute = () => {

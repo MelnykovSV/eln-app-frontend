@@ -107,7 +107,7 @@ export const DescriptionName = styled.h3`
   }
 `;
 
-export const DescriptionText = styled.p`
+export const DescriptionText = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.28;

@@ -11,7 +11,6 @@ const Container = styled.form<IStyledProps>`
 
   .dropzone {
     background-color: ${({ theme }) => theme.palette.info.light};
-    /* border: solid 1px black; */
     color: white;
     padding: 10px;
     cursor: pointer;

@@ -1,18 +1,15 @@
 import Container from "./Schemes.styled";
-import { CustomSelect } from "../../components";
+import { CustomSelect, SortingRadioGroup } from "../../components";
 import React, { useState, useEffect } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { SortingRadioGroup } from "../../components";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { SearchTextInput } from "../../ui";
 import { useAppSelector } from "../../redux/hooks";
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams, useNavigate } from "react-router-dom";
 import { getTotalPages } from "../../redux/schemes/schemesSlice";
-import { useNavigate } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import Button from "@mui/material/Button";
-import { useSearchParams } from "react-router-dom";
 import { generateQueryString } from "../../helpers/generateQueryString";
 
 dayjs.extend(customParseFormat);
@@ -20,16 +17,13 @@ dayjs.extend(customParseFormat);
 const Schemes = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
   const sortingParam = searchParams.get("sortingParam");
   const sortingDirection = searchParams.get("sortingDirection");
   const substring = searchParams.get("substring");
   const schemeStatus = searchParams.get("schemeStatus");
   const page = searchParams.get("page");
   const limit = searchParams.get("limit");
-
   const totalPages = useAppSelector(getTotalPages);
-
   const [currentSchemeStatus, setCurrentSchemeStatus] = useState(
     schemeStatus || "all"
   );
@@ -66,7 +60,6 @@ const Schemes = () => {
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentPage(1);
     setCurrentSubstring(e.target.value);
-    // dispatch(updateSearchSubstring(e.target.value));
   };
 
   const schemesTypeSelectHandler = (event: SelectChangeEvent) => {
@@ -79,14 +72,12 @@ const Schemes = () => {
   ) => {
     setCurrentPage(1);
     setCurrentSortingParam(e.target.value);
-    // dispatch(updateSortingParam(e.target.value));
   };
 
   const sortingDireactionChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setCurrentPage(1);
-    // dispatch(updateSortingDirection(e.target.value));
     setCurrentSortingDirection(e.target.value);
   };
   const handlePageChange = (
@@ -131,8 +122,6 @@ const Schemes = () => {
           sortingDireaction={currentSortingDirection}
           sortingDireactionChangeHandler={sortingDireactionChangeHandler}
         />
-
-        {/* <Link to="/newScheme">New Scheme</Link> */}
       </div>
       <div className="scheme-previews-container container">
         <Outlet />

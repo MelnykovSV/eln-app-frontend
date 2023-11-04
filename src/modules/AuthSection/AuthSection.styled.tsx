@@ -4,14 +4,11 @@ import { Link } from "react-router-dom";
 import BgImage from "./../../images/bg-image.jpg";
 
 export const Container = styled.section<IStyledProps>`
-  /* height: 600px; */
-  /* display: flex; */
   flex-direction: column;
   align-items: center;
 `;
 
 export const MainSectionContent = styled.div`
-  /* background-color: #3e85f3; */
   background-image: linear-gradient(
       0deg,
       rgba(33, 150, 243, 0.4),
@@ -66,13 +63,6 @@ export const AuthLink = styled(Link)`
     background-color: #3e85f3;
     color: #fff;
   }
-
-  @media screen and (min-width: 768px) {
-    /* padding: 15px 32px; */
-  }
-
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const AuthLinkLogIn = styled(Link)`
@@ -81,10 +71,9 @@ export const AuthLinkLogIn = styled(Link)`
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 18px; /* 128.571% */
+  line-height: calc(18 / 14);
   letter-spacing: -0.28px;
   background-color: #fff;
-  /* padding: 14px 32px; */
   width: 121px;
   height: 49px;
   display: flex;
@@ -95,13 +84,6 @@ export const AuthLinkLogIn = styled(Link)`
   gap: 6px;
   text-decoration: none;
   box-shadow: rgba(136, 165, 191, 0.48) 4px 2px 16px 0px;
-
-  @media screen and (min-width: 768px) {
-    /* padding: 15px 32px; */
-  }
-
-  @media screen and (min-width: 1280px) {
-  }
 `;
 
 export const AuthLinkBlock = styled.div`
@@ -114,8 +96,5 @@ export const AuthLinkBlock = styled.div`
     flex-direction: row-reverse;
     align-items: baseline;
     gap: 24px;
-  }
-
-  @media screen and (min-width: 1280px) {
   }
 `;

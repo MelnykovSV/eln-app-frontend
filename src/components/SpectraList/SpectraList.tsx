@@ -6,29 +6,14 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Document, Page, pdfjs } from "react-pdf";
-// import { StyleSheet } from "@react-pdf/renderer";
 import { DNALoader } from "../../ui";
 import { Button } from "@mui/material";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-// const style = StyleSheet.create({
-//   page: {
-//     width
-//   }
-//   // position: "absolute" as "absolute",
-//   // top: "50%",
-//   // left: "50%",
-//   // transform: "translate(-50%, -50%)",
-//   // width: 1200,
-//   // bgcolor: "background.paper",
-//   // border: "2px solid #000",
-//   // boxShadow: 24,
-//   // p: 4,
-// });
-
 interface IAttemptSpectraProps {
   attemptNumber: number;
 }
+
 const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
   const currentStageAttempts = useAppSelector(getCurrentStageAttempts);
   const spectra = currentStageAttempts[attemptNumber - 1].spectra;
@@ -36,7 +21,6 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalSpectrUrl, setModalSpectrUrl] = useState<string | null>(null);
   const [modalSpectrLabel, setModalSpectrLabel] = useState<string | null>(null);
-
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
 
