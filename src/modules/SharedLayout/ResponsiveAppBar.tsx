@@ -48,9 +48,12 @@ export function ResponsiveAppBar() {
   const locationState = useAppSelector(getSchemesState);
 
   useEffect(() => {
-    dispatch(getCurrentUser());
+    if (isLoggedIn) {
+      dispatch(getCurrentUser());
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoggedIn]);
   useEffect(() => {
     setActualUserName(userName);
   }, [userName]);
