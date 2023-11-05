@@ -2,6 +2,8 @@ import Container from "./SingleMolCanvas.styled";
 import { useRef, useEffect } from "react";
 import { ISingleMolCanvasProps } from "../../types";
 
+// Disables library-specific console logs in production
+
 if (process.env.REACT_APP_CONSOLE_LOGS !== "enabled") {
   console.log = () => {};
 }

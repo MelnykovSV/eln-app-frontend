@@ -132,7 +132,7 @@ const StageInfo = ({
               getLastAttempt();
             }}
             variant="contained">
-            Add attempt
+            Add experiment
           </Button>
           <Button
             type="button"

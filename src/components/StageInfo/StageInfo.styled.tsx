@@ -64,6 +64,7 @@ const Container = styled.div<IStyledProps>`
         padding: 10px;
         font-size: 13px;
         font-weight: 700;
+        height: 50px;
       }
     }
   }

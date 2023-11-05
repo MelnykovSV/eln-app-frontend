@@ -44,7 +44,7 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
   }, [spectrLabel]);
 
   const onDrop = useCallback(
-    (acceptedFiles: any) => {
+    (acceptedFiles: File[]) => {
       setMyFiles([...myFiles, ...acceptedFiles]);
     },
     [myFiles]

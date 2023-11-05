@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { isAuthError, isAuthPending } from "../statusCheckers";
+import { ITokensPayload } from "../../types";
 
 import {
   IAuthState,
@@ -29,7 +30,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
   reducers: {
-    updateTokens(state, action: PayloadAction<any>) {
+    updateTokens(state, action: PayloadAction<ITokensPayload>) {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },

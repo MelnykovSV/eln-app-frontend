@@ -100,14 +100,16 @@ export interface IReagentCardProps {
   };
 }
 
+export interface IReagentListItem {
+  smiles: string;
+  mass: number;
+  formula: string;
+  molWeight: number;
+  compoundName: string;
+}
+
 export interface IReagentListProps {
-  reagents: {
-    smiles: string;
-    mass: number;
-    formula: string;
-    molWeight: number;
-    compoundName: string;
-  }[];
+  reagents: IReagentListItem[];
 }
 
 export interface INewSchemeFormProps {

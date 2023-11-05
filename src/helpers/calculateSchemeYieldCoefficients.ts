@@ -1,24 +1,23 @@
+export interface ISchemeStageData {
+  _id?: string | null;
+  solvent: string | null;
+  temp: number | null;
+  time: string | null;
+  _yield: number | null;
+  methodic: string | null;
+  product: string | null;
+  yieldCoefficient?: number;
+}
+
 export interface ISchemeData {
   startingMaterial: string | null;
   targetCompound: string | null;
   mass: number | null;
   totalYieldCoefficient?: number;
-  stages: {
-    _id?: string | null;
-    solvent: string | null;
-    temp: number | null;
-    time: string | null;
-    _yield: number | null;
-    methodic: string | null;
-    product: string | null;
-    yieldCoefficient?: number;
-  }[];
+  stages: ISchemeStageData[];
 }
 
 export const calculateSchemeYieldCoefficients = (obj: ISchemeData) => {
-  // if (!obj.stages.length) {
-  //   return obj;
-  // }
   const arr = [...obj.stages];
 
   if (arr.some((item) => item._yield === null)) {
@@ -36,7 +35,7 @@ export const calculateSchemeYieldCoefficients = (obj: ISchemeData) => {
     arr.reverse();
     coefficients.reverse();
 
-    const result = arr.map((item: any, i: number) => ({
+    const result = arr.map((item: ISchemeStageData, i: number) => ({
       ...item,
       yieldCoefficient: coefficients[i + 1] || 1,
     }));

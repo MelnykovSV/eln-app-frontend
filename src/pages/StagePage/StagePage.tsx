@@ -12,14 +12,17 @@ import { getSchemeAndStage } from "../../redux/schemes/operations";
 const StagePage = () => {
   const dispatch = useAppDispatch();
   const currentScheme = useAppSelector(getCurrentScheme);
-  const { schemeId, stageId } = useParams() as any;
+  const { schemeId, stageId } = useParams();
 
   useEffect(() => {
-    if (currentScheme._id === schemeId) {
-      dispatch(initialUpdateCurrentStage(stageId));
-    } else {
-      dispatch(getSchemeAndStage({ schemeId, stageId }));
+    if (schemeId && stageId) {
+      if (currentScheme._id === schemeId) {
+        dispatch(initialUpdateCurrentStage(stageId));
+      } else {
+        dispatch(getSchemeAndStage({ schemeId, stageId }));
+      }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

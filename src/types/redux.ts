@@ -76,7 +76,10 @@ export interface ICurrentScheme {
   updatedAt: string | null;
   stages: IStage[];
 }
-
+export interface ITokensPayload {
+  accessToken: string;
+  refreshToken: string;
+}
 export interface IUpdatedCurrentScheme {
   _id: string | null;
   status: string | null;

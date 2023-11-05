@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setAttemptInfo,
   setAttemptStatus,
-  getCurrentStage
+  getCurrentStage,
 } from "../../redux/schemes/schemesSlice";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -102,7 +102,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Temperature"
         name="temp"
-        value={temp || 0}
+        value={temp || ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -115,7 +115,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Starting Material Mass"
         name="startingMaterialMass"
-        value={startingMaterialMass || 0}
+        value={startingMaterialMass || ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -128,7 +128,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Product Mass"
         name="productMass"
-        value={productMass || 0}
+        value={productMass || ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -141,7 +141,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Product Purity"
         name="productPurity"
-        value={productPurity || 0}
+        value={productPurity || ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"

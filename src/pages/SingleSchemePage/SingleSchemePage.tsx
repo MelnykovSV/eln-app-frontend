@@ -24,6 +24,7 @@ import {
   getCurrentSchemeId,
 } from "../../redux/schemes/schemesSlice";
 import { DNALoader } from "../../ui";
+import { IReagentListItem } from "../../types/componentsProps";
 
 function a11yProps(index: number) {
   return {
@@ -93,7 +94,9 @@ const SingleSchemePage = () => {
 
   const [value, setValue] = useState(0);
 
-  const [reagentsListData, setReagentsListData] = useState([] as any);
+  const [reagentsListData, setReagentsListData] = useState<IReagentListItem[]>(
+    []
+  );
   useEffect(() => {
     if (schemeId && schemeId !== currentScheme._id) {
       dispatch(getSingleScheme(schemeId));
@@ -105,7 +108,7 @@ const SingleSchemePage = () => {
   useEffect(() => {
     const arr1 = reagentsList.map(async (item) => {
       if (item.smiles !== null) {
-        const formula = smilesToMolecularFormula(item.smiles);
+        const formula = smilesToMolecularFormula(item.smiles) as string;
         const molWeight = calc(formula) as unknown as string;
         try {
           const response = await axios.get(
@@ -131,7 +134,9 @@ const SingleSchemePage = () => {
     });
 
     Promise.all(arr1).then((resolvedArr) => {
-      const filteredArray = resolvedArr.filter((item) => item !== undefined);
+      const filteredArray = resolvedArr.filter(
+        (item) => item !== undefined
+      ) as unknown as IReagentListItem[];
       setReagentsListData(filteredArray);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

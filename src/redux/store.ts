@@ -12,6 +12,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { AnyAction } from "@reduxjs/toolkit";
+import { IAuthState } from "../types";
 
 const persistConfig = {
   key: "auth",
@@ -19,13 +21,14 @@ const persistConfig = {
   whitelist: ["accessToken", "refreshToken"],
 };
 
-const customMiddleWare = (store: any) => (next: any) => (action: any) => {
-  next(action);
-};
+const customMiddleWare =
+  () => (next: (action: AnyAction) => void) => (action: AnyAction) => {
+    next(action);
+  };
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer<any>(persistConfig, userReducer),
+    auth: persistReducer<IAuthState>(persistConfig, userReducer),
     schemes: schemesReducer,
   },
   middleware: (getDefaultMiddleware) =>

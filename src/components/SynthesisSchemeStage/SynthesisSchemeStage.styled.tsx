@@ -13,7 +13,6 @@ const Container = styled.div<IStyledProps>`
 
   &.currentStage {
     .drawing-container {
-      /* border: solid 1px green; */
       box-shadow: 0 0 5px 1px green;
     }
   }
@@ -41,12 +40,8 @@ const Container = styled.div<IStyledProps>`
         top: 10px;
         z-index: 1000;
         border-radius: 5px;
-
-        /* border: 1px blue solid; */
-        /* border-radius: 10px; */
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         border: 1px solid ${({ theme }) => theme.palette.text.disabled};
-
         background-color: ${({ theme }) => theme.palette.background.secondary};
         opacity: 1;
         transition: transform 0.3s linear;
@@ -64,7 +59,6 @@ const Container = styled.div<IStyledProps>`
 
         ::-webkit-scrollbar-track {
           background-color: ${({ theme }) => theme.palette.text.disabled};
-          /* border: 1px solid ${({ theme }) => theme.palette.primary.main}; */
           border-radius: 5px;
           padding: 5px;
         }

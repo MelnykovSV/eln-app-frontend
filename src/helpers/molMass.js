@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-array-constructor */
+/* eslint-disable eqeqeq */
 const molar = new Array();
 molar["H"] = 1.00794;
 molar["He"] = 4.0026;
