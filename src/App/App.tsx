@@ -1,4 +1,3 @@
-
 import { lazy, Suspense } from "react";
 import { ModernNormalize } from "emotion-modern-normalize";
 import Container from "./App.styled";
@@ -63,6 +62,10 @@ function App() {
                 {/* <Route path="/tasks" element={<div>Tasks</div>} /> */}
                 <Route path="/newScheme" element={<NewSchemePage />} />
               </Route>
+              <Route
+                path="emailValidation"
+                element={<div>Email successfuly sent</div>}
+              />
 
               <Route path="*" element={<div>404 page</div>} />
             </Route>

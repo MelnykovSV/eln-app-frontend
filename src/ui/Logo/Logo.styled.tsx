@@ -12,7 +12,7 @@ const Container = styled.div`
   .logo_text-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 5px; 
     font-weight: 700;
     font-size: 16px;
     .logo_text-line {

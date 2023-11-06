@@ -5,13 +5,14 @@ import FormTextInput from "../../components/FormTextInput/FormTextInput";
 import * as yup from "yup";
 import { regexp } from "../../regexp";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { signUp } from "../../redux/auth/operations";
 import { DNALoaderSmall } from "../../ui";
 import { getIsLoading } from "../../redux/auth/authSlice";
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
   const isLoading = useAppSelector(getIsLoading);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ const RegistrationForm = () => {
       .oneOf([yup.ref("password")], "Passwords don't match")
       .required("Password is required"),
   });
-  
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -52,13 +53,17 @@ const RegistrationForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      dispatch(
+      const response = await dispatch(
         signUp({
           userName: values.name,
           email: values.email,
           password: values.password,
         })
       );
+
+      if (!response.type.endsWith("rejected")) {
+        navigate("/emailValidation");
+      }
     },
   });
 
