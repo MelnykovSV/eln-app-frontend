@@ -160,44 +160,54 @@ const SingleSchemePage = () => {
   };
 
   return (
-    <S.Container className="container">
-      <div>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example">
-          <Tab label="Scheme" {...a11yProps(0)} />
-          <Tab label="Reagents calculation" {...a11yProps(1)} />
-        </Tabs>
+    <S.Container>
+      <div className="container">
+        <div>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example">
+            <Tab label="Scheme" {...a11yProps(0)} />
+            <Tab label="Reagents calculation" {...a11yProps(1)} />
+          </Tabs>
+        </div>
+        <CustomTabPanel value={value} index={0}>
+          <RadioGroup
+            onChange={synthesisStatusChange}
+            value={currentScheme.status}
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            className="radio-buttons-container">
+            <FormControlLabel
+              value="active"
+              control={<Radio />}
+              label="Active"
+            />
+            <FormControlLabel
+              value="success"
+              control={<Radio />}
+              label="Success"
+            />
+            <FormControlLabel value="fail" control={<Radio />} label="Fail" />
+            <FormControlLabel
+              value="chosen"
+              control={<Radio />}
+              label="Chosen"
+            />
+          </RadioGroup>
+          {isLoadingSchemes && currentSchemeId !== schemeId ? (
+            <DNALoader />
+          ) : (
+            <div className="scheme-container">
+              <Scheme schemeData={updatedSchemeData} />
+            </div>
+          )}
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <ReagentList reagents={reagentsListData} />
+        </CustomTabPanel>
       </div>
-      <CustomTabPanel value={value} index={0}>
-        <RadioGroup
-          onChange={synthesisStatusChange}
-          value={currentScheme.status}
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          className="radio-buttons-container">
-          <FormControlLabel value="active" control={<Radio />} label="Active" />
-          <FormControlLabel
-            value="success"
-            control={<Radio />}
-            label="Success"
-          />
-          <FormControlLabel value="fail" control={<Radio />} label="Fail" />
-          <FormControlLabel value="chosen" control={<Radio />} label="Chosen" />
-        </RadioGroup>
-        {isLoadingSchemes && currentSchemeId !== schemeId ? (
-          <DNALoader />
-        ) : (
-          <div className="scheme-container">
-            <Scheme schemeData={updatedSchemeData} />
-          </div>
-        )}
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <ReagentList reagents={reagentsListData} />
-      </CustomTabPanel>
     </S.Container>
   );
 };

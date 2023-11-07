@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
 export const Container = styled.div<IStyledProps>`
+  background-color: ${({ theme }) => theme.palette.background.default};
+  height: calc(100vh - 85px);
   .utility-panel {
     display: flex;
     flex-direction: column;

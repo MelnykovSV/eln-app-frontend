@@ -2,11 +2,14 @@ import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
 export const Container = styled.div<IStyledProps>`
-  display: flex;
-  flex-direction: column;
+  background-color: ${({ theme }) => theme.palette.background.default};
+  .container {
+    display: flex;
+    flex-direction: column;
 
-  @media screen and (min-width: 1280px) {
-    flex-direction: row;
+    @media screen and (min-width: 1280px) {
+      flex-direction: row;
+    }
   }
 
   .new-scheme-from-container {
@@ -45,7 +48,7 @@ export const Container = styled.div<IStyledProps>`
       position: absolute;
       width: 100%;
       height: 100%;
-      background-color: white;
+      background-color: ${({ theme }) => theme.palette.primary.contrastText};
       display: block;
       z-index: 10;
 
@@ -66,5 +69,3 @@ export const Container = styled.div<IStyledProps>`
     }
   }
 `;
-
-

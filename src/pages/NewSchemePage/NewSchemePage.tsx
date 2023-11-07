@@ -162,27 +162,40 @@ const NewSchemePage = () => {
     setIsSchemePreviewShown(!isSchemePreviewShown);
   };
   return (
-    <S.Container className="container">
-      <div className="utility-panel">
-        <FormControlLabel
-          className="toggle-schem-preview"
-          control={
-            <Switch
-              checked={isSchemePreviewShown}
-              onChange={toggleSchemePreview}
-            />
-          }
-          label="Show scheme preview"
-        />
-      </div>
-      <div className="new-scheme-content">
-        <Slide
-          direction="right"
-          in={isSchemePreviewShown}
-          mountOnEnter
-          unmountOnExit
-          className="slide">
-          <div className="mobile-scheme-preview-container">
+    <S.Container>
+      <div className="container">
+        <div className="utility-panel">
+          <FormControlLabel
+            className="toggle-schem-preview"
+            control={
+              <Switch
+                checked={isSchemePreviewShown}
+                onChange={toggleSchemePreview}
+              />
+            }
+            label="Show scheme preview"
+          />
+        </div>
+        <div className="new-scheme-content">
+          <Slide
+            direction="right"
+            in={isSchemePreviewShown}
+            mountOnEnter
+            unmountOnExit
+            className="slide">
+            <div className="mobile-scheme-preview-container">
+              <Scheme
+                schemeData={calculateSchemeYieldCoefficients({
+                  startingMaterial,
+                  targetCompound,
+                  mass: Number(mass),
+                  stages,
+                })}
+              />
+            </div>
+          </Slide>
+
+          <div className="scheme-preview-container">
             <Scheme
               schemeData={calculateSchemeYieldCoefficients({
                 startingMaterial,
@@ -192,35 +205,24 @@ const NewSchemePage = () => {
               })}
             />
           </div>
-        </Slide>
 
-        <div className="scheme-preview-container">
-          <Scheme
-            schemeData={calculateSchemeYieldCoefficients({
-              startingMaterial,
-              targetCompound,
-              mass: Number(mass),
-              stages,
-            })}
-          />
-        </div>
-
-        <div className="new-scheme-from-container">
-          <NewSchemeForm
-            startingMaterial={startingMaterial}
-            mass={mass}
-            price={price}
-            deadline={deadline}
-            stageNumber={stageNumber}
-            targetCompound={targetCompound}
-            stages={stages}
-            stageChangeHandler={stageChangeHandler}
-            addStageHandler={addStageHandler}
-            handleChange={handleChange}
-            schemeFormSubmitHandler={schemeFormSubmitHandler}
-            inputChangeHandler={inputChangeHandler}
-            deadlineChangeHandler={deadlineChangeHandler}
-          />
+          <div className="new-scheme-from-container">
+            <NewSchemeForm
+              startingMaterial={startingMaterial}
+              mass={mass}
+              price={price}
+              deadline={deadline}
+              stageNumber={stageNumber}
+              targetCompound={targetCompound}
+              stages={stages}
+              stageChangeHandler={stageChangeHandler}
+              addStageHandler={addStageHandler}
+              handleChange={handleChange}
+              schemeFormSubmitHandler={schemeFormSubmitHandler}
+              inputChangeHandler={inputChangeHandler}
+              deadlineChangeHandler={deadlineChangeHandler}
+            />
+          </div>
         </div>
       </div>
     </S.Container>

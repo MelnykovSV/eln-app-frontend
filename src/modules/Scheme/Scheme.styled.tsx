@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-
 export const Container = styled.div<IStyledProps>`
   border: 3px solid ${(props) => props.theme.palette.primary.main};
   border-radius: 8px;
@@ -35,5 +34,3 @@ export const Container = styled.div<IStyledProps>`
     }
   }
 `;
-
-
