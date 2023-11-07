@@ -25,6 +25,7 @@ import {
   updateSchemesState,
   clearSchemesData,
 } from "../../redux/schemes/schemesSlice";
+import { Button } from "@mui/material";
 
 const settings = ["Logout"];
 
@@ -262,15 +263,18 @@ export function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}>
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography
-                      textAlign="center"
+                  <MenuItem
+                    key={setting}
+                    sx={{ padding: 0, alignItems: "center", height: "100%" }}
+                    onClick={handleCloseUserMenu}>
+                    <Button
+                      sx={{ height: "48px", display: "block" }}
                       onClick={async () => {
                         await dispatch(logOut());
                         dispatch(clearSchemesData());
                       }}>
                       {setting}
-                    </Typography>
+                    </Button>
                   </MenuItem>
                 ))}
               </Menu>
