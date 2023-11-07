@@ -1,4 +1,4 @@
-import Container from "./LoginForm.styled";
+import * as S from "./LoginForm.styled";
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
 import { FormTextInput } from "../../components";
@@ -32,7 +32,7 @@ const LoginForm = () => {
     },
   });
   return (
-    <Container>
+    <S.Container>
       <Link to="/register">Don't have an account? Sign up</Link>
       <h1>Login form</h1>
       <form onSubmit={formik.handleSubmit}>
@@ -48,7 +48,7 @@ const LoginForm = () => {
           {isLoading ? <DNALoaderSmall /> : null}
         </Button>
       </form>
-    </Container>
+    </S.Container>
   );
 };
 

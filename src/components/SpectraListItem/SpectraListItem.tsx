@@ -1,4 +1,4 @@
-import Container from "./SpectraListItem.styled";
+import * as S from "./SpectraListItem.styled";
 import { useParams } from "react-router";
 import { modalOpenType } from "../../types";
 import Button from "@mui/material/Button";
@@ -37,7 +37,7 @@ const SpectraListItem = ({
   };
 
   return (
-    <Container>
+    <S.Container>
       <p>{label || null}</p>
       <div className="spectr-button-container">
         <Button
@@ -63,7 +63,7 @@ const SpectraListItem = ({
           Delete
         </Button>
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

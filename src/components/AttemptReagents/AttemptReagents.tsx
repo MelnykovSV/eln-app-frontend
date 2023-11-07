@@ -1,4 +1,4 @@
-import Container from "./AttemptReagents.styled";
+import * as S from "./AttemptReagents.styled";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
 import { SingleAttemptReagentTab } from "../";
@@ -13,7 +13,7 @@ const AttemptReagents = ({ attemptNumber }: IAttemptReagentsProps) => {
   ].reagents;
 
   return (
-    <Container>
+    <S.Container>
       {currentAttemptReagents.map((item) => (
         <SingleAttemptReagentTab
           reagentNumber={item.reagentNumber}
@@ -25,7 +25,7 @@ const AttemptReagents = ({ attemptNumber }: IAttemptReagentsProps) => {
           key={item.reagentNumber}
         />
       ))}
-    </Container>
+    </S.Container>
   );
 };
 

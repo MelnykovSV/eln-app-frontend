@@ -1,4 +1,4 @@
-import Container from "./CustomTabPanel.styled";
+import * as S from "./CustomTabPanel.styled";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -10,7 +10,7 @@ const CustomTabPanel = (props: TabPanelProps) => {
   const { children, value, index, ...other } = props;
 
   return (
-    <Container
+    <S.Container
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -18,7 +18,7 @@ const CustomTabPanel = (props: TabPanelProps) => {
       aria-labelledby={`simple-tab-${index}`}
       {...other}>
       {value === index && <div>{children}</div>}
-    </Container>
+    </S.Container>
   );
 };
 

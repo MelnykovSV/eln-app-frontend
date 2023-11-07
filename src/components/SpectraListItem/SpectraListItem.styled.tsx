@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.li`
+export const Container = styled.li<IStyledProps>`
   padding: 10px 20px;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -22,8 +23,4 @@ const Container = styled.li`
       }
     }
   }
-
-
 `;
-
-export default Container;

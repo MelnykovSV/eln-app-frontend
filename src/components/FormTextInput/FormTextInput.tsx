@@ -1,4 +1,4 @@
-import Container from "./FormTextInput.styled";
+import * as S from "./FormTextInput.styled";
 import { IFormTextInputProps } from "../../types";
 import { InputAdornment, IconButton } from "@mui/material";
 import { useState } from "react";
@@ -12,7 +12,7 @@ const FormTextInput = ({ label, name, formik, type }: IFormTextInputProps) => {
   };
   if (type === "password") {
     return (
-      <Container
+      <S.Container
         label={label}
         name={name}
         variant="outlined"
@@ -36,7 +36,7 @@ const FormTextInput = ({ label, name, formik, type }: IFormTextInputProps) => {
     );
   }
   return (
-    <Container
+    <S.Container
       label={label}
       name={name}
       variant="outlined"

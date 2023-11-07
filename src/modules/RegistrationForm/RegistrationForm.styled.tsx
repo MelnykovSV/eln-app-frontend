@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   padding: 20px;
   max-width: 500px;
   width: 100%;
@@ -23,4 +24,4 @@ const Container = styled.div`
   }
 `;
 
-export default Container;
+

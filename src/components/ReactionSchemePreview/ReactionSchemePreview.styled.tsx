@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.div<IStyledProps>`
+export const Container = styled.div<IStyledProps>`
   cursor: pointer;
   width: 300px;
   background-color: white;
@@ -14,7 +14,6 @@ const Container = styled.div<IStyledProps>`
 
   .canvas-container {
     border: 2px solid ${({ theme }) => theme.palette.text.secondary};
- 
 
     overflow: hidden;
     border-radius: 8px;
@@ -207,5 +206,3 @@ const Container = styled.div<IStyledProps>`
     z-index: 50;
   }
 `;
-
-export default Container;

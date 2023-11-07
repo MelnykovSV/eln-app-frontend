@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.form<IStyledProps>`
+export const Container = styled.form<IStyledProps>`
   border: 3px solid ${(props) => props.theme.palette.primary.main};
   border-radius: 8px;
   padding: 14px;
@@ -40,13 +40,10 @@ const Container = styled.form<IStyledProps>`
       width: 100%;
       button {
         width: 100%;
-        /* height: 100%; */
       }
     }
   }
-  /* @media screen and (min-width: 1280px) {
-    width: 600px;
-  } */
+
 
   .MuiSelect-select {
     display: flex;
@@ -57,4 +54,4 @@ const Container = styled.form<IStyledProps>`
   }
 `;
 
-export default Container;
+

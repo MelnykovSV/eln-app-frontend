@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
-// import { ReactComponent as TestIcon } from "./../../images/icons/Long_arrow.svg";
-
 import TestIcon from "./../../images/icons/triangle.svg";
 
 export const Container = styled.section<IStyledProps>`

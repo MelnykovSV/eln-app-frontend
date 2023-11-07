@@ -1,4 +1,4 @@
-import Container from "./SpectraList.styled";
+import * as S from "./SpectraList.styled";
 import { useAppSelector } from "../../redux/hooks";
 import { getCurrentStageAttempts } from "../../redux/schemes/schemesSlice";
 import { SpectraListItem } from "../";
@@ -50,7 +50,7 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
   };
 
   return (
-    <Container>
+    <S.Container>
       <ul>
         {spectra.map(({ spectrUrl, label, _id }) => (
           <SpectraListItem
@@ -101,7 +101,7 @@ const SpectraList = ({ attemptNumber }: IAttemptSpectraProps) => {
           </div>
         </Box>
       </Modal>
-    </Container>
+    </S.Container>
   );
 };
 

@@ -1,4 +1,4 @@
-import Container from "./SpectraForm.styled";
+import * as S from "./SpectraForm.styled";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addSpectr } from "../../redux/schemes/operations";
 import { useDropzone } from "react-dropzone";
@@ -95,7 +95,7 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
     }
   };
   return (
-    <Container onSubmit={fileFormSubmitHandler}>
+    <S.Container onSubmit={fileFormSubmitHandler}>
       <section>
         <div
           {...getRootProps({ className: "dropzone" })}
@@ -129,7 +129,7 @@ const SpectraForm = ({ attemptNumber }: IAttemptSpectraProps) => {
       <Button type="submit" variant="contained" disabled={isSpectrUploading}>
         Submit file
       </Button>
-    </Container>
+    </S.Container>
   );
 };
 

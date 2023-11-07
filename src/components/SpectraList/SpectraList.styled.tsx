@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   ul {
     list-style: none;
     max-height: 517px;
@@ -9,5 +10,3 @@ const Container = styled.div`
     margin: 0;
   }
 `;
-
-export default Container;

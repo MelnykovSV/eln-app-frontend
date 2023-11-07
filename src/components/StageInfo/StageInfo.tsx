@@ -1,4 +1,4 @@
-import Container from "./StageInfo.styled";
+import * as S from "./StageInfo.styled";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
   getCurrentStageStartingMaterial,
@@ -50,7 +50,7 @@ const StageInfo = ({
   const isLoading = useAppSelector(getIsLoadingSchemes);
 
   return (
-    <Container>
+    <S.Container>
       <div
         className={
           matches ? "canvas-container" : "canvas-container visually-hidden"
@@ -108,7 +108,7 @@ const StageInfo = ({
         )}
       </div>
 
-      <div className="stage-wrapper">
+      <S.StageWrapper>
         <FormControl className="stage-info-select-container" fullWidth>
           <InputLabel id="stage-info-select-label">Select attempt</InputLabel>
           <Select
@@ -144,8 +144,8 @@ const StageInfo = ({
             {isLoading ? <DNALoaderSmall /> : null}
           </Button>
         </div>
-      </div>
-    </Container>
+      </S.StageWrapper>
+    </S.Container>
   );
 };
 

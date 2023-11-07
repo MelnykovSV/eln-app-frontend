@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   display: flex;
-
   flex-direction: column;
   justify-content: space-between;
   gap: 15px;
@@ -18,6 +18,7 @@ const Container = styled.div`
       width: 100%;
     }
   }
+
   @media screen and (min-width: 1280px) {
     flex-direction: row;
     flex-wrap: wrap;
@@ -36,4 +37,4 @@ const Container = styled.div`
     gap: 30px;
   }
 `;
-export default Container;
+

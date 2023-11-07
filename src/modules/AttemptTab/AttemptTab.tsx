@@ -1,4 +1,4 @@
-import Container from "./AttemptTab.styled";
+import * as S from "./AttemptTab.styled";
 import {
   AttemptConditions,
   AttemptReagents,
@@ -11,14 +11,14 @@ interface IAttemptProps {
 
 const AttemptTab = ({ attemptNumber }: IAttemptProps) => {
   return (
-    <Container>
+    <S.Container>
       <h1>Experiment {attemptNumber}</h1>
       <AttemptConditions attemptNumber={attemptNumber} />
       <div className="attempt-second-block">
         <AttemptReagents attemptNumber={attemptNumber} />
         <AttemptSpectra attemptNumber={attemptNumber} />
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

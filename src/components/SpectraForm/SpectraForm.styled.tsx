@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.form<IStyledProps>`
+export const Container = styled.form<IStyledProps>`
   width: 100%;
   padding: 10px 0;
   padding: 20px;
@@ -49,4 +49,4 @@ const Container = styled.form<IStyledProps>`
   }
 `;
 
-export default Container;
+

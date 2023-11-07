@@ -1,4 +1,4 @@
-import Container from "./NewStageTab.styled";
+import * as S from "./NewStageTab.styled";
 import { TextField } from "@mui/material";
 import { SingleMolCanvas } from "../../ui";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -28,8 +28,8 @@ const NewStageTab = ({
   areErrorsShown,
 }: IStageProps) => {
   return (
-    <Container>
-      <div className="new-stage-tab-first-block">
+    <S.Container>
+      <S.FirstBlock>
         <div className="new-stage-tab-first-block__inputs">
           <TextField
             label="Product*"
@@ -71,8 +71,8 @@ const NewStageTab = ({
         <div className="new-stage-tab-first-block__canvas-container">
           <SingleMolCanvas smiles={product} />
         </div>
-      </div>
-      <div className="new-stage-tab-second-block">
+      </S.FirstBlock>
+      <S.SecondBlock>
         <TextField
           label="Time"
           name="time"
@@ -106,7 +106,7 @@ const NewStageTab = ({
           }}
           inputProps={{ min: 0 }}
         />
-      </div>
+      </S.SecondBlock>
 
       <TextField
         label="Methodic"
@@ -120,7 +120,7 @@ const NewStageTab = ({
           stageChangeHandler(e, stageNumber);
         }}
       />
-    </Container>
+    </S.Container>
   );
 };
 

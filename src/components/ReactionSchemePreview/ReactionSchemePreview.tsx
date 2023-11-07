@@ -1,4 +1,4 @@
-import Container from "./ReactionSchemePreview.styled";
+import * as S from "./ReactionSchemePreview.styled";
 import { SingleMolCanvas, DoubleArrows } from "../../ui";
 import { IReactionSchemePreviewProps } from "../../types";
 import { useState } from "react";
@@ -37,7 +37,7 @@ const ReactionSchemePreview = ({
     return "black";
   };
   return (
-    <Container
+    <S.Container
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => {
@@ -83,7 +83,7 @@ const ReactionSchemePreview = ({
           </div>
         </dl>
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

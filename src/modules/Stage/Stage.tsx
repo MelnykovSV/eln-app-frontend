@@ -1,4 +1,4 @@
-import Container from "./Stage.styled";
+import * as S from "./Stage.styled";
 import { StageInfo } from "../../components";
 import { AttemptTab } from "../";
 import { useState } from "react";
@@ -24,7 +24,7 @@ const Stage = () => {
   };
 
   return (
-    <Container className="container">
+    <S.Container className="container">
       <StageInfo
         attemptNumber={attemptNumber}
         handleAttemptNumberChange={handleAttemptNumberChange}
@@ -32,7 +32,7 @@ const Stage = () => {
         saveHandler={saveHandler}
       />
       <AttemptTab attemptNumber={attemptNumber} />
-    </Container>
+    </S.Container>
   );
 };
 

@@ -178,7 +178,7 @@ export function ResponsiveAppBar() {
               }}>
               <MenuItem
                 key={"schemes"}
-                sx={{ padding: 0 }}
+                sx={{ padding: 0, borderRadius: "5px" }}
                 onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
                   <NavLink
@@ -190,7 +190,7 @@ export function ResponsiveAppBar() {
               </MenuItem>
               <MenuItem
                 key={"scheme"}
-                sx={{ padding: 0 }}
+                sx={{ padding: 0, borderRadius: "5px" }}
                 onClick={handleCloseNavMenu}
                 disabled={currentSchemeId ? false : true}>
                 <Typography textAlign="center">
@@ -208,7 +208,7 @@ export function ResponsiveAppBar() {
               </MenuItem>
               <MenuItem
                 key={"stage"}
-                sx={{ padding: 0 }}
+                sx={{ padding: 0, borderRadius: "5px" }}
                 onClick={handleCloseNavMenu}
                 disabled={currentStage._id && currentSchemeId ? false : true}>
                 <Typography textAlign="center">

@@ -1,4 +1,4 @@
-import Container from "./RegistrationForm.styled";
+import * as S from "./RegistrationForm.styled";
 import { Button, FormControlLabel, Checkbox } from "@mui/material";
 import { useFormik } from "formik";
 import FormTextInput from "../../components/FormTextInput/FormTextInput";
@@ -10,8 +10,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { signUp } from "../../redux/auth/operations";
 import { DNALoaderSmall } from "../../ui";
 import { getIsLoading } from "../../redux/auth/authSlice";
-
-
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -70,7 +68,7 @@ const RegistrationForm = () => {
   });
 
   return (
-    <Container>
+    <S.Container>
       <Link to="/login">Already have an account? Sign in</Link>
       <h1>Get started</h1>
       <form onSubmit={formik.handleSubmit}>
@@ -107,7 +105,7 @@ const RegistrationForm = () => {
           {isLoading ? <DNALoaderSmall /> : null}
         </Button>
       </form>
-    </Container>
+    </S.Container>
   );
 };
 

@@ -25,6 +25,7 @@ import {
 } from "../../redux/schemes/schemesSlice";
 import { DNALoader } from "../../ui";
 import { IReagentListItem } from "../../types/componentsProps";
+import { useMemo } from "react";
 
 function a11yProps(index: number) {
   return {
@@ -39,9 +40,12 @@ const SingleSchemePage = () => {
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
   const dispatch = useAppDispatch();
   const currentScheme = useAppSelector(getCurrentScheme);
-  const updatedSchemeData = calculateSchemeYieldCoefficients(
-    currentScheme
-  ) as IUpdatedCurrentScheme;
+
+  const updatedSchemeData = useMemo(
+    () =>
+      calculateSchemeYieldCoefficients(currentScheme) as IUpdatedCurrentScheme,
+    [currentScheme]
+  );
 
   const reagentsList = [
     {

@@ -1,7 +1,7 @@
 import { IStyledProps } from "../../types/common";
 import styled from "@emotion/styled";
 
-const Container = styled.li<IStyledProps>`
+export const Container = styled.li<IStyledProps>`
   padding: 10px;
   border: 1px solid black;
   display: flex;
@@ -44,4 +44,4 @@ const Container = styled.li<IStyledProps>`
   }
 `;
 
-export default Container;
+

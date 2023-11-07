@@ -18,7 +18,6 @@ const SingleMolCanvas = ({
   },
 }: ISingleMolCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
   useEffect(() => {
     if (canvasRef.current) {
       if (!smiles) {

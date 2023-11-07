@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
-const Container = styled.div<IStyledProps>`
+export const Container = styled.div<IStyledProps>`
   padding: 20px;
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
   background-color: ${({ theme }) => theme.palette.background.paper};
@@ -19,4 +19,4 @@ const Container = styled.div<IStyledProps>`
   }
 `;
 
-export default Container;
+

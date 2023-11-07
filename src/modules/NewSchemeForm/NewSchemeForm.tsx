@@ -1,4 +1,4 @@
-import Container from "./NewSchemeForm.styled";
+import * as S from "./NewSchemeForm.styled";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -14,10 +14,9 @@ import { NewStageTab } from "../../components";
 import { INewSchemeFormProps } from "../../types/componentsProps";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useState } from "react";
-import { AlertIcon,DNALoaderSmall, SingleMolCanvas } from "../../ui";
+import { AlertIcon, DNALoaderSmall, SingleMolCanvas } from "../../ui";
 import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
 import { useAppSelector } from "../../redux/hooks";
-
 
 const NewSchemeForm = ({
   startingMaterial,
@@ -35,9 +34,8 @@ const NewSchemeForm = ({
   const [areErrorsShown, setAreErrorsShown] = useState(false);
   const isLoading = useAppSelector(getIsLoadingSchemes);
 
-
   return (
-    <Container
+    <S.Container
       onSubmit={(e) => {
         setAreErrorsShown(true);
         schemeFormSubmitHandler(e);
@@ -141,7 +139,7 @@ const NewSchemeForm = ({
         disabled={isLoading}>
         Submit {isLoading ? <DNALoaderSmall /> : null}
       </Button>
-    </Container>
+    </S.Container>
   );
 };
 

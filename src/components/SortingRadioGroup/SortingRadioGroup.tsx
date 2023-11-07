@@ -1,4 +1,4 @@
-import Container from "./SortingRadioGroup.styled";
+import * as S from "./SortingRadioGroup.styled";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -13,7 +13,7 @@ const SortingRadioGroup = ({
   sortingDireactionChangeHandler,
 }: ISortingRadioGroupProps) => {
   return (
-    <Container className="sorting-container">
+    <S.Container className="sorting-container">
       <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel>
       <RadioGroup
         onChange={sortingParamChangeHandler}
@@ -68,7 +68,7 @@ const SortingRadioGroup = ({
           label=""
         />
       </RadioGroup>
-    </Container>
+    </S.Container>
   );
 };
 

@@ -1,4 +1,4 @@
-import Container from "./SingleAttemptReagentTab.styled";
+import * as S from "./SingleAttemptReagentTab.styled";
 import { SingleMolCanvas } from "../../ui";
 import TextField from "@mui/material/TextField";
 import { useAppDispatch } from "../../redux/hooks";
@@ -35,7 +35,7 @@ const SingleAttemptReagentTab = ({
     );
   };
   return (
-    <Container>
+    <S.Container>
       <SingleMolCanvas smiles={smiles} />
       <p>Reagent {reagentNumber}</p>
       <TextField
@@ -84,7 +84,7 @@ const SingleAttemptReagentTab = ({
           endAdornment: <InputAdornment position="end">g</InputAdornment>,
         }}
       />
-    </Container>
+    </S.Container>
   );
 };
 

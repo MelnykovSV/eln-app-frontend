@@ -1,4 +1,4 @@
-import Container from "./SynthesisSchemeStage.styled";
+import * as S from "./SynthesisSchemeStage.styled";
 import { SingleMolCanvas, SingleArrow } from "../../ui";
 import { ISynthesisSchemeStageProps } from "../../types";
 import { smilesToMolWeight } from "../../helpers/chemistryHelpers";
@@ -25,7 +25,6 @@ const SynthesisSchemeStage = ({
     product = "";
   }
 
-
   const navigate = useNavigate();
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
 
@@ -35,7 +34,7 @@ const SynthesisSchemeStage = ({
     }
   };
   return (
-    <Container
+    <S.Container
       onClick={stageClickHandler}
       className={isCurrentStage ? "currentStage" : ""}
       style={{ zIndex: z }}>
@@ -65,7 +64,7 @@ const SynthesisSchemeStage = ({
           </p>
         ) : null}
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

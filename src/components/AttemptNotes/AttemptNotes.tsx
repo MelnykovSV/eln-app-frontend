@@ -1,4 +1,4 @@
-import Container from "./AttemptNotes.styled";
+import * as S from "./AttemptNotes.styled";
 import {
   getCurrentStage,
   setAttemptInfo,
@@ -23,7 +23,7 @@ const AttemptNotes = ({ attemptNumber }: IAttemptNotesProps) => {
     );
   };
   return (
-    <Container>
+    <S.Container>
       <TextField
         className="notes-input"
         label="Notes"
@@ -35,7 +35,7 @@ const AttemptNotes = ({ attemptNumber }: IAttemptNotesProps) => {
         multiline
         rows={8}
       />
-    </Container>
+    </S.Container>
   );
 };
 

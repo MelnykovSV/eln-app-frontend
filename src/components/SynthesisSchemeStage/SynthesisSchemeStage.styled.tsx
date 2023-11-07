@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.div<IStyledProps>`
+export const Container = styled.div<IStyledProps>`
   display: flex;
   height: 170px;
   width: fit-content;
@@ -32,7 +32,6 @@ const Container = styled.div<IStyledProps>`
     .methodic-container {
       position: relative;
       width: 95%;
-      /* padding-top: 50px; */
 
       .methodic {
         padding: 10px;
@@ -77,7 +76,6 @@ const Container = styled.div<IStyledProps>`
     }
   }
   .drawing-container {
-    /* width: 120px; */
     position: relative;
     display: flex;
     align-items: center;
@@ -106,4 +104,4 @@ const Container = styled.div<IStyledProps>`
   }
 `;
 
-export default Container;
+

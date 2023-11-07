@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.div<IStyledProps>`
+export const Container = styled.div<IStyledProps>`
   width: 100%;
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 8px;
@@ -13,4 +13,4 @@ const Container = styled.div<IStyledProps>`
     margin-bottom: 0;
   }
 `;
-export default Container;
+

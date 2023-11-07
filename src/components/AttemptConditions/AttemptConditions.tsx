@@ -1,4 +1,4 @@
-import Container from "./AttemptConditions.styled";
+import * as S from "./AttemptConditions.styled";
 import TextField from "@mui/material/TextField";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -59,7 +59,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
   };
 
   return (
-    <Container>
+    <S.Container>
       <TextField
         label="Yield"
         className="input"
@@ -202,7 +202,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         }
         label="Is attempt successful"
       />
-    </Container>
+    </S.Container>
   );
 };
 

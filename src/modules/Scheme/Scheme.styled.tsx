@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
-// import { styled as muiStyled } from "@mui/system";
 
-const Container = styled.div<IStyledProps>`
+
+export const Container = styled.div<IStyledProps>`
   border: 3px solid ${(props) => props.theme.palette.primary.main};
   border-radius: 8px;
   height: 100%;
@@ -10,10 +10,8 @@ const Container = styled.div<IStyledProps>`
 
   & > div {
     max-width: 1500px;
-
     display: flex;
     flex-wrap: wrap;
-    /* border: 3px solid ${(props) => props.theme.palette.primary.main}; */
     border-radius: 15px;
 
     @media screen and (min-width: 768px) {
@@ -38,4 +36,4 @@ const Container = styled.div<IStyledProps>`
   }
 `;
 
-export default Container;
+

@@ -1,4 +1,4 @@
-import Container from "./SharedLayout.styled";
+import * as S from "./SharedLayout.styled";
 import { Suspense } from "react";
 import { Outlet } from "react-router";
 import { ResponsiveAppBar } from "./ResponsiveAppBar";
@@ -6,7 +6,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 const SharedLayout = () => {
   return (
-    <Container>
+    <S.Container>
       <header className="header">
         <ResponsiveAppBar />
       </header>
@@ -15,7 +15,7 @@ const SharedLayout = () => {
           <Outlet></Outlet>
         </Suspense>
       </main>
-    </Container>
+    </S.Container>
   );
 };
 

@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
-  .header  {
+export const Container = styled.div<IStyledProps>`
+  .header {
     .nav-link {
       display: block;
       padding: 6px 16px;
@@ -11,6 +12,7 @@ const Container = styled.div`
       background-color: #42a5f5;
       font-weight: 700;
       transition: background-color 0.3s linear;
+      overflow: hidden;
 
       &:hover {
         background-color: #1565c0;
@@ -44,5 +46,3 @@ const Container = styled.div`
     }
   }
 `;
-
-export default Container;

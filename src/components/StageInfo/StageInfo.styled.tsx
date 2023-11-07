@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.div<IStyledProps>`
+export const Container = styled.div<IStyledProps>`
   align-items: center;
   gap: 30px;
   padding-top: 20px;
@@ -45,29 +45,30 @@ const Container = styled.div<IStyledProps>`
   }
 
   .stage-wrapper {
-    width: 100%;
-    padding: 20px;
-    .stage-info-select-container {
-      margin-bottom: 20px;
-      #stage-info-select-label {
-        background-color: ${({ theme }) => theme.palette.background.default};
-        padding-left: 5px;
-        padding-right: 10px;
-      }
-    }
-
-    .stage-info-button-container {
-      display: flex;
-      gap: 30px;
-      button {
-        width: 100%;
-        padding: 10px;
-        font-size: 13px;
-        font-weight: 700;
-        height: 50px;
-      }
-    }
   }
 `;
 
-export default Container;
+export const StageWrapper = styled.div<IStyledProps>`
+  width: 100%;
+  padding: 20px;
+  .stage-info-select-container {
+    margin-bottom: 20px;
+    #stage-info-select-label {
+      background-color: ${({ theme }) => theme.palette.background.default};
+      padding-left: 5px;
+      padding-right: 10px;
+    }
+  }
+
+  .stage-info-button-container {
+    display: flex;
+    gap: 30px;
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      height: 50px;
+    }
+  }
+`;

@@ -1,4 +1,4 @@
-import Container from "./ReagentCard.styled";
+import * as S from "./ReagentCard.styled";
 import { SingleMolCanvas } from "../../ui";
 import { IReagentCardProps } from "../../types";
 import { nanoid } from "nanoid";
@@ -7,7 +7,7 @@ const ReagentCard = ({
   reagentData: { smiles, mass, formula, molWeight, compoundName },
 }: IReagentCardProps) => {
   return (
-    <Container>
+    <S.Container>
       <div className="reagent-canvas-wrapper">
         <SingleMolCanvas
           smiles={smiles}
@@ -33,7 +33,7 @@ const ReagentCard = ({
           <li>Compound name: {compoundName || "Can't name this compound"}</li>
         </ul>
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

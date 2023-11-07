@@ -1,4 +1,4 @@
-import Container from "./CustomSelect.styled";
+import * as S from "./CustomSelect.styled";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -18,7 +18,7 @@ const CustomSelect = ({
   schemesTypeSelectHandler,
 }: ICustomSelectProps) => {
   return (
-    <Container className="select-container">
+    <S.Container className="select-container">
       <FormControl fullWidth sx={{ width: 320 }}>
         <InputLabel id="schemes-type-select-label">Schemes type</InputLabel>
         <Select
@@ -44,7 +44,7 @@ const CustomSelect = ({
           ))}
         </Select>
       </FormControl>
-    </Container>
+    </S.Container>
   );
 };
 
