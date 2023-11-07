@@ -4,7 +4,7 @@ import {
   getSchemePreviews,
   getIsLoadingSchemes,
 } from "../../redux/schemes/schemesSlice";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { getSchemes } from "../../redux/schemes/operations";
 import { DNALoader } from "../../ui";
 import { nanoid } from "nanoid";
@@ -44,11 +44,21 @@ const SchemePreviewsPage = () => {
           <DNALoader />
         </div>
       ) : (
-        <div className="schemes-preview-container container">
-          {realSchemes.map((item) => (
-            <ReactionSchemePreview schemePreviewData={item} key={nanoid()} />
-          ))}
-        </div>
+        <Fragment>
+          {realSchemes.length ? (
+            <div className="schemes-preview-container container">
+              {realSchemes.map((item) => (
+                <ReactionSchemePreview
+                  schemePreviewData={item}
+                  key={nanoid()}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="no-schemes-message">No schemes found</p>
+          )}
+          <div className="schemes-preview-container container"></div>
+        </Fragment>
       )}
     </Container>
   );

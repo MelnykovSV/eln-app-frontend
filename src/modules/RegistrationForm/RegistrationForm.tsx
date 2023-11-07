@@ -11,6 +11,8 @@ import { signUp } from "../../redux/auth/operations";
 import { DNALoaderSmall } from "../../ui";
 import { getIsLoading } from "../../redux/auth/authSlice";
 
+
+
 const RegistrationForm = () => {
   const navigate = useNavigate();
   const isLoading = useAppSelector(getIsLoading);
@@ -62,7 +64,7 @@ const RegistrationForm = () => {
       );
 
       if (!response.type.endsWith("rejected")) {
-        navigate("/emailValidation");
+        navigate("/emailVerification");
       }
     },
   });

@@ -12,6 +12,9 @@ const LoginPage = () => {
     if (authError.message === "Email or password invalid") {
       toast.error(authError.message);
     }
+    if (authError.message === "Email is not verified") {
+      toast.error(authError.message);
+    }
   }, [authError]);
 
   return (

@@ -26,6 +26,10 @@ const SchemePreviewsPage = lazy(
   () => import("../pages/SchemePreviewsPage/SchemePreviewsPage")
 );
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const EmailVerificationPage = lazy(
+  () => import("../pages/EmailVerificationPage/EmailVerificationPage")
+);
+const Page404 = lazy(() => import("../pages/Page404/Page404"));
 
 function App() {
   const isRefreshing = useAppSelector(getIsRefreshing);
@@ -63,11 +67,11 @@ function App() {
                 <Route path="/newScheme" element={<NewSchemePage />} />
               </Route>
               <Route
-                path="emailValidation"
-                element={<div>Email successfuly sent</div>}
+                path="emailVerification"
+                element={<EmailVerificationPage />}
               />
 
-              <Route path="*" element={<div>404 page</div>} />
+              <Route path="*" element={<Page404 />} />
             </Route>
           </Routes>
         ) : (

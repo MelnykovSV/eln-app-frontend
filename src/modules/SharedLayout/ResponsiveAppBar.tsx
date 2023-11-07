@@ -265,8 +265,8 @@ export function ResponsiveAppBar() {
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography
                       textAlign="center"
-                      onClick={() => {
-                        dispatch(logOut());
+                      onClick={async () => {
+                        await dispatch(logOut());
                         dispatch(clearSchemesData());
                       }}>
                       {setting}
