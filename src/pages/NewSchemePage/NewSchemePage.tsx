@@ -1,4 +1,4 @@
-import Container from "./NewSchemePage.styled";
+import * as S from "./NewSchemePage.styled";
 import { NewSchemeForm, Scheme } from "../../modules";
 import { useState, useEffect } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
@@ -162,7 +162,7 @@ const NewSchemePage = () => {
     setIsSchemePreviewShown(!isSchemePreviewShown);
   };
   return (
-    <Container className="container">
+    <S.Container className="container">
       <div className="utility-panel">
         <FormControlLabel
           className="toggle-schem-preview"
@@ -223,7 +223,7 @@ const NewSchemePage = () => {
           />
         </div>
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

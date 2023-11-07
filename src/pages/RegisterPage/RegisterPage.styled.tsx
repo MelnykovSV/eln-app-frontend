@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import BgImage from "./../../images/bg-image-2.jpg";
+import { IStyledProps } from "../../types/common";
 
-export const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   display: flex;
   flex-direction: column;
   height: min(calc(100vh - 85px), 1150px);
@@ -10,7 +11,7 @@ export const Container = styled.div`
   }
 `;
 
-export const BGContainer = styled.div`
+export const BGContainer = styled.div<IStyledProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,7 +43,7 @@ export const BGContainer = styled.div`
     }
     .logo_text-container {
       .logo_text-line {
-        color: #ffffff;
+        color: ${({ theme }) => theme.palette.primary.contrastText};
         font-size: 20px;
         @media screen and (min-width: 1280px) {
           font-size: 30px;
@@ -68,11 +69,11 @@ export const BGContainer = styled.div`
     .slogan {
       font-size: 26px;
       width: 100%;
-      color: #ffffff;
+      color: ${({ theme }) => theme.palette.primary.contrastText};
     }
   }
 `;
-export const FormContainer = styled.div`
+export const FormContainer = styled.div<IStyledProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,4 +1,4 @@
-import Container from "./StagePage.styled";
+import * as S from "./StagePage.styled";
 import { Stage } from "../../modules";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
@@ -27,9 +27,9 @@ const StagePage = () => {
   }, []);
 
   return (
-    <Container>
+    <S.Container>
       <Stage />
-    </Container>
+    </S.Container>
   );
 };
 

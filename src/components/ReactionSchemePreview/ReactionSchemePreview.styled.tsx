@@ -4,7 +4,7 @@ import { IStyledProps } from "../../types/common";
 export const Container = styled.div<IStyledProps>`
   cursor: pointer;
   width: 300px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.primary.contrastText};
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 8px;
   padding: 10px 5px;
@@ -23,7 +23,7 @@ export const Container = styled.div<IStyledProps>`
     transition: width 0.3s linear;
     width: 284px;
     div {
-      background-color: white;
+      background-color: ${({ theme }) => theme.palette.primary.contrastText};
     }
     .arrows {
       transform: translateX(0);
@@ -54,7 +54,7 @@ export const Container = styled.div<IStyledProps>`
     flex-shrink: 0;
     position: relative;
     dl {
-      background-color: white;
+      background-color: ${({ theme }) => theme.palette.primary.contrastText};
       margin: 0;
 
       div {
@@ -104,7 +104,7 @@ export const Container = styled.div<IStyledProps>`
       transition: width 0.3s linear;
       width: 140px;
       div {
-        background-color: white;
+        background-color: ${({ theme }) => theme.palette.primary.contrastText};
       }
       .arrows {
         transition: transform 0.3s linear;
@@ -136,7 +136,7 @@ export const Container = styled.div<IStyledProps>`
       flex-shrink: 0;
       position: relative;
       dl {
-        background-color: white;
+        background-color: ${({ theme }) => theme.palette.primary.contrastText};
         margin: 0;
 
         div {

@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { TextField } from "@mui/material";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled(TextField)`
+export const Container = styled(TextField)<IStyledProps>`
 
 `;
 
-export default Container;
+

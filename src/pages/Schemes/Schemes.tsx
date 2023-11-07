@@ -1,4 +1,4 @@
-import Container from "./Schemes.styled";
+import * as S from "./Schemes.styled";
 import { CustomSelect, SortingRadioGroup } from "../../components";
 import React, { useState, useEffect } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
@@ -92,7 +92,7 @@ const Schemes = () => {
   };
 
   return (
-    <Container>
+    <S.Container>
       <div className="utility-panel container">
         <div className="utility-panel-outer-block">
           <CustomSelect
@@ -136,7 +136,7 @@ const Schemes = () => {
           />
         ) : null}
       </div>
-    </Container>
+    </S.Container>
   );
 };
 

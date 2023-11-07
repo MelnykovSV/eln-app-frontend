@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   height: calc(100vh - 85px - 20px);
   .tab-panel {
     padding-top: 20px;
@@ -20,5 +21,3 @@ const Container = styled.div`
     margin-bottom: 20px;
   }
 `;
-
-export default Container;

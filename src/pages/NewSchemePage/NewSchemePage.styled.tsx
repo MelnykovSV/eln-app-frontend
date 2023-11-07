@@ -1,13 +1,10 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 768px) {
-    /* height: calc(100vh - 85px); */
-    /* height: 898px; */
-  }
   @media screen and (min-width: 1280px) {
     flex-direction: row;
   }
@@ -70,4 +67,4 @@ const Container = styled.div`
   }
 `;
 
-export default Container;
+

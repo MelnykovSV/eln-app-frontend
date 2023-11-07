@@ -11,7 +11,7 @@ export const Container = styled.form<IStyledProps>`
 
   .dropzone {
     background-color: ${({ theme }) => theme.palette.info.light};
-    color: white;
+    color: ${({ theme }) => theme.palette.primary.contrastText};
     padding: 10px;
     cursor: pointer;
     p {
@@ -19,7 +19,7 @@ export const Container = styled.form<IStyledProps>`
     }
     .dropzone-error {
       margin-top: 10px;
-      color: red;
+      color: ${({ theme }) => theme.palette.error.dark};
     }
   }
   .files-list {
@@ -35,7 +35,7 @@ export const Container = styled.form<IStyledProps>`
   }
   .spectr-label-error {
     margin: 0;
-    color: red;
+    color: ${({ theme }) => theme.palette.error.dark};
     height: 19px;
     margin-bottom: 5px;
   }
@@ -48,5 +48,3 @@ export const Container = styled.form<IStyledProps>`
     width: 100%;
   }
 `;
-
-

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   width: 200px;
   svg {
     aspect-ratio: 12 / 1;
@@ -9,5 +10,3 @@ const Container = styled.div`
     margin: 0 auto;
   }
 `;
-
-export default Container;

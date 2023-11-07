@@ -21,7 +21,9 @@ export const Container = styled.section<IStyledProps>`
   }
 `;
 
-export const DescriptionContent = styled.ul`
+
+
+export const DescriptionContent = styled.ul<IStyledProps>`
   display: flex;
   flex-direction: column;
   padding: 64px 20px;
@@ -35,7 +37,7 @@ export const DescriptionContent = styled.ul`
   }
 `;
 
-export const DescriptionBlock = styled.li`
+export const DescriptionBlock = styled.li<IStyledProps>`
   display: flex;
   flex-direction: column;
   margin-bottom: 64px;
@@ -50,7 +52,7 @@ export const DescriptionBlock = styled.li`
   }
 `;
 
-export const DescriptionInfo = styled.div`
+export const DescriptionInfo = styled.div<IStyledProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -60,24 +62,24 @@ export const DescriptionInfo = styled.div`
   }
 `;
 
-export const DescriptionNumber = styled.p`
+export const DescriptionNumber = styled.p<IStyledProps>`
   display: flex;
   font-size: 80px;
   font-weight: 700;
   line-height: 0.8;
   letter-spacing: -4px;
-  color: #3e85f3;
+  color: ${({ theme }) => theme.palette.primary.main};
   margin: 0;
 `;
 
-export const DescriptionNameAccent = styled.h2`
+export const DescriptionNameAccent = styled.h2<IStyledProps>`
   margin-top: 20px;
   margin-bottom: 0;
   padding: 8px 18px;
   font-size: 32px;
   font-weight: 700;
   line-height: 1.25;
-  color: #3e85f3;
+  color: ${({ theme }) => theme.palette.primary.main};
   text-transform: uppercase;
   border-radius: 44px;
   background-color: #dcebf7;
@@ -90,7 +92,7 @@ export const DescriptionNameAccent = styled.h2`
   }
 `;
 
-export const DescriptionName = styled.h3`
+export const DescriptionName = styled.h3<IStyledProps>`
   font-size: 32px;
   font-weight: 700;
   line-height: 1.25;
@@ -105,7 +107,7 @@ export const DescriptionName = styled.h3`
   }
 `;
 
-export const DescriptionText = styled.div`
+export const DescriptionText = styled.div<IStyledProps>`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.28;
@@ -146,7 +148,7 @@ export const DescriptionText = styled.div`
   }
 `;
 
-export const DescritpionPictureContainer = styled.div`
+export const DescritpionPictureContainer = styled.div<IStyledProps>`
   background-color: #dcebf7;
   border-radius: 100px;
   width: 100%;
@@ -191,7 +193,7 @@ export const DescritpionPictureContainer = styled.div`
   }
 `;
 
-export const DescriptionImg = styled.img`
+export const DescriptionImg = styled.img<IStyledProps>`
   width: 100%;
   height: 100%;
 `;

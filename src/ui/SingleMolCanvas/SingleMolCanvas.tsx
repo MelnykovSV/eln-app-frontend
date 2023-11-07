@@ -1,4 +1,4 @@
-import Container from "./SingleMolCanvas.styled";
+import * as S from "./SingleMolCanvas.styled";
 import { useRef, useEffect } from "react";
 import { ISingleMolCanvasProps } from "../../types";
 
@@ -35,14 +35,14 @@ const SingleMolCanvas = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [smiles]);
   return (
-    <Container>
+    <S.Container>
       <canvas
         id="canvas"
         ref={canvasRef}
         width={`${options.width}px`}
         height={`${options.height}px`}
       />
-    </Container>
+    </S.Container>
   );
 };
 

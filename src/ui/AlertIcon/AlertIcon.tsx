@@ -1,9 +1,7 @@
-import StyledAlertIcon from "./AlertIcon.styled";
+import * as S from "./AlertIcon.styled";
 
 const AlertIcon = () => {
-  return <StyledAlertIcon />;
+  return <S.StyledAlertIcon />;
 };
 
-
-
-export default AlertIcon
+export default AlertIcon;

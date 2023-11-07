@@ -1,8 +1,8 @@
-import { Container } from "./DNALoaderMedium.styled";
+import * as S from "./DNALoaderMedium.styled";
 
 const DNALoaderMedium = () => {
   return (
-    <Container
+    <S.Container
       visible={true}
       height="100"
       ariaLabel="dna-loading"

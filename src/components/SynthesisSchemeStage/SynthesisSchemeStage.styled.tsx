@@ -103,5 +103,3 @@ export const Container = styled.div<IStyledProps>`
     }
   }
 `;
-
-

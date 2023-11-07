@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
+export const Container = styled.div<IStyledProps>`
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -24,4 +25,4 @@ const Container = styled.div`
   }
 `;
 
-export default Container;
+

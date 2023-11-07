@@ -1,7 +1,7 @@
-import StyledIcon from "./CheckMark.styed";
+import * as S from "./CheckMark.styed";
 
 const CheckMark = () => {
-  return <StyledIcon />;
+  return <S.StyledIcon />;
 };
 
 export default CheckMark;

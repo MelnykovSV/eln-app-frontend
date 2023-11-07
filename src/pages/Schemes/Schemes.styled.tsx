@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
-const Container = styled.div<IStyledProps>`
+export const Container = styled.div<IStyledProps>`
   .utility-panel {
-    /* border: 1px solid ${({ theme }) => theme.palette.text.secondary}; */
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -15,9 +14,7 @@ const Container = styled.div<IStyledProps>`
       flex-direction: row-reverse;
     }
 
-    /* border: 1px solid black; */
     .utility-panel-outer-block {
-      /* border: 1px solid ${({ theme }) => theme.palette.text.secondary}; */
       display: flex;
       flex-direction: column;
       gap: 15px;
@@ -40,9 +37,6 @@ const Container = styled.div<IStyledProps>`
         input {
           width: 100%;
         }
-        button {
-          /* width: 200px; */
-        }
       }
     }
 
@@ -51,8 +45,6 @@ const Container = styled.div<IStyledProps>`
       justify-content: center;
     }
     .select-container {
-      /* border: 1px solid black; */
-      /* padding: 10px; */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -102,5 +94,3 @@ const Container = styled.div<IStyledProps>`
     }
   }
 `;
-
-export default Container;

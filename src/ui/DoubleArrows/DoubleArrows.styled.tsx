@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import { IStyledProps } from "../../types/common";
 
-const Container = styled.div`
-  background-color: white;
+export const Container = styled.div<IStyledProps>`
+  background-color: ${({ theme }) => theme.palette.primary.contrastText};
   width: 50px;
   display: flex;
   flex-direction: column;
@@ -19,5 +20,3 @@ const Container = styled.div`
     margin: 0;
   }
 `;
-
-export default Container;

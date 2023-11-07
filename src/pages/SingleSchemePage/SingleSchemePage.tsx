@@ -1,4 +1,4 @@
-import Container from "./SingleSchemePage.styled";
+import * as S from "./SingleSchemePage.styled";
 import { Scheme } from "../../modules";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -160,7 +160,7 @@ const SingleSchemePage = () => {
   };
 
   return (
-    <Container className="container">
+    <S.Container className="container">
       <div>
         <Tabs
           value={value}
@@ -198,7 +198,7 @@ const SingleSchemePage = () => {
       <CustomTabPanel value={value} index={1}>
         <ReagentList reagents={reagentsListData} />
       </CustomTabPanel>
-    </Container>
+    </S.Container>
   );
 };
 

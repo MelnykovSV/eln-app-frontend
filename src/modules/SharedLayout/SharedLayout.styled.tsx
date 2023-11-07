@@ -8,7 +8,7 @@ export const Container = styled.div<IStyledProps>`
       padding: 6px 16px;
       text-decoration: none;
       border-radius: 5px;
-      color: white;
+      color: ${({ theme }) => theme.palette.primary.contrastText};
       background-color: #42a5f5;
       font-weight: 700;
       transition: background-color 0.3s linear;
@@ -41,7 +41,7 @@ export const Container = styled.div<IStyledProps>`
         justify-content: center;
         line-height: 1;
         text-transform: uppercase;
-        color: white;
+        color: ${({ theme }) => theme.palette.primary.contrastText};
       }
     }
   }

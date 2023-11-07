@@ -8,7 +8,7 @@ export const Container = styled.section<IStyledProps>`
   align-items: center;
 `;
 
-export const MainSectionContent = styled.div`
+export const MainSectionContent = styled.div<IStyledProps>`
   background-image: linear-gradient(
       0deg,
       rgba(33, 150, 243, 0.4),
@@ -20,7 +20,7 @@ export const MainSectionContent = styled.div`
   padding-bottom: 200px;
 `;
 
-export const StyledMessage = styled.div`
+export const StyledMessage = styled.div<IStyledProps>`
   max-width: 600px;
   margin: 0 auto;
   font-size: 20px;
@@ -39,15 +39,15 @@ export const StyledMessage = styled.div`
   margin-bottom: 30px;
 `;
 
-export const AuthLink = styled(Link)`
-  color: #3e85f3;
+export const AuthLink = styled(Link)<IStyledProps>`
+  color: ${({ theme }) => theme.palette.primary.main};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: calc(18 / 14);
   letter-spacing: -0.28px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.palette.primary.contrastText};
   width: 121px;
   height: 49px;
   display: flex;
@@ -60,20 +60,20 @@ export const AuthLink = styled(Link)`
   box-shadow: rgba(136, 165, 191, 0.48) 4px 2px 16px 0px;
   transition: background-color 0.3s linear, color 0.3s linear;
   &:hover {
-    background-color: #3e85f3;
-    color: #fff;
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    color: ${({ theme }) => theme.palette.primary.contrastText};
   }
 `;
 
-export const AuthLinkLogIn = styled(Link)`
-  color: #3e85f3;
+export const AuthLinkLogIn = styled(Link)<IStyledProps>`
+  color: ${({ theme }) => theme.palette.primary.main};
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: calc(18 / 14);
   letter-spacing: -0.28px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.palette.primary.contrastText};
   width: 121px;
   height: 49px;
   display: flex;
@@ -86,7 +86,7 @@ export const AuthLinkLogIn = styled(Link)`
   box-shadow: rgba(136, 165, 191, 0.48) 4px 2px 16px 0px;
 `;
 
-export const AuthLinkBlock = styled.div`
+export const AuthLinkBlock = styled.div<IStyledProps>`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,9 +1,9 @@
 import { Dna } from "react-loader-spinner";
-import { Container } from "./DNALoader.styled";
+import * as S from "./DNALoader.styled";
 
 const DNALoader = () => {
   return (
-    <Container className="loader">
+    <S.Container className="loader">
       <Dna
         visible={true}
         height="300"
@@ -11,7 +11,7 @@ const DNALoader = () => {
         ariaLabel="dna-loading"
         wrapperClass="dna-wrapper"
       />
-    </Container>
+    </S.Container>
   );
 };
 
