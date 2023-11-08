@@ -563,6 +563,7 @@ export const {
   setSchemeStatus,
   updateSchemesState,
 } = schemesSlice.actions;
+
 export const getSchemePreviews = (state: IState) =>
   state.schemes.schemePreviews;
 export const getCurrentScheme = (state: IState) => state.schemes.currentScheme;

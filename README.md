@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# Electronic Laboratory Notebook (ELN)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Welcome to the Electronic Laboratory Notebook (ELN), a powerful online tool designed to streamline your chemical synthesis projects. This web application is a comprehensive solution for chemists and researchers to efficiently plan, track, and manage their synthesis workflows. Whether you are a seasoned chemist or a novice in the field, ELN simplifies the entire process, from scheme creation to detailed stage management.
 
-In the project directory, you can run:
+## Key Features
 
-### `npm start`
+### Scheme Previews
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Get a quick snapshot of your synthesis projects with essential information, including starting compound, final product, number of stages, creation date, last update date, mass, and price.
+- Sort and arrange your schemes based on creation date, last update date, mass, and price for efficient data management.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Pagination
 
-### `npm test`
+- Easily manage extensive lists of schemes with a convenient pagination system.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### SMILES Search
 
-### `npm run build`
+- Accelerate your research by searching for specific schemes using SMILES substrings, saving you time and effort in finding the relevant data.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### New Synthesis Page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Initiate your synthesis project effortlessly through a user-friendly "New Scheme" form, where you can input all necessary data for your scheme.
+- Break down the synthesis process into stages, allowing you to focus on specific details for each stage and maintain an overview of the entire scheme.
+- Enter crucial data, including reaction conditions, solvent, yield, time, temperature, and methodic, for each stage.
+- Real-time "Scheme Preview" updates provide an immediate overview of your project's progress and details as you enter information.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Single Scheme Page
 
-### `npm run eject`
+- Seamlessly navigate between different stages of your synthesis, enabling easy tracking of progress and input of essential data.
+- Identify the last successfully completed stage outlined in green for quick progress tracking.
+- Access a dedicated "Reagents Calculation" tab to obtain information about required reagents and calculate the masses needed to achieve the desired compound mass when yields are provided for each stage.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Single Stage Page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Switch between different experiments for a single stage with a simple select feature, essential for optimizing conditions and selecting the best approach.
+- Input experiment conditions easily and accurately within each experiment tab, ensuring reproducible results.
+- Automatic experiment yield calculations based on product mass and purity, saving time and eliminating manual calculations.
+- Manage up to four reagents per experiment with automatic mass calculations based on starting material mass and reagent equivalents.
+- Utilize the experiment spectra panel for dynamic management of experiment data, including PDF spectra uploads, comments, viewing, downloading, and deletion as needed.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Getting Started
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To start using the Electronic Laboratory Notebook (ELN), simply follow these steps:
 
-## Learn More
+1. Access the ELN web app by visiting [insert your web app's URL here].
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Sign in or create an account to access your synthesis projects.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Use the "New Scheme" form to begin a new synthesis project, or explore existing schemes in the Scheme Previews section.
+
+4. Track the progress of your synthesis projects, manage stages, and input experiment data as needed.
+
+5. Enjoy the convenience of sorting, searching, and efficient data management features provided by the web application.
+
+## Feedback and Support
+
+We value your feedback and are here to assist you. If you have any questions, encounter issues, or have suggestions for improvement, please contact our support team at svmelnykov@gmail.com.
