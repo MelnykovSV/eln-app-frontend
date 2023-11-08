@@ -44,7 +44,7 @@ Welcome to the Electronic Laboratory Notebook (ELN), a powerful online tool desi
 
 To start using the Electronic Laboratory Notebook (ELN), simply follow these steps:
 
-1. Access the ELN web app by visiting [insert your web app's URL here].
+1. Access the ELN web app by visiting [eln-app-frontend.vercel.app].
 
 2. Sign in or create an account to access your synthesis projects.
 
