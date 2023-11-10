@@ -1,23 +1,23 @@
 import axios from "axios";
 import { updateTokens, forceLogOut } from "./redux/auth/authSlice";
 
+const homePage = "https://eln-app-web-server.onrender.com";
+
 let store: any;
 
 const privateApi = axios.create({
-  baseURL: "https://eln-app-web-server.onrender.com",
+  baseURL: homePage,
 });
 const publicApi = axios.create({
-  baseURL: "https://eln-app-web-server.onrender.com",
+  baseURL: homePage,
 });
 const refreshApi = axios.create({
-  baseURL: "https://eln-app-web-server.onrender.com",
+  baseURL: homePage,
 });
 
 export const injectStore = (_store: any) => {
   store = _store;
 };
-
-
 
 refreshApi.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${store.getState().auth.refreshToken}`;
