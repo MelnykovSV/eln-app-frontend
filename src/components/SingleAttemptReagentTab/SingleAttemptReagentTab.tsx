@@ -51,7 +51,7 @@ const SingleAttemptReagentTab = ({
         className="reagent-input"
         label="Equivalents"
         name="equivalents"
-        value={equivalents || ""}
+        value={equivalents !== null ? equivalents : ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"

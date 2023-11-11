@@ -143,10 +143,18 @@ const schemesSlice = createSlice({
 
           break;
         case "equivalents":
-          reagent.equivalents =
-            Number(action.payload.equivalents) > 0
-              ? (reagent.equivalents = Number(action.payload.equivalents))
+          // reagent.equivalents =
+          //   Number(action.payload.equivalents) > 0
+          //     ? (reagent.equivalents = Number(action.payload.equivalents))
+          //     : null;
+          if (Number(action.payload.equivalents) < 0) {
+            return;
+          }
+          const fieldValue =
+            action.payload.equivalents !== ""
+              ? action.payload.equivalents
               : null;
+          reagent.equivalents = fieldValue !== null ? Number(fieldValue) : null;
           if (
             reagent.molecularWeight !== null &&
             reagent.equivalents !== null &&
@@ -196,8 +204,7 @@ const schemesSlice = createSlice({
       switch (action.payload.fieldName) {
         case "notes":
         case "methodic":
-        case "solvent":
-        case "time": {
+        case "solvent": {
           const fieldValue =
             (action.payload[action.payload.fieldName] as string) || null;
           attempt[action.payload.fieldName] = fieldValue;
@@ -207,21 +214,40 @@ const schemesSlice = createSlice({
           }
           break;
         }
-        case "temp": {
+        case "time": {
+          if (Number(action.payload[action.payload.fieldName]) < 0) {
+            return;
+          }
           const fieldValue =
-            (action.payload[action.payload.fieldName] as number) > 0
-              ? (action.payload[action.payload.fieldName] as number)
+            action.payload[action.payload.fieldName] !== ""
+              ? action.payload[action.payload.fieldName]
               : null;
-          attempt[action.payload.fieldName] = Number(fieldValue);
+          attempt[action.payload.fieldName] =
+            fieldValue !== null ? Number(fieldValue) : null;
+
           if (attempt.isOk) {
             state.currentStage[action.payload.fieldName] = Number(fieldValue);
+          }
+          break;
+        }
+        case "temp": {
+          const fieldValue =
+            action.payload[action.payload.fieldName] !== ""
+              ? action.payload[action.payload.fieldName]
+              : null;
+
+          attempt[action.payload.fieldName] =
+            fieldValue !== null ? Number(fieldValue) : null;
+          if (attempt.isOk) {
+            state.currentStage[action.payload.fieldName] =
+              fieldValue !== null ? Number(fieldValue) : null;
           }
           break;
         }
 
         case "_yield": {
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) > 0
+            Number(action.payload[action.payload.fieldName]) >= 0
               ? Number(action.payload[action.payload.fieldName])
               : null;
           attempt[action.payload.fieldName] = fieldValue;
@@ -259,11 +285,15 @@ const schemesSlice = createSlice({
         }
 
         case "startingMaterialMass": {
+          if (Number(action.payload[action.payload.fieldName]) < 0) {
+            return;
+          }
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) > 0
-              ? Number(action.payload[action.payload.fieldName])
+            action.payload[action.payload.fieldName] !== ""
+              ? action.payload[action.payload.fieldName]
               : null;
-          attempt[action.payload.fieldName] = fieldValue;
+          attempt[action.payload.fieldName] =
+            fieldValue !== null ? Number(fieldValue) : null;
           attempt.reagents.forEach((item) => {
             if (
               item.equivalents &&
@@ -273,7 +303,7 @@ const schemesSlice = createSlice({
               if (fieldValue) {
                 item.mass = Number(
                   (
-                    (fieldValue /
+                    (Number(fieldValue) /
                       smilesToMolWeight(state.currentStage.startingMaterial)) *
                     item.molecularWeight *
                     item.equivalents
@@ -295,7 +325,7 @@ const schemesSlice = createSlice({
             } else {
               const productMass = attempt.productMass;
               const startingMaterialN =
-                fieldValue /
+                Number(fieldValue) /
                 smilesToMolWeight(state.currentStage.startingMaterial);
               const productPurity = attempt.productPurity;
               const productMolWeight = smilesToMolWeight(
@@ -318,11 +348,15 @@ const schemesSlice = createSlice({
           break;
         }
         case "productMass": {
+          if (Number(action.payload[action.payload.fieldName]) < 0) {
+            return;
+          }
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) > 0
-              ? Number(action.payload[action.payload.fieldName])
+            action.payload[action.payload.fieldName] !== ""
+              ? action.payload[action.payload.fieldName]
               : null;
-          attempt[action.payload.fieldName] = fieldValue;
+          attempt[action.payload.fieldName] =
+            fieldValue !== null ? Number(fieldValue) : null;
           if (
             attempt.startingMaterialMass &&
             attempt.productPurity &&
@@ -342,7 +376,7 @@ const schemesSlice = createSlice({
               );
               attempt._yield = Number(
                 (
-                  ((productMass * productPurity) /
+                  ((Number(productMass) * productPurity) /
                     100 /
                     (startingMaterialN * productMolWeight)) *
                   100
@@ -356,18 +390,22 @@ const schemesSlice = createSlice({
           break;
         }
         case "productPurity": {
+          if (Number(action.payload[action.payload.fieldName]) < 0) {
+            return;
+          }
           const fieldValue =
-            Number(action.payload[action.payload.fieldName]) > 0
-              ? Number(action.payload[action.payload.fieldName])
+            action.payload[action.payload.fieldName] !== ""
+              ? action.payload[action.payload.fieldName]
               : null;
-          attempt[action.payload.fieldName] = fieldValue;
+          attempt[action.payload.fieldName] =
+            fieldValue !== null ? Number(fieldValue) : null;
           if (
             attempt.startingMaterialMass &&
             attempt.productMass &&
             state.currentStage.startingMaterial &&
             state.currentStage.product
           ) {
-            if (!fieldValue) {
+            if (fieldValue === null) {
               attempt._yield = null;
             } else {
               const productMass = attempt.productMass;
@@ -381,7 +419,7 @@ const schemesSlice = createSlice({
 
               attempt._yield = Number(
                 (
-                  ((productMass * productPurity) /
+                  ((productMass * Number(productPurity)) /
                     100 /
                     (startingMaterialN * productMolWeight)) *
                   100

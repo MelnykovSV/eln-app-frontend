@@ -20,7 +20,7 @@ const blankStage = {
   product: "",
   solvent: "",
   temp: null,
-  time: "",
+  time: null,
   _yield: null,
   methodic: "",
 };
@@ -30,7 +30,7 @@ interface IStage {
   product: string;
   solvent: string;
   temp: null | number;
-  time: string;
+  time: number | null;
   _yield: number | null;
   methodic: string;
 }

@@ -72,7 +72,7 @@ export interface IAddNewSchemeParams {
     solvent: string;
     startingMaterial: string;
     temp: number | null;
-    time: string;
+    time: number | null;
     _yield: number | null;
   }[];
 }

@@ -23,7 +23,7 @@ export interface IAttempt {
   solvent: string | null;
   methodic: string | null;
   temp: number | null;
-  time: string | null;
+  time: number | null;
   notes: string | null;
   startingMaterialMass: number | null;
   productMass: number | null;
@@ -54,7 +54,7 @@ export interface IStage {
   solvent: string | null;
   methodic: string | null;
   temp: number | null;
-  time: string | null;
+  time: number | null;
   _id: string | null;
   notes?: string | null;
   startingMaterial: string | null;
@@ -94,7 +94,7 @@ export interface IUpdatedCurrentScheme {
     _id?: string | null;
     solvent: string | null;
     temp: number | null;
-    time: string | null;
+    time: number | null;
     _yield: number | null;
     methodic: string | null;
     product: string | null;

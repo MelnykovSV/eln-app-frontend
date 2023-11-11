@@ -56,7 +56,7 @@ export interface ISynthesisSchemeStageProps {
     _id?: string | null;
     solvent: string | null;
     temp: number | null;
-    time: string | null;
+    time: number | null;
     _yield: number | null;
     methodic: string | null;
     product: string | null;
@@ -80,7 +80,7 @@ export interface ISchemeProps {
       _id?: string | null;
       solvent: string | null;
       temp: number | null;
-      time: string | null;
+      time: number | null;
       _yield: number | null;
       methodic: string | null;
       product: string | null;
@@ -122,7 +122,7 @@ export interface INewSchemeFormProps {
   stages: {
     solvent: string;
     temp: number | null;
-    time: string;
+    time: number | null;
     _yield: number | null;
     methodic: string;
     product: string;

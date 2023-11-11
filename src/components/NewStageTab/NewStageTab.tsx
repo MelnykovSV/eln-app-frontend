@@ -7,7 +7,7 @@ interface IStage {
   product: string;
   solvent: string;
   temp: number | null;
-  time: string;
+  time: number | null;
   _yield: number | null;
   methodic: string;
 }

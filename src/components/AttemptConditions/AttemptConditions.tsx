@@ -88,7 +88,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Time"
         name="time"
-        value={time || ""}
+        value={time !== null ? time : ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -102,7 +102,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Temperature"
         name="temp"
-        value={temp || ""}
+        value={temp !== null ? temp : ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -115,7 +115,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Starting Material Mass"
         name="startingMaterialMass"
-        value={startingMaterialMass || ""}
+        value={startingMaterialMass !== null ? startingMaterialMass : ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -128,7 +128,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Product Mass"
         name="productMass"
-        value={productMass || ""}
+        value={productMass !== null ? productMass : ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
@@ -141,7 +141,7 @@ const AttemptConditions = ({ attemptNumber }: IAttemptInfoProps) => {
         className="input"
         label="Product Purity"
         name="productPurity"
-        value={productPurity || ""}
+        value={productPurity !== null ? productPurity : ""}
         variant="outlined"
         onChange={inputChangeHandler}
         size="small"
