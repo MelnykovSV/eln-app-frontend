@@ -28,7 +28,7 @@ const SingleAttemptReagentTab = ({
     dispatch(
       setAttemptReagentData({
         reagentNumber: reagentNumber,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value.trim(),
         attemptNumber: attemptNumber,
         fieldName: e.target.name,
       })

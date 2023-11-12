@@ -20,7 +20,7 @@ export interface ISchemeData {
 export const calculateSchemeYieldCoefficients = (obj: ISchemeData) => {
   const arr = [...obj.stages];
 
-  if (arr.some((item) => item._yield === null)) {
+  if (arr.some((item) => item._yield === null || item._yield === 0)) {
     return obj;
   } else {
     arr.reverse();

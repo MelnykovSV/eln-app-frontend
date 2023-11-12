@@ -39,15 +39,27 @@ const SynthesisSchemeStage = ({
       className={isCurrentStage ? "currentStage" : ""}
       style={{ zIndex: z }}>
       <div className="conditions-container">
-        <p>
-          {solvent ? <span>{solvent}</span> : null}
-          {(solvent && temp) || (solvent && time) ? <span>, </span> : null}
-          {temp ? <span>{temp} &#8451;</span> : null}
-          {temp && time ? <span>,</span> : null}
-          {time ? <span> {time} h</span> : null}
-        </p>
+        <div className="conditions-container-top">
+          <p>
+            {solvent ? <span>{solvent}</span> : null}
+            {(solvent && temp !== null) || (solvent && time) ? (
+              <span>, </span>
+            ) : null}
+            {temp !== null ? (
+              <span className="span-temp">{temp} &#8451;</span>
+            ) : null}
+            {temp !== null && time ? <span>,</span> : null}
+            {time ? <span className="span-time"> {time} h</span> : null}
+          </p>
+        </div>
+
         <SingleArrow />
-        {_yield ? <p>{_yield} %</p> : null}
+        {_yield ? (
+          <div className="conditions-container-bottom">
+            {" "}
+            <p>{_yield} %</p>
+          </div>
+        ) : null}
         {methodic ? (
           <div className="methodic-container">
             <div className="methodic">{methodic}</div>

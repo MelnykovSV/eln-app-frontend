@@ -63,7 +63,7 @@ const NewSchemePage = () => {
     setStages(
       [...stages].map((item, i) => {
         if (stageNumber - 1 === i) {
-          return { ...stages[i], [e.target.name]: e.target.value };
+          return { ...stages[i], [e.target.name]: e.target.value.trim() };
         } else {
           return item;
         }
@@ -132,7 +132,7 @@ const NewSchemePage = () => {
 
     const { payload } = (await dispatch(
       addNewScheme({
-        startingMaterial,
+        startingMaterial: startingMaterial.trim(),
         targetCompound:
           repairedStagesArray[repairedStagesArray.length - 1].product,
         mass,
@@ -149,7 +149,7 @@ const NewSchemePage = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const name = e.target.name as keyof typeof names;
-    names[name](e.target.value);
+    names[name](e.target.value.trim());
   };
 
   const deadlineChangeHandler = (value: Dayjs | null) => {

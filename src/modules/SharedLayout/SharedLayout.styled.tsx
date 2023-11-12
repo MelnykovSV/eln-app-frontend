@@ -45,4 +45,9 @@ export const Container = styled.div<IStyledProps>`
       }
     }
   }
+
+  main {
+    background-color: ${({ theme }) => theme.palette.background.default};
+    min-height: calc(100vh - 85px);
+  }
 `;

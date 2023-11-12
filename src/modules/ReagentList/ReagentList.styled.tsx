@@ -7,4 +7,6 @@ export const Container = styled.ul<IStyledProps>`
   gap: 10px;
   padding: 0;
   padding-bottom: 20px;
+  height: 100%;
+  overflow-y: auto;
 `;

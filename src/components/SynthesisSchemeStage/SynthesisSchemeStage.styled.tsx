@@ -24,10 +24,27 @@ export const Container = styled.div<IStyledProps>`
     align-items: center;
     justify-content: center;
 
+    .conditions-container-top,
+    .conditions-container-bottom {
+      height: 77px;
+    }
+    .conditions-container-top {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin-top: auto;
+      }
+    }
     p {
       max-width: 200px;
       margin: 0;
       overflow-wrap: break-word;
+      text-align: center;
+      .span-temp,
+      .span-time {
+        white-space: nowrap;
+      }
     }
     .methodic-container {
       position: relative;
@@ -51,6 +68,7 @@ export const Container = styled.div<IStyledProps>`
         overflow-y: auto;
         overflow-wrap: break-word;
         font-size: 14px;
+        word-break: break-word;
 
         ::-webkit-scrollbar {
           width: 12px;

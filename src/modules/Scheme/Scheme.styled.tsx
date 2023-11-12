@@ -6,6 +6,7 @@ export const Container = styled.div<IStyledProps>`
   border-radius: 8px;
   height: 100%;
   overflow-y: auto;
+  background-color: ${({ theme }) => theme.palette.background.paper};
 
   & > div {
     max-width: 1500px;
