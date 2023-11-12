@@ -54,12 +54,9 @@ const SynthesisSchemeStage = ({
         </div>
 
         <SingleArrow />
-        {_yield ? (
-          <div className="conditions-container-bottom">
-            {" "}
-            <p>{_yield} %</p>
-          </div>
-        ) : null}
+        <div className="conditions-container-bottom">
+          {_yield ? <p>{_yield} %</p> : null}
+        </div>
         {methodic ? (
           <div className="methodic-container">
             <div className="methodic">{methodic}</div>
