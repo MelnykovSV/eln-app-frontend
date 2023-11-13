@@ -26,8 +26,6 @@ const blankStage = {
   methodic: "",
 };
 
-console.log(dayjs("23.11.2023", "MM.DD.YYYY"));
-
 interface IStage {
   startingMaterial: string;
   product: string;
@@ -133,8 +131,6 @@ const NewSchemePage = () => {
     stages[0].startingMaterial = startingMaterial;
 
     const repairedStagesArray = repairNewSchemeArray(stages);
-
-    console.log(deadline);
 
     const { payload } = (await dispatch(
       addNewScheme({

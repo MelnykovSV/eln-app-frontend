@@ -18,8 +18,6 @@ import { AlertIcon, DNALoaderSmall, SingleMolCanvas } from "../../ui";
 import { getIsLoadingSchemes } from "../../redux/schemes/schemesSlice";
 import { useAppSelector } from "../../redux/hooks";
 
-console.log(dayjs("17.10.2023", "DD.MM.YYYY"));
-
 const NewSchemeForm = ({
   startingMaterial,
   mass,
