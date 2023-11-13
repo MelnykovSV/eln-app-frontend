@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { IStyledProps } from "../../types/common";
 
 export const Container = styled.div<IStyledProps>`
-  height: calc(100vh - 85px );
+  height: calc(100vh - 85px);
   background-color: ${({ theme }) => theme.palette.background.default};
 
   .tab-panel {

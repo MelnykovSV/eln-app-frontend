@@ -3,12 +3,16 @@ import { IStyledProps } from "../../types/common";
 
 export const Container = styled.div<IStyledProps>`
   background-color: ${({ theme }) => theme.palette.background.default};
-  height: calc(100vh - 85px);
+  nav.MuiPagination-root.MuiPagination-text.pagination {
+    margin-bottom: 0 ;
+    padding-bottom: 20px;
+  }
   .utility-panel {
     display: flex;
     flex-direction: column;
     padding: 10px;
     gap: 15px;
+
     @media screen and (min-width: 768px) {
       padding: 20px;
     }
