@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateSchemesState } from "../../redux/schemes/schemesSlice";
+import dayjs from "dayjs";
 
 const ReactionSchemePreview = ({
   schemePreviewData,
@@ -79,7 +80,10 @@ const ReactionSchemePreview = ({
           </div>
           <div>
             <dt>Deadline</dt>
-            <dd>{schemePreviewData.deadline}</dd>
+            <dd>
+              {dayjs(schemePreviewData.deadline).format("DD.MM.YYYY") !==
+                "10.10.2040"?dayjs(schemePreviewData.deadline).format("DD.MM.YYYY"):'none'}
+            </dd>
           </div>
         </dl>
       </div>

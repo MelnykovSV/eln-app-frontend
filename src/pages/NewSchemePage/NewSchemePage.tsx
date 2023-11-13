@@ -2,18 +2,19 @@ import * as S from "./NewSchemePage.styled";
 import { NewSchemeForm, Scheme } from "../../modules";
 import { useState, useEffect } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { Dayjs } from "dayjs";
 import { calculateSchemeYieldCoefficients } from "../../helpers/calculateSchemeYieldCoefficients";
 import Switch from "@mui/material/Switch";
 import Slide from "@mui/material/Slide";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   addNewScheme,
   IAddNewSchemePayload,
 } from "../../redux/schemes/operations";
+import dayjs from "dayjs";
+import { getSchemesError } from "../../redux/schemes/schemesSlice";
 
 const blankStage = {
   startingMaterial: "",
@@ -24,6 +25,8 @@ const blankStage = {
   _yield: null,
   methodic: "",
 };
+
+console.log(dayjs("23.11.2023", "MM.DD.YYYY"));
 
 interface IStage {
   startingMaterial: string;
@@ -36,11 +39,12 @@ interface IStage {
 }
 
 const NewSchemePage = () => {
+  const schemesError = useAppSelector(getSchemesError);
   const dispatch = useAppDispatch();
   const [startingMaterial, setStartingMaterial] = useState("");
   const [mass, setStartingMass] = useState("");
   const [price, setPrice] = useState("");
-  const [deadline, setDeadline] = useState<string>("");
+  const [deadline, setDeadline] = useState<dayjs.Dayjs>(dayjs("10.10.2040"));
   const [stageNumber, setStageNumber] = useState(1);
   const [isSchemePreviewShown, setIsSchemePreviewShown] = useState(false);
 
@@ -130,6 +134,8 @@ const NewSchemePage = () => {
 
     const repairedStagesArray = repairNewSchemeArray(stages);
 
+    console.log(deadline);
+
     const { payload } = (await dispatch(
       addNewScheme({
         startingMaterial: startingMaterial.trim(),
@@ -142,7 +148,14 @@ const NewSchemePage = () => {
       })
     )) as { payload: IAddNewSchemePayload };
 
-    navigate(`/scheme/${payload._id}`);
+    if (payload._id) {
+      navigate(`/scheme/${payload._id}`);
+    } else {
+      toast.error(
+        schemesError.message ||
+          "An unexpected error occurred while creating the scheme"
+      );
+    }
   };
 
   const inputChangeHandler = (
@@ -152,9 +165,9 @@ const NewSchemePage = () => {
     names[name](e.target.value.trim());
   };
 
-  const deadlineChangeHandler = (value: Dayjs | null) => {
+  const deadlineChangeHandler = (value: dayjs.Dayjs | null) => {
     if (value) {
-      setDeadline(value.format("DD.MM.YYYY"));
+      setDeadline(value);
     }
   };
 

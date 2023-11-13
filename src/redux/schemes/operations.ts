@@ -65,7 +65,7 @@ export interface IAddNewSchemeParams {
   targetCompound: string;
   mass: string;
   price: string;
-  deadline: string;
+  deadline: dayjs.Dayjs;
   stages: {
     methodic: string;
     product: string;
@@ -137,6 +137,19 @@ export const getSingleScheme = createAsyncThunk<ISchemeData, string>(
     try {
       const response = await privateApi.get(`/api/schemes/${schemeId}`);
 
+      if (!response.data) {
+        if (request.isAxiosError(response) && response.response) {
+          return thunkAPI.rejectWithValue({
+            message: response.response.data.message,
+            code: response.response.data.code || null,
+          });
+        }
+        return thunkAPI.rejectWithValue({
+          message: getErrorMessage(response),
+          code: null,
+        });
+      }
+
       const result = {
         ...response.data.data,
         createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
@@ -166,6 +179,19 @@ export const getSchemeAndStage = createAsyncThunk<
   try {
     const response = await privateApi.get(`/api/schemes/${schemeId}`);
 
+    if (!response.data) {
+      if (request.isAxiosError(response) && response.response) {
+        return thunkAPI.rejectWithValue({
+          message: response.response.data.message,
+          code: response.response.data.code || null,
+        });
+      }
+      return thunkAPI.rejectWithValue({
+        message: getErrorMessage(response),
+        code: null,
+      });
+    }
+
     const schemeData = {
       ...response.data.data,
       createdAt: dayjs(response.data.data.createdAt).format("DD.MM.YYYY"),
@@ -175,6 +201,13 @@ export const getSchemeAndStage = createAsyncThunk<
     const stageData = schemeData.stages.find(
       (item: IStage) => item._id === stageId
     );
+
+    if (!stageData) {
+      return thunkAPI.rejectWithValue({
+        message: "Invalid stage ID",
+        code: 404,
+      });
+    }
 
     return { schemeData, stageData };
   } catch (error) {

@@ -34,11 +34,11 @@ const SortingRadioGroup = ({
         />
         <FormControlLabel value="price" control={<Radio />} label="Price" />
         <FormControlLabel value="mass" control={<Radio />} label="Mass" />
-        {/* <FormControlLabel
+        <FormControlLabel
           value="deadline"
           control={<Radio />}
           label="Deadline"
-        /> */}
+        />
       </RadioGroup>
       <RadioGroup
         row

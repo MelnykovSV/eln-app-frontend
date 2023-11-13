@@ -3,16 +3,25 @@ import { Stage } from "../../modules";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import {
   getCurrentScheme,
+  getSchemesError,
   initialUpdateCurrentStage,
 } from "../../redux/schemes/schemesSlice";
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getSchemeAndStage } from "../../redux/schemes/operations";
 
 const StagePage = () => {
+  const navigate = useNavigate();
+  const schemesError = useAppSelector(getSchemesError);
   const dispatch = useAppDispatch();
   const currentScheme = useAppSelector(getCurrentScheme);
   const { schemeId, stageId } = useParams();
+  useEffect(() => {
+    if (schemesError.code === 404 || schemesError.code === 400) {
+      navigate("/page404");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schemesError]);
 
   useEffect(() => {
     if (schemeId && stageId) {

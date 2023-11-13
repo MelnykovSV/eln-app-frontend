@@ -26,6 +26,8 @@ import {
 import { DNALoader } from "../../ui";
 import { IReagentListItem } from "../../types/componentsProps";
 import { useMemo } from "react";
+import { getSchemesError } from "../../redux/schemes/schemesSlice";
+import { useNavigate } from "react-router";
 
 function a11yProps(index: number) {
   return {
@@ -35,9 +37,11 @@ function a11yProps(index: number) {
 }
 
 const SingleSchemePage = () => {
+  const navigate = useNavigate();
   const { schemeId } = useParams();
   const isLoadingSchemes = useAppSelector(getIsLoadingSchemes);
   const currentSchemeId = useAppSelector(getCurrentSchemeId);
+  const schemesError = useAppSelector(getSchemesError);
   const dispatch = useAppDispatch();
   const currentScheme = useAppSelector(getCurrentScheme);
 
@@ -101,6 +105,13 @@ const SingleSchemePage = () => {
   const [reagentsListData, setReagentsListData] = useState<IReagentListItem[]>(
     []
   );
+
+  useEffect(() => {
+    if (schemesError.code === 404 || schemesError.code === 400) {
+      navigate("/page404");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schemesError]);
   useEffect(() => {
     if (schemeId && schemeId !== currentScheme._id) {
       dispatch(getSingleScheme(schemeId));

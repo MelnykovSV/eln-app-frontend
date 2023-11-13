@@ -10,10 +10,10 @@ export interface ISingleMolCanvasProps {
 
 export interface IReactionPreviewData {
   _id: string;
-  status: string; ///  понять, почему не работают литералы
+  status: string;
   mass: number;
   price: number;
-  deadline: string;
+  deadline: Dayjs;
   stagesNumber: number;
   startingMaterial: string;
   targetCompound: string;
@@ -117,7 +117,7 @@ export interface INewSchemeFormProps {
   mass: string;
   price: string;
   stageNumber: number;
-  deadline: string;
+  deadline: Dayjs;
   targetCompound: string;
   stages: {
     solvent: string;
