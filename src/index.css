@@ -95,7 +95,6 @@ code {
   padding-right: 20px;
 }
 .MuiModal-root .pages {
-
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -105,7 +104,7 @@ code {
 
 @media screen and (min-width: 768px) {
   .MuiModal-root .MuiBox-root .document .loader {
-    right: -400px;
+    left: 530px;
     top: 600px;
   }
 }
