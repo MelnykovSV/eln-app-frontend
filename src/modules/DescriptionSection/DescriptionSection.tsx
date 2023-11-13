@@ -1,9 +1,9 @@
 import * as S from "./DescriptionSection.styled";
-import SchemesPageImage from "./../../images/Schemes-page.JPG";
-import NewSchemePage from "./../../images/New-scheme-page.JPG";
-import SingleSchemePage from "./../../images/Single-scheme-page1.JPG";
-import SingleSchemePageReagents from "./../../images/Single-scheme-page-reagents.JPG";
-import SingleStagePage from "./../../images/Single-stage-page.JPG";
+import SchemesPageImage from "./../../images/Schemes-page.jpg";
+import NewSchemePage from "./../../images/New-scheme-page.jpg";
+import SingleSchemePage from "./../../images/Single-scheme-page1.jpg";
+import SingleSchemePageReagents from "./../../images/Single-scheme-page-reagents.jpg";
+import SingleStagePage from "./../../images/Single-stage-page.jpg";
 
 const DescriptionSection = () => {
   return (
