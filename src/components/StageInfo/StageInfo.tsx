@@ -110,7 +110,9 @@ const StageInfo = ({
 
       <S.StageWrapper>
         <FormControl className="stage-info-select-container" fullWidth>
-          <InputLabel id="stage-info-select-label">Select attempt</InputLabel>
+          <InputLabel id="stage-info-select-label">
+            Select experiment
+          </InputLabel>
           <Select
             labelId="stage-info-select-label"
             id="demo-simple-select"

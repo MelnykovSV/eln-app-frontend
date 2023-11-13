@@ -10,7 +10,7 @@ const AuthSection = () => {
             If you need an account with already prepared database, to test app's
             functionality, you may use following credentials:
           </p>
-          <p>Email: user1@gmail.com</p>
+          <p>Email: test_user@gmail.com</p>
           <p>Password: Aa111111</p>
         </S.StyledMessage>
         <S.AuthLinkBlock>

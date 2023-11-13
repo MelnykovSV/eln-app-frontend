@@ -7,7 +7,10 @@ const DoubleArrows = ({ stagesNumber }: IDoubleArrowsProps) => {
     <S.Container className="arrows">
       <LongArrowRight className="first-arrow" style={{ width: 40 }} />
       <LongArrowRight className="second-arrow" style={{ width: 40 }} />
-      <p> {stagesNumber} stages</p>
+      <p>
+        {" "}
+        {stagesNumber} stage{stagesNumber === 1 ? "" : "s"}
+      </p>
     </S.Container>
   );
 };
