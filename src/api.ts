@@ -1,8 +1,7 @@
 import axios from "axios";
 import { updateTokens, forceLogOut } from "./redux/auth/authSlice";
 
-// const homePage = "https://eln-app-web-server.onrender.com";
-const homePage = "http://localhost:3000";
+const homePage = "https://eln-app-web-server.onrender.com";
 
 let store: any;
 
