@@ -15,6 +15,7 @@ export const Container = styled.div<IStyledProps>`
       flex-direction: column;
       .scheme-container {
         flex-grow: 1;
+        height: 80%;
       }
     }
   }

@@ -18,11 +18,15 @@ export const Container = styled.div<IStyledProps>`
   }
 
   .conditions-container {
-    width: 200px;
+    width: 178px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media screen and (min-width: 768px) {
+      width: 200px;
+    }
 
     .conditions-container-top,
     .conditions-container-bottom {
@@ -53,7 +57,7 @@ export const Container = styled.div<IStyledProps>`
       .methodic {
         padding: 10px;
         position: absolute;
-        top: 10px;
+        top: -48px;
         z-index: 1000;
         border-radius: 5px;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

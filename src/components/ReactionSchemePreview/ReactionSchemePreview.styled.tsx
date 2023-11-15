@@ -34,7 +34,7 @@ export const Container = styled.div<IStyledProps>`
   }
 
   &.chosen .canvas-container {
-    border: 2px solid ${({ theme }) => theme.palette.secondary.contrastText};
+    border: 2px solid ${({ theme }) => theme.palette.secondary.main};
   }
   &.success .canvas-container {
     border: 2px solid ${({ theme }) => theme.palette.success.main};
