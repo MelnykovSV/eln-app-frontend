@@ -90,10 +90,6 @@ export const Container = styled.div<IStyledProps>`
           border-radius: 12px;
           width: 5px;
         }
-
-        scrollbar-width: thin;
-        scrollbar-color: ${({ theme }) => theme.palette.primary.main}
-          ${({ theme }) => theme.palette.text.disabled};
       }
     }
   }

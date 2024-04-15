@@ -7,8 +7,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  scrollbar-width: thin;
-  scrollbar-color: #2196f3 #bdbdbd;
   /* padding: 0 !important; */
 }
 
@@ -61,7 +59,7 @@ code {
 ::-webkit-scrollbar-thumb {
   background-color: #2196f3;
   border: 3px solid #bdbdbd;
-  border-radius: 12px;
+  border-radius: 12px !important;
 
   width: 5px;
 }

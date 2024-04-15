@@ -8,6 +8,8 @@ export const Container = styled.div<IStyledProps>`
   gap: 15px;
   margin-bottom: 20px;
 
+
+
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
@@ -37,4 +39,3 @@ export const Container = styled.div<IStyledProps>`
     gap: 30px;
   }
 `;
-
